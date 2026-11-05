@@ -17,31 +17,34 @@
     - `fundamentacoes-legais`: 170 registros ligando cada cClassTrib ao trecho da LC 214 (texto curto e referência normativa).
     - `situacoes-tributarias/cbs-ibs`: 18 CST, cada uma com suas classificações.
     - `ncm/vigentes`: 10.515 NCM vigentes. Há também `ncm`, `nbs`, `nbs/lista`, `classificacoes-tributarias/ncm-aplicavel` e `nbs-aplicavel`, que cruzam NCM/NBS com cClassTrib.
-  - `aliquota-uniao?data=2027-01-01` devolveu 404 "alíquota não encontrada". Falta descobrir com que data a alíquota de referência existe antes de usá-la.
-  - Todos os endpoints têm parâmetro de data, o que permite consulta por vigência.
-- **LC 214/2025, texto compilado**: https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm (HTML). A página remete ao Decreto nº 12.955/2026. Falta conferir se os anexos vêm no mesmo HTML.
+  - `aliquota-uniao?data=2027-01-01` devolveu 404 "alíquota não encontrada". Falta descobrir com que data a alíquota de referência existe.
+- **LC 214/2025, texto compilado no Planalto**: https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm (HTML, cerca de 943 mil caracteres).
+  - Artigos 1 a 544 e 29 títulos de anexo (ANEXO I a XXIII, mais anexos da LC 123 e outros), todos no mesmo HTML.
+  - O compilado já traz as alterações marcadas no texto: 766 anotações da LC 227/2026 e 2 da LC 235/2026 ("Redação dada pela Lei Complementar nº 235, de 2026"), além de 190 "Redação dada" e 543 "Incluído" no total. Serve de base para saber a origem de cada alteração.
+  - Há 1 marca "(Vetado)" e a nota "Vide Decreto nº 12.955, de 2026".
+  - Conferido que LC 225 e LC 229 não aparecem como alteradoras da LC 214 nesse texto.
+- **Comitê Gestor do IBS (cgibs.gov.br)**: seções em HTML estático para `/resolucoes`, `/portarias`, `/atos-conjuntos`, `/atos-tecnicos-conjuntos` e `/legislacoes`. Cada ato tem link direto para PDF em `/upload/arquivos/AAAAMM/...`. Sem feed RSS. A lista de resoluções ia da nº 1 (23/02/2026) à nº 18 (15/09/2026). Base do Projeto 4: coleta por raspagem periódica, comparando a lista com a última leitura.
 - **Portal**: https://consumo.tributos.gov.br (rótulo "Beta"), com calculadora online e geração de credencial de API.
 
 ### Indicado por fontes secundárias (conferir no original antes de usar)
-- **Normas que alteram ou regulamentam a LC 214**: Decreto 12.955/2026 (Regulamento da CBS) e Resolução CGIBS nº 6/2026 (Regulamento do IBS), ambos de 29/04/2026; LC 227/2026 (13/01/2026, Comitê Gestor); LC 235/2026 (27/08/2026), cujo art. 6º altera a LC 214 (arts. 82 e 174, entre outros). A LC 214 já foi emendada, então o controle de vigência é requisito real, não enfeite.
-- Tabela cClassTrib no Portal da NF-e (Informe Técnico 2025.002, versões 1.50 de 15/04/2026 e 1.60 de 23/06/2026): https://dfe-portal.svrs.rs.gov.br/DFE/TabelaClassificacaoTributaria. Pode ser comparada com a API como segunda fonte.
+- **Regulamentos**: Decreto 12.955/2026 (CBS, 29/04/2026, DOU de 30/04) e Resolução CGIBS nº 6/2026 (IBS, 30/04/2026), com Livro I comum aos dois, reconhecido pela Portaria Conjunta MF/CGIBS nº 7/2026. A Resolução CGIBS 13/2026 adiou exigências para pessoas físicas para 01/01/2027. A Resolução CGIBS 17/2026 (30/07/2026) trata de atos técnicos operacionais.
+- **Leis que mexem na LC 214**: LC 227/2026 (13/01/2026, Comitê Gestor e procedimentos) e LC 235/2026 (27/08/2026, DOU de 28/08; art. 6º altera a LC 214, ex.: art. 82 e art. 174). Há projetos em tramitação (PLP 18/2026, que altera o art. 127 § 3º), então a lei continuará mudando.
+- Tabela cClassTrib no Portal da NF-e (Informe Técnico 2025.002, versões 1.50 de 15/04/2026 e 1.60 de 23/06/2026): https://dfe-portal.svrs.rs.gov.br/DFE/TabelaClassificacaoTributaria. Pode servir de segunda fonte para comparar com a API.
 - API do Conformidade Fácil (SVRS): `https://cff.svrs.rs.gov.br/api/v1/consultas/classTrib`.
-- Calculadora offline (Java, Docker ou JAR) com a mesma API local. Há repositório da Receita no GitHub, ainda sem endereço confirmado.
-- NCM no Portal Único Siscomex (JSON público). Fica como alternativa; a API da Receita já entrega as NCM vigentes por data.
-- Atos do Comitê Gestor do IBS e da NFS-e saem em gov.br/nfse. Sem feed identificado ainda.
+- Calculadora offline (Java em Docker ou JAR) com a mesma API local. A Receita informou ter repositório no GitHub; o endereço oficial não foi confirmado.
+- Cliente Python não oficial `rfbcalc` (PyPI, MIT) confirma a base URL e que não há chave; serve como referência, não como dependência.
 
 ### Ainda não verificado
-- [ ] Termos de uso e licença da API e do repositório da calculadora.
-- [ ] Limites de uso da API (taxa de requisições) e se o ambiente "piloto" continua depois de 31/12/2026.
-- [ ] Texto oficial do Decreto 12.955/2026, da Resolução CGIBS 6/2026, da LC 227/2026 e da LC 235/2026, e se entram no escopo.
-- [ ] Anexos da LC 214 no HTML do Planalto (listas de NCM por alíquota).
-- [ ] Onde coletar atos novos da Receita e do Comitê Gestor de forma automática (base do Projeto 4).
+- [ ] Termos de uso e licença da API e do repositório da calculadora (nenhuma página de termos encontrada). Até confirmar: guardar cópia local, citar a fonte e a data, não redistribuir como produto próprio.
+- [ ] Limites de uso (taxa de requisições) e se o ambiente "piloto" continua depois de 31/12/2026.
+- [ ] Texto oficial do Decreto 12.955/2026, da Resolução CGIBS 6/2026 e da Portaria Conjunta 7/2026, e se entram no escopo da primeira versão.
 - [ ] Alíquotas de referência: data e endpoint corretos.
+- [ ] Atos novos da Receita Federal (a fonte do lado do CGIBS já está mapeada).
 
 ### Consequência para o escopo
-- Há dado oficial estruturado, versionado e com data de vigência: 170 cClassTrib, fundamentação legal por classificação, 10.515 NCM, 18 CST.
-- Desenho natural: ingerir a lei por artigo (Planalto) e a API (classificações e fundamentos), ligar as duas pela referência normativa e expor tudo por MCP.
-- Riscos: portal e API em fase Beta/piloto, tabelas mudando várias vezes ao ano, e a lei já alterada. Mitigação: guardar versão e data da consulta em cada resposta e recusar quando a fonte não confirmar.
+- Há dado oficial estruturado, versionado e com data: 170 cClassTrib, fundamentação legal por classificação, 10.515 NCM, 18 CST, mais a lei completa com anexos e alterações marcadas.
+- Desenho natural: ingerir a lei por artigo (Planalto) e a API (classificações e fundamentos), ligar as duas pela referência normativa e expor tudo por MCP. Primeira versão só com a LC 214 e a API; regulamentos entram depois.
+- Riscos: API em fase piloto, tabelas mudando várias vezes ao ano, lei já alterada e com mais mudanças a caminho. Mitigação: guardar versão e data da consulta em cada resposta e recusar quando a fonte não confirmar.
 - Concorrência comercial existe; o diferencial segue sendo MCP, avaliação com gabarito, recusa e vigência.
 
 ## Etapas
