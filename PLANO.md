@@ -26,6 +26,15 @@
 - **Comitê Gestor do IBS (cgibs.gov.br)**: seções em HTML estático para `/resolucoes`, `/portarias`, `/atos-conjuntos`, `/atos-tecnicos-conjuntos` e `/legislacoes`. Cada ato tem link direto para PDF em `/upload/arquivos/AAAAMM/...`. Sem feed RSS. A lista de resoluções ia da nº 1 (23/02/2026) à nº 18 (15/09/2026). Base do Projeto 4: coleta por raspagem periódica, comparando a lista com a última leitura.
 - **Portal**: https://consumo.tributos.gov.br (rótulo "Beta"), com calculadora online e geração de credencial de API.
 
+### Achados da primeira coleta real (05/11/2026, data=2027-01-01)
+- Coletados sem erro: versão, 18 CST, 170 cClassTrib, 170 fundamentos legais e 10.515 NCM. Base V0066 de 28/10/2026.
+- `classificacoes-tributarias/cbs-ibs` e `fundamentacoes-legais` têm exatamente os mesmos 170 códigos, 1 fundamento por classificação.
+- Divergência da fonte: `situacoes-tributarias/cbs-ibs` lista 173 classificações; as 3 a mais (220001, 220002, 220003, todas da CST 220) não aparecem em `classificacoes-tributarias/cbs-ibs`. A ingestão deve registrar essa diferença, não esconder.
+- `dataAtualizacao` é 2026-10-01 em todas as 170 classificações, mais recente que a versão 1.60 (23/06/2026) citada pelas fontes secundárias. Vale a data da API.
+- `textoCurto` aponta o artigo em 168 dos 170 casos (ex.: "Art. 10, § 3º", "Arts. 99 e 100"); 2 dizem só "LC 214/2025" (regra geral). O formato não é uniforme ("Art 28, parágrafos 3° e 4°"), então o ligador precisa tolerar variações.
+- `referenciaNormativa` traz a hierarquia (livro/título/capítulo) com `\n` literal, não o artigo.
+- O download do Planalto foi encerrado pelo servidor (`ConnectionResetError`) com o cliente Python; o coletor agora envia cabeçalhos comuns de navegador e aceita `--lei-arquivo` com o HTML salvo pelo navegador.
+
 ### Indicado por fontes secundárias (conferir no original antes de usar)
 - **Regulamentos**: Decreto 12.955/2026 (CBS, 29/04/2026, DOU de 30/04) e Resolução CGIBS nº 6/2026 (IBS, 30/04/2026), com Livro I comum aos dois, reconhecido pela Portaria Conjunta MF/CGIBS nº 7/2026. A Resolução CGIBS 13/2026 adiou exigências para pessoas físicas para 01/01/2027. A Resolução CGIBS 17/2026 (30/07/2026) trata de atos técnicos operacionais.
 - **Leis que mexem na LC 214**: LC 227/2026 (13/01/2026, Comitê Gestor e procedimentos) e LC 235/2026 (27/08/2026, DOU de 28/08; art. 6º altera a LC 214, ex.: art. 82 e art. 174). Há projetos em tramitação (PLP 18/2026, que altera o art. 127 § 3º), então a lei continuará mudando.
@@ -48,8 +57,13 @@
 - Concorrência comercial existe; o diferencial segue sendo MCP, avaliação com gabarito, recusa e vigência.
 
 ## Etapas
-1. [ ] Levantar e registrar as fontes oficiais (URL, data de acesso, licença).
+1. [x] Levantar e registrar as fontes oficiais (URL, data de acesso, licença). Termos de uso e limites da API seguem em aberto (ver acima).
 2. [ ] Ingestão com metadados: norma, artigo, data de publicação, vigência, status.
+   - [x] Coletor (`python -m taxtrace.coleta --data AAAA-MM-DD`): baixa lei e API para `data/raw/AAAA-MM-DD/` com manifesto (URL, hash, versão da base). Testado só com respostas simuladas; falta rodar contra os sites reais.
+   - [x] Leitor da lei (`taxtrace/lei.py`): HTML do Planalto → artigos com hierarquia e anotações de alteração/veto/vigência; trecho riscado marcado. Testado só com HTML de exemplo; falta validar com o HTML real (esperado: artigos 1 a 544).
+   - [ ] Carregar as tabelas da API (cClassTrib, fundamentos, NCM) em estruturas tipadas.
+   - [ ] Ligar cada cClassTrib ao artigo da LC 214 pela referência normativa.
+   - [ ] Gravar tudo no banco com versão da base e data da coleta.
 3. [ ] Busca (pgvector) e respostas com citação.
 4. [ ] Servidor MCP com as ferramentas de consulta.
 5. [ ] Agente LangGraph com recusa e aprovação humana.
