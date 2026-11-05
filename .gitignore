@@ -1,0 +1,29 @@
+# Local credentials and environments
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Raw downloads and local processing (official sources are re-downloadable)
+data/raw/
+data/processed/
+*.log
+*.sqlite3
+.DS_Store
+Thumbs.db
+
+# Builds, keys and editor state
+dist/
+build/
+*.egg-info/
+*.pem
+*.key
+.vscode/
+.idea/
+.coverage
+htmlcov/
