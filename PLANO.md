@@ -59,11 +59,11 @@
 ## Etapas
 1. [x] Levantar e registrar as fontes oficiais (URL, data de acesso, licença). Termos de uso e limites da API seguem em aberto (ver acima).
 2. [ ] Ingestão com metadados: norma, artigo, data de publicação, vigência, status.
-   - [x] Coletor (`python -m taxtrace.coleta --data AAAA-MM-DD`): baixa lei e API para `data/raw/AAAA-MM-DD/` com manifesto (URL, hash, versão da base). Testado só com respostas simuladas; falta rodar contra os sites reais.
-   - [x] Leitor da lei (`taxtrace/lei.py`): HTML do Planalto → artigos com hierarquia e anotações de alteração/veto/vigência; trecho riscado marcado. Testado só com HTML de exemplo; falta validar com o HTML real (esperado: artigos 1 a 544).
-   - [ ] Carregar as tabelas da API (cClassTrib, fundamentos, NCM) em estruturas tipadas.
-   - [ ] Ligar cada cClassTrib ao artigo da LC 214 pela referência normativa.
-   - [ ] Gravar tudo no banco com versão da base e data da coleta.
+   - [x] Coletor (`python -m taxtrace.coleta --data AAAA-MM-DD`): baixa lei e API para `data/raw/AAAA-MM-DD/` com manifesto (URL, hash, versão da base). Rodado contra os sites reais em 05/11/2026, sem erros (lei: 5,4 MB).
+   - [x] Leitor da lei (`taxtrace/lei.py`): validado com o HTML real. Resultado: 580 artigos (1 a 544 sem buraco, 36 com sufixo como 2-A), 35 com texto riscado, 537 anotações "Incluído", 181 "Redação dada", 58 "Revogado", 7 "Vide ADI" e 1 veto. Cabeçalho de artigo riscado abre o artigo e a redação nova se junta a ele.
+   - [x] Tabelas da API em estruturas tipadas (`taxtrace/tabelas.py`), com versão da base, data da coleta e lista de divergências da fonte (hoje: 220001, 220002 e 220003).
+   - [x] Ligação cClassTrib → artigo (`taxtrace/ligacao.py`): 168 de 170 ligadas, 2 de regra geral (000001 e 000006), nenhum artigo citado ausente da lei, 110 artigos distintos. Alertas de vigência nos artigos ligados: 9 ligações caem em artigo com texto revogado (ex.: 000002→art. 11, 010002→art. 233) e 1 em artigo com "Vide ADI 7779/7790" (200015→art. 149).
+   - [ ] Gravar tudo no banco (Postgres + pgvector) com versão da base e data da coleta.
 3. [ ] Busca (pgvector) e respostas com citação.
 4. [ ] Servidor MCP com as ferramentas de consulta.
 5. [ ] Agente LangGraph com recusa e aprovação humana.

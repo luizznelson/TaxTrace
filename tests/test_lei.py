@@ -29,6 +29,8 @@ de 2026)</p>
 <p>&ldquo;Art. 1º Texto citado de outra lei.&rdquo;</p>
 <p>Art. 1º Linha fora de ordem, mantida no artigo corrente.</p>
 <p>Art. 12. (Vetado)</p>
+<p><strike>Art. 13. Redação antiga do artigo.</strike></p>
+<p>Art. 13. Redação nova do artigo. (Redação dada pela Lei Complementar nº 227, de 2026)</p>
 <p>Brasília, 16 de janeiro de 2025; 204º da Independência.</p>
 <p>ANEXO I</p>
 <p>Art. 99 Não deve entrar.</p>
@@ -43,7 +45,7 @@ class LeiTest(unittest.TestCase):
 
     def test_numeros_em_ordem_e_sem_anexo(self):
         numeros = [a.numero for a in self.artigos]
-        self.assertEqual(numeros, ["1", "2", "2-A", "10", "11", "12"])
+        self.assertEqual(numeros, ["1", "2", "2-A", "10", "11", "12", "13"])
 
     def test_texto_do_artigo_junta_linhas_do_mesmo_paragrafo(self):
         art2 = self.por_numero["2"].texto
@@ -99,6 +101,13 @@ class LeiTest(unittest.TestCase):
         todo = " ".join(a.texto for a in self.artigos)
         self.assertNotIn("204º da Independência", todo)
         self.assertNotIn("Não deve entrar", todo)
+
+    def test_cabecalho_riscado_abre_o_artigo_e_a_redacao_nova_se_junta(self):
+        art13 = self.por_numero["13"]
+        self.assertTrue(art13.tem_trecho_riscado)
+        self.assertIn("⟦Art. 13. Redação antiga do artigo.⟧", art13.texto)
+        self.assertIn("Redação nova do artigo.", art13.texto)
+        self.assertNotIn("Redação antiga", self.por_numero["12"].texto)
 
     def test_id_estavel(self):
         self.assertEqual(self.por_numero["2-A"].id, "lc214-art-2-a")

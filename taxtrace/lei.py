@@ -90,7 +90,7 @@ class Artigo:
         return f"lc214-art-{self.numero.lower()}"
 
 
-_ART = re.compile(r"^Art\.\s*(\d+)(?:[º°])?(?:-([A-Z]{1,2}))?(?=[\s.]|$)")
+_ART = re.compile(f"^{ABRE_RISCADO}?\\s*Art\\.\\s*(\\d+)(?:[º°])?(?:-([A-Z]{{1,2}}))?(?=[\\s.]|$)")
 _CABECALHO = re.compile(
     r"^(LIVRO|T[ÍI]TULO|CAP[ÍI]TULO|SE[ÇC][ÃA]O|SUBSE[ÇC][ÃA]O)\s+"
     r"([IVXLCDM]+|[ÚU]NICO)(?:-([A-Z]))?\s*(?:\(.*\))?$",
