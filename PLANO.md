@@ -77,7 +77,8 @@
 4. [x] Servidor MCP com as ferramentas de consulta: SDK oficial 2.3.0, stdio local, `consultar_base`, `buscar_artigos`, `ler_artigo` e `consultar_classificacao`. Conexão somente leitura, entradas limitadas, contrato estruturado e erros sanitizados. Cliente/servidor reais verificados em 13 chamadas; ver `docs/MCP.md`. Planejador Gemini integrado pelo fluxo LangGraph (ver etapa 5); cliente desktop e transporte HTTP seguem pendentes.
 5. [ ] Agente LangGraph com recusa e aprovação humana.
    - [x] Fluxo de planejamento limitado, consultas MCP reais, conferência de coleta/citações e rastro local. Modo por regras e modo Gemini (gemini-3.5-flash-lite), com três chamadas reais registradas. Até uma requisição de modelo e três chamadas MCP; sem síntese fiscal. Ver `docs/AGENTE.md`.
-   - [ ] Checkpoint persistente e pausa/retomada para revisão humana.
+   - [x] Checkpoint SQLite local e pausa/retomada tipada para revisão documental. Decisão exige hash, origem e motivo; trava por revisão, recusa de decisão duplicada e bloqueio após mudança do código identificado. Retomada sem chamadas MCP/Gemini. Teste entre processos com decisões sintéticas identificado; sem alegar revisão humana real. Ver `docs/REVISAO.md`.
+   - [ ] Interface e autenticação de revisores; revisão fiscal e geração de respostas continuam pendentes.
    - [ ] Avaliação independente de planejamento, recusa e suficiência antes da geração de respostas.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
    - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.

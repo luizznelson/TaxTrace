@@ -21,7 +21,7 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Servidor MCP local com quatro ferramentas de consulta, fontes e coleta identificada.
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** RAG com geração, aprovação humana com retomada, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
+**Ainda em desenvolvimento:** RAG com geração, interface de revisão, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -114,7 +114,18 @@ O [fluxo de consulta](docs/AGENTE.md) planeja uma ação limitada, consulta a ba
 .venv/Scripts/python.exe -m taxtrace.agente --modo gemini --consulta "Qual artigo trata da cesta basica?"
 ```
 
-O modo Gemini exige a chave no `.env`. O resultado é um conjunto de evidências para revisão, com no máximo três chamadas MCP; ainda não há parecer fiscal, aprovação humana com retomada ou memória de conversa.
+O modo Gemini exige a chave no `.env`. O resultado é um conjunto de evidências para revisão, com no máximo três chamadas MCP; ainda não há parecer fiscal ou memória de conversa. A pausa e a retomada já estão disponíveis no módulo de revisão documental.
+
+## Revisão com pausa e retomada
+
+O [fluxo de revisão](docs/REVISAO.md) salva o estado em SQLite, permite inspecionar as evidências e retoma com uma decisão declarada de aprovação ou rejeição. A decisão exige o hash do conjunto revisado; revisão encerrada não aceita outra decisão. A retomada não repete chamadas MCP ou Gemini.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.revisao iniciar --consulta "Leia o artigo 125."
+.venv/Scripts/python.exe -m taxtrace.verificar_revisao
+```
+
+O segundo comando é uma demonstração automatizada identificada, não revisão humana real. Checkpoints privados ficam fora do Git; os eventos publicáveis ficam em `runs/`. A identidade do revisor é autodeclarada e a decisão documental não valida um parecer fiscal.
 
 ## Como conferir a qualidade
 

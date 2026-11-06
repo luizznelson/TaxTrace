@@ -30,3 +30,6 @@ htmlcov/
 
 # Model weights are downloaded and verified locally
 data/models/
+
+# Private workflow checkpoints, SQLite WAL files and local locks
+data/checkpoints/

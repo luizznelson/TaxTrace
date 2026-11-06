@@ -74,8 +74,12 @@ A [entrega registrada](../runs/2026-11-06-langgraph-delivery/verificacao.json) a
 
 Os testes automatizados usam clientes e planejadores sintéticos identificados nas fixtures para simular falha operacional, coleta divergente, citação adulterada, referência inventada, excesso de ações e HTTP 429 sem retry. O CI não chama o Gemini e não usa a chave do desenvolvedor. A execução do CI remoto não foi observada nesta entrega.
 
+## Revisão persistente disponível
+
+O [módulo de revisão](REVISAO.md) já permite salvar a pausa em SQLite, inspecionar o conjunto e retomar com uma decisão declarada. Use `python -m taxtrace.revisao iniciar` com o Python da `.venv`; o comando `taxtrace.agente` continua sendo a execução direta sem pausa.
+
 ## O que ainda falta
 
-Este fluxo não tem memória de conversa, checkpoint persistente, pausa e retomada para aprovação humana ou síntese fiscal por LLM. Os arquivos JSON são evidências de execução, não checkpoints que permitam retomar o grafo. Ainda falta avaliar planejamento e recusa com uma amostra independente e revisar suficiência, vigência e citações antes de gerar uma resposta.
+A execução direta deste módulo não tem memória de conversa ou síntese fiscal. O checkpoint e a pausa para revisão estão implementados separadamente em `taxtrace.revisao`, conforme [REVISAO.md](REVISAO.md). Os arquivos JSON são evidências de execução, não checkpoints que permitam retomar o grafo. Ainda falta avaliar planejamento e recusa com uma amostra independente e revisar suficiência, vigência e citações antes de gerar uma resposta.
 
-A integração usa o [Graph API do LangGraph](https://docs.langchain.com/oss/python/langgraph/graph-api). A etapa seguinte pode acrescentar pausa e retomada para revisão humana, mantendo claro que aprovação de fluxo não comprova correção tributária.
+A integração usa o [Graph API do LangGraph](https://docs.langchain.com/oss/python/langgraph/graph-api). A pausa e a retomada agora estão disponíveis no módulo de revisão. Faltam interface e autenticação de revisores; aprovação de fluxo não comprova correção tributária.

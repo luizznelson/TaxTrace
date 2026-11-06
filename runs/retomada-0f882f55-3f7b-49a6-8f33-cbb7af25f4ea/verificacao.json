@@ -1,0 +1,179 @@
+{
+  "verificado_em": "2026-11-06T18:48:14.220521+00:00",
+  "natureza": "teste_automatizado_sem_revisao_humana_real",
+  "chamadas_cli_em_processos_distintos": [
+    {
+      "argumentos": [
+        "iniciar",
+        "--consulta",
+        "Leia o artigo 125."
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "aguardando_revisao",
+        "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403",
+        "registro": "runs\\revisao-ba6378fa-3f96-4936-9388-9497f244e9ce"
+      }
+    },
+    {
+      "argumentos": [
+        "inspecionar",
+        "--revisao",
+        "ef6daf3b-e19c-44eb-8cba-da61a2a64c83"
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "aguardando_revisao",
+        "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403",
+        "registro": "runs\\revisao-e7d5f679-48dd-49ba-acf9-ce8ffd1056cb"
+      }
+    },
+    {
+      "argumentos": [
+        "decidir",
+        "--revisao",
+        "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "--decisao",
+        "aprovar",
+        "--revisor",
+        "Revisor automatizado",
+        "--motivo",
+        "Teste entre processos, sem parecer fiscal.",
+        "--origem",
+        "teste_automatizado",
+        "--dossie-sha256",
+        "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      ],
+      "codigo_saida": 1,
+      "resultado": {
+        "status": "operacao_nao_concluida",
+        "codigo": "dossie_da_decisao_divergente"
+      }
+    },
+    {
+      "argumentos": [
+        "decidir",
+        "--revisao",
+        "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "--decisao",
+        "aprovar",
+        "--revisor",
+        "Revisor automatizado",
+        "--motivo",
+        "Teste entre processos, sem parecer fiscal.",
+        "--origem",
+        "teste_automatizado",
+        "--dossie-sha256",
+        "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "revisao_documental_aprovada",
+        "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403",
+        "registro": "runs\\revisao-34caffb6-8c5d-43d5-aee3-5164aa7a5e9d"
+      }
+    },
+    {
+      "argumentos": [
+        "decidir",
+        "--revisao",
+        "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "--decisao",
+        "rejeitar",
+        "--revisor",
+        "Revisor automatizado",
+        "--motivo",
+        "Teste entre processos, sem parecer fiscal.",
+        "--origem",
+        "teste_automatizado",
+        "--dossie-sha256",
+        "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+      ],
+      "codigo_saida": 1,
+      "resultado": {
+        "status": "operacao_nao_concluida",
+        "codigo": "revisao_nao_pendente"
+      }
+    },
+    {
+      "argumentos": [
+        "inspecionar",
+        "--revisao",
+        "ef6daf3b-e19c-44eb-8cba-da61a2a64c83"
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "revisao_documental_aprovada",
+        "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+        "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403",
+        "registro": "runs\\revisao-bd692c79-2713-450b-8fae-61d36fd4d4b1"
+      }
+    },
+    {
+      "argumentos": [
+        "iniciar",
+        "--consulta",
+        "cesta basica"
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "aguardando_revisao",
+        "revisao_id": "d9cbf6ce-badd-4a8f-ab04-baa5a87d90da",
+        "dossie_sha256": "16f346b08fa0720a75b1b6464333b1512db01941c0c21face60f143ffe9fde23",
+        "registro": "runs\\revisao-de84ee73-d7bc-4608-9635-7a98437f5399"
+      }
+    },
+    {
+      "argumentos": [
+        "decidir",
+        "--revisao",
+        "d9cbf6ce-badd-4a8f-ab04-baa5a87d90da",
+        "--decisao",
+        "rejeitar",
+        "--revisor",
+        "Revisor automatizado",
+        "--motivo",
+        "Teste entre processos, sem parecer fiscal.",
+        "--origem",
+        "teste_automatizado",
+        "--dossie-sha256",
+        "16f346b08fa0720a75b1b6464333b1512db01941c0c21face60f143ffe9fde23"
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "revisao_documental_rejeitada",
+        "revisao_id": "d9cbf6ce-badd-4a8f-ab04-baa5a87d90da",
+        "dossie_sha256": "16f346b08fa0720a75b1b6464333b1512db01941c0c21face60f143ffe9fde23",
+        "registro": "runs\\revisao-fed9f6ae-7a83-491a-9b75-56872153e316"
+      }
+    },
+    {
+      "argumentos": [
+        "iniciar",
+        "--consulta",
+        "Consulte o codigo 999999."
+      ],
+      "codigo_saida": 0,
+      "resultado": {
+        "status": "referencia_nao_encontrada_nesta_consulta",
+        "revisao_id": "7a456331-c5c4-422c-a8a0-bda0c3beec1a",
+        "dossie_sha256": "a97ad14341c5832069754c7cdb91f63cbad0af79e7057794e9ccc8d9e5e8c439",
+        "registro": "runs\\revisao-a29620d5-8160-4b34-9135-81b2cca21d51"
+      }
+    }
+  ],
+  "mesmas_chamadas_mcp_antes_e_depois_da_retomada": true,
+  "hash_do_dossie_preservado": true,
+  "decisao_duplicada_recusada": true,
+  "hash_incorreto_recusado": true,
+  "aprovacao_e_rejeicao_sinteticas_verificadas": true,
+  "referencia_ausente_nao_vai_para_revisao": true,
+  "limites": [
+    "Checkpoint local sem autenticação de identidade do revisor.",
+    "Não foram feitas chamadas Gemini neste teste de retomada.",
+    "A decisão não gera resposta fiscal nem comprova vigência."
+  ]
+}

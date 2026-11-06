@@ -1,0 +1,70 @@
+{
+  "verificado_em": "2026-11-06T18:50:36.096710+00:00",
+  "teste_entre_processos": "runs/retomada-0f882f55-3f7b-49a6-8f33-cbb7af25f4ea/verificacao.json",
+  "eventos_publicos": [
+    {
+      "registro": "runs/revisao-34caffb6-8c5d-43d5-aee3-5164aa7a5e9d/evento.json",
+      "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+      "operacao": "decidir",
+      "status": "revisao_documental_aprovada",
+      "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+    },
+    {
+      "registro": "runs/revisao-a29620d5-8160-4b34-9135-81b2cca21d51/evento.json",
+      "revisao_id": "7a456331-c5c4-422c-a8a0-bda0c3beec1a",
+      "operacao": "iniciar",
+      "status": "referencia_nao_encontrada_nesta_consulta",
+      "dossie_sha256": "a97ad14341c5832069754c7cdb91f63cbad0af79e7057794e9ccc8d9e5e8c439"
+    },
+    {
+      "registro": "runs/revisao-ba6378fa-3f96-4936-9388-9497f244e9ce/evento.json",
+      "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+      "operacao": "iniciar",
+      "status": "aguardando_revisao",
+      "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+    },
+    {
+      "registro": "runs/revisao-bd692c79-2713-450b-8fae-61d36fd4d4b1/evento.json",
+      "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+      "operacao": "inspecionar",
+      "status": "revisao_documental_aprovada",
+      "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+    },
+    {
+      "registro": "runs/revisao-de84ee73-d7bc-4608-9635-7a98437f5399/evento.json",
+      "revisao_id": "d9cbf6ce-badd-4a8f-ab04-baa5a87d90da",
+      "operacao": "iniciar",
+      "status": "aguardando_revisao",
+      "dossie_sha256": "16f346b08fa0720a75b1b6464333b1512db01941c0c21face60f143ffe9fde23"
+    },
+    {
+      "registro": "runs/revisao-e7d5f679-48dd-49ba-acf9-ce8ffd1056cb/evento.json",
+      "revisao_id": "ef6daf3b-e19c-44eb-8cba-da61a2a64c83",
+      "operacao": "inspecionar",
+      "status": "aguardando_revisao",
+      "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+    },
+    {
+      "registro": "runs/revisao-fed9f6ae-7a83-491a-9b75-56872153e316/evento.json",
+      "revisao_id": "d9cbf6ce-badd-4a8f-ab04-baa5a87d90da",
+      "operacao": "decidir",
+      "status": "revisao_documental_rejeitada",
+      "dossie_sha256": "16f346b08fa0720a75b1b6464333b1512db01941c0c21face60f143ffe9fde23"
+    }
+  ],
+  "testes": {
+    "executados": 105,
+    "falhas": 0,
+    "ignorados": 0
+  },
+  "ruff_check": "aprovado",
+  "ruff_format_check": "aprovado",
+  "pip_check": "sem_incompatibilidades",
+  "segredos_locais_encontrados_em_arquivos_publicaveis": 0,
+  "segredos_locais_encontrados_nos_checkpoints": 0,
+  "limites": [
+    "Aprovação e rejeição foram exercitadas por automação identificada, não por um revisor humano real.",
+    "Identidade do revisor é autodeclarada; não há autenticação multiusuário.",
+    "Nenhum parecer fiscal foi gerado e nenhuma vigência foi validada."
+  ]
+}

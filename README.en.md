@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-RAG with generation, resumable human approval, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
+RAG with generation, a review interface, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
 
 ## Recorded local verification
 
@@ -102,7 +102,18 @@ The [LangGraph workflow](docs/AGENTE.md) selects a bounded action, calls the rea
 .venv/Scripts/python.exe -m taxtrace.agente --modo gemini --consulta "Qual artigo trata da cesta basica?"
 ```
 
-Gemini mode requires `GEMINI_API_KEY` in the local `.env`; the current model setting is `GEMINI_MODEL=gemini-3.5-flash-lite`. Each run permits at most one model request and three MCP calls. Operational failures remain distinct from missing references. Local audit records include the plan, collection, tool responses and code hashes; LangSmith tracing is explicitly disabled. Fiscal answer generation, persistent resume and human approval remain unimplemented.
+Gemini mode requires `GEMINI_API_KEY` in the local `.env`; the current model setting is `GEMINI_MODEL=gemini-3.5-flash-lite`. Each run permits at most one model request and three MCP calls. Operational failures remain distinct from missing references. Local audit records include the plan, collection, tool responses and code hashes; LangSmith tracing is explicitly disabled. Fiscal answer generation remains unimplemented. Persistent review is now available through the separate module below.
+
+## Persistent document review
+
+The [review workflow](docs/REVISAO.md) uses SQLite checkpoints and a typed LangGraph interrupt. Start a query, inspect its frozen evidence package, then resume with an explicitly attributed decision and the package hash. A per-review lock prevents concurrent application operations; completed reviews reject a second decision. Resume does not restart MCP or call the model.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.revisao iniciar --consulta "Leia o artigo 125."
+.venv/Scripts/python.exe -m taxtrace.verificar_revisao
+```
+
+The verifier exercises synthetic approval/rejection across separate processes and labels them as automated. It does not claim a real human review. Operator identity is self-declared, not authenticated; document approval does not establish legal correctness. Private checkpoints and lock files are excluded from Git, while reviewed public audit exports remain under `runs/`.
 
 ## Checks
 

@@ -9,12 +9,14 @@ from datetime import UTC, datetime
 from importlib.metadata import version
 from pathlib import Path
 from time import perf_counter
-from typing import TypedDict
+from typing import Literal, TypedDict
 from uuid import uuid4
 
 from langgraph.graph import END, START, StateGraph
+from langgraph.types import interrupt
 from langsmith import tracing_context
 from mcp import Client, StdioServerParameters
+from pydantic import BaseModel, ConfigDict, Field
 
 from taxtrace.planejamento import FalhaPlanejamento, planejar_gemini, planejar_local
 
@@ -29,9 +31,43 @@ class Estado(TypedDict, total=False):
     erro: str
     rastro: list
     resultado: dict
+    revisao: dict
+    codigo_revisao: str
+    versao_revisao: int
+    origem_execucao: str
 
 
-def criar_grafo(cliente, raiz, *, coleta_id=None, planejador_ia=planejar_gemini):
+class DecisaoRevisao(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True, str_strip_whitespace=True)
+    decisao: Literal["aprovar", "rejeitar"]
+    revisor: str = Field(min_length=3, max_length=80)
+    motivo: str = Field(min_length=5, max_length=1000)
+    origem: Literal["operador_local", "teste_automatizado"]
+    dossie_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+def dossie_revisao(estado):
+    dados = {k: estado.get(k) for k in ("pergunta", "modo", "plano", "coleta", "respostas")}
+    checksum = hashlib.sha256(
+        json.dumps(dados, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    return {
+        "escopo": "revisao_documental",
+        "dossie": dados,
+        "dossie_sha256": checksum,
+        "aviso": "A decisão revisa este retrato documental; não valida vigência ou parecer fiscal.",
+    }
+
+
+def criar_grafo(
+    cliente,
+    raiz,
+    *,
+    coleta_id=None,
+    planejador_ia=planejar_gemini,
+    checkpointer=None,
+    revisao_humana=False,
+):
     async def chamar(estado, nome, args):
         chamadas = sum("argumentos" in e for e in estado.get("rastro", []))
         if chamadas >= 3:
@@ -168,10 +204,40 @@ def criar_grafo(cliente, raiz, *, coleta_id=None, planejador_ia=planejar_gemini)
                 + [{"etapa": "conferir", "erro": "referencias_inconsistentes"}],
             }
 
+    async def revisar(estado):
+        # Somente cálculo puro antes de interrupt: este início é reexecutado na retomada.
+        pacote = dossie_revisao(estado)
+        decisao = interrupt(pacote, response_schema=DecisaoRevisao)
+        if decisao.dossie_sha256 != pacote["dossie_sha256"]:
+            raise ValueError("dossie_da_decisao_divergente")
+        registrada = {
+            **decisao.model_dump(),
+            "registrada_em": datetime.now(UTC).isoformat(),
+            "identidade_verificada": False,
+        }
+        return {
+            "revisao": registrada,
+            "rastro": estado["rastro"]
+            + [
+                {
+                    "etapa": "revisar",
+                    "decisao": decisao.decisao,
+                    "origem": decisao.origem,
+                    "dossie_sha256": decisao.dossie_sha256,
+                }
+            ],
+        }
+
     async def finalizar(estado):
         r = estado.get("respostas", {}).get("consulta", {}) or {}
         if estado.get("erro"):
             status = "execucao_nao_concluida"
+        elif estado.get("revisao"):
+            status = (
+                "revisao_documental_aprovada"
+                if estado["revisao"]["decisao"] == "aprovar"
+                else "revisao_documental_rejeitada"
+            )
         elif estado["plano"]["acao"] == "recusar":
             status = "recusado_pelo_planejador"
         elif r.get("status") in {
@@ -187,7 +253,11 @@ def criar_grafo(cliente, raiz, *, coleta_id=None, planejador_ia=planejar_gemini)
                 "status": status,
                 "suficiencia_para_resposta": "nao_avaliada",
                 "resposta_fiscal_gerada": False,
-                "aprovacao_humana_realizada": False,
+                "aprovacao_humana_realizada": (
+                    estado.get("revisao", {}).get("origem") == "operador_local"
+                    and estado.get("revisao", {}).get("decisao") == "aprovar"
+                ),
+                "revisao_registrada": bool(estado.get("revisao")),
             },
             "rastro": estado["rastro"] + [{"etapa": "finalizar", "status": status}],
         }
@@ -214,9 +284,26 @@ def criar_grafo(cliente, raiz, *, coleta_id=None, planejador_ia=planejar_gemini)
     graph.add_conditional_edges(
         "aprofundar", lambda e: "finalizar" if e.get("erro") else "conferir"
     )
-    graph.add_edge("conferir", "finalizar")
+    if revisao_humana:
+        if checkpointer is None:
+            raise ValueError("revisao_exige_checkpointer")
+        graph.add_node("revisar", revisar)
+
+        def depois_conferencia(e):
+            status = e.get("respostas", {}).get("consulta", {}).get("status")
+            ausentes = {
+                "sem_evidencia_na_busca_textual",
+                "artigo_nao_encontrado_nesta_coleta",
+                "classificacao_nao_encontrada_nesta_coleta",
+            }
+            return "finalizar" if e.get("erro") or status in ausentes else "revisar"
+
+        graph.add_conditional_edges("conferir", depois_conferencia)
+        graph.add_edge("revisar", "finalizar")
+    else:
+        graph.add_edge("conferir", "finalizar")
     graph.add_edge("finalizar", END)
-    return graph.compile()
+    return graph.compile(checkpointer=checkpointer)
 
 
 async def executar(pergunta, *, modo="local", coleta_id=None):
@@ -249,7 +336,8 @@ async def executar(pergunta, *, modo="local", coleta_id=None):
             "Modo local usa regras, não um modelo de linguagem.",
             "Modelo Gemini, quando usado, planeja a consulta; não decide a resposta fiscal.",
             "Abrir o primeiro candidato não comprova relevância ou suficiência.",
-            "Sem memória de sessão, retomada persistente ou aprovação humana nesta etapa.",
+            "Esta execução direta não pausa; use o módulo revisao "
+            "para checkpoint e decisão registrada.",
         ],
         "codigo_sha256": {
             n: hashlib.sha256((raiz / "taxtrace" / n).read_bytes()).hexdigest()
