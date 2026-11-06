@@ -1,0 +1,34 @@
+services:
+  db:
+    image: pgvector/pgvector@sha256:7d0a41464797aeb9862dfdc0bbf1526b82cfd324cdd8036df19e3545f4a9ccb8
+    environment:
+      POSTGRES_USER: taxtrace
+      POSTGRES_PASSWORD: ${TAXTRACE_DB_PASSWORD:?Configure o .env}
+      POSTGRES_DB: taxtrace
+    ports:
+      - "127.0.0.1:15433:5432"
+    volumes:
+      - taxtrace-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taxtrace -d taxtrace"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  db-test:
+    image: pgvector/pgvector@sha256:7d0a41464797aeb9862dfdc0bbf1526b82cfd324cdd8036df19e3545f4a9ccb8
+    profiles: [tests]
+    environment:
+      POSTGRES_USER: taxtrace_test
+      POSTGRES_PASSWORD: ${TAXTRACE_TEST_DB_PASSWORD:?Configure o .env}
+      POSTGRES_DB: taxtrace_test
+    ports:
+      - "127.0.0.1:15434:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taxtrace_test -d taxtrace_test"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  taxtrace-db:

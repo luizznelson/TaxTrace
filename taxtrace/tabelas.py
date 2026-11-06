@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from decimal import Decimal
 from pathlib import Path
 
+from taxtrace.integridade import verificar
+
 
 @dataclass(frozen=True, slots=True)
 class VersaoBase:
@@ -68,10 +70,7 @@ def pasta_mais_recente(raiz: Path) -> Path:
 
 
 def carregar(pasta: Path) -> Tabelas:
-    manifesto = _json(pasta / "manifesto.json")
-    if manifesto["erros"]:
-        nomes = ", ".join(e["nome"] for e in manifesto["erros"])
-        raise ValueError(f"coleta incompleta, fontes não verificadas: {nomes}")
+    manifesto, _ = verificar(pasta)
 
     v = _json(pasta / "versao.json")
     versao = VersaoBase(

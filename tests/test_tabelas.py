@@ -1,3 +1,4 @@
+import hashlib
 import json
 import tempfile
 import unittest
@@ -5,6 +6,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from taxtrace import tabelas
+from taxtrace.integridade import API
 
 
 def gravar(pasta: Path, nome: str, dados) -> None:
@@ -96,6 +98,27 @@ def montar(pasta: Path, erros=None, fundamentos=None):
         ],
     )
     gravar(pasta, "ncm_vigentes.json", [{"ncm": "01012100", "descricao": "-- Reprodutores"}])
+    atualizar_manifesto(pasta)
+
+
+def atualizar_manifesto(pasta):
+    arquivo = pasta / "manifesto.json"
+    manifesto = json.loads(arquivo.read_bytes())
+    entradas = []
+    for nome, caminho in {**API, "lc214_planalto": "lc214_planalto.html"}.items():
+        if (pasta / caminho).exists():
+            bruto = (pasta / caminho).read_bytes()
+            entradas.append(
+                {
+                    "nome": nome,
+                    "arquivo": caminho,
+                    "url": "https://example.invalid/" + caminho,
+                    "bytes": len(bruto),
+                    "sha256": hashlib.sha256(bruto).hexdigest(),
+                }
+            )
+    manifesto["arquivos"] = entradas
+    arquivo.write_text(json.dumps(manifesto), encoding="utf-8")
 
 
 class TabelasTest(unittest.TestCase):

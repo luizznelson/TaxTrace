@@ -63,8 +63,12 @@
    - [x] Leitor da lei (`taxtrace/lei.py`): validado com o HTML real. Resultado: 580 artigos (1 a 544 sem buraco, 36 com sufixo como 2-A), 35 com texto riscado, 537 anotações "Incluído", 181 "Redação dada", 58 "Revogado", 7 "Vide ADI" e 1 veto. Cabeçalho de artigo riscado abre o artigo e a redação nova se junta a ele.
    - [x] Tabelas da API em estruturas tipadas (`taxtrace/tabelas.py`), com versão da base, data da coleta e lista de divergências da fonte (hoje: 220001, 220002 e 220003).
    - [x] Ligação cClassTrib → artigo (`taxtrace/ligacao.py`): 168 de 170 ligadas, 2 de regra geral (000001 e 000006), nenhum artigo citado ausente da lei, 110 artigos distintos. Alertas de vigência nos artigos ligados: 9 ligações caem em artigo com texto revogado (ex.: 000002→art. 11, 010002→art. 233) e 1 em artigo com "Vide ADI 7779/7790" (200015→art. 149).
-   - [ ] Gravar tudo no banco (Postgres + pgvector) com versão da base e data da coleta.
+   - [x] Banco (Postgres + pgvector): `docker-compose.yml`, `taxtrace/schema.sql` e `taxtrace/banco.py` (`python -m taxtrace.banco`). Cada carga prende tudo a uma coleta (versão da base + data); recarregar a mesma coleta é recusado. Decisão: Docker local para desenvolver, Neon só no deploy. Validado em 06/11/2026 com PostgreSQL local: 580 artigos, 784 alterações, 170 classificações, 169 ligações, 10.515 NCM e 3 divergências. Banco de testes separado, sem TRUNCATE; transações desfeitas ao final. Evidência: `runs/2026-11-06-local-database/verification.json`.
 3. [ ] Busca (pgvector) e respostas com citação.
+   - [x] Base de comparação: busca textual em português, com artigo, trecho literal, fonte e versão; login somente leitura. 580 documentos pesquisáveis. Sem embeddings ou geração por IA nesta etapa.
+   - [ ] Avaliar a recuperação com perguntas e artigos esperados; busca atual pode falhar por variação de termos.
+   - [ ] Embeddings e comparação com a busca textual.
+   - [ ] Validar vigência por dispositivo/data; remover trechos riscados do índice não resolve toda a análise temporal.
 4. [ ] Servidor MCP com as ferramentas de consulta.
 5. [ ] Agente LangGraph com recusa e aprovação humana.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.

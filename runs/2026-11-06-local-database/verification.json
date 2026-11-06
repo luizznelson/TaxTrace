@@ -1,0 +1,72 @@
+{
+  "verificado_em": "2026-11-06T16:45:30.076565+00:00",
+  "ambiente": "PostgreSQL local; Docker; desenvolvimento e testes separados",
+  "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79",
+  "coleta": {
+    "id": 1,
+    "coletado_em": "2026-11-05 21:34:28+00:00",
+    "data_consulta": "2027-01-01",
+    "versao_base": "V0066",
+    "data_base": "2026-10-28",
+    "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+  },
+  "contagens": {
+    "artigos": 580,
+    "alteracoes": 784,
+    "classificacoes": 170,
+    "ligacoes": 169,
+    "ncm": 10515,
+    "divergencias": 3,
+    "documentos_busca": 580
+  },
+  "consultas_textuais": [
+    {
+      "consulta": "credito presumido",
+      "status": "encontrado",
+      "artigos": [
+        "381",
+        "380",
+        "335"
+      ]
+    },
+    {
+      "consulta": "cesta basica",
+      "status": "sem_evidencia_na_busca_textual",
+      "artigos": []
+    },
+    {
+      "consulta": "imposto seletivo",
+      "status": "encontrado",
+      "artigos": [
+        "434",
+        "422",
+        "417"
+      ]
+    },
+    {
+      "consulta": "zzzinexistentetaxtracezz",
+      "status": "sem_evidencia_na_busca_textual",
+      "artigos": []
+    }
+  ],
+  "duplicata_recusada_sem_nova_coleta": true,
+  "leitor_sem_superusuario_criacao_ou_insert": true,
+  "testes_sem_tabela_coletas_persistida": true,
+  "limites": [
+    "Busca textual; ainda sem embeddings, LLM, MCP ou LangGraph.",
+    "Data consultada na API não é a data da captura nem garantia de vigência.",
+    "Validação local; não comprova execução do CI remoto nem Neon.",
+    "Hash verifica correspondência dos arquivos ao manifesto; não é assinatura digital da fonte."
+  ],
+  "verificacoes_de_qualidade": {
+    "unittest": {
+      "executados": 43,
+      "ignorados": 0,
+      "falhas": 0
+    },
+    "ruff_check": "aprovado",
+    "ruff_format_check": "aprovado",
+    "git_diff_check": "aprovado",
+    "valores_privados_do_env_em_arquivos_publicaveis": 0
+  }
+}
