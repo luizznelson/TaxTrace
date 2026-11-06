@@ -78,12 +78,15 @@
 5. [ ] Agente LangGraph com recusa e aprovação humana.
    - [x] Fluxo de planejamento limitado, consultas MCP reais, conferência de coleta/citações e rastro local. Modo por regras e modo Gemini (gemini-3.5-flash-lite), com três chamadas reais registradas. Até uma requisição de modelo e três chamadas MCP; sem síntese fiscal. Ver `docs/AGENTE.md`.
    - [x] Checkpoint SQLite local e pausa/retomada tipada para revisão documental. Decisão exige hash, origem e motivo; trava por revisão, recusa de decisão duplicada e bloqueio após mudança do código identificado. Retomada sem chamadas MCP/Gemini. Teste entre processos com decisões sintéticas identificado; sem alegar revisão humana real. Ver `docs/REVISAO.md`.
-   - [ ] Interface e autenticação de revisores; revisão fiscal e geração de respostas continuam pendentes.
+   - [x] Interface local de revisão documental com fontes acessíveis e decisão vinculada ao conjunto exibido.
+   - [ ] Autenticação de revisores para exposição pública; revisão fiscal e geração de respostas continuam pendentes.
    - [ ] Avaliação independente de planejamento, recusa e suficiência antes da geração de respostas.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
    - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.
    - [ ] Revisão por especialista, conjunto independente e avaliação de respostas/citações/recusas.
 7. [ ] Interface, Docker, CI, deploy, README e vídeo.
+   - [x] Interface local FastAPI com bancada de pesquisa, lista selecionável, leitor de fontes e revisão contextual, PT/EN, histórico da aba, exportação e decisão vinculada ao hash. Teste visual de computador e tela pequena; ver `docs/INTERFACE.md`.
+   - [ ] Autenticação adequada antes de exposição pública, publicação e vídeo.
 
 ## Regras do projeto
 - Nunca afirmar vigência sem data e fonte.

@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-RAG with generation, a review interface, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
+RAG with generation, authenticated multi-user review and answer evaluation with reviewed labels remain **planned**. A local document review interface is available. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
 
 ## Recorded local verification
 
@@ -114,6 +114,16 @@ The [review workflow](docs/REVISAO.md) uses SQLite checkpoints and a typed LangG
 ```
 
 The verifier exercises synthetic approval/rejection across separate processes and labels them as automated. It does not claim a real human review. Operator identity is self-declared, not authenticated; document approval does not establish legal correctness. Private checkpoints and lock files are excluded from Git, while reviewed public audit exports remain under `runs/`.
+
+## Local application
+
+The [TaxTrace interface](docs/INTERFACE.md) brings **research, source reading and document review** into one workspace: selectable results, an adjacent reader and a decision form with the source still accessible. Includes tab history and record export. Portuguese and English UI are available; official documents retain their original text.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.web
+```
+
+Open [the local application](http://127.0.0.1:8015/). The database must be running. This is a local application, without public deployment or multiuser authentication.
 
 ## Checks
 

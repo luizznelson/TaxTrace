@@ -1,0 +1,24 @@
+{
+  "verificado_em": "2026-11-06T19:29:53.694454+00:00",
+  "tipo": "interface_local",
+  "testes": 111,
+  "falhas": 0,
+  "verificacao_visual": [
+    "consulta real artigo 125",
+    "evidências separadas da revisão",
+    "rejeição com origem teste_automatizado",
+    "idioma com rascunho preservado",
+    "computador e viewport móvel sem overflow horizontal no caso inspecionado"
+  ],
+  "console_erros_observados": 0,
+  "credenciais": "não incluídas por este registro",
+  "limites": [
+    "Sem deploy, sem autenticação multiusuário, sem revisão humana real no teste visual.",
+    "Não é auditoria completa de acessibilidade ou segurança."
+  ],
+  "assets_sha256": {
+    "index.html": "2aaa1c890a06930cde3e93f68f156ce4ab79ec21a713eb4ef50e079b7d58ed26",
+    "styles.css": "885cdb092850ed3df8971dbb7f9a8963679072773170cfacbd611d53a88a85e1",
+    "app.js": "5082f2fa5aebe234896417381119aa4d106d3d4fcbb490a98e99bac533e78d7a"
+  }
+}

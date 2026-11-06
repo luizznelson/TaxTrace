@@ -21,7 +21,7 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Servidor MCP local com quatro ferramentas de consulta, fontes e coleta identificada.
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** RAG com geração, interface de revisão, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
+**Ainda em desenvolvimento:** RAG com geração, autenticação de revisores para publicação multiusuário e avaliação de respostas com gabarito revisado. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -127,6 +127,16 @@ O [fluxo de revisão](docs/REVISAO.md) salva o estado em SQLite, permite inspeci
 
 O segundo comando é uma demonstração automatizada identificada, não revisão humana real. Checkpoints privados ficam fora do Git; os eventos publicáveis ficam em `runs/`. A identidade do revisor é autodeclarada e a decisão documental não valida um parecer fiscal.
 
+## Aplicação local
+
+A [interface do TaxTrace](docs/INTERFACE.md) reúne **pesquisa, leitura das fontes e revisão documental** em uma bancada: lista selecionável de resultados, leitor ao lado e decisão com a fonte acessível. Inclui histórico da aba e exportação do registro. Português e inglês disponíveis; os documentos oficiais preservam o texto original.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.web
+```
+
+Abra [a aplicação local](http://127.0.0.1:8015/). A base precisa estar ativa. Esta etapa não publica o app nem oferece autenticação multiusuário.
+
 ## Como conferir a qualidade
 
 ```powershell
@@ -140,18 +150,18 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 
 ## Organização
 
-| Local | Responsabilidade |
-| --- | --- |
-| `taxtrace/coleta.py`, `integridade.py` | Captura e conferência dos arquivos contra o manifesto |
-| `taxtrace/lei.py`, `tabelas.py`, `ligacao.py` | Interpretação e ligação das fontes |
-| `taxtrace/schema.sql`, `banco.py`, `conexao.py` | Persistência, transações e conexões separadas |
-| `taxtrace/documentos.py`, `consulta.py`, `busca.py` | Texto pesquisável e busca com citações |
-| `taxtrace/encoder.py`, `vetores.py` | Modelo local fixado, fragmentação e índice vetorial experimental |
+| Local                                                          | Responsabilidade                                                      |
+| -------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `taxtrace/coleta.py`, `integridade.py`                         | Captura e conferência dos arquivos contra o manifesto                 |
+| `taxtrace/lei.py`, `tabelas.py`, `ligacao.py`                  | Interpretação e ligação das fontes                                    |
+| `taxtrace/schema.sql`, `banco.py`, `conexao.py`                | Persistência, transações e conexões separadas                         |
+| `taxtrace/documentos.py`, `consulta.py`, `busca.py`            | Texto pesquisável e busca com citações                                |
+| `taxtrace/encoder.py`, `vetores.py`                            | Modelo local fixado, fragmentação e índice vetorial experimental      |
 | `taxtrace/consultas.py`, `servidor_mcp.py`, `verificar_mcp.py` | Consultas de domínio, ferramentas MCP e verificação real do protocolo |
-| `tests/` | Verificações automatizadas e isolamento do banco de testes |
-| `evals/`, `taxtrace/avaliacao.py` | Gabaritos, metodologia e avaliação da recuperação |
-| `runs/` | Registros públicos de validação, sem credenciais |
-| `PLANO.md` | Decisões, fontes e entregas pendentes |
+| `tests/`                                                       | Verificações automatizadas e isolamento do banco de testes            |
+| `evals/`, `taxtrace/avaliacao.py`                              | Gabaritos, metodologia e avaliação da recuperação                     |
+| `runs/`                                                        | Registros públicos de validação, sem credenciais                      |
+| `PLANO.md`                                                     | Decisões, fontes e entregas pendentes                                 |
 
 ## Limites de interpretação
 
