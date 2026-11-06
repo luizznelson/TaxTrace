@@ -1,0 +1,186 @@
+{
+  "verificado_em": "2026-11-06T18:38:33.239569+00:00",
+  "registros": [
+    {
+      "registro": "runs/agente-0234f4f4-91af-430a-836d-5167054805c4/execucao.json",
+      "modo": "local",
+      "acao": "buscar",
+      "modelo": null,
+      "status": "evidencias_para_revisao",
+      "chamadas_mcp": 3,
+      "conferencia_presente": false,
+      "uso_modelo": null,
+      "codigo_sha256": {
+        "agente.py": "08eed6a03721cdfb015b4242b4107e1874bf2ade24e434169adb69c58ddfe8ab",
+        "planejamento.py": "ee60598a73f5309f7c0d489fa1f7f7f3d1ae1e320806603086da9629db9c92a4",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-0425d61d-dfe8-44d4-8f9e-b4dec98fcf75/execucao.json",
+      "modo": "local",
+      "acao": "classificacao",
+      "modelo": null,
+      "status": "referencia_nao_encontrada_nesta_consulta",
+      "chamadas_mcp": 2,
+      "conferencia_presente": true,
+      "uso_modelo": null,
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-2d837887-79da-4569-9cb3-0100f4a2f53b/execucao.json",
+      "modo": "local",
+      "acao": "ler_artigo",
+      "modelo": null,
+      "status": "evidencias_para_revisao",
+      "chamadas_mcp": 2,
+      "conferencia_presente": true,
+      "uso_modelo": null,
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-581c5265-5fd7-4a48-a4da-71a63e15e4c5/execucao.json",
+      "modo": "local",
+      "acao": "buscar",
+      "modelo": null,
+      "status": "evidencias_para_revisao",
+      "chamadas_mcp": 3,
+      "conferencia_presente": true,
+      "uso_modelo": null,
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-6d10681b-7000-4a2e-92a0-70099d0eb0ad/execucao.json",
+      "modo": "gemini",
+      "acao": "buscar",
+      "modelo": "gemini-3.5-flash-lite",
+      "status": "evidencias_para_revisao",
+      "chamadas_mcp": 3,
+      "conferencia_presente": true,
+      "uso_modelo": {
+        "promptTokenCount": 151,
+        "candidatesTokenCount": 38,
+        "totalTokenCount": 189,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 151
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-b4bfcd9e-6237-4918-8d78-ad85415b1e94/execucao.json",
+      "modo": "local",
+      "acao": "buscar",
+      "modelo": null,
+      "status": "referencia_nao_encontrada_nesta_consulta",
+      "chamadas_mcp": 2,
+      "conferencia_presente": true,
+      "uso_modelo": null,
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-b647f4a7-579d-4325-99f0-118e2c5a5a33/execucao.json",
+      "modo": "gemini",
+      "acao": "recusar",
+      "modelo": "gemini-3.5-flash-lite",
+      "status": "recusado_pelo_planejador",
+      "chamadas_mcp": 0,
+      "conferencia_presente": false,
+      "uso_modelo": {
+        "promptTokenCount": 153,
+        "candidatesTokenCount": 34,
+        "totalTokenCount": 187,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 153
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-d20ace41-99c0-4679-8a34-740b22aaf503/execucao.json",
+      "modo": "local",
+      "acao": "classificacao",
+      "modelo": null,
+      "status": "evidencias_para_revisao",
+      "chamadas_mcp": 2,
+      "conferencia_presente": true,
+      "uso_modelo": null,
+      "codigo_sha256": {
+        "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+        "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    },
+    {
+      "registro": "runs/agente-fb43b91c-ce53-47d5-b6ab-8b29f91605c1/execucao.json",
+      "modo": "gemini",
+      "acao": "ler_artigo",
+      "modelo": "gemini-3.5-flash-lite",
+      "status": "evidencias_para_revisao",
+      "chamadas_mcp": 2,
+      "conferencia_presente": false,
+      "uso_modelo": {
+        "promptTokenCount": 154,
+        "candidatesTokenCount": 37,
+        "totalTokenCount": 191,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 154
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "codigo_sha256": {
+        "agente.py": "08eed6a03721cdfb015b4242b4107e1874bf2ade24e434169adb69c58ddfe8ab",
+        "planejamento.py": "ee60598a73f5309f7c0d489fa1f7f7f3d1ae1e320806603086da9629db9c92a4",
+        "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+      }
+    }
+  ],
+  "testes": {
+    "executados": 96,
+    "falhas": 0,
+    "ignorados": 0
+  },
+  "ruff_check": "aprovado",
+  "ruff_format_check": "aprovado",
+  "pip_check": "sem_incompatibilidades",
+  "limites": [
+    "Execuções locais por regras e três chamadas reais de planejamento Gemini; não são um benchmark representativo.",
+    "Duas execuções preliminares antecedem o nó de conferência; hashes e rastros as distinguem.",
+    "Sem síntese fiscal, aprovação humana ou retomada persistente."
+  ]
+}

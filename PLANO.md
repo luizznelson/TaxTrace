@@ -74,8 +74,11 @@
    - [x] Experimento de recuperação combinada RRF: 80% e 75% nos conjuntos conhecidos, inferior à textual v4; mantido como opção explícita. Avaliador verifica trechos literais na fonte e presença de âncora do gabarito, separadamente do acerto de artigo. Ver `evals/HIBRIDA.md`.
    - [ ] Avaliar suficiência para resposta e recusa antes de usar os vetores em geração. Âncora literal não comprova suficiência jurídica.
    - [ ] Validar vigência por dispositivo/data; remover trechos riscados do índice não resolve toda a análise temporal.
-4. [x] Servidor MCP com as ferramentas de consulta: SDK oficial 2.3.0, stdio local, `consultar_base`, `buscar_artigos`, `ler_artigo` e `consultar_classificacao`. Conexão somente leitura, entradas limitadas, contrato estruturado e erros sanitizados. Cliente/servidor reais verificados em 13 chamadas; ver `docs/MCP.md`. Ainda sem integração com LLM, cliente desktop ou transporte HTTP.
+4. [x] Servidor MCP com as ferramentas de consulta: SDK oficial 2.3.0, stdio local, `consultar_base`, `buscar_artigos`, `ler_artigo` e `consultar_classificacao`. Conexão somente leitura, entradas limitadas, contrato estruturado e erros sanitizados. Cliente/servidor reais verificados em 13 chamadas; ver `docs/MCP.md`. Planejador Gemini integrado pelo fluxo LangGraph (ver etapa 5); cliente desktop e transporte HTTP seguem pendentes.
 5. [ ] Agente LangGraph com recusa e aprovação humana.
+   - [x] Fluxo de planejamento limitado, consultas MCP reais, conferência de coleta/citações e rastro local. Modo por regras e modo Gemini (gemini-3.5-flash-lite), com três chamadas reais registradas. Até uma requisição de modelo e três chamadas MCP; sem síntese fiscal. Ver `docs/AGENTE.md`.
+   - [ ] Checkpoint persistente e pausa/retomada para revisão humana.
+   - [ ] Avaliação independente de planejamento, recusa e suficiência antes da geração de respostas.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
    - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.
    - [ ] Revisão por especialista, conjunto independente e avaliação de respostas/citações/recusas.

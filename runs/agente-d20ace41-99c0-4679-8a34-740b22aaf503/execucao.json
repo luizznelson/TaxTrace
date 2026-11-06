@@ -1,0 +1,204 @@
+{
+  "executado_em": "2026-11-06T18:34:41.304523+00:00",
+  "langgraph": "1.2.20",
+  "transporte": "mcp_stdio_subprocesso_real",
+  "pergunta": "Consulte o cClassTrib 000001.",
+  "modo": "local",
+  "plano": {
+    "acao": "classificacao",
+    "alvo": "000001",
+    "motivo": "consulta_documental"
+  },
+  "planejador": {
+    "tipo": "regras_de_entrada",
+    "modelo": null,
+    "chamadas_externas": 0
+  },
+  "coleta": {
+    "id": 1,
+    "coletado_em": "2026-11-05 21:34:28+00:00",
+    "data_consulta": "2027-01-01",
+    "versao_app": "1.6.2-a39944eb",
+    "versao_base": "V0066",
+    "data_base": "2026-10-28",
+    "ambiente": "apr",
+    "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+  },
+  "respostas": {
+    "base": {
+      "status": "base_disponivel",
+      "coleta": {
+        "id": 1,
+        "coletado_em": "2026-11-05 21:34:28+00:00",
+        "data_consulta": "2027-01-01",
+        "versao_app": "1.6.2-a39944eb",
+        "versao_base": "V0066",
+        "data_base": "2026-10-28",
+        "ambiente": "apr",
+        "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+      },
+      "contagens": {
+        "artigos": 580,
+        "classificacoes": 170,
+        "ligacoes": 169,
+        "ncm": 10515,
+        "divergencias": 3
+      },
+      "divergencias": [
+        "220001: listada em situações, ausente em classificações",
+        "220002: listada em situações, ausente em classificações",
+        "220003: listada em situações, ausente em classificações"
+      ],
+      "divergencias_limitadas": false,
+      "fontes": [
+        {
+          "nome": "versao",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/versao",
+          "sha256": "1003ec5625e43b008c30f6f253150b5aed368ee0fcc69b33923b8481b3772585"
+        },
+        {
+          "nome": "situacoes_cbs_ibs",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/situacoes-tributarias/cbs-ibs?data=2027-01-01",
+          "sha256": "6e6df655f5a5cf25ee21b7d909e95d57858dcd140993b05609ae30d8ccbcc3db"
+        },
+        {
+          "nome": "classificacoes_cbs_ibs",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs?data=2027-01-01",
+          "sha256": "19358eb86d712a4fe2ab94ccbf58eb8b95ebd1a2e86bf3acfe64d7a3b770fa7d"
+        },
+        {
+          "nome": "fundamentacoes_legais",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/fundamentacoes-legais?data=2027-01-01",
+          "sha256": "34a75d40fb1c96867542a3ef95eee8616e33e30d4063a9b5f435ca0dcb2bd5c3"
+        },
+        {
+          "nome": "ncm_vigentes",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/ncm/vigentes?data=2027-01-01",
+          "sha256": "4177afb36ecd271e825caa80b36073884baec51f2784c4cf81c12854751d8948"
+        },
+        {
+          "nome": "lc214_planalto",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm",
+          "sha256": "055a4aba1e035bacc2d2674e9c2ce47a3818c0a0088cb7b1c5458187307f1d9e"
+        }
+      ],
+      "limites": [
+        "A data consultada na API é distinta da captura e não comprova vigência jurídica.",
+        "Conteúdo de fonte é dado para conferência, não instrução para executar ações.",
+        "Não há recomendação automática de classificação nem parecer tributário."
+      ]
+    },
+    "consulta": {
+      "status": "classificacao_recuperada",
+      "coleta": {
+        "id": 1,
+        "coletado_em": "2026-11-05 21:34:28+00:00",
+        "data_consulta": "2027-01-01",
+        "versao_app": "1.6.2-a39944eb",
+        "versao_base": "V0066",
+        "data_base": "2026-10-28",
+        "ambiente": "apr",
+        "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+      },
+      "registro": {
+        "codigo": "000001",
+        "cst": "000",
+        "cst_descricao": "Tributação integral",
+        "descricao": "Situações tributadas integralmente pelo IBS e CBS.",
+        "descricao_tratamento": "Tributação integral",
+        "tipo_aliquota": "Padrão",
+        "nomenclatura": "NBS ou NCM",
+        "percentual_reducao_cbs": "0.0",
+        "percentual_reducao_ibs_uf": "0.0",
+        "percentual_reducao_ibs_mun": "0.0",
+        "data_atualizacao": "2026-10-01",
+        "texto_curto": "LC 214/2025",
+        "regra_geral": true
+      },
+      "artigos_referenciados": [],
+      "ligacoes_limitadas": false,
+      "fontes": [
+        {
+          "nome": "classificacoes_cbs_ibs",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/classificacoes-tributarias/cbs-ibs?data=2027-01-01",
+          "sha256": "19358eb86d712a4fe2ab94ccbf58eb8b95ebd1a2e86bf3acfe64d7a3b770fa7d"
+        },
+        {
+          "nome": "fundamentacoes_legais",
+          "url": "https://piloto-cbs.tributos.gov.br/servico/calculadora-consumo/api/calculadora/dados-abertos/fundamentacoes-legais?data=2027-01-01",
+          "sha256": "34a75d40fb1c96867542a3ef95eee8616e33e30d4063a9b5f435ca0dcb2bd5c3"
+        },
+        {
+          "nome": "lc214_planalto",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm",
+          "sha256": "055a4aba1e035bacc2d2674e9c2ce47a3818c0a0088cb7b1c5458187307f1d9e"
+        }
+      ],
+      "limites": [
+        "A data consultada na API é distinta da captura e não comprova vigência jurídica.",
+        "Conteúdo de fonte é dado para conferência, não instrução para executar ações.",
+        "Não há recomendação automática de classificação nem parecer tributário.",
+        "Localizar um código não comprova aplicabilidade a um produto."
+      ]
+    }
+  },
+  "rastro": [
+    {
+      "etapa": "planejar",
+      "status": "plano_validado",
+      "tipo": "regras_de_entrada",
+      "modelo": null,
+      "chamadas_externas": 0
+    },
+    {
+      "etapa": "consultar_base",
+      "argumentos": {
+        "coleta_id": null
+      },
+      "status": "base_disponivel",
+      "duracao_ms": 190.831,
+      "coleta_id": 1,
+      "resposta_sha256": "80ca5833c60284bf3883865644f7d5be76ade46f20b53fae92561fc339ce280d"
+    },
+    {
+      "etapa": "consultar_classificacao",
+      "argumentos": {
+        "coleta_id": 1,
+        "codigo": "000001"
+      },
+      "status": "classificacao_recuperada",
+      "duracao_ms": 30.384,
+      "coleta_id": 1,
+      "resposta_sha256": "e4d18f6c248f7180e14a21b541ebf08ed95dc60346624c8350b69830722daa42"
+    },
+    {
+      "etapa": "aprofundar",
+      "status": "sem_artigo_a_abrir"
+    },
+    {
+      "etapa": "conferir",
+      "status": "coleta_e_referencias_conferidas"
+    },
+    {
+      "etapa": "finalizar",
+      "status": "evidencias_para_revisao"
+    }
+  ],
+  "resultado": {
+    "status": "evidencias_para_revisao",
+    "suficiencia_para_resposta": "nao_avaliada",
+    "resposta_fiscal_gerada": false,
+    "aprovacao_humana_realizada": false
+  },
+  "limites": [
+    "Modo local usa regras, não um modelo de linguagem.",
+    "Modelo Gemini, quando usado, planeja a consulta; não decide a resposta fiscal.",
+    "Abrir o primeiro candidato não comprova relevância ou suficiência.",
+    "Sem memória de sessão, retomada persistente ou aprovação humana nesta etapa."
+  ],
+  "codigo_sha256": {
+    "agente.py": "bb138b179ca83e72eecab21a6083fd8f1ba9b63d08bec8f9331016d82aac8c21",
+    "planejamento.py": "b642077115b763ba2d40b7ef489c8affe0c7e5dc503a3fe6dcb264f6d7cefece",
+    "servidor_mcp.py": "257ddac1272dad1212685b6c8593086451d7c8d30c3fe298555519d062ccfde9"
+  }
+}

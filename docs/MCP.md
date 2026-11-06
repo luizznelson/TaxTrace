@@ -4,7 +4,7 @@
 
 Uma aplicação cliente pode consultar a base do TaxTrace por ferramentas com entradas e respostas estruturadas. O fluxo começa pela cobertura dos dados, passa pela busca de referências e permite abrir o artigo e conferir a classificação citada. Cada chamada informa qual coleta foi usada.
 
-Isso prepara a integração com um assistente que utilize ferramentas. **Ainda não há agente LangGraph ou geração de respostas fiscais.** Nesta etapa, o teste foi feito com um cliente Python, não com um modelo de linguagem ou um aplicativo desktop.
+Isso prepara a integração com um assistente que utilize ferramentas. O [fluxo LangGraph](AGENTE.md) já integra essas ferramentas com modos local e Gemini. Ainda não há geração de respostas fiscais ou integração com aplicativo desktop. A verificação isolada do protocolo descrita aqui usa um cliente Python.
 
 ## Ferramentas disponíveis
 
@@ -69,8 +69,8 @@ O teste real está em [runs/mcp-ffad7503-4c81-491a-b18b-2d6559d41b07/verificacao
 - Ausência de artigo e classificação, entradas inválidas e coleta inexistente.
 - Contagens iguais antes e depois das chamadas.
 
-Os testes automatizados adicionais cobrem schemas, tipos estritos, recusa de papel administrativo, paginação literal completa e ocultação de uma mensagem privada simulada de erro. A leitura real foi validada localmente; o CI remoto não foi observado nesta entrega. Nenhum teste com um LLM ou avaliação de parecer jurídico está sendo alegado.
+Os testes automatizados adicionais cobrem schemas, tipos estritos, recusa de papel administrativo, paginação literal completa e ocultação de uma mensagem privada simulada de erro. A leitura real foi validada localmente; o CI remoto não foi observado nesta entrega. Os testes do planejador com modelo real estão registrados separadamente em [AGENTE.md](AGENTE.md); não há avaliação de parecer jurídico.
 
 ## Próximo passo
 
-Integrar essas ferramentas a um agente com fluxo explícito e rastro das chamadas. A decisão sobre evidência suficiente, recusa e data aplicável ainda precisa de avaliação própria. O [plano](../PLANO.md) registra essas pendências.
+O [fluxo com LangGraph](AGENTE.md) já registra essas chamadas. Faltam pausa e retomada para revisão humana e avaliação de respostas. A decisão sobre evidência suficiente, recusa e data aplicável ainda precisa de avaliação própria. O [plano](../PLANO.md) registra essas pendências.

@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-RAG with generation, LangGraph, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
+RAG with generation, resumable human approval, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
 
 ## Recorded local verification
 
@@ -91,7 +91,18 @@ The [local MCP server](docs/MCP.md) exposes four structured tools: collection co
 .venv/Scripts/python.exe -m taxtrace.verificar_mcp
 ```
 
-The verifier launches a real stdio subprocess, discovers the tools and records successful and expected-error calls under `runs/`. The implementation uses pinned official SDK `mcp==2.3.0`, strict bounded inputs and the read-only database login. No HTTP endpoint, model API key or embeddings download is needed. LLM-agent and desktop-host integration have not been tested in this delivery.
+The verifier launches a real stdio subprocess, discovers the tools and records successful and expected-error calls under `runs/`. The implementation uses pinned official SDK `mcp==2.3.0`, strict bounded inputs and the read-only database login. No HTTP endpoint, model API key or embeddings download is needed. LangGraph planning integration is now documented separately; desktop-host integration remains untested.
+
+## LangGraph query workflow
+
+The [LangGraph workflow](docs/AGENTE.md) selects a bounded action, calls the real MCP server and checks collection identity and citation metadata. Local mode uses explicit routing rules; Gemini mode uses a real model only for planning. Both have recorded local executions, including three Gemini calls. This is not an independent planning benchmark.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.agente --consulta "Leia o artigo 125."
+.venv/Scripts/python.exe -m taxtrace.agente --modo gemini --consulta "Qual artigo trata da cesta basica?"
+```
+
+Gemini mode requires `GEMINI_API_KEY` in the local `.env`; the current model setting is `GEMINI_MODEL=gemini-3.5-flash-lite`. Each run permits at most one model request and three MCP calls. Operational failures remain distinct from missing references. Local audit records include the plan, collection, tool responses and code hashes; LangSmith tracing is explicitly disabled. Fiscal answer generation, persistent resume and human approval remain unimplemented.
 
 ## Checks
 

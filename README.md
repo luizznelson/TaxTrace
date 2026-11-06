@@ -21,7 +21,7 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Servidor MCP local com quatro ferramentas de consulta, fontes e coleta identificada.
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** RAG com geração, agente LangGraph, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
+**Ainda em desenvolvimento:** RAG com geração, aprovação humana com retomada, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -103,7 +103,18 @@ O [servidor MCP](docs/MCP.md) permite que um cliente consulte a base, busque art
 .venv/Scripts/python.exe -m taxtrace.verificar_mcp
 ```
 
-O comando inicia um cliente e um servidor locais, confere as chamadas e grava evidências em `runs/`. A integração com um agente de IA vem depois; não é necessária chave de modelo para testar o MCP.
+O comando inicia um cliente e um servidor locais, confere as chamadas e grava evidências em `runs/`. O fluxo LangGraph já usa essas ferramentas; não é necessária chave de modelo para testar o MCP isolado.
+
+## Fluxo LangGraph com rastro das chamadas
+
+O [fluxo de consulta](docs/AGENTE.md) planeja uma ação limitada, consulta a base por MCP, recupera referências e confere a coleta e as citações. O modo local usa regras; o modo Gemini usa IA apenas no planejamento. Foram executados testes reais de ambos, com registros em `runs/`.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.agente --consulta "Leia o artigo 125."
+.venv/Scripts/python.exe -m taxtrace.agente --modo gemini --consulta "Qual artigo trata da cesta basica?"
+```
+
+O modo Gemini exige a chave no `.env`. O resultado é um conjunto de evidências para revisão, com no máximo três chamadas MCP; ainda não há parecer fiscal, aprovação humana com retomada ou memória de conversa.
 
 ## Como conferir a qualidade
 
