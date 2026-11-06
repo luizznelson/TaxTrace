@@ -86,6 +86,38 @@ def pontuar(esperados, encontrados):
     }
 
 
+def pontuar_trechos(caso, resultados):
+    referencias = {
+        artigo: any(r["artigo_numero"] == artigo and ancora in r["trecho"] for r in resultados)
+        for artigo in caso["esperados"]
+        for ancora in [caso["evidencias"][artigo]]
+    }
+    return {
+        "ancoras_literais_exibidas": referencias,
+        "hit_ancora_no_trecho": any(referencias.values()),
+        "suficiencia_para_resposta": "nao_avaliada",
+    }
+
+
+def verificar_trechos(conn, coleta_id, resultados):
+    for resultado in resultados:
+        origem = conn.execute(
+            "SELECT texto_ativo FROM documentos_busca WHERE coleta_id=%s AND artigo_numero=%s",
+            (coleta_id, resultado["artigo_numero"]),
+        ).fetchone()
+        trecho = resultado.get("trecho")
+        if (
+            not origem
+            or not isinstance(trecho, str)
+            or not trecho.strip()
+            or trecho not in origem[0]
+        ):
+            raise ValueError("trecho_nao_confere_com_fonte")
+        if resultado.get("tipo_trecho") == "fragmento_semantico":
+            if origem[0][resultado["inicio"] : resultado["fim"]] != trecho:
+                raise ValueError("offsets_do_trecho_divergentes")
+
+
 def resumir(casos):
     artigos = [c for c in casos if c["tipo"] == "artigo"]
     controles = [c for c in casos if c["tipo"] == "controle_sem_resultado"]
@@ -98,6 +130,11 @@ def resumir(casos):
         ),
         "mrr_at_k": (
             sum(c["reciproco_primeiro_relevante"] for c in artigos) / len(artigos)
+            if artigos
+            else None
+        ),
+        "hit_ancora_literal_at_k": (
+            sum(c.get("hit_ancora_no_trecho", False) for c in artigos) / len(artigos)
             if artigos
             else None
         ),
@@ -142,6 +179,7 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
                 for r in resultados
             ):
                 raise ValueError("citacao_divergente")
+            verificar_trechos(conn, coleta["id"], resultados)
             encontrados = [r["artigo_numero"] for r in resultados]
             saida = {
                 **caso,
@@ -151,6 +189,11 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
                 "correspondencias": [
                     {
                         "artigo": r["artigo_numero"],
+                        "trecho": r["trecho"],
+                        "trecho_sha256": hashlib.sha256(r["trecho"].encode()).hexdigest(),
+                        "tipo_trecho": r.get("tipo_trecho", "recorte_textual"),
+                        "inicio": r.get("inicio"),
+                        "fim": r.get("fim"),
                         "posicoes": r.get("posicoes"),
                         "origem": r.get("origem"),
                         "parcial_v2": r.get("correspondencia_parcial"),
@@ -161,6 +204,7 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
             }
             if caso["esperados"]:
                 saida.update(pontuar(caso["esperados"], encontrados))
+                saida.update(pontuar_trechos(caso, resultados))
             saidas.append(saida)
     return {
         "coleta": coleta,
@@ -193,7 +237,9 @@ def versao_codigo(raiz):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4", "semantica"], default="v4")
+    parser.add_argument(
+        "--metodo", choices=["v1", "v2", "v3", "v4", "semantica", "hibrida"], default="v4"
+    )
     parser.add_argument("--casos", type=Path, default=Path("evals/recuperacao.v1.json"))
     parser.add_argument("--limite", type=int, default=5)
     args = parser.parse_args(argv)
@@ -208,6 +254,8 @@ def main(argv=None):
                 "metodo": (
                     "busca_semantica_e5_v1"
                     if args.metodo == "semantica"
+                    else "busca_hibrida_rrf_v1"
+                    if args.metodo == "hibrida"
                     else f"busca_textual_portugues_{args.metodo}"
                 ),
                 "embeddings_codigo_sha256": {

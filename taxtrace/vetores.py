@@ -173,7 +173,10 @@ def buscar_semantica(cur, vetor, coleta_id, limite):
           FROM ordenados WHERE posicao=1 ORDER BY distancia_cosseno,artigo_numero LIMIT %s""",
         (vetor_sql(vetor), vetor_sql(vetor), indice["id"], coleta_id, limite),
     )
-    return cur.fetchall(), indice
+    resultados = cur.fetchall()
+    for item in resultados:
+        item["tipo_trecho"] = "fragmento_semantico"
+    return resultados, indice
 
 
 def main(argv=None):

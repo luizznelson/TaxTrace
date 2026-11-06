@@ -2,6 +2,8 @@
 
 **Estado atual:** a busca padrão é a v4 conservadora. A [avaliação semântica](SEMANTICA.md) está disponível como experimento separado, com resultados inferiores à textual. Veja a [comparação atual](COMPARACAO.md). As medições v1/v2 abaixo são registros históricos das etapas anteriores.
 
+A [busca híbrida e a avaliação dos trechos](HIBRIDA.md) acrescentam a checagem de âncoras literais e a conferência dos recortes contra a fonte. Os relatórios históricos anteriores não possuem essa métrica.
+
 ## Decisão que esta avaliação apoia
 
 Antes de gerar respostas com IA, precisamos saber se a busca consegue localizar o artigo de referência. Uma resposta bem escrita não resolve a ausência do documento necessário. Esta medição cria uma base de comparação para melhorias da busca e, depois, embeddings.

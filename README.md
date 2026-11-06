@@ -88,6 +88,12 @@ O modelo de embeddings roda localmente, sem chave de API, e indexou **990 trecho
 
 Consulte [instalação, comparação e limites](evals/SEMANTICA.md) para testar com `--metodo semantica`. Os arquivos do modelo ficam fora do Git e seu download é explícito. Embeddings são recuperação de informação; a aplicação ainda não gera respostas por IA.
 
+## Qualidade dos trechos e busca combinada
+
+O [experimento híbrido](evals/HIBRIDA.md) combina candidatos textuais e semânticos, mas ficou abaixo da busca padrão: 16/20 e 9/12 referências encontradas. A avaliação agora também confere a literalidade dos recortes na fonte e a presença da frase de referência no trecho exibido. Na busca semântica, três consultas encontraram o artigo esperado sem mostrar essa frase.
+
+O comando `python -m taxtrace.avaliacao` com o Python da `.venv` gera esses novos indicadores. A presença da frase é uma verificação textual limitada; a suficiência jurídica para uma resposta continua sem avaliação. Use `--metodo hibrida` apenas para explorar o experimento, com o índice semântico já preparado.
+
 ## Como conferir a qualidade
 
 ```powershell

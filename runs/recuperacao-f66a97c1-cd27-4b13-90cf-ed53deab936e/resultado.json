@@ -1,0 +1,1752 @@
+{
+  "coleta": {
+    "id": 1,
+    "coletado_em": "2026-11-05 21:34:28+00:00",
+    "data_consulta": "2027-01-01",
+    "versao_base": "V0066",
+    "data_base": "2026-10-28",
+    "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+  },
+  "indice_semantico": null,
+  "k": 5,
+  "resumo": {
+    "casos": 22,
+    "casos_com_artigo": 20,
+    "hit_at_k": 0.95,
+    "recall_referencias_at_k": 0.95,
+    "mrr_at_k": 0.7116666666666667,
+    "hit_ancora_literal_at_k": 0.95,
+    "controles_sem_resultado": 2,
+    "controles_corretos": 2
+  },
+  "casos": [
+    {
+      "id": "instituicao_termos",
+      "tema": "instituicao",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "competência compartilhada",
+      "esperados": [
+        "1"
+      ],
+      "evidencias": {
+        "1": "Ficam instituídos:"
+      },
+      "encontrados": [
+        "1",
+        "493-A",
+        "58",
+        "349",
+        "174"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.88,
+      "correspondencias": [
+        {
+          "artigo": "1",
+          "trecho": "Art. 1º Ficam instituídos: I - o Imposto sobre Bens e Serviços (IBS), de competência compartilhada entre Estados, Municípios e Distrito Federal, de que trata o art. 156-A da Constituição Federal; e II - a Contribuição Social sobre Bens e Serviços (CBS), de competência da União, de que trata o inciso V do caput do art. 195 da Constituição Federal.",
+          "trecho_sha256": "2f28e37af13130c0b2356e271788b04203af3c1edf27077017e2e091db6eeeed",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "493-A",
+          "trecho": " no Distrito Federal, com o objetivo de desenvolver, implementar, gerir e operacionalizar, de forma compartilhada, módulos, sistemas e componentes relativos à administração do IBS e da CBS. (Incluído pela Lei Complementar nº 227, de 2026) § 1º A associação de que trata o caput deste artigo qualifica-se como entidade pública de natureza especial e submete-se ao regime jurídico de direito público. (Incluído pela Lei Complementar nº 227, de 2026) § 2º A associação tem sua atuação caracterizada pela ausência de vinculação, tutela ou subordinação hierárquica a qualquer órgão da administração pública. (Incluído pela Lei Complementar nº 227, de 2026) § 3º A associação tem personalidade jurídica própria, distinta da União, do CGIBS, dos Estados, do Distrito Federal e dos Municípios, assegurada autonomia administrativa, patrimonial, técnica e financeira, nos limites estabelecidos em regulamento e neste artigo. (Incluído pela Lei Complementar nº 227, de 2026) § 4º Ato conjunto da RFB e do CGIBS ",
+          "trecho_sha256": "2bce258692dff9815f6a7311f706d34cd51e0b6bb9f6258cdbf2054824e0d4f4",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "58",
+          "trecho": " implementar soluções integradas para a administração do IBS e da CBS, sem prejuízo das respectivas competências legais. Produção de efeitos § 1º O contribuinte acessará as informações da apuração e do pagamento do IBS e da CBS em plataforma eletrônica unificada, com gestão compartilhada entre o Comitê Gestor do IBS e a RFB. § 2º A plataforma eletrônica unificada de que trata o § 1º deste artigo disponibilizará canal de atendimento ao contribuinte para resolução de problemas operacionais relacionados à apuração e pagamento do IBS e da CBS. § 3º Sem prejuízo do disposto nos §§ 1º e 2º deste artigo, o Comitê Gestor do IBS e a RFB poderão manter seus próprios sistemas para administração do IBS e da CBS. § 4º É assegurada ao contribuinte a gratuidade de acesso aos mecanismos de integração sistêmica para envio e recebimento de dados e transações mínimos destinados à apuração e ao cumprimento de obrigações acessórias relativas ao IBS e à CBS, disponibilizados, respectivamente, pelo CGIBS e p",
+          "trecho_sha256": "b0bae29bc9704a37c2dd7d3cf24154d333dd36a2beda965cd43be68bda21e0a2",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "349",
+          "trecho": "será elaborada pelo Comitê Gestor do IBS e pelo Poder Executivo da União, no âmbito das respectivas competências, com base nos critérios constantes dos arts. 350 a 369 desta Lei Complementar; e II - será homologada pelo Tribunal de Contas da União. § 8º Na definição da metodologia de que trata o § 7º, o Poder Executivo da União e o Comitê Gestor do IBS poderão propor ajustes nos critérios constantes dos arts. 350 a 369 desta Lei Complementar, desde que estes sejam justificados. § 9º No processo de homologação da metodologia de que trata o § 7º: I - o Comitê Gestor do IBS e o Poder Executivo da União deverão encaminhar ao Tribunal de Contas da União a proposta de metodologia a ser adotada até o final do mês de junho do segundo ano anterior àquele de vigência da alíquota de referência calculada com base na metodologia a ser homologada; II - o Tribunal de Contas da União deverá homologar a metodologia no prazo de 180 (cento e oitenta) dias; III - o Tribunal de Contas da União poderá solic",
+          "trecho_sha256": "8b1ac62e237f3634ac56018909f2a93a8d3526955b3ace91723d3310b308a1bd",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "174",
+          "trecho": "Art. 174. As alíquotas do IBS e da CBS para os combustíveis de que trata o art. 172 desta Lei Complementar serão: I - uniformes em todo o território nacional, específicas por unidade de medida e diferenciadas por produto; II - reajustadas no ano anterior ao de sua vigência, observada, para a sua majoração, a anterioridade nonagesimal prevista na alínea “c” do inciso III do caput do art. 150 da Constituição Federal; III - divulgadas: a) quanto ao IBS, pelo Comitê Gestor do IBS; b) quanto à CBS, pelo chefe do Poder Executivo da União. § 1º As alíquotas da CBS em 2027 serão fixadas de forma a não exceder a carga tributária incidente sobre os combustíveis dos tributos federais extintos ou reduzidos pela Emenda Constitucional nº 132, de 20 de dezembro de 2023, calculada nos termos do § 2º deste artigo. § 2º Na apuração da carga tributária de que trata o § 1º deste artigo deverá ser considerada: I - a carga tributária direta das contribuições previstas na alínea “b” do inciso I e no inciso I",
+          "trecho_sha256": "32f48b0382ed16386660b5fdc529c5390348d3e00f6b2d7f84b49715ffbb1a25",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "1": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "instituicao_pergunta",
+      "tema": "instituicao",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo institui o IBS e a CBS?",
+      "esperados": [
+        "1"
+      ],
+      "evidencias": {
+        "1": "Ficam instituídos:"
+      },
+      "encontrados": [
+        "61",
+        "263",
+        "1",
+        "471-A",
+        "463"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 29.059,
+      "correspondencias": [
+        {
+          "artigo": "61",
+          "trecho": "Art. 61. O Comitê Gestor do IBS e a RFB poderão instituir programas de incentivo à cidadania fiscal por meio de estímulo à exigência, pelos consumidores, da emissão de documentos fiscais. § 1º Os programas de que trata o caput deste artigo poderão ser financiados pelo montante equivalente a até 0,05% (cinco centésimos por cento) da arrecadação do IBS e da CBS. § 2º O regulamento poderá prever hipóteses em que as informações apresentadas nos termos do inciso I do § 1º do art. 32 desta Lei Complementar poderão ser utilizadas para identificar o adquirente que não seja contribuinte do IBS e da CBS nos respectivos documentos fiscais eletrônicos, garantida a opção do adquirente por outra forma de identificação.",
+          "trecho_sha256": "9530e650c3fe9b2539dc923296d97bad208a65324d0c0827dc3b9ea2395186c4",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "263",
+          "trecho": "nante de bem imóvel, na alienação de bem imóvel ou de direito a ele relativo; II - aquele que cede, institui ou transmite direitos reais sobre bens imóveis, na cessão ou no ato oneroso instituidor ou translativo de direitos reais sobre bens imóveis, exceto os de garantia; III - o locador, o cedente ou o arrendador, na locação, cessão onerosa ou arrendamento de bem imóvel; IV - o adquirente, no caso de adjudicação, remição e arrematação em leilão judicial de bem imóvel; V - o prestador de serviços de construção; VI - o prestador de serviços de administração e intermediação de bem imóvel. § 1º No caso do inciso IV do caput deste artigo, a operação: I - será tributada como alienação realizada por contribuinte do regime regular do IBS e da CBS, se houver redutor de ajuste vinculado ao imóvel, aplicando-se o disposto no art. 257, § 1º; ou II - será tratada como alienação realizada por não contribuinte do regime regular do IBS e da CBS, se não houver redutor de ajuste vinculado ao imóvel. § ",
+          "trecho_sha256": "d326fd3fe8496ceff587ec22169424939671f9dbfd5a1a7b852f024f8680f3a5",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "1",
+          "trecho": "Art. 1º Ficam instituídos: I - o Imposto sobre Bens e Serviços (IBS), de competência compartilhada entre Estados, Municípios e Distrito Federal, de que trata o art. 156-A da Constituição Federal; e II - a Contribuição Social sobre Bens e Serviços (CBS), de competência da União, de que trata o inciso V do caput do art. 195 da Constituição Federal.",
+          "trecho_sha256": "2f28e37af13130c0b2356e271788b04203af3c1edf27077017e2e091db6eeeed",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "471-A",
+          "trecho": "Art. 471-A. É instituído o Programa Nacional de Conformidade Tributária (PNCT), destinado a integrar os regimes de conformidade tributária do IBS e da CBS, com vistas a promover a segurança jurídica, a previsibilidade, a transparência e a melhoria da relação entre as administrações tributárias e os contribuintes. (Incluído pela Lei Complementar nº 227, de 2026) § 1º A adesão ao PNCT será voluntária e dependerá do cumprimento de critérios objetivos previstos em regulamento. (Incluído pela Lei Complementar nº 227, de 2026) § 2º O PNCT será regulamentado por ato conjunto do CGIBS e da RFB, observado o disposto nesta Lei Complementar. (Incluído pela Lei Complementar nº 227, de 2026)",
+          "trecho_sha256": "52afcf3b578c489f5c4fbd9cc740d64b5ad3e0f301aa9a1a3857bdff29d905e3",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "463",
+          "trecho": "Art. 463. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre operação originada fora da área de livre comércio que destine bem material industrializado de origem nacional a contribuinte estabelecido na área de livre comércio que seja: I - habilitado nos termos do art. 460 desta Lei Complementar; e II - sujeito ao regime regular do IBS e da CBS ou optante pelo regime do Simples Nacional de que trata o art. 12 da Lei Complementar nº 123, de 14 de dezembro de 2006. § 1º O disposto no caput não se aplica às operações com bens de que trata o § 1º do art. 461 desta Lei Complementar. § 2º O contribuinte sujeito ao regime regular do IBS e da CBS que realiza as operações de que trata o caput poderá apropriar e utilizar créditos relativos às operações antecedentes, observado o disposto nos arts. 47 a 56 desta Lei Complementar. § 3º Deverão ser instituídos controles específicos para verificação da entrada nas Áreas de Livre Comércio dos bens de que trata o caput, nos termos do r",
+          "trecho_sha256": "779db248a312679cf59642a90c1b3886457d6278c1d22214289b7a604b591563",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.3333333333333333,
+      "ancoras_literais_exibidas": {
+        "1": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "incidencia_termos",
+      "tema": "incidencia",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "operações onerosas",
+      "esperados": [
+        "4"
+      ],
+      "evidencias": {
+        "4": "incidem sobre operações onerosas"
+      },
+      "encontrados": [
+        "11",
+        "4",
+        "81-A",
+        "6",
+        "63"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.941,
+      "correspondencias": [
+        {
+          "artigo": "11",
+          "trecho": "emais incisos deste artigo: (Redação dada pela Lei Complementar nº 227, de 2026) a) adquirente, nas operações onerosas; a) se a operação for onerosa: (Redação dada pela Lei Complementar nº 227, de 2026) 1. o local do domicílio principal do adquirente residente ou domiciliado no País; ou (Incluído pela Lei Complementar nº 227, de 2026) 2. o local do domicílio principal do destinatário residente ou domiciliado no País, caso o adquirente não seja residente ou domiciliado no País. (Incluído pela Lei Complementar nº 227, de 2026) b) destinatário, nas operações não onerosas. b) se a operação for não onerosa, o local do domicílio principal do destinatário residente ou domiciliado no País. (Redação dada pela Lei Complementar nº 227, de 2026) § 1º Para fins do disposto no inciso I do caput deste artigo: I - em operação realizada de forma não presencial, assim entendida aquela em que a entrega ou disponibilização não ocorra na presença do adquirente ou destinatário no estabelecimento do forneced",
+          "trecho_sha256": "e6352e3f16fdc7735fded285a3d5b9a713e9110aac76eba220a0d38a53fce967",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "4",
+          "trecho": "Art. 4º O IBS e a CBS incidem sobre operações onerosas com bens ou com serviços. § 1º As operações não onerosas com bens ou com serviços serão tributadas nas hipóteses expressamente previstas nesta Lei Complementar. § 2º Para fins do disposto neste artigo, considera-se operação onerosa com bens ou com serviços qualquer fornecimento com contraprestação, incluindo o decorrente de: I - compra e venda, troca ou permuta, dação em pagamento e demais espécies de alienação; II - locação; III - licenciamento, concessão, cessão; IV - mútuo oneroso; V - doação com contraprestação em benefício do doador; VI - instituição onerosa de direitos reais; VII - arrendamento, inclusive mercantil; e VIII - prestação de serviços. § 3º São irrelevantes para a caracterização das operações de que trata este artigo: I - o título jurídico pelo qual o bem encontra-se na posse do fornecedor; II - a espécie, tipo ou forma jurídica, a validade jurídica e os efeitos dos atos ou negócios jurídicos; III - a obtenção de ",
+          "trecho_sha256": "e0b9914938482c2d0a651a411556508004a7d1a6b45d3d9f1b4e331171edc9df",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "81-A",
+          "trecho": "ortador, com os devidos acréscimos, a CBS e o IBS incidentes na operação, inclusive os relativos às operações de que trata o inciso II do § 1º do art. 80. (Incluído pela Lei Complementar nº 227, de 2026) § 2º O regulamento poderá prever hipóteses de ampliação do prazo previsto no § 1º deste artigo. (Incluído pela Lei Complementar nº 227, de 2026)",
+          "trecho_sha256": "c68b4980f093d53e0188a0455e513ad1ced694da2d24b1afd54a9d5738385517",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "6",
+          "trecho": "árias, ressalvado o disposto no inciso III do caput do art. 5º desta Lei Complementar; VII - demais operações com títulos ou valores mobiliários, com exceção do disposto para essas operações no regime específico de serviços financeiros de que trata a Seção III do Capítulo II do Título V deste Livro, nos termos previstos nesse regime e das demais situações previstas expressamente nesta Lei Complementar; VIII - doações sem contraprestação em benefício do doador; IX - transferências de recursos públicos e demais bens públicos para organizações da sociedade civil constituídas como pessoas jurídicas sem fins lucrativos no País, por meio de termos de fomento, termos de colaboração, acordos de cooperação, termos de parceria, termos de execução descentralizada, contratos de gestão, contratos de repasse, subvenções, convênios e demais instrumentos celebrados pela administração pública direta, por autarquias e por fundações públicas; X - destinação de recursos por sociedade cooperativa para os f",
+          "trecho_sha256": "940299505bf75d6b6fa001b64395a6328b3c93a916f853953d7a14c7ec320104",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "63",
+          "trecho": "ta neste Capítulo, aplicam-se à importação de que trata o caput deste artigo as regras relativas às operações onerosas de que trata o Capítulo II deste Título.",
+          "trecho_sha256": "08210bb237ac9e7b47390f09247af5be1062bba9f01541e32611d05b43b95677",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5,
+      "ancoras_literais_exibidas": {
+        "4": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "incidencia_pergunta",
+      "tema": "incidencia",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "O IBS e a CBS incidem sobre operações onerosas?",
+      "esperados": [
+        "4"
+      ],
+      "evidencias": {
+        "4": "incidem sobre operações onerosas"
+      },
+      "encontrados": [
+        "4",
+        "5",
+        "252",
+        "6",
+        "63"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 11.42,
+      "correspondencias": [
+        {
+          "artigo": "4",
+          "trecho": "Art. 4º O IBS e a CBS incidem sobre operações onerosas com bens ou com serviços. § 1º As operações não onerosas com bens ou com serviços serão tributadas nas hipóteses expressamente previstas nesta Lei Complementar. § 2º Para fins do disposto neste artigo, considera-se operação onerosa com bens ou com serviços qualquer fornecimento com contraprestação, incluindo o decorrente de: I - compra e venda, troca ou permuta, dação em pagamento e demais espécies de alienação; II - locação; III - licenciamento, concessão, cessão; IV - mútuo oneroso; V - doação com contraprestação em benefício do doador; VI - instituição onerosa de direitos reais; VII - arrendamento, inclusive mercantil; e VIII - prestação de serviços. § 3º São irrelevantes para a caracterização das operações de que trata este artigo: I - o título jurídico pelo qual o bem encontra-se na posse do fornecedor; II - a espécie, tipo ou forma jurídica, a validade jurídica e os efeitos dos atos ou negócios jurídicos; III - a obtenção de ",
+          "trecho_sha256": "e0b9914938482c2d0a651a411556508004a7d1a6b45d3d9f1b4e331171edc9df",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "5",
+          "trecho": "Art. 5º O IBS e a CBS também incidem sobre as seguintes operações: I - fornecimento não oneroso ou a valor inferior ao de mercado de bens e serviços, nas hipóteses previstas nesta Lei Complementar; I - fornecimento não oneroso ou a valor inferior ao de mercado de bens e serviços: (Redação dada pela Lei Complementar nº 227, de 2026) a) adquiridos pelo contribuinte, que tenham permitido a apropriação de créditos de IBS e de CBS, para: (Incluído pela Lei Complementar nº 227, de 2026) 1. o próprio contribuinte, caso este seja pessoa física; (Incluído pela Lei Complementar nº 227, de 2026) 2. as pessoas físicas que sejam sócias, acionistas, administradoras e membros de conselhos de administração e fiscal e comitês de assessoramento do conselho de administração do contribuinte previstos em lei; (Incluído pela Lei Complementar nº 227, de 2026) 3. os empregados do contribuinte; e (Incluído pela Lei Complementar nº 227, de 2026) 4. os cônjuges, companheiros ou parentes, consanguíneos ou afins, ",
+          "trecho_sha256": "c4a72d00f737441364c27ec1616d97935084f13f82a98c5439e3a24803d2a67e",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "252",
+          "trecho": "Art. 252. O IBS e a CBS incidem, nos termos deste Capítulo, sobre as seguintes operações com bens imóveis: I - alienação, inclusive decorrente de incorporação imobiliária e de parcelamento de solo; II - cessão e ato translativo ou constitutivo onerosos de direitos reais; III - locação, cessão onerosa e arrendamento; IV - serviços de administração e intermediação; e V - serviços de construção civil. § 1º Sujeitam-se à tributação pelo IBS e pela CBS pelas mesmas regras da locação, cessão onerosa e arrendamento de bens imóveis: I - a servidão, a cessão de uso ou de espaço; II - a permissão de uso, o direito de passagem; e III - (VETADO). § 2º O IBS e a CBS não incidem nas seguintes hipóteses: I - nas operações de permuta de bens imóveis, exceto sobre a torna, que será tributada nos termos deste Capítulo; I - nas operações de permuta entre bens imóveis, exceto sobre a torna, que será tributada nos termos deste Capítulo; (Redação dada pela Lei Complementar nº 227, de 2026) II - na constitui",
+          "trecho_sha256": "46f49b119ead9707676959a30c05be6195a9e9d07f9fb60117387a6a7a6cba3d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "6",
+          "trecho": "Art. 6º O IBS e a CBS não incidem sobre: I - fornecimento de serviços por pessoas físicas em decorrência de: a) relação de emprego com o contribuinte; ou b) sua atuação como administradores ou membros de conselhos de administração e fiscal e comitês de assessoramento do conselho de administração do contribuinte previstos em lei; II - transferência de bens entre estabelecimentos pertencentes ao mesmo contribuinte, observada a obrigatoriedade de emissão de documento fiscal eletrônico, nos termos do inciso II do § 2º do art. 60 desta Lei Complementar; III - baixa, liquidação e transmissão, incluindo alienação, de participação societária, ressalvado o disposto no inciso III do caput do art. 5º desta Lei Complementar; IV - transmissão de bens em decorrência de fusão, cisão e incorporação e de integralização e devolução de capital, ressalvado o disposto no inciso III do caput do art. 5º desta Lei Complementar; V - rendimentos financeiros, exceto quando incluídos na base de cálculo no regime ",
+          "trecho_sha256": "788480164256670acbbab4737c6240bcf53f8bd5c737734a66eef70a37fba394",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "63",
+          "trecho": "Art. 63. O IBS e a CBS incidem sobre a importação de bens ou de serviços do exterior realizada por pessoa física ou jurídica ou entidade sem personalidade jurídica, ainda que não inscrita ou obrigada a se inscrever no regime regular do IBS e da CBS, qualquer que seja a sua finalidade. Parágrafo único. Salvo disposição específica prevista neste Capítulo, aplicam-se à importação de que trata o caput deste artigo as regras relativas às operações onerosas de que trata o Capítulo II deste Título.",
+          "trecho_sha256": "bd16e0b3243d6c28db86d9c6fa72c611ea04dbeb96213864360066d9b8ab94fe",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "4": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "fato_gerador_termos",
+      "tema": "fato_gerador",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "momento fornecimento",
+      "esperados": [
+        "10"
+      ],
+      "evidencias": {
+        "10": "no momento do fornecimento"
+      },
+      "encontrados": [
+        "10",
+        "28",
+        "254",
+        "116",
+        "412"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 11.521,
+      "correspondencias": [
+        {
+          "artigo": "10",
+          "trecho": "Art. 10. Considera-se ocorrido o fato gerador do IBS e da CBS no momento do fornecimento nas operações com bens ou com serviços, ainda que de execução continuada ou fracionada. § 1º Para fins do disposto no caput deste artigo, considera-se ocorrido o fornecimento no momento: I - do início do transporte, na prestação de serviço de transporte iniciado no País; II - do término do transporte, na prestação de serviço de transporte de carga quando iniciado no exterior; III - do término do fornecimento, no caso dos demais serviços; IV - em que o bem for encontrado desacobertado de documentação fiscal idônea; e V - da aquisição do bem nas hipóteses de: a) licitação promovida pelo poder público de bem apreendido ou abandonado; ou b) leilão judicial. § 2º Nas aquisições de bens e serviços pela administração pública direta, por autarquias e por fundações públicas, que estejam sujeitas ao disposto no art. 473 desta Lei Complementar, considera-se ocorrido o fato gerador no momento em que se realiza",
+          "trecho_sha256": "51c877cb70d1e273b3b9efd0e02b1d9c0a883946620b71e01d92564a9b8a7a6e",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "28",
+          "trecho": "pela Lei Complementar nº 227, de 2026) I - pela distribuidora de energia elétrica, nas hipóteses de fornecimento para adquirente atendido no ambiente de contratação regulada ou de cobrança pelo uso dos sistemas de distribuição para consumidores atendidos no ambiente de contratação livre; (Redação dada pela Lei Complementar nº 227, de 2026) II - pelo alienante, caso se trate de aquisição no ambiente de contratação livre de energia para consumo do adquirente ou quando o adquirente não esteja sujeito ao regime regular do IBS e da CBS; (Redação dada pela Lei Complementar nº 227, de 2026) III - na hipótese de aquisição para consumo, realizada de forma multilateral: (Redação dada pela Lei Complementar nº 227, de 2026) a) pelo comercializador varejista, em relação ao consumo das unidades consumidoras representadas; ou (Incluído pela Lei Complementar nº 227, de 2026) b) nos demais casos, pelo estabelecimento consumidor; (Incluído pela Lei Complementar nº 227, de 2026) IV - pela transmissora de",
+          "trecho_sha256": "0a5357c2897407526d7dab0d0ca43f1a25d4f29a08aad8d587b6cc0a5e93829e",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "254",
+          "trecho": "Art. 254. Considera-se ocorrido o fato gerador do IBS e da CBS: I - na alienação de bem imóvel, no momento do ato de alienação; II - na cessão ou no ato oneroso translativo ou constitutivo de direitos reais sobre bens imóveis, no momento da celebração do ato, inclusive de quaisquer ajustes posteriores, exceto os de garantia; III - na locação, cessão onerosa ou arrendamento de bem imóvel, no momento do pagamento; IV - no serviço de administração e intermediação de bem imóvel, no momento do pagamento; e V - no serviço de construção civil, no momento do fornecimento. § 1º Para fins do disposto no inciso I do caput deste artigo, considera-se alienação a adjudicação, a celebração, inclusive de quaisquer ajustes posteriores, do contrato de alienação, ainda que mediante instrumento de promessa, carta de reserva com princípio de pagamento ou qualquer outro documento representativo de compromisso, ou quando implementada a condição suspensiva a que estiver sujeita a alienação. § 2º Nas hipóteses",
+          "trecho_sha256": "2b002d05c52664f41852b3dafe702c52cc590344ba5240213982bc9e6abff59b",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "116",
+          "trecho": "Art. 116. As devoluções dos tributos previstas neste Capítulo serão concedidas no momento definido em regulamento. § 1º Caso se trate de fornecimento domiciliar de energia elétrica, abastecimento de água, esgotamento sanitário e gás canalizado e de fornecimento de serviços de telecomunicações as devoluções serão concedidas no momento da cobrança. § 2º Caso se trate de fornecimento de bens ou de serviços sujeitos à cobrança com periodicidade fixa, as devoluções serão concedidas, preferencialmente no momento da cobrança. § 3º Os valores serão disponibilizados para o agente financeiro no prazo máximo de 15 (quinze) dias após a apuração, observado o disposto no inciso I do § 1º do art. 114 e no art. 115 desta Lei Complementar. § 4º O agente financeiro deverá transferir os valores às famílias destinatárias em até 10 (dez) dias após a disponibilização de que trata o § 3º deste artigo. § 5º (VETADO). (Incluído pela Lei Complementar nº 227, de 2026)",
+          "trecho_sha256": "9bda1c1ea8bded59a6a28a6b78e4ae8a6b56cd5cbe85d74034535685b10d891f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "412",
+          "trecho": "Art. 412. Considera-se ocorrido o fato gerador do Imposto Seletivo no momento: I - do primeiro fornecimento a qualquer título do bem, inclusive decorrente dos negócios jurídicos mencionados nos incisos I a VIII do § 2º do art. 4º desta Lei Complementar; II - da arrematação em leilão público; III - da transferência não onerosa de bem produzido; IV - da incorporação do bem ao ativo imobilizado pelo fabricante; V - da extração de bem mineral; VI - do consumo do bem pelo fabricante; VII - do fornecimento ou do pagamento do serviço, o que ocorrer primeiro; ou VIII - da importação de bens e serviços.",
+          "trecho_sha256": "239f16511f35e2722e2010aff1dbcdca85cc380061012ff758e98a18c4a4001d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "10": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "fato_gerador_pergunta",
+      "tema": "fato_gerador",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quando ocorre o fato gerador do IBS e da CBS?",
+      "esperados": [
+        "10"
+      ],
+      "evidencias": {
+        "10": "no momento do fornecimento"
+      },
+      "encontrados": [
+        "67",
+        "348",
+        "372",
+        "64",
+        "10"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.257,
+      "correspondencias": [
+        {
+          "artigo": "67",
+          "trecho": "Art. 67. Para efeitos de cálculo do IBS e da CBS, considera-se ocorrido o fato gerador do IBS e da CBS na importação de bens materiais: I - na liberação dos bens submetidos a despacho para consumo; II - na liberação dos bens submetidos ao regime aduaneiro especial de admissão temporária para utilização econômica; III - no lançamento do correspondente crédito tributário, quando se tratar de: a) bens compreendidos no conceito de bagagem, acompanhada ou desacompanhada; b) bens constantes de manifesto ou de outras declarações de efeito equivalente, cujo extravio tenha sido verificado pela autoridade aduaneira; ou c) bens importados que não tenham sido objeto de declaração de importação. § 1º Para efeitos do inciso I do caput deste artigo, entende-se por despacho para consumo na importação o despacho aduaneiro a que são submetidos os bens importados a título definitivo. § 2º O disposto no inciso I do caput deste artigo aplica-se, inclusive, no caso de despacho para consumo de bens sob regim",
+          "trecho_sha256": "36529505089583fb5c94b3933f4fefdbf0bad47d9eb86e84ebbcdf5e1ffc5563",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "348",
+          "trecho": "Art. 348. Em relação aos fatos geradores ocorridos de 1º de janeiro a 31 de dezembro de 2026: I - o montante recolhido do IBS e da CBS será compensado com o valor devido, no mesmo período de apuração, das contribuições previstas no art. 195, inciso I, alínea “b”, e inciso IV, e da contribuição para o PIS a que se refere o art. 239, ambos da Constituição Federal; II - caso o contribuinte não possua débitos suficientes para efetuar a compensação de que trata o inciso I, o valor recolhido poderá ser: a) compensado com qualquer outro tributo federal, nos termos da legislação; ou b) ressarcido em até 60 (sessenta) dias, mediante requerimento; III - as alíquotas do IBS e da CBS previstas nos arts. 343 e 346 desta Lei Complementar: a) serão aplicadas com a respectiva redução no caso das operações sujeitas a alíquota reduzida, no âmbito de regimes diferenciados de tributação; b) serão aplicadas em relação aos regimes específicos de que trata esta Lei Complementar, observadas as respectivas bas",
+          "trecho_sha256": "7358d948da2f4475d06bd2cbd97115f187d5ab96de42c29805926edc4eba3711",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "372",
+          "trecho": "nos termos do art. 473 desta Lei Complementar: I - não se aplica: a) ao IBS e à CBS, em relação aos fatos geradores ocorridos de 1º de janeiro a 31 de dezembro de 2026; b) à CBS, em relação aos fatos geradores ocorridos de 1º de janeiro de 2027 a 31 de dezembro de 2028; II - aplica-se integralmente: a) ao IBS, em relação aos fatos geradores ocorridos a partir de 1º de janeiro de 2027; b) à CBS, em relação aos fatos geradores ocorridos a partir de 1º de janeiro de 2033. Parágrafo único. Em relação aos fatos geradores ocorridos de 1º de janeiro de 2029 a 31 de dezembro de 2032, a aplicação do regime de que trata o caput se dará nas seguintes proporções da CBS incidente nas aquisições de bens e serviços pela administração pública direta, por autarquias e por fundações públicas: I - de 1º de janeiro a 31 de dezembro de 2029, 10% (dez por cento); II - de 1º de janeiro a 31 de dezembro de 2030, 20% (vinte por cento); III - de 1º de janeiro a 31 de dezembro de 2031, 30% (trinta por cento); IV",
+          "trecho_sha256": "b39d1d03156912545e004e069bc9ec33347a90011a0b50bd8cfed91c4ac439b0",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "64",
+          "trecho": "ive direitos, concomitantemente no território nacional e no exterior, apenas a parcela cujo consumo ocorrer no País será considerada importação. § 4º Os bens imateriais, inclusive direitos, e serviços cujo valor esteja incluído no valor aduaneiro de bens materiais importados nos termos do art. 69 desta Lei Complementar sujeitam-se à incidência do IBS e da CBS na forma da Seção III deste Capítulo. § 5º Na importação de bens imateriais ou de serviços a que se refere o caput deste artigo: I - considera-se ocorrido o fato gerador do IBS e da CBS: a) no momento definido conforme o disposto no art. 10 desta Lei Complementar; b) no local definido conforme o disposto no art. 11 desta Lei Complementar; (Revogado pela Lei Complementar nº 227, de 2026) b) (revogada); (Redação dada pela Lei Complementar nº 227, de 2026) II - a base de cálculo é o valor da operação nos termos do art. 12 desta Lei Complementar; III - as alíquotas do IBS e da CBS incidentes sobre cada importação de bem imaterial ou d",
+          "trecho_sha256": "a862e2f400ceb6b62762eb6a16d24e9f11bdfffc20fc130c749d61a6efaf1d38",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "10",
+          "trecho": "Art. 10. Considera-se ocorrido o fato gerador do IBS e da CBS no momento do fornecimento nas operações com bens ou com serviços, ainda que de execução continuada ou fracionada. § 1º Para fins do disposto no caput deste artigo, considera-se ocorrido o fornecimento no momento: I - do início do transporte, na prestação de serviço de transporte iniciado no País; II - do término do transporte, na prestação de serviço de transporte de carga quando iniciado no exterior; III - do término do fornecimento, no caso dos demais serviços; IV - em que o bem for encontrado desacobertado de documentação fiscal idônea; e V - da aquisição do bem nas hipóteses de: a) licitação promovida pelo poder público de bem apreendido ou abandonado; ou b) leilão judicial. § 2º Nas aquisições de bens e serviços pela administração pública direta, por autarquias e por fundações públicas, que estejam sujeitas ao disposto no art. 473 desta Lei Complementar, considera-se ocorrido o fato gerador no momento em que se realiza",
+          "trecho_sha256": "51c877cb70d1e273b3b9efd0e02b1d9c0a883946620b71e01d92564a9b8a7a6e",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.2,
+      "ancoras_literais_exibidas": {
+        "10": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "plataformas_termos",
+      "tema": "plataformas",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "plataformas digitais",
+      "esperados": [
+        "22"
+      ],
+      "evidencias": {
+        "22": "As plataformas digitais, ainda que domiciliadas no exterior"
+      },
+      "encontrados": [
+        "26",
+        "22",
+        "64"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 12.322,
+      "correspondencias": [
+        {
+          "artigo": "26",
+          "trecho": "a de serviço de transporte privado individual de passageiros ou de entrega de bens intermediado por plataformas digitais 25% (vinte e cinco por cento) do valor bruto mensal recebido. § 10. Para fins de enquadramento como nanoempreendedor nos termos do inciso IV do caput deste artigo, será considerada como receita bruta da pessoa física prestadora de serviço de transporte privado individual de passageiros ou de entrega de bens, inclusive na hipótese em que houver intermediação por plataformas digitais, 25% (vinte e cinco por cento) do valor bruto mensal recebido. (Redação dada pela Lei Complementar nº 227, de 2026) § 11. O regulamento poderá estabelecer obrigações acessórias simplificadas para as pessoas e entes sem personalidade jurídica e as unidades de natureza econômico-contábil de que trata este artigo.",
+          "trecho_sha256": "67b84a4d88185cc135ad0cacf0bb67895476e3a88a05068924155b23ed6cbf1c",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "22",
+          "trecho": "Art. 22. As plataformas digitais, ainda que domiciliadas no exterior, são responsáveis pelo pagamento do IBS e da CBS relativos às operações e importações realizadas por seu intermédio, nas seguintes hipóteses: I - solidariamente com o adquirente ou destinatário e em substituição ao fornecedor, caso este seja residente ou domiciliado no exterior; e II - solidariamente com o fornecedor, caso este: II - solidariamente com o fornecedor residente e domiciliado no País, caso: (Redação dada pela Lei Complementar nº 227, de 2026) a) seja residente ou domiciliado no País; a) a plataforma digital não forneça as informações previstas no § 5º deste artigo; ou (Redação dada pela Lei Complementar nº 227, de 2026) b) seja contribuinte, ainda que não inscrito nos termos do § 1º do art. 21 desta Lei Complementar; e b) o fornecedor: (Redação dada pela Lei Complementar nº 227, de 2026) 1. seja contribuinte, ainda que não inscrito nos termos do § 1º do art. 21 desta Lei Complementar; e (Incluído pela Lei",
+          "trecho_sha256": "77383b764048b3bdfa2521f20063586839403a1d79a2f12436a470c9e87eae22",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "64",
+          "trecho": " CBS com o contribuinte, observando-se o disposto nos arts. 21 e 23 desta Lei Complementar; IX - as plataformas digitais, ainda que residentes e domiciliadas no exterior, serão responsáveis pelo pagamento do IBS e da CBS nas importações realizadas por seu intermédio, observando-se o disposto nos arts. 22 e 23 desta Lei Complementar. § 6º Aplicam-se também as regras específicas previstas no Título V deste Livro às importações de bens e serviços objeto de regimes específicos. § 7º Não será considerado como importação de serviço ou de bem imaterial, inclusive direitos, o consumo eventual por pessoa física não residente que permaneça temporariamente no País, nos termos do regulamento. (Revogado pela Lei Complementar nº 227, de 2026) § 7º (Revogado). (Redação dada pela Lei Complementar nº 227, de 2026)",
+          "trecho_sha256": "c68ea4c1ca1808c2b793b6b6e39a81b8aa138dd2b65a1ef05a77dc0cac818ecd",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5,
+      "ancoras_literais_exibidas": {
+        "22": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "plataformas_pergunta",
+      "tema": "plataformas",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "As plataformas digitais são responsáveis pelo pagamento de IBS e CBS?",
+      "esperados": [
+        "22"
+      ],
+      "evidencias": {
+        "22": "As plataformas digitais, ainda que domiciliadas no exterior"
+      },
+      "encontrados": [
+        "64",
+        "22",
+        "26",
+        "96",
+        "94"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 26.32,
+      "correspondencias": [
+        {
+          "artigo": "64",
+          "trecho": " Lei Complementar; VIII - o fornecedor residente ou domiciliado no exterior é responsável solidário pelo pagamento do IBS e da CBS com o contribuinte, observando-se o disposto nos arts. 21 e 23 desta Lei Complementar; IX - as plataformas digitais, ainda que residentes e domiciliadas no exterior, serão responsáveis pelo pagamento do IBS e da CBS nas importações realizadas por seu intermédio, observando-se o disposto nos arts. 22 e 23 desta Lei Complementar. § 6º Aplicam-se também as regras específicas previstas no Título V deste Livro às importações de bens e serviços objeto de regimes específicos. § 7º Não será considerado como importação de serviço ou de bem imaterial, inclusive direitos, o consumo eventual por pessoa física não residente que permaneça temporariamente no País, nos termos do regulamento. (Revogado pela Lei Complementar nº 227, de 2026) § 7º (Revogado). (Redação dada pela Lei Complementar nº 227, de 2026)",
+          "trecho_sha256": "b583c3750501d5bbbae575b33775c6df9bfc1e67b8c6a7e7fcebc15571748333",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "22",
+          "trecho": "Art. 22. As plataformas digitais, ainda que domiciliadas no exterior, são responsáveis pelo pagamento do IBS e da CBS relativos às operações e importações realizadas por seu intermédio, nas seguintes hipóteses: I - solidariamente com o adquirente ou destinatário e em substituição ao fornecedor, caso este seja residente ou domiciliado no exterior; e II - solidariamente com o fornecedor, caso este: II - solidariamente com o fornecedor residente e domiciliado no País, caso: (Redação dada pela Lei Complementar nº 227, de 2026) a) seja residente ou domiciliado no País; a) a plataforma digital não forneça as informações previstas no § 5º deste artigo; ou (Redação dada pela Lei Complementar nº 227, de 2026) b) seja contribuinte, ainda que não inscrito nos termos do § 1º do art. 21 desta Lei Complementar; e b) o fornecedor: (Redação dada pela Lei Complementar nº 227, de 2026) 1. seja contribuinte, ainda que não inscrito nos termos do § 1º do art. 21 desta Lei Complementar; e (Incluído pela Lei",
+          "trecho_sha256": "77383b764048b3bdfa2521f20063586839403a1d79a2f12436a470c9e87eae22",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "26",
+          "trecho": "s termos da Lei nº 13.800, de 4 de janeiro de 2019. (Promulgação partes vetadas) § 1º Poderão optar pelo regime regular do IBS e da CBS, observado o disposto no § 6º do art. 41 desta Lei Complementar: I - as entidades sem personalidade jurídica de que tratam os incisos I a III do caput deste artigo; II - a pessoa física de que trata o inciso IV do caput deste artigo; e III - (VETADO); IV - o produtor rural de que trata o inciso VI do caput deste artigo, na forma do art. 165 desta Lei Complementar; e V - o transportador autônomo de carga de que trata o inciso VII do caput deste artigo. § 2º Em relação ao condomínio edilício de que trata o inciso I do caput deste artigo: I - caso exerça a opção pelo regime regular de que trata o § 1º deste artigo, o IBS e a CBS incidirão sobre todas as taxas e demais valores cobrados pelo condomínio dos seus condôminos e de terceiros; e I - caso exerça a opção pelo regime regular, nos termos do § 1º deste artigo, o IBS e a CBS incidirão sobre todas as ta",
+          "trecho_sha256": "ab5e9959eb38dc204e610577db0c0293c63da6ff30029ba3820ca47e4c97ffc8",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "responsav"
+          ]
+        },
+        {
+          "artigo": "96",
+          "trecho": "Art. 96. A plataforma digital, ainda que domiciliada no exterior, é responsável pelo pagamento do IBS e da CBS relativos aos bens materiais objeto de remessa internacional cuja operação ou importação tenha sido realizada por seu intermédio, observado o disposto nos arts. 22 e 23 desta Lei Complementar.",
+          "trecho_sha256": "63d316aeb8ce1645a498f985ded6450b0118a6c20fafe91bfc8f3626c4dee03c",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "digit",
+            "responsav"
+          ]
+        },
+        {
+          "artigo": "94",
+          "trecho": "Art. 94. São isentas do pagamento do IBS e da CBS na importação de bens materiais: I - bagagens de viajantes e de tripulantes, acompanhadas ou desacompanhadas; e II - remessas internacionais, desde que: a) sejam isentas do Imposto sobre a Importação; b) o remetente e o destinatário sejam pessoas físicas; e c) não tenha ocorrido a intermediação de plataforma digital.",
+          "trecho_sha256": "5b635212119c8482eb434b87129e0258bc0aa8212eecaa1599cf857a2dcf6132",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "digit",
+            "responsav"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5,
+      "ancoras_literais_exibidas": {
+        "22": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "extincao_termos",
+      "tema": "extincao",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "extinção débitos modalidades",
+      "esperados": [
+        "27"
+      ],
+      "evidencias": {
+        "27": "serão extintos mediante as seguintes modalidades"
+      },
+      "encontrados": [
+        "50",
+        "47",
+        "46",
+        "450",
+        "48"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.077,
+      "correspondencias": [
+        {
+          "artigo": "50",
+          "trecho": "aja a exigência do crédito suspenso, a apropriação dos créditos será admitida somente no momento da extinção dos débitos por qualquer das modalidades previstas no art. 27 desta Lei Complementar, vedada a apropriação de créditos em relação aos acréscimos legais.",
+          "trecho_sha256": "7f950cd3fb012f3e8e195f70e05ca38c535a611c09166d0feb5882b29a588992",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "47",
+          "trecho": "O contribuinte sujeito ao regime regular poderá apropriar créditos do IBS e da CBS quando ocorrer a extinção por qualquer das modalidades previstas no art. 27 dos débitos relativos às operações em que seja adquirente, excetuadas exclusivamente aquelas consideradas de uso ou consumo pessoal, nos termos do art. 57 desta Lei Complementar, e as demais hipóteses previstas nesta Lei Complementar. § 1º A apropriação dos créditos de que trata o caput deste artigo: I - será realizada de forma segregada para o IBS e para a CBS, vedadas, em qualquer hipótese, a compensação de créditos de IBS com valores devidos de CBS e a compensação de créditos de CBS com valores devidos de IBS; e II - está condicionada à comprovação da operação por meio de documento fiscal eletrônico idôneo. § 2º Os valores dos créditos do IBS e da CBS apropriados corresponderão: I - aos valores dos débitos, respectivamente, do IBS e da CBS que tenham sido destacados no documento fiscal de aquisição e extintos por qualquer das ",
+          "trecho_sha256": "0df3ed2ff5c7693962d2abe61bee782fc14729982876982e07bcf105e56548cc",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "46",
+          "trecho": " Lei Complementar e terá por base: I - documentos fiscais eletrônicos; II - informações relativas à extinção dos débitos do IBS e da CBS por quaisquer das modalidades previstas no art. 27 desta Lei Complementar; e III - outras informações prestadas pelo contribuinte ou a ele relativas. § 2º Caso haja a apresentação da apuração assistida de que trata o caput deste artigo, a apuração pelo contribuinte de que trata o art. 45 desta Lei Complementar somente poderá ser realizada mediante ajustes na apuração assistida. § 3º A apuração assistida realizada nos termos deste artigo, caso o contribuinte a confirme ou nela realize ajustes, implica confissão de dívida e constitui o crédito tributário. § 4º Na ausência de manifestação do contribuinte sobre a apuração assistida no prazo para conclusão da apuração de que trata o inciso I do caput do art. 44 desta Lei Complementar, presume-se correto o saldo apurado e considera-se constituído o crédito tributário. § 5º A confissão de dívida e a apuração",
+          "trecho_sha256": "facaf3f0b381d945c45bdfca213b86111d41ed14026218f1ccd78508b09142bf",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "450",
+          "trecho": "entivo serão aplicados a cada débito de IBS para reduzir os valores a serem recolhidos ou pagos nas modalidades de extinção previstas nos incisos III a V do caput do art. 27 desta Lei Complementar, assegurada a apropriação do crédito; (Incluído pela Lei Complementar nº 227, de 2026) III - após a apuração do saldo devedor de IBS de que trata o inciso I deste parágrafo, será deduzido o crédito presumido de que trata o § 1º deste artigo e, em seguida, as deduções de que trata o § 3º do art. 45 desta Lei Complementar; e (Incluído pela Lei Complementar nº 227, de 2026) IV - sem prejuízo das demais transferências previstas nesta Lei Complementar, na hipótese em que houver saldo a recuperar, apurado nos termos do § 3º do art. 45, os valores dos débitos extintos pelas modalidades previstas nos incisos III a V do caput do art. 27 no período de apuração serão transferidos à indústria incentivada, até limite do referido saldo a recuperar, em até 3 (três) dias úteis contados da data da conclusão d",
+          "trecho_sha256": "842ae2af93d5f16fb1c4e975e82d384e717a9e905a61f40047883c86fc343577",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "48",
+          "trecho": "Art. 48. Ficará dispensado o requisito de extinção dos débitos para fins de apropriação dos créditos de que trata o caput do art. 47 desta Lei Complementar, exclusivamente, se não houver sido implementada nenhuma das seguintes modalidades de extinção: I - recolhimento na liquidação financeira da operação (split payment), nos termos dos arts. 31 e 32 desta Lei Complementar; ou II - recolhimento pelo adquirente, nos termos do art. 36 desta Lei Complementar. Parágrafo único. Na hipótese de que trata o caput deste artigo, a apropriação dos créditos ficará condicionada ao destaque dos valores corretos do IBS e da CBS no documento fiscal eletrônico relativo à aquisição.",
+          "trecho_sha256": "03bfa22df4a362c64761ca1d6e5649f29a2ffb8b0c8fb4185a1e4ad2482a589f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0,
+      "ancoras_literais_exibidas": {
+        "27": false
+      },
+      "hit_ancora_no_trecho": false,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "extincao_pergunta",
+      "tema": "extincao",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quais são as modalidades de extinção dos débitos de IBS e CBS?",
+      "esperados": [
+        "27"
+      ],
+      "evidencias": {
+        "27": "serão extintos mediante as seguintes modalidades"
+      },
+      "encontrados": [
+        "27",
+        "48",
+        "46",
+        "47",
+        "33"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 26.928,
+      "correspondencias": [
+        {
+          "artigo": "27",
+          "trecho": "Art. 27. Os débitos do IBS e da CBS decorrentes da incidência sobre operações com bens ou com serviços serão extintos mediante as seguintes modalidades: I - compensação com créditos, respectivamente, de IBS e de CBS apropriados pelo contribuinte, nos termos dos arts. 47 a 56 e das demais disposições desta Lei Complementar; II - pagamento pelo contribuinte; III - recolhimento na liquidação financeira da operação (split payment), nos termos dos arts. 31 a 35 desta Lei Complementar; IV - recolhimento pelo adquirente, nos termos do art. 36 desta Lei Complementar; ou V - pagamento por aquele a quem esta Lei Complementar atribuir responsabilidade. Parágrafo único. A extinção de débitos de que trata o caput deste artigo: I - nas hipóteses dos incisos I e II do caput deste artigo, será imputada aos valores dos débitos não extintos do IBS e da CBS incidentes sobre as operações ocorridas no período de apuração na ordem cronológica do documento fiscal, segundo critérios estabelecidos no regulamen",
+          "trecho_sha256": "c30a914a326c7880d9ce87c56e6f81360fb811090bcd9fe69c9916f6da6f467c",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "48",
+          "trecho": "Art. 48. Ficará dispensado o requisito de extinção dos débitos para fins de apropriação dos créditos de que trata o caput do art. 47 desta Lei Complementar, exclusivamente, se não houver sido implementada nenhuma das seguintes modalidades de extinção: I - recolhimento na liquidação financeira da operação (split payment), nos termos dos arts. 31 e 32 desta Lei Complementar; ou II - recolhimento pelo adquirente, nos termos do art. 36 desta Lei Complementar. Parágrafo único. Na hipótese de que trata o caput deste artigo, a apropriação dos créditos ficará condicionada ao destaque dos valores corretos do IBS e da CBS no documento fiscal eletrônico relativo à aquisição.",
+          "trecho_sha256": "03bfa22df4a362c64761ca1d6e5649f29a2ffb8b0c8fb4185a1e4ad2482a589f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "46",
+          "trecho": " Lei Complementar e terá por base: I - documentos fiscais eletrônicos; II - informações relativas à extinção dos débitos do IBS e da CBS por quaisquer das modalidades previstas no art. 27 desta Lei Complementar; e III - outras informações prestadas pelo contribuinte ou a ele relativas. § 2º Caso haja a apresentação da apuração assistida de que trata o caput deste artigo, a apuração pelo contribuinte de que trata o art. 45 desta Lei Complementar somente poderá ser realizada mediante ajustes na apuração assistida. § 3º A apuração assistida realizada nos termos deste artigo, caso o contribuinte a confirme ou nela realize ajustes, implica confissão de dívida e constitui o crédito tributário. § 4º Na ausência de manifestação do contribuinte sobre a apuração assistida no prazo para conclusão da apuração de que trata o inciso I do caput do art. 44 desta Lei Complementar, presume-se correto o saldo apurado e considera-se constituído o crédito tributário. § 5º A confissão de dívida e a apuração",
+          "trecho_sha256": "facaf3f0b381d945c45bdfca213b86111d41ed14026218f1ccd78508b09142bf",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "47",
+          "trecho": "O contribuinte sujeito ao regime regular poderá apropriar créditos do IBS e da CBS quando ocorrer a extinção por qualquer das modalidades previstas no art. 27 dos débitos relativos às operações em que seja adquirente, excetuadas exclusivamente aquelas consideradas de uso ou consumo pessoal, nos termos do art. 57 desta Lei Complementar, e as demais hipóteses previstas nesta Lei Complementar. § 1º A apropriação dos créditos de que trata o caput deste artigo: I - será realizada de forma segregada para o IBS e para a CBS, vedadas, em qualquer hipótese, a compensação de créditos de IBS com valores devidos de CBS e a compensação de créditos de CBS com valores devidos de IBS; e II - está condicionada à comprovação da operação por meio de documento fiscal eletrônico idôneo. § 2º Os valores dos créditos do IBS e da CBS apropriados corresponderão: I - aos valores dos débitos, respectivamente, do IBS e da CBS que tenham sido destacados no documento fiscal de aquisição e extintos por qualquer das ",
+          "trecho_sha256": "0df3ed2ff5c7693962d2abe61bee782fc14729982876982e07bcf105e56548cc",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "33",
+          "trecho": "as operações e do histórico de utilização de créditos; e III - não guardará relação com o valor dos débitos do IBS e da CBS efetivamente incidentes sobre a operação. § 2º-A. A originação de transação de pagamento relativa à operação com bem ou com serviço sem a identificação dos valores do IBS e da CBS, nos termos do inciso II do § 1º do art. 32 desta Lei Complementar, implica opção pelo procedimento simplificado de que trata este artigo. (Incluído pela Lei Complementar nº 227, de 2026) § 3º Os valores do IBS e da CBS recolhidos por meio do procedimento simplificado de que trata o caput serão utilizados para pagamento dos débitos não extintos do contribuinte decorrentes das operações de que trata o caput ocorridas no período de apuração, em ordem cronológica do documento fiscal, segundo critérios estabelecidos no regulamento. § 3º Os valores do IBS e da CBS recolhidos por meio do procedimento simplificado de que trata este artigo serão utilizados para pagamento, em ordem cronológica do",
+          "trecho_sha256": "9e512b726da07d5d38c0ff4b1215134c5ea35e99709d71ec434899985117053f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "27": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "creditos_termos",
+      "tema": "creditos",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "apropriar créditos",
+      "esperados": [
+        "47"
+      ],
+      "evidencias": {
+        "47": "O contribuinte sujeito ao regime regular poderá apropriar créditos"
+      },
+      "encontrados": [
+        "47",
+        "45",
+        "40",
+        "138",
+        "197"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 10.644,
+      "correspondencias": [
+        {
+          "artigo": "47",
+          "trecho": "Art. 47. O contribuinte sujeito ao regime regular poderá apropriar créditos do IBS e da CBS quando ocorrer a extinção por qualquer das modalidades previstas no art. 27 dos débitos relativos às operações em que seja adquirente, excetuadas exclusivamente aquelas consideradas de uso ou consumo pessoal, nos termos do art. 57 desta Lei Complementar, e as demais hipóteses previstas nesta Lei Complementar. § 1º A apropriação dos créditos de que trata o caput deste artigo: I - será realizada de forma segregada para o IBS e para a CBS, vedadas, em qualquer hipótese, a compensação de créditos de IBS com valores devidos de CBS e a compensação de créditos de CBS com valores devidos de IBS; e II - está condicionada à comprovação da operação por meio de documento fiscal eletrônico idôneo. § 2º Os valores dos créditos do IBS e da CBS apropriados corresponderão: I - aos valores dos débitos, respectivamente, do IBS e da CBS que tenham sido destacados no documento fiscal de aquisição e extintos por qual",
+          "trecho_sha256": "d5301b8239cc0210472e3242c7a4a69a98cd4f3ec452586ffc86364d192b9da2",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "45",
+          "trecho": " débitos do IBS e da CBS decorrentes dos fatos geradores ocorridos no período de apuração; II - dos créditos apropriados no mesmo período, incluindo os créditos presumidos, acrescido do saldo a recuperar de período ou períodos anteriores não utilizado para compensação ou ressarcimento. § 1º O contribuinte poderá realizar ajustes positivos ou negativos no saldo apurado na forma do caput deste artigo, nos termos previstos no regulamento. § 2º Inclui-se entre os ajustes de que trata o § 1º deste artigo o estorno de crédito apropriado em período de apuração anterior, aplicados os acréscimos de que tratam os §§ 2º a 4º do art. 29 desta Lei Complementar desde a data em que tiver ocorrido a apropriação indevida do crédito. § 3º Do saldo apurado na forma do caput e do § 1º deste artigo, serão deduzidos os valores extintos pelas modalidades previstas nos incisos III a V do caput do art. 27, que resultará: I - quando positivo, saldo a recolher que deverá ser pago pelo contribuinte; e II - quando",
+          "trecho_sha256": "ed66d3d6625ee1fb854058ae09b980904fad148cf87463dabd3188695f98bebe",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "40",
+          "trecho": " ressarcimento previstos nos incisos I ou II do § 3º do art. 39 desta Lei Complementar para: I - os créditos apropriados de IBS e de CBS relativos à aquisição de bens e serviços incorporados ao ativo imobilizado do contribuinte; II - os pedidos de ressarcimento cujo valor seja igual ou inferior a 150% (cento e cinquenta por cento) do valor médio mensal da diferença entre: a) os créditos de IBS e de CBS apropriados pelo contribuinte; e b) os débitos de IBS e de CBS incidentes sobre as operações do contribuinte. § 1º O cálculo do valor médio mensal de que trata o inciso II do caput será realizado com base nas informações relativas aos 24 (vinte e quatro) meses anteriores ao período de apuração, excluídos do cálculo os créditos apropriados nos termos do inciso I do caput deste artigo. § 2º Cabe ao regulamento dispor sobre a forma de aplicação do disposto neste artigo, inclusive quanto: I - à utilização de estimativas para os valores de que tratam as alíneas “a” e “b” do inciso II do caput",
+          "trecho_sha256": "ff98f4513ea5b39debab193320f1d3ff8da668d19c08216309beadaf704a2677",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "138",
+          "trecho": "ue utilize os insumos na produção de bem vendido para adquirentes que têm direito à apropriação dos créditos presumidos estabelecidos pelo art. 168 desta Lei Complementar; e II - importação realizada por: a) contribuinte sujeito ao regime regular do IBS e da CBS; e b) produtor rural não contribuinte do IBS e da CBS que utilize os insumos na produção de bem vendido para adquirentes que têm direito à apropriação dos créditos presumidos estabelecidos pelo art. 168 desta Lei Complementar. § 3º O diferimento de que tratam a alínea “b” do inciso I e a alínea “b” do inciso II, ambos do § 2º, somente será aplicado sobre a parcela de insumos utilizada pelo produtor rural não contribuinte do IBS e da CBS na produção de bem vendido para adquirentes que têm direito à apropriação dos créditos presumidos estabelecidos pelo art. 168 desta Lei Complementar. § 4º (VETADO). § 5º Nas hipóteses previstas na alínea “a” do inciso I e na alínea “a” do inciso II, ambas do § 2º deste artigo, o diferimento será",
+          "trecho_sha256": "154f83355922200ad9b46fc6dfce1e455a14458955ea3d4df6c66e06d7172499",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "197",
+          "trecho": "Art. 197. Não poderão apropriar créditos na forma prevista nos arts. 194 a 196 os associados tomadores de operações de crédito com sociedades cooperativas que fornecerem serviços financeiros e exercerem a opção de que trata o art. 271 desta Lei Complementar. Art. 197. Não poderão apropriar créditos na forma prevista nos arts. 194 a 196 desta Lei Complementar: (Redação dada pela Lei Complementar nº 227, de 2026) I - os associados tomadores de operações de crédito com sociedades cooperativas que fornecerem serviços financeiros e exercerem a opção de que trata o art. 271 desta Lei Complementar; e (Incluído pela Lei Complementar nº 227, de 2026) II - os tomadores de operações de crédito referenciadas em moeda estrangeira e os emissores de títulos de dívida referenciados em moeda estrangeira, observado o disposto no art. 198 desta Lei Complementar. (Incluído pela Lei Complementar nº 227, de 2026)",
+          "trecho_sha256": "57df780fccae761c354c0152bf7dc7b599bab9d4fa842b1a8349c51711a313d0",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "47": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "creditos_pergunta",
+      "tema": "creditos",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quando o contribuinte pode apropriar créditos de IBS e CBS?",
+      "esperados": [
+        "47"
+      ],
+      "evidencias": {
+        "47": "O contribuinte sujeito ao regime regular poderá apropriar créditos"
+      },
+      "encontrados": [
+        "47",
+        "180",
+        "169",
+        "168",
+        "171"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 10.724,
+      "correspondencias": [
+        {
+          "artigo": "47",
+          "trecho": "Art. 47. O contribuinte sujeito ao regime regular poderá apropriar créditos do IBS e da CBS quando ocorrer a extinção por qualquer das modalidades previstas no art. 27 dos débitos relativos às operações em que seja adquirente, excetuadas exclusivamente aquelas consideradas de uso ou consumo pessoal, nos termos do art. 57 desta Lei Complementar, e as demais hipóteses previstas nesta Lei Complementar. § 1º A apropriação dos créditos de que trata o caput deste artigo: I - será realizada de forma segregada para o IBS e para a CBS, vedadas, em qualquer hipótese, a compensação de créditos de IBS com valores devidos de CBS e a compensação de créditos de CBS com valores devidos de IBS; e II - está condicionada à comprovação da operação por meio de documento fiscal eletrônico idôneo. § 2º Os valores dos créditos do IBS e da CBS apropriados corresponderão: I - aos valores dos débitos, respectivamente, do IBS e da CBS que tenham sido destacados no documento fiscal de aquisição e extintos por qual",
+          "trecho_sha256": "d5301b8239cc0210472e3242c7a4a69a98cd4f3ec452586ffc86364d192b9da2",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "180",
+          "trecho": "Art. 180. É vedada a apropriação de créditos em relação às aquisições de combustíveis sujeitos à incidência única do IBS e da CBS, quando destinadas à distribuição, à comercialização ou à revenda. § 1º Excetuadas as hipóteses previstas no caput deste artigo, o contribuinte no regime regular poderá apropriar créditos do IBS e da CBS em relação à aquisição de combustíveis, nos termos do § 4º do art. 47 desta Lei Complementar. § 2º Fica assegurado ao exportador de combustíveis o direito à apropriação e à utilização dos créditos do IBS e da CBS relativos às aquisições de que trata esta Seção, na forma do § 1º deste artigo.",
+          "trecho_sha256": "80cb6ef7e1aecbff86025df5ccb084ad90fddcf5f786646172c8ffe29c80e128",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "169",
+          "trecho": "Art. 169. O contribuinte de IBS e de CBS sujeito ao regime regular poderá apropriar créditos presumidos dos referidos tributos relativos às aquisições de serviço de transporte de carga de transportador autônomo pessoa física que não seja contribuinte dos referidos tributos ou que seja inscrito como MEI. Produção de efeitos § 1º Os créditos presumidos de que trata o caput deste artigo: I - somente se aplicam ao contribuinte que adquire bens e serviços e suporta a cobrança do valor do serviço de transporte de carga; II - não se aplicam ao contribuinte que adquire bens e serviços e suporta a cobrança do valor do transporte como parte do valor da operação, ainda que especificado em separado nos documentos relativos à aquisição. § 2º O documento fiscal eletrônico relativo à aquisição deverá discriminar: I - o valor da operação, que corresponderá ao valor pago ao fornecedor; II - o valor do crédito presumido; e III - o valor líquido para efeitos fiscais, que corresponderá à diferença entre o",
+          "trecho_sha256": "aa84b896be126e5ac4c8e58e1a6ebfabdeeaa3f747dd496a88b7088df5649cdd",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "168",
+          "trecho": "Art. 168. O contribuinte de IBS e de CBS sujeito ao regime regular poderá apropriar créditos presumidos dos referidos tributos relativos às aquisições de bens e serviços de produtor rural ou de produtor rural integrado, não contribuintes, de que trata o art. 164 desta Lei Complementar. Produção de efeitos § 1º O documento fiscal eletrônico relativo à aquisição deverá discriminar: I - o valor da operação, que corresponderá ao valor pago ao fornecedor; II - o valor do crédito presumido; e III - o valor líquido para efeitos fiscais, que corresponderá à diferença entre os valores discriminados nos incisos I e II deste parágrafo. § 2º Na hipótese de bem ou serviço fornecido por produtor integrado, o valor da operação de que trata o inciso I do § 1º deste artigo será o valor da remuneração do produtor integrado determinado com base no contrato de integração. § 3º O valor do crédito presumido de que trata o inciso II do § 1º deste artigo será o resultado da aplicação dos percentuais de que tr",
+          "trecho_sha256": "48f96a1904a092f9f4f42099eb35347f342dc6eea4f87732111dc5b198716824",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "171",
+          "trecho": "Art. 171. O contribuinte de IBS e de CBS sujeito ao regime regular poderá apropriar créditos presumidos dos referidos tributos relativos às aquisições, para revenda, de bem móvel usado de pessoa física que não seja contribuinte dos referidos tributos ou que seja inscrita como MEI. Produção de efeitos § 1º Os créditos presumidos de que trata o caput deste artigo serão calculados mediante aplicação dos seguintes percentuais sobre o valor da aquisição registrado em documento admitido pela administração tributária na forma do regulamento: I - para o crédito presumido de IBS, o percentual equivalente à soma das alíquotas de IBS aplicáveis às operações com bem móvel de que trata o caput deste artigo, fixadas pelo Município e pelo Estado onde estiver localizado o estabelecimento em que tiver sido efetuada a aquisição vigentes: a) na data da revenda, para aquisições realizadas até 31 de dezembro de 2032; b) na data da aquisição, para aquisições realizadas a partir de 1º de janeiro de 2033; II ",
+          "trecho_sha256": "8aa607667f9b9bc09d129630aef5f3813166466d2b34ab05a0f9b7adfaa99c22",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "47": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "cesta_termos",
+      "tema": "cesta",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "cesta básica",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "475",
+        "125"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.921,
+      "correspondencias": [
+        {
+          "artigo": "475",
+          "trecho": "volução personalizada do IBS e da CBS, de que trata o Capítulo I do Título III do Livro I; III - da Cesta Básica Nacional de Alimentos, de que trata o Capítulo II do Título III do Livro I; IV - dos regimes diferenciados do IBS e da CBS, de que trata o Título IV do Livro I; e V - dos regimes específicos do IBS e da CBS, de que trata o Título V do Livro I. § 1º A avaliação de que trata o caput deverá considerar, inclusive, o impacto da legislação do IBS e da CBS na promoção da igualdade entre homens e mulheres e étnico-racial. § 2º Para fins do disposto no inciso II do caput, a avaliação de que trata o caput deverá considerar o impacto sobre as desigualdades de renda. § 3º Para fins do disposto no inciso III do caput, a composição dos produtos que integram a Cesta Básica Nacional de Alimentos deve ter como objetivo garantir a alimentação saudável e nutricionalmente adequada, em observância ao direito social à alimentação, devendo satisfazer os seguintes critérios: I - privilegiar aliment",
+          "trecho_sha256": "ce4ede4b8227338f810bc81e364311656a6e1876767940570de8afa8a69b941d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "125",
+          "trecho": "desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023. Parágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+          "trecho_sha256": "6e45461d1e8cca9a040e2c5641b38e61fcd6373e47bb72f5af8376f717fce75f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5,
+      "ancoras_literais_exibidas": {
+        "125": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "cesta_pergunta",
+      "tema": "cesta",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo reduz a zero as alíquotas da cesta básica nacional de alimentos?",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "125",
+        "475"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 22.488,
+      "correspondencias": [
+        {
+          "artigo": "125",
+          "trecho": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023. Parágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+          "trecho_sha256": "b2fe972aea6138d47d80003708a75ca12ae910079c3c808e8cab36f9887b77fc",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "475",
+          "trecho": "volução personalizada do IBS e da CBS, de que trata o Capítulo I do Título III do Livro I; III - da Cesta Básica Nacional de Alimentos, de que trata o Capítulo II do Título III do Livro I; IV - dos regimes diferenciados do IBS e da CBS, de que trata o Título IV do Livro I; e V - dos regimes específicos do IBS e da CBS, de que trata o Título V do Livro I. § 1º A avaliação de que trata o caput deverá considerar, inclusive, o impacto da legislação do IBS e da CBS na promoção da igualdade entre homens e mulheres e étnico-racial. § 2º Para fins do disposto no inciso II do caput, a avaliação de que trata o caput deverá considerar o impacto sobre as desigualdades de renda. § 3º Para fins do disposto no inciso III do caput, a composição dos produtos que integram a Cesta Básica Nacional de Alimentos deve ter como objetivo garantir a alimentação saudável e nutricionalmente adequada, em observância ao direito social à alimentação, devendo satisfazer os seguintes critérios: I - privilegiar aliment",
+          "trecho_sha256": "ce4ede4b8227338f810bc81e364311656a6e1876767940570de8afa8a69b941d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "zer"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "125": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "profissionais_termos",
+      "tema": "profissionais",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "conselho profissional",
+      "esperados": [
+        "127"
+      ],
+      "evidencias": {
+        "127": "submetidas à fiscalização por conselho profissional"
+      },
+      "encontrados": [
+        "127"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 11.056,
+      "correspondencias": [
+        {
+          "artigo": "127",
+          "trecho": "ividades intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: I - administradores; II - advogados; III - arquitetos e urbanistas; IV - assistentes sociais; V - bibliotecários; VI - biólogos; VII - contabilistas; VIII - economistas; IX - economistas domésticos; X - profissionais de educação física; XI - engenheiros e agrônomos; XII - estatísticos; XIII - médicos veterinários e zootecnistas; XIV - museólogos; XV - químicos; XVI - profissionais de relações públicas; XVII - técnicos industriais; e XVIII - técnicos agrícolas. § 1º A redução de alíquotas prevista no caput deste artigo aplica-se à prestação de serviços realizada por: I - pessoa física, desde que os serviços prestados estejam vinculados à habilitação dos profissionais; e II - pessoa jurídica que cumpra, cumulativamente, os seguintes requisitos: a) possuam os sócios habilitações profissionais diretamente relacionadas com os objetivos da sociedade e estejam submetidos ",
+          "trecho_sha256": "e064d6c781f40bc4a49d87874f8bf19d1a95b15270923041aaed541e885c3fda",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "127": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "profissionais_pergunta",
+      "tema": "profissionais",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quais profissionais têm redução de 30% nas alíquotas de IBS e CBS?",
+      "esperados": [
+        "127"
+      ],
+      "evidencias": {
+        "127": "submetidas à fiscalização por conselho profissional"
+      },
+      "encontrados": [
+        "127",
+        "351",
+        "19",
+        "363",
+        "175"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 24.966,
+      "correspondencias": [
+        {
+          "artigo": "127",
+          "trecho": "Art. 127. Ficam reduzidas em 30% (trinta por cento) as alíquotas do IBS e da CBS incidentes sobre a prestação de serviços pelos seguintes profissionais, que exercerem atividades intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional: I - administradores; II - advogados; III - arquitetos e urbanistas; IV - assistentes sociais; V - bibliotecários; VI - biólogos; VII - contabilistas; VIII - economistas; IX - economistas domésticos; X - profissionais de educação física; XI - engenheiros e agrônomos; XII - estatísticos; XIII - médicos veterinários e zootecnistas; XIV - museólogos; XV - químicos; XVI - profissionais de relações públicas; XVII - técnicos industriais; e XVIII - técnicos agrícolas. § 1º A redução de alíquotas prevista no caput deste artigo aplica-se à prestação de serviços realizada por: I - pessoa física, desde que os serviços prestados estejam vinculados à habilitação dos profissionais; e II - pessoa jurídica que cumpr",
+          "trecho_sha256": "6316524a09c506348b166eeeb07296b6bd0164e779b066b297079d40f0ffc766",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "351",
+          "trecho": "ade de operação e importação de que tratam os incisos I a III do caput deste artigo; V - o valor da redução da receita em decorrência: a) da concessão de créditos presumidos, discriminada para cada modalidade de crédito presumido prevista nesta Lei Complementar; b) da devolução geral de IBS e da CBS a pessoas físicas, a que se refere o art. 118 desta Lei Complementar discriminada para cada modalidade de devolução; VI - outros fatores que elevem ou reduzam a receita de IBS e de CBS não considerados nos incisos anteriores, discriminados por categoria. § 1º As receitas de que tratam os incisos I a III do caput deste artigo: I - não considerarão as operações contratadas pela administração pública direta, por autarquias e por fundações públicas, inclusive suas importações, e sujeitas ao regime de que trata o art. 473 desta Lei Complementar; II - corresponderão ao valor do IBS e da CBS incidentes nas operações que não geram direito a crédito para os adquirentes. § 2º Para fins da fixação da ",
+          "trecho_sha256": "35db39055cc2b1df4249bbeb7954a632a6d56fa1e3d3fc23fa6757ccc1633bef",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        },
+        {
+          "artigo": "19",
+          "trecho": "eral que reduza ou eleve a arrecadação do IBS ou da CBS: I - deverá ser compensada pela elevação ou redução, pelo Senado Federal, da alíquota de referência da CBS e das alíquotas de referência estadual e municipal do IBS, de modo a preservar a arrecadação das esferas federativas; II - somente entrará em vigor com o início da produção de efeitos do ajuste das alíquotas de referência de que trata o inciso I deste caput. § 1º Para fins do disposto no caput deste artigo: I - deverá ser considerada qualquer alteração na legislação federal que reduza ou eleve a arrecadação do IBS ou da CBS, contemplando, entre outros: a) alterações nos critérios relativos à devolução geral de IBS e de CBS a pessoas físicas, de que trata o Capítulo I do Título III deste Livro; b) alterações nos regimes diferenciados, específicos ou favorecidos de tributação previstos nesta Lei Complementar, inclusive em decorrência da avaliação quinquenal de que trata o Capítulo I do Título III do Livro III desta Lei Compleme",
+          "trecho_sha256": "7e30dc140ac07fcf44351ee8ac1e34f134513b54dc59be9a683176d93fccd5d6",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        },
+        {
+          "artigo": "363",
+          "trecho": "Art. 363. As alíquotas de referência estadual e municipal do IBS para 2031 serão fixadas de modo que: I - a média da estimativa da parcela estadual da receita do IBS de 2028 e em 2029, calculada com base na alíquota de referência estadual, nas alíquotas estaduais dos regimes específicos e na legislação do IBS de 2031, nos termos do art. 360 desta Lei Complementar, seja equivalente a 30% da média: a) da receita de referência dos Estados em 2028; b) da receita de referência dos Estados em 2029, dividida por 9 (nove) e multiplicada por 10 (dez); II - a média da estimativa da parcela municipal da receita do IBS em 2028 e em 2029, calculada com base na alíquota de referência municipal, nas alíquotas municipais dos regimes específicos e na legislação do IBS de 2031, nos termos do art. 360 desta Lei Complementar, seja equivalente a 30% da média: a) da receita de referência dos Municípios em 2028; b) da receita de referência dos Municípios em 2029, dividida por 9 (nove) e multiplicada por 10 (",
+          "trecho_sha256": "c7758b9de09e8b6d5995358d3ba3d543c176a9f3daa21a628f65775f8eac7624",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        },
+        {
+          "artigo": "175",
+          "trecho": "encial competitivo estabelecido no inciso VIII do § 1º do art. 225 da Constituição Federal. § 1º As alíquotas do IBS e da CBS relativas aos biocombustíveis e ao hidrogênio de baixa emissão de carbono não poderão ser inferiores a 40% (quarenta por cento) e não poderão exceder a 90% (noventa por cento) das alíquotas incidentes sobre os respectivos combustíveis fósseis comparados. § 2º A tributação reduzida de que trata este artigo será estabelecida considerando-se, nos termos do regulamento: I - a equivalência energética, os preços de mercado e as unidades de medida dos combustíveis comparados; II - o potencial de redução de impactos ambientais dos biocombustíveis ou do hidrogênio de baixa emissão de carbono em relação aos combustíveis fósseis de que sejam substitutos ou com os quais sejam misturados. § 3º Em relação ao etanol hidratado combustível (EHC), o diferencial de que trata o caput deste artigo será, no mínimo, aquele existente entre a carga tributária direta e indireta definida ",
+          "trecho_sha256": "34a6c1c4cf4f6add7aa6d42174698f0dd91ad6781b6137d546a92c089af0bd69",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "127": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "seletivo_termos",
+      "tema": "seletivo",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "imposto seletivo",
+      "esperados": [
+        "409"
+      ],
+      "evidencias": {
+        "409": "Fica instituído o Imposto Seletivo"
+      },
+      "encontrados": [
+        "434",
+        "422",
+        "417",
+        "427",
+        "409"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 8.452,
+      "correspondencias": [
+        {
+          "artigo": "434",
+          "trecho": "Art. 434. Aplica-se ao Imposto Seletivo, na importação de bens materiais, o disposto: I - no art. 65 desta Lei Complementar, em relação ao fato gerador; II - no art. 66 e no inciso III do art. 413 desta Lei Complementar, em relação à não incidência; III - no art. 67 desta Lei Complementar, em relação ao momento da ocorrência do fato gerador; e IV - nos arts. 72, 73 e 74 desta Lei Complementar, em relação à sujeição passiva. § 1º As alíquotas do Imposto Seletivo incidentes na importação serão fixadas em lei ordinária. § 2º Caso a alíquota do Imposto Seletivo seja ad valorem, a sua base de cálculo, na importação, será o valor aduaneiro acrescido do montante do Imposto sobre a Importação. § 2º-A. No caso de importação de produtos fumígenos sujeitos à alíquota ad valorem do Imposto Seletivo, a base de cálculo será a maior entre a prevista na alínea “c” do inciso III do art. 414 e a prevista no § 2º deste artigo. (Incluído pela Lei Complementar nº 227, de 2026) § 3º O Imposto Seletivo, na i",
+          "trecho_sha256": "0d8dc5ed905a320268fed48e2cdcef5ab95ee6676df8beec1c4d6390874d9ded",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "422",
+          "trecho": "Art. 422. Observado o disposto nos arts. 419 e 420, as alíquotas do Imposto Seletivo aplicáveis nas operações com os bens e os serviços referidos no Anexo XVII são aquelas previstas em lei ordinária. § 1º Serão aplicadas alíquotas ad valorem cumuladas com alíquotas específicas para: I - produtos fumígenos classificados na posição 24.02 da NCM/SH; e II - bebidas alcoólicas, em que as alíquotas específicas devem considerar o produto do teor alcoólico pelo volume dos produtos. § 2º As alíquotas do Imposto Seletivo estabelecidas nas operações com bens minerais extraídos respeitarão o percentual máximo de 0,25% (vinte e cinco centésimos por cento). § 2º As alíquotas do Imposto Seletivo respeitarão o percentual máximo de 0,25% (vinte e cinco centésimos por cento), nas operações com bens minerais extraídos. (Redação dada pela Lei Complementar nº 227, de 2026) § 3º Lei ordinária poderá estabelecer alíquotas específicas para os demais produtos fumígenos não referidos no inciso I do § 1º, as qua",
+          "trecho_sha256": "4898fbce800e516f7511aad3acf567a6c1d030436b67e19646b7de1aed43358a",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "417",
+          "trecho": "Art. 417. Não integram a base de cálculo do Imposto Seletivo: I - o montante da CBS, do IBS e do próprio Imposto Seletivo incidentes na operação; e II - os descontos incondicionais. § 1º Para efeitos do disposto no inciso II do caput, considera-se desconto incondicional a parcela redutora do preço da operação que conste do respectivo documento fiscal e não dependa de evento posterior. § 2º Não integra a base de cálculo do Imposto Seletivo a bonificação que atenda as mesmas condições especificadas no § 1º para a caracterização dos descontos incondicionais. § 3º O disposto no § 2º não se aplica à tributação por meio de alíquota específica, em que a base de cálculo, expressa em unidade de medida, deve considerar os bens fornecidos em bonificação. § 4º Até 31 de dezembro de 2032, não integra a base de cálculo do Imposto Seletivo o montante do: I - Imposto sobre operações relativas à Circulação de Mercadorias e sobre prestações de Serviços de Transporte Interestadual e Intermunicipal e de C",
+          "trecho_sha256": "24070f9500a28bfe1549746ea1c2b0fb447bf2f203308187424bf149cb97b403",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "427",
+          "trecho": "Art. 427. A empresa comercial exportadora fica responsável pelo recolhimento do Imposto Seletivo que não foi pago no fornecimento de bens para a empresa comercial exportadora, nas hipóteses de que trata § 5º do art. 82 desta Lei Complementar. § 1º Para efeitos do disposto no caput, considera-se devido o Imposto Seletivo na data de ocorrência do fato gerador, conforme definido no art. 412 desta Lei Complementar. § 2º Os valores que não forem pagos ficarão sujeitos à incidência de multa e juros de mora nos termos do § 2º do art. 29 desta Lei Complementar. § 3º Aplica-se ao Imposto Seletivo o disposto no § 10 do art. 82 desta Lei Complementar.",
+          "trecho_sha256": "112d1b2bd47b9de32943a2c11046b672d24472456922058dbeb6c63b5b02d4c6",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "409",
+          "trecho": "Art. 409. Fica instituído o Imposto Seletivo, de que trata o inciso VIII do art. 153 da Constituição Federal, incidente sobre a produção, extração, comercialização ou importação de bens e serviços prejudiciais à saúde ou ao meio ambiente. § 1º Para fins de incidência do Imposto Seletivo, consideram-se prejudiciais à saúde ou ao meio ambiente os bens classificados nos códigos da NCM/SH e o carvão mineral, e os serviços listados no Anexo XVII, referentes a: I - veículos; II - embarcações e aeronaves; III - produtos fumígenos; IV - bebidas alcoólicas; V - bebidas açucaradas; VI - bens minerais; VII - concursos de prognósticos e fantasy sport. § 2º Os bens a que se referem os incisos III e IV do § 1º estão sujeitos ao Imposto Seletivo quando acondicionados em embalagem primária, assim entendida aquela em contato direto com o produto e destinada ao consumidor final.",
+          "trecho_sha256": "d112289a3716a291648dea7dd58fc65afe885eaeb24385de5c2a7158865e1048",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.2,
+      "ancoras_literais_exibidas": {
+        "409": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "seletivo_pergunta",
+      "tema": "seletivo",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo institui o Imposto Seletivo?",
+      "esperados": [
+        "409"
+      ],
+      "evidencias": {
+        "409": "Fica instituído o Imposto Seletivo"
+      },
+      "encontrados": [
+        "409",
+        "411",
+        "432",
+        "431",
+        "438"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 13.907,
+      "correspondencias": [
+        {
+          "artigo": "409",
+          "trecho": "Art. 409. Fica instituído o Imposto Seletivo, de que trata o inciso VIII do art. 153 da Constituição Federal, incidente sobre a produção, extração, comercialização ou importação de bens e serviços prejudiciais à saúde ou ao meio ambiente. § 1º Para fins de incidência do Imposto Seletivo, consideram-se prejudiciais à saúde ou ao meio ambiente os bens classificados nos códigos da NCM/SH e o carvão mineral, e os serviços listados no Anexo XVII, referentes a: I - veículos; II - embarcações e aeronaves; III - produtos fumígenos; IV - bebidas alcoólicas; V - bebidas açucaradas; VI - bens minerais; VII - concursos de prognósticos e fantasy sport. § 2º Os bens a que se referem os incisos III e IV do § 1º estão sujeitos ao Imposto Seletivo quando acondicionados em embalagem primária, assim entendida aquela em contato direto com o produto e destinada ao consumidor final.",
+          "trecho_sha256": "d112289a3716a291648dea7dd58fc65afe885eaeb24385de5c2a7158865e1048",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "411",
+          "trecho": "Art. 411. Compete à RFB a administração e a fiscalização do Imposto Seletivo. Parágrafo único. O contencioso administrativo no âmbito do Imposto Seletivo atenderá ao disposto no Decreto nº 70.235, de 6 de março de 1972.",
+          "trecho_sha256": "3e5987d43cc628326b1a3062e880a20a8fc240ed483abb2c30250abc37c7620d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        },
+        {
+          "artigo": "432",
+          "trecho": "Art. 432. O Imposto Seletivo será pago mediante recolhimento do montante devido pelo sujeito passivo.",
+          "trecho_sha256": "291f7cfa15690c1fb671363d1871dff8d643b5a5af50e5749de8cb60fef05062",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        },
+        {
+          "artigo": "431",
+          "trecho": "Art. 431. A apuração relativa ao Imposto Seletivo deverá consolidar as operações realizadas por todos os estabelecimentos do contribuinte.",
+          "trecho_sha256": "facb5a817c374cc6c3b4e9ac698ca8a01896c9bad24e9e8779e79c7a7f994150",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        },
+        {
+          "artigo": "438",
+          "trecho": "Art. 438. O regulamento do Imposto Seletivo de que trata este Livro será editado pelo chefe do Poder Executivo da União.",
+          "trecho_sha256": "5ab79968ff1b5b9baf818fdde515b76bc7bef07186fb6310bed421241ea09a64",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "409": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "cesta_variacao_18",
+      "tema": "cesta",
+      "categoria": "variacao_escrita",
+      "tipo": "artigo",
+      "consulta": "cesta basica",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "125",
+        "475"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 10.308,
+      "correspondencias": [
+        {
+          "artigo": "125",
+          "trecho": "desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023. Parágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+          "trecho_sha256": "6e45461d1e8cca9a040e2c5641b38e61fcd6373e47bb72f5af8376f717fce75f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "475",
+          "trecho": "volução personalizada do IBS e da CBS, de que trata o Capítulo I do Título III do Livro I; III - da Cesta Básica Nacional de Alimentos, de que trata o Capítulo II do Título III do Livro I; IV - dos regimes diferenciados do IBS e da CBS, de que trata o Título IV do Livro I; e V - dos regimes específicos do IBS e da CBS, de que trata o Título V do Livro I. § 1º A avaliação de que trata o caput deverá considerar, inclusive, o impacto da legislação do IBS e da CBS na promoção da igualdade entre homens e mulheres e étnico-racial. § 2º Para fins do disposto no inciso II do caput, a avaliação de que trata o caput deverá considerar o impacto sobre as desigualdades de renda. § 3º Para fins do disposto no inciso III do caput, a composição dos produtos que integram a Cesta Básica Nacional de Alimentos deve ter como objetivo garantir a alimentação saudável e nutricionalmente adequada, em observância ao direito social à alimentação, devendo satisfazer os seguintes critérios: I - privilegiar aliment",
+          "trecho_sha256": "ce4ede4b8227338f810bc81e364311656a6e1876767940570de8afa8a69b941d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v2",
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0,
+      "ancoras_literais_exibidas": {
+        "125": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "cesta_variacao_19",
+      "tema": "cesta",
+      "categoria": "variacao_escrita",
+      "tipo": "artigo",
+      "consulta": "CESTA BÁSICA",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "475",
+        "125"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 8.925,
+      "correspondencias": [
+        {
+          "artigo": "475",
+          "trecho": "volução personalizada do IBS e da CBS, de que trata o Capítulo I do Título III do Livro I; III - da Cesta Básica Nacional de Alimentos, de que trata o Capítulo II do Título III do Livro I; IV - dos regimes diferenciados do IBS e da CBS, de que trata o Título IV do Livro I; e V - dos regimes específicos do IBS e da CBS, de que trata o Título V do Livro I. § 1º A avaliação de que trata o caput deverá considerar, inclusive, o impacto da legislação do IBS e da CBS na promoção da igualdade entre homens e mulheres e étnico-racial. § 2º Para fins do disposto no inciso II do caput, a avaliação de que trata o caput deverá considerar o impacto sobre as desigualdades de renda. § 3º Para fins do disposto no inciso III do caput, a composição dos produtos que integram a Cesta Básica Nacional de Alimentos deve ter como objetivo garantir a alimentação saudável e nutricionalmente adequada, em observância ao direito social à alimentação, devendo satisfazer os seguintes critérios: I - privilegiar aliment",
+          "trecho_sha256": "ce4ede4b8227338f810bc81e364311656a6e1876767940570de8afa8a69b941d",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "125",
+          "trecho": "desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023. Parágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+          "trecho_sha256": "6e45461d1e8cca9a040e2c5641b38e61fcd6373e47bb72f5af8376f717fce75f",
+          "tipo_trecho": "recorte_textual",
+          "inicio": null,
+          "fim": null,
+          "posicoes": null,
+          "origem": "v1",
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5,
+      "ancoras_literais_exibidas": {
+        "125": true
+      },
+      "hit_ancora_no_trecho": true,
+      "suficiencia_para_resposta": "nao_avaliada"
+    },
+    {
+      "id": "controle_1",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzinexistentetaxtracezz",
+      "esperados": [],
+      "evidencias": {},
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 10.662,
+      "correspondencias": []
+    },
+    {
+      "id": "controle_2",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzinexistentetaxtracezz'; DROP TABLE coletas; --",
+      "esperados": [],
+      "evidencias": {},
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 8.789,
+      "correspondencias": []
+    }
+  ],
+  "ambiente": {
+    "postgres": "17.11 (Debian 17.11-1.pgdg12+2)",
+    "python": "3.14.3"
+  },
+  "por_categoria": {
+    "controle_sintetico": {
+      "casos": 2,
+      "casos_com_artigo": 0,
+      "hit_at_k": null,
+      "recall_referencias_at_k": null,
+      "mrr_at_k": null,
+      "hit_ancora_literal_at_k": null,
+      "controles_sem_resultado": 2,
+      "controles_corretos": 2
+    },
+    "pergunta": {
+      "casos": 9,
+      "casos_com_artigo": 9,
+      "hit_at_k": 1.0,
+      "recall_referencias_at_k": 1.0,
+      "mrr_at_k": 0.7814814814814814,
+      "hit_ancora_literal_at_k": 1.0,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    },
+    "termos": {
+      "casos": 9,
+      "casos_com_artigo": 9,
+      "hit_at_k": 0.8888888888888888,
+      "recall_referencias_at_k": 0.8888888888888888,
+      "mrr_at_k": 0.6333333333333333,
+      "hit_ancora_literal_at_k": 0.8888888888888888,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    },
+    "variacao_escrita": {
+      "casos": 2,
+      "casos_com_artigo": 2,
+      "hit_at_k": 1.0,
+      "recall_referencias_at_k": 1.0,
+      "mrr_at_k": 0.75,
+      "hit_ancora_literal_at_k": 1.0,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    }
+  },
+  "executado_em": "2026-11-06T17:39:32.526436+00:00",
+  "metodo": "busca_textual_portugues_v4",
+  "embeddings_codigo_sha256": {
+    "encoder.py": "bc6c6fb2d078800a3d76dcd343457ae038462c46e5e4c6355bcc87a538f3a825",
+    "vetores.py": "59aadbf25a6d88e5b46b2c93787b5d50a8e3e5b82d0cc08aff4a91f5ec46faa4"
+  },
+  "conjunto_sha256": "237b8441f955b18c20f46756095cf81ace395ba4090b5e6addea084b864f4d60",
+  "codigo": {
+    "commit": "8c7f45a6c8f740e08999e27e6cf7954f27409191",
+    "alteracoes_locais": true
+  },
+  "avaliador_sha256": "8b16e6ec2ddeac2b3ac8efa644368f2bce01f642b543e792c11fff05170c72ce",
+  "fusao_sha256": "354414d421e0fcb94ec3cf367e79bfda46fb223fcdbe2e15b85cbce1427e0aec",
+  "schema_sha256": "3a809519efd492867425b4910acda4279e7fc340a0b2077d7a93b8dc40399bd6",
+  "consulta_sha256": "6ff6011c0009ad27f0dd841d04d964bbc6e38554bdda0da833535f66e06d36c9",
+  "busca_sha256": "b561d75e3e76be9e720a25ad17ac6cabb409f963e96a8e785d15354b3e7633ef",
+  "limites": [
+    "Casos elaborados durante o desenvolvimento; sem revisão por especialista tributário e sem amostra independente de usuários.",
+    "Métricas avaliam localização do artigo esperado, não correção jurídica, vigência, qualidade de resposta ou suporte do trecho exibido.",
+    "Referências mínimas: outros artigos retornados podem ser pertinentes; não calculamos precisão.",
+    "Controles sintéticos não demonstram recusa semântica de perguntas fora do escopo.",
+    "Variações do mesmo tema não são observações independentes. Latências locais não são teste de carga.",
+    "Falhas de execução invalidam o relatório; não são convertidas em buscas vazias."
+  ]
+}

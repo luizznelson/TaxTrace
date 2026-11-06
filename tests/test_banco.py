@@ -295,3 +295,30 @@ class PostgresTest(unittest.TestCase):
             self.conn.execute("SELECT count(*) FROM fragmentos_semanticos").fetchone()[0], 0
         )
         self.assertEqual(self.conn.execute("SELECT count(*) FROM coletas").fetchone()[0], 1)
+
+    def test_hibrida_combina_e_preserva_citacao_com_encoder_sintetico(self):
+        from unittest.mock import MagicMock, patch
+
+        self.preparar_indice_sintetico()
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        encoder = MagicMock()
+        encoder.gerar.return_value = [[1] + [0] * 383]
+        with patch("taxtrace.busca.encoder_local", return_value=encoder):
+            r = busca.pesquisar(self.conn, "crédito presumido", metodo="hibrida")
+        self.assertEqual(r["status"], "candidatos_para_revisao")
+        self.assertEqual(len({x["artigo_numero"] for x in r["resultados"]}), 2)
+        item = next(x for x in r["resultados"] if x["artigo_numero"] == "138")
+        self.assertEqual(set(item["posicoes"]), {"textual", "semantica"})
+        self.assertEqual(item["citacao"]["artigo"], "138")
+        self.assertEqual(item["pontuacao_tipo"], "rrf")
+
+    def test_hibrida_com_indice_ausente_nao_oculta_falha_com_resposta_textual(self):
+        from unittest.mock import MagicMock, patch
+
+        banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        encoder = MagicMock()
+        encoder.gerar.return_value = [[1] + [0] * 383]
+        with patch("taxtrace.busca.encoder_local", return_value=encoder):
+            with self.assertRaisesRegex(ValueError, "indice_semantico_ausente"):
+                busca.pesquisar(self.conn, "crédito presumido", metodo="hibrida")

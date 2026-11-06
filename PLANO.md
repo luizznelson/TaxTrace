@@ -71,7 +71,8 @@
    - [x] Tratar regressões e avaliar perguntas adicionais: v4 preserva a ordem v1 e completa vagas. Hit@5 de 95% no conjunto original e 91,7% no adicional, sem perdas contra v1; v4 adotada como padrão. RRF v3 não resolveu as regressões e ficou experimental. Metodologia em `evals/COMPARACAO.md`. O conjunto adicional foi consultado durante a decisão, portanto não é teste independente.
    - [ ] Avaliação independente de recuperação e suficiência dos trechos; ainda sem revisão fiscal especializada.
    - [x] Embeddings e comparação com a busca textual: E5-small local ONNX quantizado, revisão e hashes fixados, 990 trechos/580 artigos, vetores 384D e busca exata pgvector. Recuperação semântica de 60% e 75% nos conjuntos conhecidos, inferior à v4 (95% e 91,7%); controles vazios 0/2 em ambos. Textual mantida como padrão. Ver `evals/SEMANTICA.md`.
-   - [ ] Recuperação combinada/reordenação e avaliação de recusa/evidência suficiente antes de usar os vetores em geração.
+   - [x] Experimento de recuperação combinada RRF: 80% e 75% nos conjuntos conhecidos, inferior à textual v4; mantido como opção explícita. Avaliador verifica trechos literais na fonte e presença de âncora do gabarito, separadamente do acerto de artigo. Ver `evals/HIBRIDA.md`.
+   - [ ] Avaliar suficiência para resposta e recusa antes de usar os vetores em geração. Âncora literal não comprova suficiência jurídica.
    - [ ] Validar vigência por dispositivo/data; remover trechos riscados do índice não resolve toda a análise temporal.
 4. [ ] Servidor MCP com as ferramentas de consulta.
 5. [ ] Agente LangGraph com recusa e aprovação humana.

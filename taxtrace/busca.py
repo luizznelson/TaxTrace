@@ -21,7 +21,7 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
         raise ValueError("limite_deve_ser_1_a_20")
     if coleta_id is not None and (type(coleta_id) is not int or coleta_id < 1):
         raise ValueError("coleta_invalida")
-    if metodo not in {"v1", "v2", "v3", "v4", "semantica"}:
+    if metodo not in {"v1", "v2", "v3", "v4", "semantica", "hibrida"}:
         raise ValueError("metodo_invalido")
     with conn.transaction(), conn.cursor(row_factory=dict_row) as cur:
         cur.execute("SELECT has_table_privilege(current_user,'coletas','INSERT') AS escreve")
@@ -38,7 +38,14 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
         if not coleta or not coleta["manifesto_sha256"] or not coleta["fontes"]:
             raise ValueError("coleta_verificada_nao_encontrada")
         indice_semantico = None
-        if metodo == "semantica":
+        if metodo == "hibrida":
+            textual = buscar_v4(cur, consulta, coleta["id"], CANDIDATOS_POR_BUSCA)
+            vetor = encoder_local(Path.cwd()).gerar([consulta], consulta=True)[0]
+            semantica, indice_semantico = buscar_semantica(
+                cur, vetor, coleta["id"], CANDIDATOS_POR_BUSCA
+            )
+            resultados = fundir({"textual": textual, "semantica": semantica}, limite)
+        elif metodo == "semantica":
             vetor = encoder_local(Path.cwd()).gerar([consulta], consulta=True)[0]
             resultados, indice_semantico = buscar_semantica(cur, vetor, coleta["id"], limite)
         elif metodo == "v1":
@@ -54,13 +61,7 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
                 limite,
             )
         else:
-            principal = buscar_v1(cur, consulta, coleta["id"], limite)
-            ampliada = (
-                buscar_v2(cur, preparar(consulta), coleta["id"], CANDIDATOS_POR_BUSCA)
-                if len(principal) < limite
-                else []
-            )
-            resultados = completar(principal, ampliada, limite)
+            resultados = buscar_v4(cur, consulta, coleta["id"], limite)
         fonte = next(f for f in coleta["fontes"] if f["nome"] == "lc214_planalto")
         for item in resultados:
             # Extrato literal em torno da primeira palavra encontrada, não prosa de LLM.
@@ -68,7 +69,11 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
             palavras = [p for p in re.findall(r"\w+", consulta) if len(p) > 3]
             posicoes = [texto.casefold().find(p.casefold()) for p in palavras]
             inicio = max(0, min((p for p in posicoes if p >= 0), default=0) - 100)
-            item["trecho"] = texto if metodo == "semantica" else texto[inicio : inicio + 1000]
+            item["trecho"] = (
+                texto
+                if item.get("tipo_trecho") == "fragmento_semantico"
+                else texto[inicio : inicio + 1000]
+            )
             item["citacao"] = {
                 "norma": "LC 214/2025",
                 "artigo": item["artigo_numero"],
@@ -80,11 +85,19 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
         "metodo": (
             "busca_semantica_e5_v1"
             if metodo == "semantica"
+            else "busca_hibrida_rrf_v1"
+            if metodo == "hibrida"
             else f"busca_textual_portugues_{metodo}"
         ),
         "indice_semantico": indice_semantico,
         "consulta": consulta,
-        "status": "encontrado" if resultados else "sem_evidencia_na_busca_textual",
+        "status": (
+            "candidatos_para_revisao"
+            if resultados and metodo in {"semantica", "hibrida"}
+            else "encontrado"
+            if resultados
+            else "sem_evidencia_na_busca_textual"
+        ),
         "coleta": coleta,
         "resultados": resultados,
         "limites": [
@@ -99,6 +112,16 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
             "Nenhum resultado nesta busca não significa ausência na legislação.",
         ],
     }
+
+
+def buscar_v4(cur, consulta, coleta_id, limite):
+    principal = buscar_v1(cur, consulta, coleta_id, limite)
+    ampliada = (
+        buscar_v2(cur, preparar(consulta), coleta_id, CANDIDATOS_POR_BUSCA)
+        if len(principal) < limite
+        else []
+    )
+    return completar(principal, ampliada, limite)
 
 
 def buscar_v1(cur, consulta, coleta_id, limite):
@@ -147,7 +170,9 @@ def buscar_v2(cur, consulta, coleta_id, limite):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--consulta", required=True)
-    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4", "semantica"], default="v4")
+    parser.add_argument(
+        "--metodo", choices=["v1", "v2", "v3", "v4", "semantica", "hibrida"], default="v4"
+    )
     parser.add_argument("--coleta", type=int)
     parser.add_argument("--limite", type=int, default=5)
     args = parser.parse_args()

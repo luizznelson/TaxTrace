@@ -19,6 +19,8 @@ def fundir(rankings, limite):
                 itens[numero] = {
                     **original,
                     "pontuacao": 0.0,
+                    "pontuacao_tipo": "rrf",
+                    "origem": "fusao",
                     "posicoes": {},
                     "correspondencia_parcial": None,
                     "termos_ausentes": None,
@@ -26,9 +28,9 @@ def fundir(rankings, limite):
             item = itens[numero]
             item["pontuacao"] += 1 / (CONSTANTE_RRF + posicao)
             item["posicoes"][metodo] = posicao
-            if metodo == "v2":
-                item["correspondencia_parcial"] = original["correspondencia_parcial"]
-                item["termos_ausentes"] = original["termos_ausentes"]
+            if metodo in {"v2", "textual"}:
+                item["correspondencia_parcial"] = original.get("correspondencia_parcial")
+                item["termos_ausentes"] = original.get("termos_ausentes")
     return sorted(itens.values(), key=lambda x: (-x["pontuacao"], x["artigo_numero"]))[:limite]
 
 

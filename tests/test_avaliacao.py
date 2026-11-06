@@ -6,7 +6,15 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from taxtrace.avaliacao import avaliar, carregar_casos, main, pontuar, resumir
+from taxtrace.avaliacao import (
+    avaliar,
+    carregar_casos,
+    main,
+    pontuar,
+    pontuar_trechos,
+    resumir,
+    verificar_trechos,
+)
 
 
 class MetricasTest(unittest.TestCase):
@@ -94,3 +102,48 @@ class MetricasTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TrechosTest(unittest.TestCase):
+    def test_artigo_correto_sem_ancora_nao_conta_como_trecho_util(self):
+        caso = {"esperados": ["1"], "evidencias": {"1": "base esperada"}}
+        r = pontuar_trechos(caso, [{"artigo_numero": "1", "trecho": "outro trecho do artigo"}])
+        self.assertFalse(r["hit_ancora_no_trecho"])
+        self.assertEqual(r["suficiencia_para_resposta"], "nao_avaliada")
+
+    def test_ancora_em_artigo_errado_ou_chave_extra_nao_inflam_resultado(self):
+        caso = {"esperados": ["1"], "evidencias": {"1": "ancora", "2": "ancora"}}
+        r = pontuar_trechos(caso, [{"artigo_numero": "2", "trecho": "ancora"}])
+        self.assertFalse(r["hit_ancora_no_trecho"])
+        self.assertEqual(r["ancoras_literais_exibidas"], {"1": False})
+
+    def test_ancora_literal_correta_nao_comprova_suficiencia(self):
+        r = pontuar_trechos(
+            {"esperados": ["1"], "evidencias": {"1": "regra"}},
+            [{"artigo_numero": "1", "trecho": "A regra inclui ressalvas."}],
+        )
+        self.assertTrue(r["hit_ancora_no_trecho"])
+        self.assertEqual(r["suficiencia_para_resposta"], "nao_avaliada")
+
+    def test_trecho_inventado_ou_vazio_interrompe_verificacao(self):
+        conn = MagicMock()
+        conn.execute.return_value.fetchone.return_value = ("texto da fonte",)
+        for trecho in ("inventado", "", None):
+            with (
+                self.subTest(trecho=trecho),
+                self.assertRaisesRegex(ValueError, "trecho_nao_confere"),
+            ):
+                verificar_trechos(conn, 1, [{"artigo_numero": "1", "trecho": trecho}])
+
+    def test_offset_incorreto_nao_e_aceito_mesmo_com_trecho_literal(self):
+        conn = MagicMock()
+        conn.execute.return_value.fetchone.return_value = ("abc def",)
+        item = {
+            "artigo_numero": "1",
+            "trecho": "def",
+            "tipo_trecho": "fragmento_semantico",
+            "inicio": 0,
+            "fim": 3,
+        }
+        with self.assertRaisesRegex(ValueError, "offsets_do_trecho"):
+            verificar_trechos(conn, 1, [item])

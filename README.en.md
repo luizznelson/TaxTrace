@@ -77,6 +77,12 @@ See [setup, methodology and limitations](evals/SEMANTICA.md). Optional dependenc
 
 This implements retrieval, not answer generation. Real-model evaluation was local; core CI uses synthetic vectors and does not download model weights.
 
+## Hybrid retrieval and excerpt checks
+
+The [hybrid experiment](evals/HIBRIDA.md) combines textual and semantic rankings through RRF. It retrieved 16/20 and 9/12 reference articles, below the default textual search. Select `--metodo hibrida` explicitly after preparing the semantic index; the default remains v4.
+
+Evaluation now checks that returned excerpts are literal source substrings and whether a reference anchor appears in the excerpt of the expected article. Semantic retrieval found the expected article without displaying its anchor in three queries. This metric does not establish sufficient evidence or legal correctness; sufficiency remains unevaluated. Reports preserve excerpts and hashes, and operational failures are not disguised as empty results.
+
 ## Checks
 
 ```powershell

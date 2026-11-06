@@ -1,0 +1,135 @@
+{
+  "registrado_em": "2026-11-06T17:41:10.111022+00:00",
+  "decisao": "Manter v4 como padrão; recuperação híbrida RRF fica experimental. Nenhum método foi liberado para resposta fiscal automática.",
+  "metodo_hibrido": {
+    "constante_rrf": 60,
+    "candidatos_por_busca": 20,
+    "limite_avaliado": 5,
+    "origens": [
+      "textual_v4",
+      "semantica_e5"
+    ],
+    "politica_trecho": "Preservar o recorte da primeira lista que introduziu o artigo (textual antes da semântica)."
+  },
+  "comparacoes": [
+    {
+      "conjunto": "original",
+      "conjunto_sha256": "237b8441f955b18c20f46756095cf81ace395ba4090b5e6addea084b864f4d60",
+      "resultados": {
+        "v4": {
+          "registro": "runs/recuperacao-f66a97c1-cd27-4b13-90cf-ed53deab936e/resultado.json",
+          "resumo": {
+            "casos": 22,
+            "casos_com_artigo": 20,
+            "hit_at_k": 0.95,
+            "recall_referencias_at_k": 0.95,
+            "mrr_at_k": 0.7116666666666667,
+            "hit_ancora_literal_at_k": 0.95,
+            "controles_sem_resultado": 2,
+            "controles_corretos": 2
+          }
+        },
+        "semantica": {
+          "registro": "runs/recuperacao-c5b697f1-f401-43bf-9cdb-c1023d5488f2/resultado.json",
+          "resumo": {
+            "casos": 22,
+            "casos_com_artigo": 20,
+            "hit_at_k": 0.6,
+            "recall_referencias_at_k": 0.6,
+            "mrr_at_k": 0.4208333333333333,
+            "hit_ancora_literal_at_k": 0.5,
+            "controles_sem_resultado": 2,
+            "controles_corretos": 0
+          }
+        },
+        "hibrida": {
+          "registro": "runs/recuperacao-d1cdd1f9-4351-495e-8b66-52a1bcd36783/resultado.json",
+          "resumo": {
+            "casos": 22,
+            "casos_com_artigo": 20,
+            "hit_at_k": 0.8,
+            "recall_referencias_at_k": 0.8,
+            "mrr_at_k": 0.5916666666666667,
+            "hit_ancora_literal_at_k": 0.8,
+            "controles_sem_resultado": 2,
+            "controles_corretos": 0
+          }
+        }
+      },
+      "artigo_encontrado_sem_ancora_no_trecho": {
+        "v4": [],
+        "semantica": [
+          "plataformas_termos",
+          "plataformas_pergunta"
+        ],
+        "hibrida": []
+      }
+    },
+    {
+      "conjunto": "adicional",
+      "conjunto_sha256": "dc40beb009d37e6d1429e078f2777e1e81b2ab40bfab231cdc9b0b2aa7cb83ec",
+      "resultados": {
+        "v4": {
+          "registro": "runs/recuperacao-7742a059-3703-47cc-8217-886e2f4191be/resultado.json",
+          "resumo": {
+            "casos": 14,
+            "casos_com_artigo": 12,
+            "hit_at_k": 0.9166666666666666,
+            "recall_referencias_at_k": 0.9166666666666666,
+            "mrr_at_k": 0.7152777777777778,
+            "hit_ancora_literal_at_k": 0.9166666666666666,
+            "controles_sem_resultado": 2,
+            "controles_corretos": 2
+          }
+        },
+        "semantica": {
+          "registro": "runs/recuperacao-f70329ba-71bf-4cdb-90e5-4cdbdaf092ae/resultado.json",
+          "resumo": {
+            "casos": 14,
+            "casos_com_artigo": 12,
+            "hit_at_k": 0.75,
+            "recall_referencias_at_k": 0.75,
+            "mrr_at_k": 0.6458333333333334,
+            "hit_ancora_literal_at_k": 0.6666666666666666,
+            "controles_sem_resultado": 2,
+            "controles_corretos": 0
+          }
+        },
+        "hibrida": {
+          "registro": "runs/recuperacao-992e45a8-5382-40de-a7d4-3bc12ec106e8/resultado.json",
+          "resumo": {
+            "casos": 14,
+            "casos_com_artigo": 12,
+            "hit_at_k": 0.75,
+            "recall_referencias_at_k": 0.75,
+            "mrr_at_k": 0.6458333333333334,
+            "hit_ancora_literal_at_k": 0.75,
+            "controles_sem_resultado": 2,
+            "controles_corretos": 0
+          }
+        }
+      },
+      "artigo_encontrado_sem_ancora_no_trecho": {
+        "v4": [],
+        "semantica": [
+          "adicional_produtor"
+        ],
+        "hibrida": []
+      }
+    }
+  ],
+  "qualidade": {
+    "testes_executados": 81,
+    "falhas": 0,
+    "ignorados": 0,
+    "ruff_check": "aprovado",
+    "ruff_format_check": "aprovado"
+  },
+  "definicao_metrica_trecho": "Pelo menos um artigo esperado exibe sua âncora literal do gabarito dentro do trecho retornado. Não mede suficiência jurídica.",
+  "limites": [
+    "Conjuntos de desenvolvimento conhecidos, sem revisão fiscal independente.",
+    "Uma âncora literal curta pode omitir condições, exceções e regras de vigência.",
+    "Trecho literal na fonte pode ser irrelevante para a pergunta; controles semânticos/híbridos não tiveram recusa calibrada.",
+    "A verificação de literalidade é feita pelo avaliador, não é uma certificação jurídica do produto."
+  ]
+}
