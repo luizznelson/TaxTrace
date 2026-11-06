@@ -1,4 +1,4 @@
-"""Busca textual em português, com referência e versão; ainda não é RAG vetorial."""
+"""Recuperação textual e semântica com citação; ainda sem geração de respostas."""
 
 import argparse
 import json
@@ -9,7 +9,9 @@ from psycopg.rows import dict_row
 
 from taxtrace.conexao import conectar
 from taxtrace.consulta import preparar
+from taxtrace.encoder import encoder_local
 from taxtrace.fusao import CANDIDATOS_POR_BUSCA, completar, fundir
+from taxtrace.vetores import buscar_semantica
 
 
 def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> dict:
@@ -19,7 +21,7 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
         raise ValueError("limite_deve_ser_1_a_20")
     if coleta_id is not None and (type(coleta_id) is not int or coleta_id < 1):
         raise ValueError("coleta_invalida")
-    if metodo not in {"v1", "v2", "v3", "v4"}:
+    if metodo not in {"v1", "v2", "v3", "v4", "semantica"}:
         raise ValueError("metodo_invalido")
     with conn.transaction(), conn.cursor(row_factory=dict_row) as cur:
         cur.execute("SELECT has_table_privilege(current_user,'coletas','INSERT') AS escreve")
@@ -35,7 +37,11 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
         coleta = cur.fetchone()
         if not coleta or not coleta["manifesto_sha256"] or not coleta["fontes"]:
             raise ValueError("coleta_verificada_nao_encontrada")
-        if metodo == "v1":
+        indice_semantico = None
+        if metodo == "semantica":
+            vetor = encoder_local(Path.cwd()).gerar([consulta], consulta=True)[0]
+            resultados, indice_semantico = buscar_semantica(cur, vetor, coleta["id"], limite)
+        elif metodo == "v1":
             resultados = buscar_v1(cur, consulta, coleta["id"], limite)
         elif metodo == "v2":
             resultados = buscar_v2(cur, preparar(consulta), coleta["id"], limite)
@@ -62,7 +68,7 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
             palavras = [p for p in re.findall(r"\w+", consulta) if len(p) > 3]
             posicoes = [texto.casefold().find(p.casefold()) for p in palavras]
             inicio = max(0, min((p for p in posicoes if p >= 0), default=0) - 100)
-            item["trecho"] = texto[inicio : inicio + 1000]
+            item["trecho"] = texto if metodo == "semantica" else texto[inicio : inicio + 1000]
             item["citacao"] = {
                 "norma": "LC 214/2025",
                 "artigo": item["artigo_numero"],
@@ -71,13 +77,20 @@ def pesquisar(conn, consulta: str, *, coleta_id=None, limite=5, metodo="v4") -> 
             }
     coleta.pop("fontes")
     return {
-        "metodo": f"busca_textual_portugues_{metodo}",
+        "metodo": (
+            "busca_semantica_e5_v1"
+            if metodo == "semantica"
+            else f"busca_textual_portugues_{metodo}"
+        ),
+        "indice_semantico": indice_semantico,
         "consulta": consulta,
         "status": "encontrado" if resultados else "sem_evidencia_na_busca_textual",
         "coleta": coleta,
         "resultados": resultados,
         "limites": [
-            "Ranking textual não é confiança nem parecer tributário.",
+            "Pontuação de recuperação não é confiança nem parecer tributário.",
+            "Busca semântica retorna vizinhos mesmo sem evidência adequada; "
+            "não há recusa calibrada.",
             "Resultados ampliados podem ser parciais; confira os termos ausentes.",
             "Termos ausentes nulos: cobertura pela v2 não aferida.",
             "Pontuações de estratégias diferentes não são diretamente comparáveis.",
@@ -134,7 +147,7 @@ def buscar_v2(cur, consulta, coleta_id, limite):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--consulta", required=True)
-    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4"], default="v4")
+    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4", "semantica"], default="v4")
     parser.add_argument("--coleta", type=int)
     parser.add_argument("--limite", type=int, default=5)
     args = parser.parse_args()

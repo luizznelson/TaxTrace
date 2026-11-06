@@ -17,9 +17,10 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Organização das tabelas da API da Receita e ligação das classificações aos artigos citados.
 - Carga transacional em PostgreSQL local, vinculada à versão da coleta; duplicatas são recusadas.
 - Busca textual em português, com trechos literais, artigo, URL e identificação da coleta.
+- Recuperação semântica experimental: embeddings locais, trechos por artigo e vetores no pgvector.
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** embeddings, RAG, ferramentas MCP, agente LangGraph, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A extensão pgvector está disponível no banco, mas a busca atual não usa vetores ou modelos de IA.
+**Ainda em desenvolvimento:** RAG com geração, ferramentas MCP, agente LangGraph, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -81,6 +82,12 @@ Esses números são de desenvolvimento, sem revisão fiscal independente. Não m
 
 Cada execução grava um novo registro em `runs/`, identificando código, gabarito, coleta, artigos e origem dos candidatos. A versão v4 é o padrão; `--metodo v1` reproduz a referência anterior. As versões v2 e v3 permanecem experimentais. Para atualizar um banco já carregado, use `python -m taxtrace.banco --somente-esquema` com o Python da `.venv`.
 
+## Recuperação semântica experimental
+
+O modelo de embeddings roda localmente, sem chave de API, e indexou **990 trechos de 580 artigos**. Na avaliação, recuperou 12/20 e 9/12 referências, abaixo da busca textual (19/20 e 11/12). Também retornou vizinhos para termos inexistentes; não há recusa semântica calibrada. Por isso, a busca padrão foi preservada.
+
+Consulte [instalação, comparação e limites](evals/SEMANTICA.md) para testar com `--metodo semantica`. Os arquivos do modelo ficam fora do Git e seu download é explícito. Embeddings são recuperação de informação; a aplicação ainda não gera respostas por IA.
+
 ## Como conferir a qualidade
 
 ```powershell
@@ -100,6 +107,7 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 | `taxtrace/lei.py`, `tabelas.py`, `ligacao.py` | Interpretação e ligação das fontes |
 | `taxtrace/schema.sql`, `banco.py`, `conexao.py` | Persistência, transações e conexões separadas |
 | `taxtrace/documentos.py`, `consulta.py`, `busca.py` | Texto pesquisável e busca com citações |
+| `taxtrace/encoder.py`, `vetores.py` | Modelo local fixado, fragmentação e índice vetorial experimental |
 | `tests/` | Verificações automatizadas e isolamento do banco de testes |
 | `evals/`, `taxtrace/avaliacao.py` | Gabaritos, metodologia e avaliação da recuperação |
 | `runs/` | Registros públicos de validação, sem credenciais |

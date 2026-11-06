@@ -27,3 +27,6 @@ build/
 .idea/
 .coverage
 htmlcov/
+
+# Model weights are downloaded and verified locally
+data/models/

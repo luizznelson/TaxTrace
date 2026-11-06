@@ -1,0 +1,37 @@
+{
+  "status": "indexado",
+  "indice_id": "e2918b50-aa8e-432d-82f4-ce7f03c76961",
+  "coleta_id": 1,
+  "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79",
+  "config_sha256": "2e8fa2478a6214dc9a46f2318c741d901f5b8c2bb5a3529cf8d5e49cdb9547ad",
+  "config": {
+    "modelo": "intfloat/multilingual-e5-small",
+    "revisao": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "arquivos": {
+      "tokenizer.json": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+      "onnx/model_qint8_avx512_vnni.onnx": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88"
+    },
+    "dimensoes": 384,
+    "quantizacao": "qint8_avx512_vnni",
+    "tokens_por_trecho": 320,
+    "sobreposicao_tokens": 48,
+    "pooling": "media_attention_mask_l2",
+    "prefixos": [
+      "query: ",
+      "passage: "
+    ],
+    "implementacao": 1,
+    "onnxruntime": "1.31.1",
+    "tokenizers": "0.23.3",
+    "numpy": "2.5.4"
+  },
+  "corpus_sha256": "6999be4ce87e0034d387e9243c0a461af18ce1b853f9b7974f55d01256b1c65a",
+  "artigos": 580,
+  "fragmentos": 990,
+  "duracao_segundos": 168.306,
+  "executado_em": "2026-11-06T17:28:32.687559+00:00",
+  "limites": [
+    "Índice local; não há geração de resposta por IA.",
+    "Busca semântica não tem limiar calibrado de recusa."
+  ]
+}

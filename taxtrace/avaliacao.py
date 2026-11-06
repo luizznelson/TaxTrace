@@ -126,6 +126,7 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
                 if not linha or caso["evidencias"][artigo] not in linha[0]:
                     raise ValueError("evidencia_do_gabarito_nao_confere")
         saidas = []
+        indice_semantico = None
         for caso in conjunto["casos"]:
             inicio = perf_counter()
             resposta = pesquisar(
@@ -133,6 +134,7 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
             )
             duracao = round((perf_counter() - inicio) * 1000, 3)
             resultados = resposta["resultados"]
+            indice_semantico = resposta.get("indice_semantico")
             if any(
                 r["citacao"]["fonte_sha256"] != conjunto["fonte_sha256"]
                 or r["citacao"]["url"] != conjunto["fonte_url"]
@@ -162,6 +164,7 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
             saidas.append(saida)
     return {
         "coleta": coleta,
+        "indice_semantico": indice_semantico,
         "k": limite,
         "resumo": resumir(saidas),
         "casos": saidas,
@@ -190,7 +193,7 @@ def versao_codigo(raiz):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4"], default="v4")
+    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4", "semantica"], default="v4")
     parser.add_argument("--casos", type=Path, default=Path("evals/recuperacao.v1.json"))
     parser.add_argument("--limite", type=int, default=5)
     args = parser.parse_args(argv)
@@ -202,7 +205,15 @@ def main(argv=None):
         relatorio.update(
             {
                 "executado_em": datetime.now(UTC).isoformat(),
-                "metodo": f"busca_textual_portugues_{args.metodo}",
+                "metodo": (
+                    "busca_semantica_e5_v1"
+                    if args.metodo == "semantica"
+                    else f"busca_textual_portugues_{args.metodo}"
+                ),
+                "embeddings_codigo_sha256": {
+                    nome: hashlib.sha256((Path(__file__).parent / nome).read_bytes()).hexdigest()
+                    for nome in ("encoder.py", "vetores.py")
+                },
                 "conjunto_sha256": checksum,
                 "codigo": versao_codigo(raiz),
                 "avaliador_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

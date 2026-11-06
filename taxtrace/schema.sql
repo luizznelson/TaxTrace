@@ -110,3 +110,34 @@ ALTER TABLE documentos_busca ADD COLUMN IF NOT EXISTS termos_v2 tsvector
     setweight(to_tsvector('public.taxtrace_portugues_v2', texto_ativo), 'D')
   ) STORED;
 CREATE INDEX IF NOT EXISTS documentos_busca_termos_v2 ON documentos_busca USING gin(termos_v2);
+
+
+-- Índices semânticos são publicados completos em uma única transação.
+CREATE TABLE IF NOT EXISTS indices_semanticos (
+    id uuid PRIMARY KEY,
+    coleta_id bigint NOT NULL REFERENCES coletas(id),
+    config_sha256 text NOT NULL,
+    config jsonb NOT NULL,
+    corpus_sha256 text NOT NULL,
+    artigos integer NOT NULL CHECK (artigos > 0),
+    fragmentos integer NOT NULL CHECK (fragmentos >= artigos),
+    criado_em timestamptz NOT NULL DEFAULT now(),
+    UNIQUE (coleta_id,config_sha256),
+    UNIQUE (id,coleta_id)
+);
+CREATE TABLE IF NOT EXISTS fragmentos_semanticos (
+    indice_id uuid NOT NULL,
+    coleta_id bigint NOT NULL,
+    artigo_numero text NOT NULL,
+    ordem integer NOT NULL CHECK (ordem >= 0),
+    inicio integer NOT NULL CHECK (inicio >= 0),
+    fim integer NOT NULL CHECK (fim > inicio),
+    texto text NOT NULL,
+    texto_sha256 text NOT NULL,
+    vetor vector(384) NOT NULL,
+    PRIMARY KEY (indice_id,artigo_numero,ordem),
+    FOREIGN KEY (indice_id,coleta_id) REFERENCES indices_semanticos(id,coleta_id),
+    FOREIGN KEY (coleta_id,artigo_numero) REFERENCES artigos(coleta_id,numero),
+    CHECK (char_length(texto)=fim-inicio)
+);
+-- Busca exata neste corpus pequeno; sem índice aproximado ou perda de recall de ANN.

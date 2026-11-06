@@ -1,6 +1,6 @@
 # Avaliação da recuperação de artigos
 
-**Estado atual:** a busca padrão é a v4 conservadora. Veja a [comparação atual](COMPARACAO.md). As medições v1/v2 abaixo são registros históricos das etapas anteriores.
+**Estado atual:** a busca padrão é a v4 conservadora. A [avaliação semântica](SEMANTICA.md) está disponível como experimento separado, com resultados inferiores à textual. Veja a [comparação atual](COMPARACAO.md). As medições v1/v2 abaixo são registros históricos das etapas anteriores.
 
 ## Decisão que esta avaliação apoia
 

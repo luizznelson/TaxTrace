@@ -1,0 +1,80 @@
+{
+  "registrado_em": "2026-11-06T17:33:14.476449+00:00",
+  "decisao": "Manter busca textual v4 como padrão; semântica fica experimental e sem geração de respostas.",
+  "comparacoes": [
+    {
+      "conjunto": "original",
+      "conjunto_sha256": "237b8441f955b18c20f46756095cf81ace395ba4090b5e6addea084b864f4d60",
+      "textual": "runs/recuperacao-3423b570-ae03-44f6-9113-76e06ca9c1a6/resultado.json",
+      "semantica": "runs/recuperacao-81eca15c-cbc3-4858-b809-a9ef6b2c8af9/resultado.json",
+      "resumo_textual": {
+        "casos": 22,
+        "casos_com_artigo": 20,
+        "hit_at_k": 0.95,
+        "recall_referencias_at_k": 0.95,
+        "mrr_at_k": 0.7116666666666667,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 2
+      },
+      "resumo_semantica": {
+        "casos": 22,
+        "casos_com_artigo": 20,
+        "hit_at_k": 0.6,
+        "recall_referencias_at_k": 0.6,
+        "mrr_at_k": 0.4208333333333333,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 0
+      },
+      "ganhos": [
+        "extincao_termos"
+      ],
+      "perdas": [
+        "instituicao_termos",
+        "instituicao_pergunta",
+        "fato_gerador_pergunta",
+        "creditos_termos",
+        "creditos_pergunta",
+        "seletivo_termos",
+        "seletivo_pergunta",
+        "cesta_variacao_19"
+      ]
+    },
+    {
+      "conjunto": "adicional",
+      "conjunto_sha256": "dc40beb009d37e6d1429e078f2777e1e81b2ab40bfab231cdc9b0b2aa7cb83ec",
+      "textual": "runs/recuperacao-b1010301-9f92-4929-8644-3339f89c330b/resultado.json",
+      "semantica": "runs/recuperacao-e087a546-1cc9-43b3-b1af-ce96a37dc67d/resultado.json",
+      "resumo_textual": {
+        "casos": 14,
+        "casos_com_artigo": 12,
+        "hit_at_k": 0.9166666666666666,
+        "recall_referencias_at_k": 0.9166666666666666,
+        "mrr_at_k": 0.7152777777777778,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 2
+      },
+      "resumo_semantica": {
+        "casos": 14,
+        "casos_com_artigo": 12,
+        "hit_at_k": 0.75,
+        "recall_referencias_at_k": 0.75,
+        "mrr_at_k": 0.6458333333333334,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 0
+      },
+      "ganhos": [
+        "adicional_split"
+      ],
+      "perdas": [
+        "adicional_base_calculo",
+        "adicional_aliquotas",
+        "adicional_saude_sem_acento"
+      ]
+    }
+  ],
+  "limites": [
+    "Conjuntos conhecidos de desenvolvimento, sem revisão por especialista.",
+    "Busca semântica sem limiar calibrado retorna vizinhos para controles inexistentes.",
+    "Percentuais medem artigo esperado, não resposta correta, vigência ou suficiência do trecho."
+  ]
+}

@@ -185,3 +185,113 @@ class PostgresTest(unittest.TestCase):
             r = busca.pesquisar(self.conn, "crédito presumido", limite=1)
         self.assertEqual(r["metodo"], "busca_textual_portugues_v4")
         self.assertEqual(r["resultados"][0]["origem"], "v1")
+
+    def preparar_indice_sintetico(self):
+        # Vetores artificiais servem apenas ao teste de persistência, não à qualidade do modelo.
+        from taxtrace.vetores import gravar_indice
+
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        manifesto = self.conn.execute(
+            "SELECT manifesto_sha256 FROM coletas WHERE id=%s", (cid,)
+        ).fetchone()[0]
+        artigos = self.conn.execute(
+            "SELECT artigo_numero,texto_ativo FROM documentos_busca "
+            "WHERE coleta_id=%s ORDER BY artigo_numero",
+            (cid,),
+        ).fetchall()
+        fragmentos = []
+        for n, (numero, texto) in enumerate(artigos):
+            corte = len(texto) // 2
+            for ordem, (inicio, fim) in enumerate(((0, corte), (max(0, corte - 3), len(texto)))):
+                fragmentos.append(
+                    {
+                        "artigo": numero,
+                        "ordem": ordem,
+                        "inicio": inicio,
+                        "fim": fim,
+                        "texto": texto[inicio:fim],
+                        "vetor": [0] * n + [1] + [0] * (383 - n),
+                    }
+                )
+        indice = gravar_indice(self.conn, cid, manifesto, artigos, fragmentos)
+        return cid, manifesto, artigos, fragmentos, indice
+
+    def test_vetores_exatos_deduplicam_artigo_e_leitor_nao_escreve(self):
+        import psycopg
+        from psycopg.rows import dict_row
+
+        from taxtrace.vetores import buscar_semantica
+
+        cid, _, _, _, indice = self.preparar_indice_sintetico()
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        with self.conn.cursor(row_factory=dict_row) as cur:
+            resultados, meta = buscar_semantica(cur, [1] + [0] * 383, cid, 5)
+        self.assertEqual(meta["id"], str(indice))
+        self.assertEqual([x["artigo_numero"] for x in resultados], ["1", "138"])
+        self.assertAlmostEqual(resultados[0]["pontuacao"], 1)
+        with self.assertRaises(psycopg.errors.InsufficientPrivilege):
+            with self.conn.transaction():
+                self.conn.execute("DELETE FROM indices_semanticos")
+
+    def test_indice_duplicado_nao_deixa_fragmentos_parciais(self):
+        import psycopg
+
+        from taxtrace.vetores import gravar_indice
+
+        cid, manifesto, artigos, fragmentos, _ = self.preparar_indice_sintetico()
+        with self.assertRaises(psycopg.errors.UniqueViolation):
+            gravar_indice(self.conn, cid, manifesto, artigos, fragmentos)
+        self.assertEqual(
+            self.conn.execute("SELECT count(*) FROM indices_semanticos").fetchone()[0], 1
+        )
+        self.assertEqual(
+            self.conn.execute("SELECT count(*) FROM fragmentos_semanticos").fetchone()[0], 4
+        )
+
+    def test_indice_ausente_e_alteracao_de_coleta_nao_viram_busca_vazia(self):
+        from psycopg.rows import dict_row
+
+        from taxtrace.vetores import buscar_semantica, gravar_indice
+
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        with self.conn.cursor(row_factory=dict_row) as cur:
+            with self.assertRaisesRegex(ValueError, "indice_semantico_ausente"):
+                buscar_semantica(cur, [1] + [0] * 383, cid, 5)
+        # Um corpus diferente do banco deve ser recusado antes de publicar o índice.
+        with self.assertRaisesRegex(ValueError, "coleta_alterada"):
+            gravar_indice(
+                self.conn,
+                cid,
+                "hash_incorreto",
+                [("1", "abc")],
+                [
+                    {
+                        "artigo": "1",
+                        "ordem": 0,
+                        "inicio": 0,
+                        "fim": 3,
+                        "texto": "abc",
+                        "vetor": [1] + [0] * 383,
+                    }
+                ],
+            )
+        self.assertEqual(
+            self.conn.execute("SELECT count(*) FROM indices_semanticos").fetchone()[0], 0
+        )
+
+    def test_falha_na_gravacao_de_fragmentos_reverte_indice_inteiro(self):
+        import psycopg
+
+        self.conn.execute("""CREATE FUNCTION falhar_fragmento_teste() RETURNS trigger
+           LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'falha simulada'; END $$""")
+        self.conn.execute("""CREATE TRIGGER falha_simulada BEFORE INSERT ON fragmentos_semanticos
+           FOR EACH ROW EXECUTE FUNCTION falhar_fragmento_teste()""")
+        with self.assertRaises(psycopg.errors.RaiseException):
+            self.preparar_indice_sintetico()
+        self.assertEqual(
+            self.conn.execute("SELECT count(*) FROM indices_semanticos").fetchone()[0], 0
+        )
+        self.assertEqual(
+            self.conn.execute("SELECT count(*) FROM fragmentos_semanticos").fetchone()[0], 0
+        )
+        self.assertEqual(self.conn.execute("SELECT count(*) FROM coletas").fetchone()[0], 1)

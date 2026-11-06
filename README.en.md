@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-Embeddings, RAG, MCP tools, LangGraph, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The pgvector extension is available, but the current search uses neither vectors nor LLMs.
+RAG with generation, MCP tools, LangGraph, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
 
 ## Recorded local verification
 
@@ -68,6 +68,14 @@ These are development results, not independent legal validation. The additional 
 Each run records code and dataset hashes, collection and per-case outcomes. Select `--metodo v1` to reproduce the original baseline. v2 and RRF-based v3 remain experimental. For an existing database, run `.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema` once to create the additive indexes.
 
 The default v4 queries only through the read-only login. Result metadata identifies candidate origin, partial matches and missing normalized terms. Scores from different underlying searches are not directly comparable. A full original list is left unchanged, so v4 cannot improve its ordering.
+
+## Experimental semantic retrieval
+
+A pinned, local multilingual E5 model generated 384-dimensional vectors for **990 chunks from 580 articles**. No AI API key is required. Semantic retrieval found 12/20 and 9/12 reference articles, below textual v4 (19/20 and 11/12). It also returned neighbors for every synthetic empty-result control; no abstention threshold has been calibrated. The default search was therefore preserved.
+
+See [setup, methodology and limitations](evals/SEMANTICA.md). Optional dependencies are in `requirements-embeddings.txt`. Download weights explicitly with `python -m taxtrace.vetores preparar-modelo`, then build the local index with `python -m taxtrace.vetores indexar`, using the virtual environment's Python. Query or evaluate with `--metodo semantica`. Model files are hashed and excluded from Git. No queries are sent to an AI provider by this encoder.
+
+This implements retrieval, not answer generation. Real-model evaluation was local; core CI uses synthetic vectors and does not download model weights.
 
 ## Checks
 

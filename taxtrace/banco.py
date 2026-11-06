@@ -168,7 +168,8 @@ def preparar_leitor(conn, senha):
     conn.execute("REVOKE ALL ON ALL TABLES IN SCHEMA public FROM taxtrace_reader")
     conn.execute(
         "GRANT SELECT ON coletas,artigos,alteracoes,classificacoes,ligacoes,ncm,"
-        "divergencias,documentos_busca TO taxtrace_reader"
+        "divergencias,documentos_busca,indices_semanticos,fragmentos_semanticos "
+        "TO taxtrace_reader"
     )
 
 

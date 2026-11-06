@@ -1,0 +1,32 @@
+{
+  "verificado_em": "2026-11-06T17:31:46.097469+00:00",
+  "indice_id": "e2918b50-aa8e-432d-82f4-ce7f03c76961",
+  "config_sha256": "2e8fa2478a6214dc9a46f2318c741d901f5b8c2bb5a3529cf8d5e49cdb9547ad",
+  "artigos": 580,
+  "fragmentos": 990,
+  "dimensoes": 384,
+  "verificacoes": {
+    "trechos_literais_e_cobertura_integral_sem_lacuna_nao_branca": true,
+    "hashes_dos_trechos": true,
+    "corpus_sha256": "6999be4ce87e0034d387e9243c0a461af18ce1b853f9b7974f55d01256b1c65a",
+    "leitor_sem_insert_nas_tabelas_semanticas": true,
+    "textual_funciona_com_imports_opcionais_bloqueados": true,
+    "vetores_finitos_e_normalizados": true,
+    "modelo_hashes": {
+      "tokenizer.json": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+      "onnx/model_qint8_avx512_vnni.onnx": "dd476dd0c2514e9b9be83aeb3853fac0763e0bdf4a71645407587d77c48a2d88"
+    },
+    "cosseno_mesma_consulta_sozinha_e_em_lote": 0.9965838695414251
+  },
+  "qualidade": {
+    "testes_executados": 74,
+    "falhas": 0,
+    "ignorados": 0,
+    "ruff_check": "aprovado",
+    "ruff_format_check": "aprovado"
+  },
+  "limites": [
+    "Teste de consistência do encoder não compara a quantização com o modelo de precisão completa.",
+    "Execução local; sem LLM, deploy remoto ou alegação de correção jurídica."
+  ]
+}
