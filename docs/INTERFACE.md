@@ -10,6 +10,8 @@ A navegação fixa tem três áreas, nomeadas pelas tarefas do usuário:
 - **Revisões da sessão:** lista das últimas dez consultas desta aba, com status e retomada. É possível abrir outro registro local pelo identificador. O histórico da aba não é apresentado como cadastro permanente de usuários.
 - **Base e fontes:** cobertura real, versão, datas e conteúdo das fontes. As consultas usam uma coleta, não acesso em tempo real à legislação. Os totais de NCM não significam uma ferramenta de enquadramento disponível.
 
+A abertura explica em linguagem direta o que o TaxTrace pesquisa e entrega. Os exemplos ficam antes do campo: cesta básica, crédito presumido e redução de alíquotas; nas tarefas específicas, artigos 125/126 e cClassTrib 000001. Clicar em um exemplo apenas preenche o campo; o usuário pode editar e precisa acionar Consultar. Os textos da interface têm versão em português e inglês.
+
 Após consultar, o usuário seleciona os documentos para ler o texto e conferir a fonte. Trechos de busca são identificados como parciais. A revisão mantém o leitor acessível e exige decisão, justificativa e confirmação do conjunto documental. Navegar entre áreas ou alternar evidência/revisão preserva os campos ainda não enviados; trocar de idioma mantém o rascunho, mas reinicia a confirmação.
 
 O visual usa navegação lateral persistente, cabeçalho de localização, formulários com rótulos explícitos, hierarquia tipográfica e controles consistentes. Não depende de fontes remotas ou bibliotecas visuais. A entrada explica a utilidade e as entregas, sem prometer cálculo de tributos ou parecer fiscal.

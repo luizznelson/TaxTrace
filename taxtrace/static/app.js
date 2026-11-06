@@ -159,7 +159,7 @@ const strings = {
         sourcesNav: "Base e fontes",
         snapshotLabel: "Coleta documental",
         researchDescription:
-            "Encontre a base legal de IBS e CBS, confira a origem e registre sua revisão documental.",
+            "O TaxTrace pesquisa artigos da legislação da reforma tributária e consulta classificações de IBS e CBS. Você confere o texto, identifica a fonte e registra sua revisão documental.",
         sessionsDescription:
             "Retome as consultas desta aba para conferir fontes, concluir uma revisão ou baixar o registro.",
         sourcesDescription:
@@ -188,17 +188,19 @@ const strings = {
         searchExample: "cesta básica",
         articleExample: "Artigo 125",
         codeExample: "cClassTrib 000001",
-        purposeTitle: "Conferir a base normativa com a origem à vista.",
+        purposeTitle: "O que você consegue fazer aqui?",
         purposeText:
-            "A lei e as tabelas tributárias estão em fontes separadas. O TaxTrace ajuda a localizar referências de IBS e CBS e a registrar quais documentos sustentam sua análise.",
+            "Localizar onde a lei trata de um assunto, abrir um artigo pelo número e conferir a descrição e os percentuais de um cClassTrib. Depois, registrar quais documentos foram conferidos e por quê.",
         deliverTitle: "O que a consulta entrega",
-        deliver1: "Referências da coleta",
-        deliver1Sub: "Artigos ou classificação correspondentes à consulta.",
-        deliver2: "Origem para conferência",
-        deliver2Sub: "Texto recuperado, link oficial e versão dos dados.",
-        deliver3: "Revisão documentada",
+        deliver1: "Encontre uma referência",
+        deliver1Sub:
+            "Pesquise por assunto, número de artigo ou código cClassTrib.",
+        deliver2: "Confira o documento",
+        deliver2Sub:
+            "Leia o texto recuperado e abra a fonte oficial. A versão da coleta acompanha a consulta.",
+        deliver3: "Registre o que foi revisado",
         deliver3Sub:
-            "Sua decisão e justificativa ligadas ao material conferido.",
+            "Informe sua decisão e justificativa. O registro e as evidências podem ser baixados.",
         scopeTitle: "O que não é feito aqui",
         scopeText:
             "Cálculo de tributos, enquadramento automático de produtos ou emissão de parecer fiscal.",
@@ -218,6 +220,14 @@ const strings = {
         navigationLabel: "Áreas da aplicação",
         queryTypeLabel: "Tipo de consulta",
         queryViewLabel: "Visualização da consulta",
+        examplesTitle: "Exemplos para começar",
+        examplesHint: "Clique para preencher; depois, consulte.",
+        exampleBasket: "Cesta básica",
+        exampleCredit: "Crédito presumido",
+        exampleReduction: "Redução de alíquotas",
+        exampleArticle125: "Artigo 125 · cesta básica",
+        exampleArticle126: "Artigo 126",
+        exampleCode000001: "000001 · tributação integral",
     },
     en: {
         skip: "Skip to query",
@@ -377,7 +387,7 @@ const strings = {
         sourcesNav: "Collection and sources",
         snapshotLabel: "Document snapshot",
         researchDescription:
-            "Find IBS and CBS legal references, inspect their origin and record your document review.",
+            "TaxTrace searches Brazilian tax reform articles and looks up IBS and CBS classifications. Inspect the text, identify its source and record your document review.",
         sessionsDescription:
             "Resume queries from this tab to inspect sources, complete a review or download the record.",
         sourcesDescription:
@@ -406,17 +416,18 @@ const strings = {
         searchExample: "cesta básica",
         articleExample: "Article 125",
         codeExample: "cClassTrib 000001",
-        purposeTitle: "Check the legal basis with its origin in view.",
+        purposeTitle: "What can you do here?",
         purposeText:
-            "Legal text and tax tables are published separately. TaxTrace helps locate IBS and CBS references and record which documents support your analysis.",
+            "Find where the law addresses a topic, open an article by number and check a cClassTrib description and reported percentages. Then record which documents were checked and why.",
         deliverTitle: "What the lookup provides",
-        deliver1: "Snapshot references",
-        deliver1Sub: "Articles or a classification matching the query.",
-        deliver2: "Sources for verification",
-        deliver2Sub: "Retrieved text, official links and the dataset version.",
-        deliver3: "Documented review",
+        deliver1: "Find a reference",
+        deliver1Sub: "Search by topic, article number or cClassTrib code.",
+        deliver2: "Inspect the document",
+        deliver2Sub:
+            "Read the retrieved text and open the official source. Each query identifies its snapshot version.",
+        deliver3: "Record your review",
         deliver3Sub:
-            "Your decision and reasoning bound to the inspected material.",
+            "Enter your decision and reasoning. The record and evidence can be downloaded.",
         scopeTitle: "Outside this application",
         scopeText:
             "Tax calculation, automatic product classification or tax advice.",
@@ -438,6 +449,14 @@ const strings = {
         navigationLabel: "Application areas",
         queryTypeLabel: "Query type",
         queryViewLabel: "Query view",
+        examplesTitle: "Examples to get started",
+        examplesHint: "Click to fill in the field, then run the lookup.",
+        exampleBasket: "Basic food basket",
+        exampleCredit: "Presumed tax credit",
+        exampleReduction: "Rate reductions",
+        exampleArticle125: "Article 125 · basic food basket",
+        exampleArticle126: "Article 126",
+        exampleCode000001: "000001 · full taxation",
     },
 };
 
@@ -542,7 +561,7 @@ function setBusy(value) {
     $("#mode").disabled = value;
     document
         .querySelectorAll(
-            "[data-query],button[data-task],[data-view-target],#task-example,#new-query,#restore-button,#language",
+            "[data-query],button[data-task],[data-view-target],#task-examples button,#new-query,#restore-button,#language",
         )
         .forEach((n) => (n.disabled = value));
 }
@@ -1140,6 +1159,36 @@ function setView(view, scroll = true) {
         $("#inicio").scrollIntoView({ block: "start" });
     }
 }
+const queryExamples = {
+    search: [
+        ["exampleBasket", "cesta basica"],
+        ["exampleCredit", "credito presumido"],
+        ["exampleReduction", "reducao de aliquotas"],
+    ],
+    article: [
+        ["exampleArticle125", "125"],
+        ["exampleArticle126", "126"],
+    ],
+    code: [["exampleCode000001", "000001"]],
+};
+function renderExamples() {
+    const list = $("#task-examples");
+    list.replaceChildren();
+    queryExamples[activeTask].forEach(([key, value]) => {
+        const button = el("button", "example-option", t(key));
+        button.type = "button";
+        button.disabled = busy;
+        button.addEventListener("click", () => {
+            if (busy) return;
+            $("#question").value = value;
+            taskDrafts[activeTask] = value;
+            $("#question").dispatchEvent(new Event("input"));
+            $("#feedback").hidden = true;
+            $("#question").focus();
+        });
+        list.append(button);
+    });
+}
 function renderTask() {
     $("#query-label").textContent = t(`${activeTask}Label`);
     $("#question").placeholder = t(`${activeTask}Placeholder`);
@@ -1151,7 +1200,7 @@ function renderTask() {
         activeTask === "search" ? "text" : "numeric",
     );
     $("#task-help").textContent = t(`${activeTask}Help`);
-    $("#task-example").textContent = t(`${activeTask}Example`);
+    renderExamples();
     $("#mode-control").hidden = activeTask !== "search";
     $("#counter").hidden = activeTask !== "search";
     document.body.dataset.task = activeTask;
@@ -1180,15 +1229,6 @@ document.querySelectorAll("button[data-task]").forEach((b) =>
         $("#question").focus();
     }),
 );
-$("#task-example").addEventListener("click", () => {
-    $("#question").value = {
-        search: "cesta basica",
-        article: "125",
-        code: "000001",
-    }[activeTask];
-    $("#question").dispatchEvent(new Event("input"));
-    $("#question").focus();
-});
 $("#brand-home").addEventListener("click", () => setView("research"));
 applyLanguage();
 setBusy(false);
