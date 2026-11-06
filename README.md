@@ -129,7 +129,7 @@ O segundo comando é uma demonstração automatizada identificada, não revisão
 
 ## Aplicação local
 
-A [interface do TaxTrace](docs/INTERFACE.md) reúne **pesquisa, leitura das fontes e revisão documental** em uma bancada: lista selecionável de resultados, leitor ao lado e decisão com a fonte acessível. Inclui histórico da aba e exportação do registro. Português e inglês disponíveis; os documentos oficiais preservam o texto original.
+A [interface do TaxTrace](docs/INTERFACE.md) reúne **pesquisa, leitura das fontes e revisão documental** em uma bancada: lista selecionável de resultados, leitor ao lado e decisão com a fonte acessível. A navegação separa Consulta documental, Revisões da sessão e Base e fontes. Há entradas específicas para tema, número de artigo e cClassTrib, histórico da aba e exportação do registro. Português e inglês disponíveis; os documentos oficiais preservam o texto original.
 
 ```powershell
 .venv/Scripts/python.exe -m taxtrace.web
@@ -142,6 +142,7 @@ Abra [a aplicação local](http://127.0.0.1:8015/). A base precisa estar ativa. 
 ```powershell
 $env:TAXTRACE_TEST_DATABASE='1'
 .venv/Scripts/python.exe -m unittest discover -s tests -q
+node --test tests/query-input.test.mjs
 .venv/Scripts/ruff.exe check .
 .venv/Scripts/ruff.exe format --check .
 ```

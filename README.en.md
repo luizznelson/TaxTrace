@@ -117,7 +117,7 @@ The verifier exercises synthetic approval/rejection across separate processes an
 
 ## Local application
 
-The [TaxTrace interface](docs/INTERFACE.md) brings **research, source reading and document review** into one workspace: selectable results, an adjacent reader and a decision form with the source still accessible. Includes tab history and record export. Portuguese and English UI are available; official documents retain their original text.
+The [TaxTrace interface](docs/INTERFACE.md) brings **research, source reading and document review** into one workspace: selectable results, an adjacent reader and a decision form with the source still accessible. Navigation separates Document research, Session reviews and Collection and sources. Dedicated inputs support topics, article numbers and cClassTrib codes, with tab history and record export. Portuguese and English UI are available; official documents retain their original text.
 
 ```powershell
 .venv/Scripts/python.exe -m taxtrace.web
@@ -130,6 +130,7 @@ Open [the local application](http://127.0.0.1:8015/). The database must be runni
 ```powershell
 $env:TAXTRACE_TEST_DATABASE='1'
 .venv/Scripts/python.exe -m unittest discover -s tests -q
+node --test tests/query-input.test.mjs
 .venv/Scripts/ruff.exe check .
 .venv/Scripts/ruff.exe format --check .
 ```

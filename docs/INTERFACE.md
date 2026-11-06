@@ -4,12 +4,15 @@ Uma equipe fiscal precisa localizar a base normativa, conferir seu contexto e de
 
 ## Organização da experiência
 
-- **Pesquisar:** pergunta, exemplos editáveis e escolha explícita entre consulta direta e planejamento com Gemini. Cobertura e ajuda ficam em seções expansíveis.
-- **Conferir fontes:** lista selecionável de referências ao lado do leitor. O conteúdo vem da coleta; trechos de busca são identificados e não apresentados como artigos completos. O link oficial permanece disponível.
-- **Registrar revisão:** o leitor continua acessível. Em telas maiores, formulário e fonte aparecem lado a lado; em telas pequenas, ficam na sequência de leitura. A navegação permite voltar às fontes sem perder o formulário.
-- **Retomar:** histórico da aba e abertura de revisão por identificador. Rastro e JSON técnico ficam recolhidos até serem necessários.
+A navegação fixa tem três áreas, nomeadas pelas tarefas do usuário:
 
-A interface usa tipografia de sistema, superfícies neutras e azul para ações e seleção. Alertas documentais usam âmbar. Não depende de fontes remotas, bibliotecas visuais ou conteúdo externo incorporado.
+- **Consulta documental:** pesquisar um tema da legislação, abrir um artigo por número ou consultar um cClassTrib com seis dígitos. Cada opção tem campo, orientação e exemplo próprios. Só a pesquisa de temas oferece planejamento por IA; as referências explícitas usam o modo direto. Nenhum NCM é convertido automaticamente em classificação.
+- **Revisões da sessão:** lista das últimas dez consultas desta aba, com status e retomada. É possível abrir outro registro local pelo identificador. O histórico da aba não é apresentado como cadastro permanente de usuários.
+- **Base e fontes:** cobertura real, versão, datas e conteúdo das fontes. As consultas usam uma coleta, não acesso em tempo real à legislação. Os totais de NCM não significam uma ferramenta de enquadramento disponível.
+
+Após consultar, o usuário seleciona os documentos para ler o texto e conferir a fonte. Trechos de busca são identificados como parciais. A revisão mantém o leitor acessível e exige decisão, justificativa e confirmação do conjunto documental. Navegar entre áreas ou alternar evidência/revisão preserva os campos ainda não enviados; trocar de idioma mantém o rascunho, mas reinicia a confirmação.
+
+O visual usa navegação lateral persistente, cabeçalho de localização, formulários com rótulos explícitos, hierarquia tipográfica e controles consistentes. Não depende de fontes remotas ou bibliotecas visuais. A entrada explica a utilidade e as entregas, sem prometer cálculo de tributos ou parecer fiscal.
 
 ## Referências de interação
 
@@ -36,6 +39,8 @@ JSON técnico e exportação estão disponíveis para conferir os registros. Con
 
 ## Verificação desta etapa
 
-As verificações e seus limites estão registrados em [runs/2026-11-06-research-workspace/verification.md](../runs/2026-11-06-research-workspace/verification.md).
+As verificações desta reorganização estão em [runs/2026-11-06-product-interface/verification.md](../runs/2026-11-06-product-interface/verification.md). A etapa anterior está preservada em [research-workspace](../runs/2026-11-06-research-workspace/verification.md).
+
+Os testes das entradas estruturadas podem ser executados com `node --test tests/query-input.test.mjs` (Node.js 24).
 
 A validação visual não substitui auditoria completa de acessibilidade, teste de carga ou segurança para exposição pública. Não houve deploy nem alteração de autenticação. Veja [REVISAO.md](REVISAO.md) para os limites do checkpoint e da identidade autodeclarada.

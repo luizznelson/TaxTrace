@@ -5,330 +5,544 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
             name="description"
-            content="Consulte fontes da reforma tributária e acompanhe a revisão documental."
+            content="Pesquisa documental de IBS e CBS: encontre referências legais, consulte classificações tributárias e registre a conferência das fontes."
         />
         <link rel="icon" href="/assets/favicon.svg" />
         <title>TaxTrace · Consulta documental</title>
         <link rel="stylesheet" href="/assets/styles.css" />
         <script type="module" src="/assets/app.js"></script>
     </head>
-    <body data-step="query">
+    <body data-step="query" data-view="research">
         <a class="skip" href="#consulta" data-i18n="skip">Ir para a consulta</a>
-        <header class="topbar">
-            <a class="brand" href="#inicio" aria-label="TaxTrace"
-                ><span class="logo">T<span>↗</span></span
-                ><span
-                    >TaxTrace<small data-i18n="brand"
-                        >DA PERGUNTA À FONTE</small
-                    ></span
-                ></a
-            >
-            <div class="top-actions">
-                <span class="local-tag" data-i18n="local">Ambiente local</span
-                ><button
-                    id="language"
-                    class="language"
-                    aria-label="Switch to English"
-                >
-                    EN ↗
-                </button>
-            </div>
-        </header>
-        <div class="shell">
+        <div class="app-shell">
             <aside class="sidebar" aria-label="Navegação">
-                <button id="new-query" class="new-query" data-i18n="new">
-                    ＋ Nova consulta
-                </button>
-                <p class="eyebrow" data-i18n="session">NESTA ABA</p>
-                <div id="history" class="history"></div>
-                <details class="restore">
-                    <summary data-i18n="resume">Retomar uma revisão</summary>
-                    <label for="restore-id" data-i18n="identifier"
-                        >Identificador da revisão</label
-                    ><input
-                        id="restore-id"
-                        placeholder="00000000-0000-0000-0000-000000000000"
-                        maxlength="36"
-                    /><button
-                        id="restore-button"
-                        class="button quiet"
-                        data-i18n="open"
-                    >
-                        Abrir revisão
+                <a
+                    class="brand"
+                    href="#inicio"
+                    id="brand-home"
+                    aria-label="TaxTrace"
+                    ><svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <path
+                            d="M5 5h22v22H5z"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        />
+                        <path
+                            d="M10 11h12M16 11v12M10 17h5"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        /></svg
+                    ><span
+                        >TaxTrace<small data-i18n="brand"
+                            >PESQUISA TRIBUTÁRIA</small
+                        ></span
+                    ></a
+                >
+                <p class="nav-caption" data-i18n="workspace">
+                    ÁREA DE TRABALHO
+                </p>
+                <nav
+                    class="app-nav"
+                    aria-label="Áreas da aplicação"
+                    data-i18n-aria="navigationLabel"
+                >
+                    <button data-view-target="research" aria-current="page">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <circle cx="10.5" cy="10.5" r="6.5" />
+                            <path d="m16 16 4 4" /></svg
+                        ><span data-i18n="researchNav"
+                            >Consulta documental</span
+                        >
                     </button>
-                </details>
+                    <button data-view-target="sessions">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <path d="M4 5v5h5M4.6 10A8 8 0 1 1 4 15" />
+                            <path d="M12 7v5l3 2" /></svg
+                        ><span data-i18n="sessionsNav">Revisões da sessão</span
+                        ><span id="session-count" class="nav-count">0</span>
+                    </button>
+                    <button data-view-target="sources">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <path d="M4 5h16v15H4zM4 10h16M9 5v15" /></svg
+                        ><span data-i18n="sourcesNav">Base e fontes</span>
+                    </button>
+                </nav>
                 <div class="sidebar-bottom">
-                    <a href="#base-details" id="base-link" data-i18n="baseNav"
-                        >Base documental</a
-                    >
-                    <p data-i18n="sideNote">
-                        Uma consulta pode terminar. A origem dos dados precisa
-                        continuar visível.
+                    <div class="source-indicator">
+                        <span></span
+                        ><b data-i18n="snapshotLabel">Coleta documental</b>
+                    </div>
+                    <p>
+                        LC 214/2025 · IBS / CBS<br /><span data-i18n="version"
+                            >Versão</span
+                        >
+                        <span id="sidebar-version">—</span>
                     </p>
-                    <a href="#metodo" id="help-link" data-i18n="understand"
-                        >Entenda o processo ↗</a
+                    <span class="local-tag" data-i18n="local"
+                        >Ambiente local</span
                     >
                 </div>
             </aside>
-            <main id="inicio">
-                <nav class="workflow" aria-label="Etapas da análise">
-                    <button data-step-target="query" aria-current="step">
-                        <span>01</span>
-                        <div>
-                            <b data-i18n="navQuery">Consulta</b
-                            ><small data-i18n="navQuerySub"
-                                >Defina o que conferir</small
-                            >
-                        </div>
+            <div class="app-content">
+                <header class="topbar">
+                    <div>
+                        <span data-i18n="workspaceName">Espaço de pesquisa</span
+                        ><span class="breadcrumb-divider">/</span
+                        ><b id="view-title">Consulta documental</b>
+                    </div>
+                    <button
+                        id="language"
+                        class="language"
+                        aria-label="Switch to English"
+                    >
+                        EN
                     </button>
-                    <button data-step-target="evidence" disabled>
-                        <span>02</span>
+                </header>
+                <main id="inicio">
+                    <section class="page-heading">
                         <div>
-                            <b data-i18n="navEvidence">Evidências</b
-                            ><small data-i18n="navEvidenceSub"
-                                >Leia e confronte fontes</small
-                            >
-                        </div>
-                    </button>
-                    <button data-step-target="review" disabled>
-                        <span>03</span>
-                        <div>
-                            <b data-i18n="navReview">Revisão</b
-                            ><small data-i18n="navReviewSub"
-                                >Registre sua decisão</small
-                            >
-                        </div>
-                    </button>
-                </nav>
-                <div class="query-layout">
-                    <section class="intro">
-                        <p class="eyebrow" data-i18n="scope">
-                            REFORMA TRIBUTÁRIA · IBS E CBS
-                        </p>
-                        <h1 data-i18n="hero">
-                            Qual referência você precisa conferir?
-                        </h1>
-                        <p class="lead" data-i18n="lead">
-                            Pesquise a base legal, leia os documentos e registre
-                            sua revisão em um só lugar.
-                        </p>
-                    </section>
-                    <section id="consulta" class="query-section">
-                        <div class="section-line">
-                            <p class="eyebrow" data-i18n="start">
-                                01 / EXPLORE UMA REFERÊNCIA
+                            <p class="eyebrow" data-i18n="scope">
+                                REFORMA TRIBUTÁRIA · IBS E CBS
                             </p>
-                            <span data-i18n="publicOnly"
-                                >Use somente dados públicos</span
-                            >
+                            <h1 id="page-title">Consulta documental</h1>
+                            <p id="page-description" class="lead"></p>
                         </div>
-                        <form id="query-form" class="composer">
-                            <label
-                                class="sr-only"
-                                for="question"
-                                data-i18n="question"
-                                >Sua pergunta</label
-                            ><textarea
-                                id="question"
-                                maxlength="500"
-                                rows="3"
-                                required
-                                data-placeholder="placeholder"
-                                placeholder="O que você precisa conferir na base?"
-                            ></textarea>
-                            <div class="composer-bottom">
-                                <div>
-                                    <label
-                                        class="sr-only"
-                                        for="mode"
-                                        data-i18n="mode"
-                                        >Modo de consulta</label
-                                    ><select id="mode">
-                                        <option
-                                            value="local"
-                                            data-i18n="direct"
+                        <button
+                            id="new-query"
+                            class="button quiet"
+                            data-i18n="new"
+                        >
+                            Nova consulta
+                        </button>
+                    </section>
+                    <div
+                        id="feedback"
+                        class="notice"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    ></div>
+                    <div
+                        id="working"
+                        class="working"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                    >
+                        <span class="spinner"></span>
+                        <div>
+                            <b data-i18n="working">Consultando as fontes…</b>
+                            <p data-i18n="workingSub">
+                                O resultado identificará os documentos e a
+                                coleta utilizada.
+                            </p>
+                        </div>
+                    </div>
+                    <section class="research-view">
+                        <div class="query-layout">
+                            <section
+                                id="consulta"
+                                class="query-section"
+                                aria-labelledby="task-heading"
+                            >
+                                <h2 id="task-heading" data-i18n="taskHeading">
+                                    O que você precisa conferir?
+                                </h2>
+                                <div
+                                    class="task-options"
+                                    role="group"
+                                    aria-label="Tipo de consulta"
+                                    data-i18n-aria="queryTypeLabel"
+                                >
+                                    <button
+                                        type="button"
+                                        data-task="search"
+                                        aria-pressed="true"
+                                    >
+                                        <b data-i18n="taskSearch"
+                                            >Pesquisar um tema</b
+                                        ><small data-i18n="taskSearchSub"
+                                            >Localizar artigos por
+                                            assunto</small
                                         >
-                                            Consulta direta · sem API de IA
-                                        </option>
-                                        <option value="gemini" data-i18n="ai">
-                                            Assistente IA · planeja a consulta
-                                        </option></select
-                                    ><small
-                                        id="mode-help"
-                                        data-i18n="directHelp"
-                                        >Referências explícitas ou busca pelos
-                                        termos da pergunta.</small
+                                    </button>
+                                    <button
+                                        type="button"
+                                        data-task="article"
+                                        aria-pressed="false"
                                     >
-                                </div>
-                                <div class="send-group">
-                                    <span id="counter">0 / 500</span
-                                    ><button
-                                        id="send"
-                                        type="submit"
-                                        class="button primary"
-                                        data-i18n="send"
+                                        <b data-i18n="taskArticle"
+                                            >Abrir um artigo</b
+                                        ><small data-i18n="taskArticleSub"
+                                            >Ler um dispositivo
+                                            específico</small
+                                        >
+                                    </button>
+                                    <button
+                                        type="button"
+                                        data-task="code"
+                                        aria-pressed="false"
                                     >
-                                        Consultar ↗
+                                        <b data-i18n="taskCode"
+                                            >Consultar cClassTrib</b
+                                        ><small data-i18n="taskCodeSub"
+                                            >Conferir a classificação da
+                                            tabela</small
+                                        >
                                     </button>
                                 </div>
-                            </div>
-                        </form>
-                        <div class="suggestions">
-                            <button data-query="cesta basica">
-                                <span>⌕</span
-                                ><b data-i18n="example1"
-                                    >Encontrar a base legal</b
-                                ><small data-i18n="example1sub"
-                                    >Explore a cesta básica</small
-                                ></button
-                            ><button data-query="Leia o artigo 125.">
-                                <span>§</span
-                                ><b data-i18n="example2">Ler um artigo</b
-                                ><small data-i18n="example2sub"
-                                    >Abra o artigo 125</small
-                                ></button
-                            ><button data-query="Consulte o cClassTrib 000001.">
-                                <span>≡</span
-                                ><b data-i18n="example3">Conferir um código</b
-                                ><small data-i18n="example3sub"
-                                    >Consulte o cClassTrib 000001</small
+                                <form id="query-form" class="composer">
+                                    <label id="query-label" for="question"
+                                        >Assunto ou pergunta sobre IBS e
+                                        CBS</label
+                                    >
+                                    <textarea
+                                        id="question"
+                                        maxlength="500"
+                                        rows="3"
+                                        required
+                                    ></textarea>
+                                    <p id="task-help" class="field-help"></p>
+                                    <div class="composer-bottom">
+                                        <div id="mode-control">
+                                            <label for="mode" data-i18n="mode"
+                                                >Modo de consulta</label
+                                            ><select id="mode">
+                                                <option
+                                                    value="local"
+                                                    data-i18n="direct"
+                                                >
+                                                    Busca direta
+                                                </option>
+                                                <option
+                                                    value="gemini"
+                                                    data-i18n="ai"
+                                                >
+                                                    Planejamento com IA
+                                                </option></select
+                                            ><small id="mode-help"></small>
+                                        </div>
+                                        <div class="send-group">
+                                            <span id="counter">0 / 500</span
+                                            ><button
+                                                id="send"
+                                                type="submit"
+                                                class="button primary"
+                                            >
+                                                <span data-i18n="send"
+                                                    >Consultar</span
+                                                ><svg
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="1.6"
+                                                    aria-hidden="true"
+                                                >
+                                                    <path
+                                                        d="M5 12h14m-5-5 5 5-5 5"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="example-row">
+                                    <span data-i18n="tryExample"
+                                        >Experimente:</span
+                                    ><button
+                                        id="task-example"
+                                        type="button"
+                                    ></button>
+                                </div>
+                            </section>
+                            <aside
+                                class="purpose-panel"
+                                aria-labelledby="purpose-title"
+                            >
+                                <span
+                                    class="panel-index"
+                                    data-i18n="purposeLabel"
+                                    >APOIO À ANÁLISE TRIBUTÁRIA</span
                                 >
-                            </button>
-                        </div>
-                    </section>
-                    <details class="coverage" id="base-details">
-                        <summary data-i18n="baseSummary">
-                            Base e cobertura · LC 214/2025 + Receita Federal
-                        </summary>
-                        <div class="coverage-body">
-                            <div class="coverage-heading">
-                                <div>
-                                    <p class="eyebrow" data-i18n="dataset">
-                                        BASE DOCUMENTAL
+                                <h2 id="purpose-title" data-i18n="purposeTitle">
+                                    Da dúvida à referência verificável.
+                                </h2>
+                                <p data-i18n="purposeText">
+                                    Apoia a conferência da base normativa quando
+                                    a informação está distribuída entre a lei e
+                                    as tabelas tributárias.
+                                </p>
+                                <h3 data-i18n="deliverTitle">
+                                    O que você recebe
+                                </h3>
+                                <ol>
+                                    <li>
+                                        <b data-i18n="deliver1"
+                                            >Referências da coleta</b
+                                        ><span data-i18n="deliver1Sub"
+                                            >Artigos ou classificação
+                                            correspondentes à consulta.</span
+                                        >
+                                    </li>
+                                    <li>
+                                        <b data-i18n="deliver2"
+                                            >Origem para conferência</b
+                                        ><span data-i18n="deliver2Sub"
+                                            >Texto recuperado, link oficial e
+                                            versão dos dados.</span
+                                        >
+                                    </li>
+                                    <li>
+                                        <b data-i18n="deliver3"
+                                            >Registro da revisão</b
+                                        ><span data-i18n="deliver3Sub"
+                                            >Decisão, justificativa e evidências
+                                            exportáveis.</span
+                                        >
+                                    </li>
+                                </ol>
+                                <div class="scope-note">
+                                    <b data-i18n="scopeTitle"
+                                        >Limite da análise</b
+                                    >
+                                    <p data-i18n="scopeText">
+                                        Não calcula tributos, não enquadra
+                                        produtos automaticamente e não emite
+                                        parecer fiscal.
                                     </p>
-                                    <h2 id="coverage-title">
-                                        LC 214/2025
-                                        <span>+ Receita Federal</span>
+                                </div>
+                            </aside>
+                        </div>
+                        <nav
+                            class="workflow"
+                            aria-label="Visualização da consulta"
+                            data-i18n-aria="queryViewLabel"
+                        >
+                            <button data-step-target="query">
+                                <b data-i18n="navQuery"
+                                    >Editar consulta</b
+                                ></button
+                            ><button data-step-target="evidence">
+                                <b data-i18n="navEvidence"
+                                    >Documentos encontrados</b
+                                ></button
+                            ><button data-step-target="review">
+                                <b data-i18n="navReview">Revisão documental</b>
+                            </button>
+                        </nav>
+                        <section id="result" tabindex="-1" hidden></section>
+                    </section>
+                    <section
+                        id="sessions-view"
+                        class="sessions-view"
+                        aria-label="Revisões da sessão"
+                    >
+                        <div class="session-toolbar">
+                            <h2 data-i18n="session">Consultas nesta aba</h2>
+                            <span data-i18n="sessionLimit"
+                                >Até 10 consultas · histórico da aba</span
+                            >
+                        </div>
+                        <div id="history" class="history"></div>
+                        <details class="restore">
+                            <summary data-i18n="resume">
+                                Abrir revisão por identificador
+                            </summary>
+                            <p data-i18n="restoreText">
+                                Use o identificador de um registro salvo neste
+                                ambiente.
+                            </p>
+                            <label for="restore-id" data-i18n="identifier"
+                                >Identificador da revisão</label
+                            >
+                            <div class="restore-controls">
+                                <input
+                                    id="restore-id"
+                                    placeholder="00000000-0000-0000-0000-000000000000"
+                                    maxlength="36"
+                                /><button
+                                    id="restore-button"
+                                    class="button quiet"
+                                    data-i18n="open"
+                                >
+                                    Abrir revisão
+                                </button>
+                            </div>
+                        </details>
+                    </section>
+                    <section class="sources-view">
+                        <p class="source-intro" data-i18n="sourceIntro">
+                            As consultas usam uma coleta identificada, não uma
+                            busca em tempo real na legislação. Confira as datas
+                            e a fonte oficial antes de interpretar o resultado.
+                        </p>
+                        <section class="coverage" id="base-details">
+                            <h2 data-i18n="baseSummary">
+                                Base e cobertura · LC 214/2025 + Receita Federal
+                            </h2>
+                            <div class="coverage-body">
+                                <div class="coverage-heading">
+                                    <div>
+                                        <p class="eyebrow" data-i18n="dataset">
+                                            BASE DOCUMENTAL
+                                        </p>
+                                        <h2 id="coverage-title">
+                                            LC 214/2025
+                                            <span>+ Receita Federal</span>
+                                        </h2>
+                                    </div>
+                                    <span id="version" class="pill">—</span>
+                                </div>
+                                <div class="metrics">
+                                    <div>
+                                        <strong id="article-count">—</strong
+                                        ><span data-i18n="articles"
+                                            >artigos organizados</span
+                                        >
+                                    </div>
+                                    <div>
+                                        <strong id="class-count">—</strong
+                                        ><span data-i18n="classes"
+                                            >classificações tributárias</span
+                                        >
+                                    </div>
+                                    <div>
+                                        <strong id="ncm-count">—</strong
+                                        ><span data-i18n="ncm"
+                                            >códigos NCM na coleta</span
+                                        >
+                                    </div>
+                                </div>
+                                <div class="coverage-dates">
+                                    <span
+                                        ><span data-i18n="captured"
+                                            >Captura:</span
+                                        >
+                                        <b id="captured">—</b></span
+                                    ><span
+                                        ><span data-i18n="apiDate"
+                                            >Data consultada na API:</span
+                                        >
+                                        <b id="api-date">—</b></span
+                                    ><span data-i18n="dateLimit"
+                                        >Data de consulta não comprova
+                                        vigência.</span
+                                    >
+                                </div>
+                                <p
+                                    id="base-error"
+                                    class="notice error"
+                                    hidden
+                                ></p>
+                            </div>
+                        </section>
+                        <div class="source-catalog">
+                            <h2 data-i18n="catalogTitle">Fontes consultadas</h2>
+                            <div>
+                                <b>LC 214/2025</b
+                                ><span data-i18n="lawDescription"
+                                    >Texto legal organizado por artigo, com
+                                    marcas de alteração preservadas.</span
+                                ><a
+                                    href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    data-i18n="source"
+                                    >Abrir fonte oficial ↗</a
+                                >
+                            </div>
+                            <div>
+                                <b>Receita Federal</b
+                                ><span data-i18n="tableDescription"
+                                    >Tabelas de classificação tributária e
+                                    códigos NCM da coleta. Os totais não
+                                    significam que todos os códigos tenham
+                                    consulta disponível na interface.</span
+                                >
+                            </div>
+                        </div>
+                        <details id="metodo" class="method">
+                            <summary data-i18n="methodTitle">
+                                Como funciona esta pesquisa?
+                            </summary>
+                            <div class="method-body">
+                                <div>
+                                    <p class="eyebrow" data-i18n="method">
+                                        DO DOCUMENTO À REVISÃO
+                                    </p>
+                                    <h2 data-i18n="methodTitle">
+                                        Você acompanha o caminho.
                                     </h2>
                                 </div>
-                                <span id="version" class="pill">—</span>
-                            </div>
-                            <div class="metrics">
-                                <div>
-                                    <strong id="article-count">—</strong
-                                    ><span data-i18n="articles"
-                                        >artigos organizados</span
-                                    >
+                                <div class="method-steps">
+                                    <article>
+                                        <span>1</span>
+                                        <h3 data-i18n="step1">
+                                            Escolher a referência
+                                        </h3>
+                                        <p data-i18n="step1text">
+                                            A consulta começa pela base
+                                            identificada. A IA, quando
+                                            escolhida, apenas planeja uma ação
+                                            limitada.
+                                        </p>
+                                    </article>
+                                    <article>
+                                        <span>2</span>
+                                        <h3 data-i18n="step2">
+                                            Conferir a evidência
+                                        </h3>
+                                        <p data-i18n="step2text">
+                                            Veja os artigos, as fontes e a
+                                            coleta usada. Um documento
+                                            encontrado ainda precisa de
+                                            interpretação.
+                                        </p>
+                                    </article>
+                                    <article>
+                                        <span>3</span>
+                                        <h3 data-i18n="step3">
+                                            Registrar a revisão
+                                        </h3>
+                                        <p data-i18n="step3text">
+                                            Aprove ou rejeite o conjunto
+                                            exibido. A decisão fica ligada ao
+                                            seu hash, sem gerar um parecer
+                                            fiscal.
+                                        </p>
+                                    </article>
                                 </div>
-                                <div>
-                                    <strong id="class-count">—</strong
-                                    ><span data-i18n="classes"
-                                        >classificações tributárias</span
-                                    >
-                                </div>
-                                <div>
-                                    <strong id="ncm-count">—</strong
-                                    ><span data-i18n="ncm"
-                                        >códigos NCM na coleta</span
-                                    >
-                                </div>
                             </div>
-                            <div class="coverage-dates">
-                                <span
-                                    ><span data-i18n="captured">Captura:</span>
-                                    <b id="captured">—</b></span
-                                ><span
-                                    ><span data-i18n="apiDate"
-                                        >Data consultada na API:</span
-                                    >
-                                    <b id="api-date">—</b></span
-                                ><span data-i18n="dateLimit"
-                                    >Data de consulta não comprova
-                                    vigência.</span
-                                >
-                            </div>
-                            <p id="base-error" class="notice error" hidden></p>
-                        </div>
-                    </details>
-                </div>
-                <div
-                    id="feedback"
-                    class="notice"
-                    role="status"
-                    aria-live="polite"
-                    hidden
-                ></div>
-                <div
-                    id="working"
-                    class="working"
-                    role="status"
-                    aria-live="polite"
-                    hidden
-                >
-                    <span class="spinner"></span>
-                    <div>
-                        <b data-i18n="working"
-                            >Consultando ferramentas e conferindo fontes…</b
-                        >
-                        <p data-i18n="workingSub">
-                            O resultado aparecerá com o caminho realmente
-                            percorrido.
+                        </details>
+                    </section>
+                    <footer>
+                        <span>TaxTrace</span>
+                        <p data-i18n="footer">
+                            Pesquisa documental com fontes identificadas. A
+                            interpretação tributária exige conferência
+                            profissional.
                         </p>
-                    </div>
-                </div>
-                <section id="result" tabindex="-1" hidden></section>
-                <details id="metodo" class="method">
-                    <summary data-i18n="methodTitle">
-                        Como funciona esta pesquisa?
-                    </summary>
-                    <div class="method-body">
-                        <div>
-                            <p class="eyebrow" data-i18n="method">
-                                DO DOCUMENTO À REVISÃO
-                            </p>
-                            <h2 data-i18n="methodTitle">
-                                Você acompanha o caminho.
-                            </h2>
-                        </div>
-                        <div class="method-steps">
-                            <article>
-                                <span>1</span>
-                                <h3 data-i18n="step1">Escolher a referência</h3>
-                                <p data-i18n="step1text">
-                                    A consulta começa pela base identificada. A
-                                    IA, quando escolhida, apenas planeja uma
-                                    ação limitada.
-                                </p>
-                            </article>
-                            <article>
-                                <span>2</span>
-                                <h3 data-i18n="step2">Conferir a evidência</h3>
-                                <p data-i18n="step2text">
-                                    Veja os artigos, as fontes e a coleta usada.
-                                    Um documento encontrado ainda precisa de
-                                    interpretação.
-                                </p>
-                            </article>
-                            <article>
-                                <span>3</span>
-                                <h3 data-i18n="step3">Registrar a revisão</h3>
-                                <p data-i18n="step3text">
-                                    Aprove ou rejeite o conjunto exibido. A
-                                    decisão fica ligada ao seu hash, sem gerar
-                                    um parecer fiscal.
-                                </p>
-                            </article>
-                        </div>
-                    </div>
-                </details>
-                <footer>
-                    <span>TaxTrace</span>
-                    <p data-i18n="footer">
-                        Apoio à consulta documental. Confira as fontes antes de
-                        tomar uma decisão tributária.
-                    </p>
-                </footer>
-            </main>
+                    </footer>
+                </main>
+            </div>
         </div>
     </body>
 </html>
