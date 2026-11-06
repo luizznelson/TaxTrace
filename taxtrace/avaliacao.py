@@ -106,7 +106,7 @@ def resumir(casos):
     }
 
 
-def avaliar(conn, conjunto, *, limite=5, metodo="v1"):
+def avaliar(conn, conjunto, *, limite=5, metodo="v4"):
     if type(limite) is not int or not 1 <= limite <= 20:
         raise ValueError("limite_invalido")
     with conn.transaction():
@@ -146,6 +146,16 @@ def avaliar(conn, conjunto, *, limite=5, metodo="v1"):
                 "encontrados": encontrados,
                 "status": resposta["status"],
                 "duracao_ms": duracao,
+                "correspondencias": [
+                    {
+                        "artigo": r["artigo_numero"],
+                        "posicoes": r.get("posicoes"),
+                        "origem": r.get("origem"),
+                        "parcial_v2": r.get("correspondencia_parcial"),
+                        "termos_ausentes_v2": r.get("termos_ausentes"),
+                    }
+                    for r in resultados
+                ],
             }
             if caso["esperados"]:
                 saida.update(pontuar(caso["esperados"], encontrados))
@@ -180,7 +190,7 @@ def versao_codigo(raiz):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--metodo", choices=["v1", "v2"], default="v1")
+    parser.add_argument("--metodo", choices=["v1", "v2", "v3", "v4"], default="v4")
     parser.add_argument("--casos", type=Path, default=Path("evals/recuperacao.v1.json"))
     parser.add_argument("--limite", type=int, default=5)
     args = parser.parse_args(argv)
@@ -196,6 +206,9 @@ def main(argv=None):
                 "conjunto_sha256": checksum,
                 "codigo": versao_codigo(raiz),
                 "avaliador_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                "fusao_sha256": hashlib.sha256(
+                    (Path(__file__).parent / "fusao.py").read_bytes()
+                ).hexdigest(),
                 "schema_sha256": hashlib.sha256(
                     (Path(__file__).parent / "schema.sql").read_bytes()
                 ).hexdigest(),

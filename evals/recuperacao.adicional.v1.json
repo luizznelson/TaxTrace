@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79",
+  "fonte_sha256": "055a4aba1e035bacc2d2674e9c2ce47a3818c0a0088cb7b1c5458187307f1d9e",
+  "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm",
+  "limites": [
+    "Casos elaborados durante o desenvolvimento; sem revisão por especialista tributário e sem amostra independente de usuários.",
+    "Métricas avaliam localização do artigo esperado, não correção jurídica, vigência, qualidade de resposta ou suporte do trecho exibido.",
+    "Referências mínimas: outros artigos retornados podem ser pertinentes; não calculamos precisão.",
+    "Controles sintéticos não demonstram recusa semântica de perguntas fora do escopo.",
+    "Variações do mesmo tema não são observações independentes. Latências locais não são teste de carga.",
+    "Falhas de execução invalidam o relatório; não são convertidas em buscas vazias."
+  ],
+  "descricao": "Perguntas adicionais fixadas antes da primeira execução da fusão. Mesma autoria de desenvolvimento; não constitui teste independente.",
+  "criterio_gabarito": "Artigos novos em relação ao primeiro conjunto, escolhidos por leitura da cópia coletada antes de executar v3. Um tema de saúde tem variação sem acentos.",
+  "casos": [
+    {
+      "id": "adicional_base_calculo",
+      "tema": "base_calculo",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual é a base de cálculo do IBS e da CBS?",
+      "esperados": [
+        "12"
+      ],
+      "evidencias": {
+        "12": "A base de cálculo do IBS e da CBS é o valor da operação"
+      }
+    },
+    {
+      "id": "adicional_aliquotas",
+      "tema": "aliquotas",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como serão fixadas as alíquotas da CBS e do IBS?",
+      "esperados": [
+        "14"
+      ],
+      "evidencias": {
+        "14": "serão fixadas por lei específica do respectivo ente federativo"
+      }
+    },
+    {
+      "id": "adicional_split",
+      "tema": "split",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como funciona a segregação no split payment?",
+      "esperados": [
+        "31"
+      ],
+      "evidencias": {
+        "31": "no momento da liquidação financeira da transação (split payment)"
+      }
+    },
+    {
+      "id": "adicional_pessoal",
+      "tema": "pessoal",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Quais bens são considerados de uso ou consumo pessoal?",
+      "esperados": [
+        "57"
+      ],
+      "evidencias": {
+        "57": "Consideram-se de uso ou consumo pessoal"
+      }
+    },
+    {
+      "id": "adicional_documento",
+      "tema": "documento",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Quem deverá emitir documento fiscal eletrônico nas operações de IBS e CBS?",
+      "esperados": [
+        "60"
+      ],
+      "evidencias": {
+        "60": "deverá emitir documento fiscal eletrônico"
+      }
+    },
+    {
+      "id": "adicional_saude",
+      "tema": "saude",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual artigo trata dos serviços de saúde relacionados no Anexo III?",
+      "esperados": [
+        "130"
+      ],
+      "evidencias": {
+        "130": "serviços de saúde relacionados no Anexo III"
+      }
+    },
+    {
+      "id": "adicional_medicamentos",
+      "tema": "medicamentos",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual artigo trata dos medicamentos registrados na Anvisa e farmácias de manipulação?",
+      "esperados": [
+        "133"
+      ],
+      "evidencias": {
+        "133": "medicamentos registrados na Anvisa ou produzidos por farmácias de manipulação"
+      }
+    },
+    {
+      "id": "adicional_comunicacao",
+      "tema": "comunicacao",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como são tratadas as alíquotas dos serviços de comunicação institucional à administração pública?",
+      "esperados": [
+        "140"
+      ],
+      "evidencias": {
+        "140": "serviços de comunicação institucional à administração pública direta"
+      }
+    },
+    {
+      "id": "adicional_urbana",
+      "tema": "urbana",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual é o objetivo da reabilitação urbana de zonas históricas?",
+      "esperados": [
+        "159"
+      ],
+      "evidencias": {
+        "159": "A reabilitação urbana de zonas históricas"
+      }
+    },
+    {
+      "id": "adicional_imoveis",
+      "tema": "imoveis",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Onde deverão ser inscritos os bens imóveis urbanos e rurais?",
+      "esperados": [
+        "265"
+      ],
+      "evidencias": {
+        "265": "deverão ser inscritos no CIB"
+      }
+    },
+    {
+      "id": "adicional_produtor",
+      "tema": "produtor",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como são tratados créditos presumidos de aquisições de produtor rural?",
+      "esperados": [
+        "168"
+      ],
+      "evidencias": {
+        "168": "relativos às aquisições de bens e serviços de produtor rural"
+      }
+    },
+    {
+      "id": "adicional_saude_sem_acento",
+      "tema": "saude_sem_acento",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "servicos de saude Anexo III",
+      "esperados": [
+        "130"
+      ],
+      "evidencias": {
+        "130": "serviços de saúde relacionados no Anexo III"
+      }
+    },
+    {
+      "id": "controle_adicional_1",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzcontroleadicionalxyz",
+      "esperados": [],
+      "evidencias": {}
+    },
+    {
+      "id": "controle_adicional_2",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzcontroleadicionalxyz OR zzzoutrotermo",
+      "esperados": [],
+      "evidencias": {}
+    }
+  ]
+}

@@ -52,25 +52,22 @@ Development binds only to loopback port 15433, with persistent storage. Tests bi
 
 ## Retrieval evaluation
 
-The [development evaluation set](evals/README.md) provides queries, reference articles and source fragments. The first run retrieved the reference article within the top five results for **14 of 20 positive queries**. Two synthetic empty-result controls are scored separately. These results do not measure legal correctness or generalize to real users.
+The [current comparison](evals/COMPARACAO.md) records queries, reference articles, gains and failures. The default v4 preserves the original search order and fills empty slots with new candidates from the expanded search.
+
+- Original development set: **19/20 references within the top five**, versus 14/20 for v1.
+- Additional development questions: **11/12**, versus 6/12 for v1.
+- No previously successful v1 case was lost in either comparison; the entire original prefix was preserved.
+
+These are development results, not independent legal validation. The additional set was consulted during the choice of strategy. Two synthetic controls per set are scored separately. Article retrieval does not establish legal correctness or sufficient excerpt evidence.
 
 ```powershell
-.venv/Scripts/python.exe -m taxtrace.avaliacao --limite 5
+.venv/Scripts/python.exe -m taxtrace.avaliacao
+.venv/Scripts/python.exe -m taxtrace.avaliacao --casos evals/recuperacao.adicional.v1.json
 ```
 
-Each run writes a new report under `runs/`, recording per-case results, collection, dataset and code identifiers. Full questions and spelling variations expose weaknesses. This is a development benchmark, not an independent test. The linked methodology explains metrics and limits.
+Each run records code and dataset hashes, collection and per-case outcomes. Select `--metodo v1` to reproduce the original baseline. v2 and RRF-based v3 remain experimental. For an existing database, run `.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema` once to create the additive indexes.
 
-Experimental `v2` adds accent normalization and question preprocessing. It retrieved 16 of 20 references, with six gains and four regressions against v1. **v1 remains the default**. Results do not establish legal accuracy or generalization.
-
-For an existing local database:
-
-```powershell
-.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema
-.venv/Scripts/python.exe -m taxtrace.busca --metodo v2 --consulta "cesta basica"
-.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v2
-```
-
-The additive schema update preserves existing sources and the original index. v2 may return partial lexical matches; each result exposes missing normalized terms. These matches are not sufficient grounds for an automatic legal answer. See the [comparison record](runs/2026-11-06-search-comparison/comparacao.json) and the linked evaluation methodology for regressions and limitations.
+The default v4 queries only through the read-only login. Result metadata identifies candidate origin, partial matches and missing normalized terms. Scores from different underlying searches are not directly comparable. A full original list is left unchanged, so v4 cannot improve its ordering.
 
 ## Checks
 

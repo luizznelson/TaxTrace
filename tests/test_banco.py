@@ -112,7 +112,7 @@ class PostgresTest(unittest.TestCase):
                 resposta = busca.pesquisar(self.conn, consulta, coleta_id=cid, metodo="v2")
                 self.assertEqual(resposta["resultados"][0]["artigo_numero"], "139")
                 self.assertEqual(resposta["resultados"][0]["termos_ausentes"], [])
-        self.assertEqual(busca.pesquisar(self.conn, "cesta basica")["resultados"], [])
+        self.assertEqual(busca.pesquisar(self.conn, "cesta basica", metodo="v1")["resultados"], [])
 
     def test_v2_sinaliza_correspondencia_parcial(self):
         cid = banco.carregar_pasta(self.conn, self.pasta)
@@ -149,3 +149,39 @@ class PostgresTest(unittest.TestCase):
             ).fetchone()[0],
             2,
         )
+
+    def test_v3_citacoes_versao_e_consulta_sem_evidencia(self):
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        r = busca.pesquisar(self.conn, "crédito presumido", coleta_id=cid, metodo="v3")
+        self.assertEqual(r["coleta"]["id"], cid)
+        self.assertEqual(r["resultados"][0]["citacao"]["artigo"], "138")
+        self.assertEqual(r["resultados"][0]["posicoes"], {"v1": 1, "v2": 1})
+        for consulta in ("zzzinexistente", "zzzinexistente'; DROP TABLE coletas; --"):
+            self.assertEqual(busca.pesquisar(self.conn, consulta, metodo="v3")["resultados"], [])
+        self.assertEqual(self.conn.execute("SELECT count(*) FROM coletas").fetchone()[0], 1)
+
+    def test_v4_preserva_ranking_original_e_completa_vagas(self):
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        original = busca.pesquisar(self.conn, "crédito presumido", coleta_id=cid, metodo="v1")
+        conservadora = busca.pesquisar(self.conn, "crédito presumido", coleta_id=cid, metodo="v4")
+        self.assertEqual(
+            [x["artigo_numero"] for x in original["resultados"]],
+            [x["artigo_numero"] for x in conservadora["resultados"]],
+        )
+        ampliada = busca.pesquisar(self.conn, "credito presumido zzzterm", metodo="v4")
+        self.assertEqual(ampliada["resultados"][0]["origem"], "v2")
+        self.assertTrue(ampliada["resultados"][0]["correspondencia_parcial"])
+
+    def test_padrao_v4_nao_consulta_v2_quando_nao_ha_vagas(self):
+        from unittest.mock import patch
+
+        banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        with patch(
+            "taxtrace.busca.buscar_v2", side_effect=AssertionError("consulta desnecessária")
+        ):
+            r = busca.pesquisar(self.conn, "crédito presumido", limite=1)
+        self.assertEqual(r["metodo"], "busca_textual_portugues_v4")
+        self.assertEqual(r["resultados"][0]["origem"], "v1")

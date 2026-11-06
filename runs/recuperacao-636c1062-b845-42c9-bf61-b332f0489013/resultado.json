@@ -1,0 +1,1371 @@
+{
+  "coleta": {
+    "id": 1,
+    "coletado_em": "2026-11-05 21:34:28+00:00",
+    "data_consulta": "2027-01-01",
+    "versao_base": "V0066",
+    "data_base": "2026-10-28",
+    "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+  },
+  "k": 5,
+  "resumo": {
+    "casos": 22,
+    "casos_com_artigo": 20,
+    "hit_at_k": 0.8,
+    "recall_referencias_at_k": 0.8,
+    "mrr_at_k": 0.7016666666666667,
+    "controles_sem_resultado": 2,
+    "controles_corretos": 2
+  },
+  "casos": [
+    {
+      "id": "instituicao_termos",
+      "tema": "instituicao",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "competência compartilhada",
+      "esperados": [
+        "1"
+      ],
+      "evidencias": {
+        "1": "Ficam instituídos:"
+      },
+      "encontrados": [
+        "1",
+        "493-A",
+        "58",
+        "349",
+        "174"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 10.821,
+      "correspondencias": [
+        {
+          "artigo": "1",
+          "posicoes": {
+            "v1": 1,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "493-A",
+          "posicoes": {
+            "v1": 2,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "58",
+          "posicoes": {
+            "v1": 3,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "349",
+          "posicoes": {
+            "v1": 4,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "174",
+          "posicoes": {
+            "v1": 5
+          },
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "instituicao_pergunta",
+      "tema": "instituicao",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo institui o IBS e a CBS?",
+      "esperados": [
+        "1"
+      ],
+      "evidencias": {
+        "1": "Ficam instituídos:"
+      },
+      "encontrados": [
+        "61",
+        "263",
+        "1",
+        "471-A",
+        "463"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 21.952,
+      "correspondencias": [
+        {
+          "artigo": "61",
+          "posicoes": {
+            "v1": 1,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "263",
+          "posicoes": {
+            "v1": 2,
+            "v2": 13
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "1",
+          "posicoes": {
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "471-A",
+          "posicoes": {
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "463",
+          "posicoes": {
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.3333333333333333
+    },
+    {
+      "id": "incidencia_termos",
+      "tema": "incidencia",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "operações onerosas",
+      "esperados": [
+        "4"
+      ],
+      "evidencias": {
+        "4": "incidem sobre operações onerosas"
+      },
+      "encontrados": [
+        "4",
+        "63",
+        "261",
+        "81-A",
+        "11"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 14.002,
+      "correspondencias": [
+        {
+          "artigo": "4",
+          "posicoes": {
+            "v1": 2,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "63",
+          "posicoes": {
+            "v1": 5,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "261",
+          "posicoes": {
+            "v1": 9,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "81-A",
+          "posicoes": {
+            "v1": 3,
+            "v2": 8
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "11",
+          "posicoes": {
+            "v1": 1,
+            "v2": 12
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "incidencia_pergunta",
+      "tema": "incidencia",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "O IBS e a CBS incidem sobre operações onerosas?",
+      "esperados": [
+        "4"
+      ],
+      "evidencias": {
+        "4": "incidem sobre operações onerosas"
+      },
+      "encontrados": [
+        "4",
+        "63",
+        "5",
+        "252",
+        "6"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 28.831,
+      "correspondencias": [
+        {
+          "artigo": "4",
+          "posicoes": {
+            "v1": 1,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "63",
+          "posicoes": {
+            "v1": 5,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "5",
+          "posicoes": {
+            "v1": 2,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "252",
+          "posicoes": {
+            "v1": 3,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "6",
+          "posicoes": {
+            "v1": 4,
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "fato_gerador_termos",
+      "tema": "fato_gerador",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "momento fornecimento",
+      "esperados": [
+        "10"
+      ],
+      "evidencias": {
+        "10": "no momento do fornecimento"
+      },
+      "encontrados": [
+        "116",
+        "10",
+        "254",
+        "7",
+        "412"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 15.427,
+      "correspondencias": [
+        {
+          "artigo": "116",
+          "posicoes": {
+            "v1": 4,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "10",
+          "posicoes": {
+            "v1": 1,
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "254",
+          "posicoes": {
+            "v1": 3,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "7",
+          "posicoes": {
+            "v1": 6,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "412",
+          "posicoes": {
+            "v1": 5,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5
+    },
+    {
+      "id": "fato_gerador_pergunta",
+      "tema": "fato_gerador",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quando ocorre o fato gerador do IBS e da CBS?",
+      "esperados": [
+        "10"
+      ],
+      "evidencias": {
+        "10": "no momento do fornecimento"
+      },
+      "encontrados": [
+        "372",
+        "67",
+        "45",
+        "348",
+        "76"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 23.669,
+      "correspondencias": [
+        {
+          "artigo": "372",
+          "posicoes": {
+            "v1": 3,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "67",
+          "posicoes": {
+            "v1": 1,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "45",
+          "posicoes": {
+            "v1": 7,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "348",
+          "posicoes": {
+            "v1": 2,
+            "v2": 10
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "76",
+          "posicoes": {
+            "v1": 11,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "plataformas_termos",
+      "tema": "plataformas",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "plataformas digitais",
+      "esperados": [
+        "22"
+      ],
+      "evidencias": {
+        "22": "As plataformas digitais, ainda que domiciliadas no exterior"
+      },
+      "encontrados": [
+        "22",
+        "26",
+        "64"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.759,
+      "correspondencias": [
+        {
+          "artigo": "22",
+          "posicoes": {
+            "v1": 2,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "26",
+          "posicoes": {
+            "v1": 1,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "64",
+          "posicoes": {
+            "v1": 3,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "plataformas_pergunta",
+      "tema": "plataformas",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "As plataformas digitais são responsáveis pelo pagamento de IBS e CBS?",
+      "esperados": [
+        "22"
+      ],
+      "evidencias": {
+        "22": "As plataformas digitais, ainda que domiciliadas no exterior"
+      },
+      "encontrados": [
+        "22",
+        "64",
+        "26",
+        "96",
+        "94"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 23.662,
+      "correspondencias": [
+        {
+          "artigo": "22",
+          "posicoes": {
+            "v1": 2,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "64",
+          "posicoes": {
+            "v1": 1,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "26",
+          "posicoes": {
+            "v2": 3
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "responsav"
+          ]
+        },
+        {
+          "artigo": "96",
+          "posicoes": {
+            "v2": 4
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "digit",
+            "responsav"
+          ]
+        },
+        {
+          "artigo": "94",
+          "posicoes": {
+            "v2": 5
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "digit",
+            "responsav"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "extincao_termos",
+      "tema": "extincao",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "extinção débitos modalidades",
+      "esperados": [
+        "27"
+      ],
+      "evidencias": {
+        "27": "serão extintos mediante as seguintes modalidades"
+      },
+      "encontrados": [
+        "50",
+        "47",
+        "48",
+        "46",
+        "27"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 14.138,
+      "correspondencias": [
+        {
+          "artigo": "50",
+          "posicoes": {
+            "v1": 1,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "47",
+          "posicoes": {
+            "v1": 2,
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "48",
+          "posicoes": {
+            "v1": 5,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "46",
+          "posicoes": {
+            "v1": 3,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "27",
+          "posicoes": {
+            "v1": 6,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.2
+    },
+    {
+      "id": "extincao_pergunta",
+      "tema": "extincao",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quais são as modalidades de extinção dos débitos de IBS e CBS?",
+      "esperados": [
+        "27"
+      ],
+      "evidencias": {
+        "27": "serão extintos mediante as seguintes modalidades"
+      },
+      "encontrados": [
+        "27",
+        "48",
+        "46",
+        "47",
+        "33"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 23.143,
+      "correspondencias": [
+        {
+          "artigo": "27",
+          "posicoes": {
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "48",
+          "posicoes": {
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "46",
+          "posicoes": {
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "47",
+          "posicoes": {
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "33",
+          "posicoes": {
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "creditos_termos",
+      "tema": "creditos",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "apropriar créditos",
+      "esperados": [
+        "47"
+      ],
+      "evidencias": {
+        "47": "O contribuinte sujeito ao regime regular poderá apropriar créditos"
+      },
+      "encontrados": [
+        "197",
+        "180",
+        "55",
+        "40",
+        "380"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 14.069,
+      "correspondencias": [
+        {
+          "artigo": "197",
+          "posicoes": {
+            "v1": 5,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "180",
+          "posicoes": {
+            "v1": 9,
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "55",
+          "posicoes": {
+            "v1": 16,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "40",
+          "posicoes": {
+            "v1": 3,
+            "v2": 19
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "380",
+          "posicoes": {
+            "v1": 12,
+            "v2": 13
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "creditos_pergunta",
+      "tema": "creditos",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quando o contribuinte pode apropriar créditos de IBS e CBS?",
+      "esperados": [
+        "47"
+      ],
+      "evidencias": {
+        "47": "O contribuinte sujeito ao regime regular poderá apropriar créditos"
+      },
+      "encontrados": [
+        "180",
+        "218",
+        "209",
+        "78",
+        "205"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 30.895,
+      "correspondencias": [
+        {
+          "artigo": "180",
+          "posicoes": {
+            "v1": 2,
+            "v2": 4
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "218",
+          "posicoes": {
+            "v1": 10,
+            "v2": 3
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "209",
+          "posicoes": {
+            "v1": 8,
+            "v2": 6
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "78",
+          "posicoes": {
+            "v1": 11,
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "205",
+          "posicoes": {
+            "v1": 17,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "cesta_termos",
+      "tema": "cesta",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "cesta básica",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "125",
+        "475"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 9.46,
+      "correspondencias": [
+        {
+          "artigo": "125",
+          "posicoes": {
+            "v1": 2,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "475",
+          "posicoes": {
+            "v1": 1,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "cesta_pergunta",
+      "tema": "cesta",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo reduz a zero as alíquotas da cesta básica nacional de alimentos?",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "125",
+        "475"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 20.359,
+      "correspondencias": [
+        {
+          "artigo": "125",
+          "posicoes": {
+            "v1": 1,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "475",
+          "posicoes": {
+            "v2": 2
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "zer"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "profissionais_termos",
+      "tema": "profissionais",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "conselho profissional",
+      "esperados": [
+        "127"
+      ],
+      "evidencias": {
+        "127": "submetidas à fiscalização por conselho profissional"
+      },
+      "encontrados": [
+        "127"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 8.14,
+      "correspondencias": [
+        {
+          "artigo": "127",
+          "posicoes": {
+            "v1": 1,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "profissionais_pergunta",
+      "tema": "profissionais",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quais profissionais têm redução de 30% nas alíquotas de IBS e CBS?",
+      "esperados": [
+        "127"
+      ],
+      "evidencias": {
+        "127": "submetidas à fiscalização por conselho profissional"
+      },
+      "encontrados": [
+        "127",
+        "351",
+        "19",
+        "363",
+        "175"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 22.622,
+      "correspondencias": [
+        {
+          "artigo": "127",
+          "posicoes": {
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "351",
+          "posicoes": {
+            "v2": 2
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        },
+        {
+          "artigo": "19",
+          "posicoes": {
+            "v2": 3
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        },
+        {
+          "artigo": "363",
+          "posicoes": {
+            "v2": 4
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        },
+        {
+          "artigo": "175",
+          "posicoes": {
+            "v2": 5
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "profission"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "seletivo_termos",
+      "tema": "seletivo",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "imposto seletivo",
+      "esperados": [
+        "409"
+      ],
+      "evidencias": {
+        "409": "Fica instituído o Imposto Seletivo"
+      },
+      "encontrados": [
+        "411",
+        "427",
+        "417",
+        "410",
+        "434"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 10.215,
+      "correspondencias": [
+        {
+          "artigo": "411",
+          "posicoes": {
+            "v1": 6,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "427",
+          "posicoes": {
+            "v1": 4,
+            "v2": 9
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "417",
+          "posicoes": {
+            "v1": 3,
+            "v2": 13
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "410",
+          "posicoes": {
+            "v1": 11,
+            "v2": 5
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "434",
+          "posicoes": {
+            "v1": 1,
+            "v2": 17
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "seletivo_pergunta",
+      "tema": "seletivo",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo institui o Imposto Seletivo?",
+      "esperados": [
+        "409"
+      ],
+      "evidencias": {
+        "409": "Fica instituído o Imposto Seletivo"
+      },
+      "encontrados": [
+        "409",
+        "411",
+        "432",
+        "431",
+        "438"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 11.542,
+      "correspondencias": [
+        {
+          "artigo": "409",
+          "posicoes": {
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "411",
+          "posicoes": {
+            "v2": 2
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        },
+        {
+          "artigo": "432",
+          "posicoes": {
+            "v2": 3
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        },
+        {
+          "artigo": "431",
+          "posicoes": {
+            "v2": 4
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        },
+        {
+          "artigo": "438",
+          "posicoes": {
+            "v2": 5
+          },
+          "parcial_v2": true,
+          "termos_ausentes_v2": [
+            "institu"
+          ]
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "cesta_variacao_18",
+      "tema": "cesta",
+      "categoria": "variacao_escrita",
+      "tipo": "artigo",
+      "consulta": "cesta basica",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "125",
+        "475"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 8.449,
+      "correspondencias": [
+        {
+          "artigo": "125",
+          "posicoes": {
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "475",
+          "posicoes": {
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "cesta_variacao_19",
+      "tema": "cesta",
+      "categoria": "variacao_escrita",
+      "tipo": "artigo",
+      "consulta": "CESTA BÁSICA",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      },
+      "encontrados": [
+        "125",
+        "475"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 7.702,
+      "correspondencias": [
+        {
+          "artigo": "125",
+          "posicoes": {
+            "v1": 2,
+            "v2": 1
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        },
+        {
+          "artigo": "475",
+          "posicoes": {
+            "v1": 1,
+            "v2": 2
+          },
+          "parcial_v2": false,
+          "termos_ausentes_v2": []
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "controle_1",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzinexistentetaxtracezz",
+      "esperados": [],
+      "evidencias": {},
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 6.184,
+      "correspondencias": []
+    },
+    {
+      "id": "controle_2",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzinexistentetaxtracezz'; DROP TABLE coletas; --",
+      "esperados": [],
+      "evidencias": {},
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 6.573,
+      "correspondencias": []
+    }
+  ],
+  "ambiente": {
+    "postgres": "17.11 (Debian 17.11-1.pgdg12+2)",
+    "python": "3.14.3"
+  },
+  "por_categoria": {
+    "controle_sintetico": {
+      "casos": 2,
+      "casos_com_artigo": 0,
+      "hit_at_k": null,
+      "recall_referencias_at_k": null,
+      "mrr_at_k": null,
+      "controles_sem_resultado": 2,
+      "controles_corretos": 2
+    },
+    "pergunta": {
+      "casos": 9,
+      "casos_com_artigo": 9,
+      "hit_at_k": 0.7777777777777778,
+      "recall_referencias_at_k": 0.7777777777777778,
+      "mrr_at_k": 0.7037037037037037,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    },
+    "termos": {
+      "casos": 9,
+      "casos_com_artigo": 9,
+      "hit_at_k": 0.7777777777777778,
+      "recall_referencias_at_k": 0.7777777777777778,
+      "mrr_at_k": 0.6333333333333333,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    },
+    "variacao_escrita": {
+      "casos": 2,
+      "casos_com_artigo": 2,
+      "hit_at_k": 1.0,
+      "recall_referencias_at_k": 1.0,
+      "mrr_at_k": 1.0,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    }
+  },
+  "executado_em": "2026-11-06T17:08:23.612824+00:00",
+  "metodo": "busca_textual_portugues_v3",
+  "conjunto_sha256": "237b8441f955b18c20f46756095cf81ace395ba4090b5e6addea084b864f4d60",
+  "codigo": {
+    "commit": "4ada7822fc9ef25704a1323abd2ed58a8d226a23",
+    "alteracoes_locais": true
+  },
+  "avaliador_sha256": "fb4beb385d8d8fb77577ec65089a1e385cfcb0e1e72fe90ba34451966a627cad",
+  "fusao_sha256": "e2cac6ed11c1c1a2d0857ecf0afdce53781f80027de2d85d1bf77b86099c256c",
+  "schema_sha256": "4e2f5164f947bb816599e6a9ea363f7b0379ffffb366d0018ad7fd5f2127559d",
+  "consulta_sha256": "6ff6011c0009ad27f0dd841d04d964bbc6e38554bdda0da833535f66e06d36c9",
+  "busca_sha256": "afc81dd8ffe2a58619800631d20823faaa18ee695131c13656bc6f973a6250c4",
+  "limites": [
+    "Casos elaborados durante o desenvolvimento; sem revisão por especialista tributário e sem amostra independente de usuários.",
+    "Métricas avaliam localização do artigo esperado, não correção jurídica, vigência, qualidade de resposta ou suporte do trecho exibido.",
+    "Referências mínimas: outros artigos retornados podem ser pertinentes; não calculamos precisão.",
+    "Controles sintéticos não demonstram recusa semântica de perguntas fora do escopo.",
+    "Variações do mesmo tema não são observações independentes. Latências locais não são teste de carga.",
+    "Falhas de execução invalidam o relatório; não são convertidas em buscas vazias."
+  ]
+}

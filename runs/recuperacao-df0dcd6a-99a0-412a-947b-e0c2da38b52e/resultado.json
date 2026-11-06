@@ -1,0 +1,488 @@
+{
+  "coleta": {
+    "id": 1,
+    "coletado_em": "2026-11-05 21:34:28+00:00",
+    "data_consulta": "2027-01-01",
+    "versao_base": "V0066",
+    "data_base": "2026-10-28",
+    "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+  },
+  "k": 5,
+  "resumo": {
+    "casos": 14,
+    "casos_com_artigo": 12,
+    "hit_at_k": 0.5,
+    "recall_referencias_at_k": 0.5,
+    "mrr_at_k": 0.34027777777777773,
+    "controles_sem_resultado": 2,
+    "controles_corretos": 2
+  },
+  "casos": [
+    {
+      "id": "adicional_base_calculo",
+      "tema": "base_calculo",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual é a base de cálculo do IBS e da CBS?",
+      "esperados": [
+        "12"
+      ],
+      "evidencias": {
+        "12": "A base de cálculo do IBS e da CBS é o valor da operação"
+      },
+      "encontrados": [
+        "274",
+        "289",
+        "12",
+        "255",
+        "280"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 7.731,
+      "correspondencias": [
+        {
+          "artigo": "274",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "289",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "12",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "255",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "280",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.3333333333333333
+    },
+    {
+      "id": "adicional_aliquotas",
+      "tema": "aliquotas",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como serão fixadas as alíquotas da CBS e do IBS?",
+      "esperados": [
+        "14"
+      ],
+      "evidencias": {
+        "14": "serão fixadas por lei específica do respectivo ente federativo"
+      },
+      "encontrados": [
+        "473",
+        "233",
+        "212",
+        "14",
+        "472"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 8.147,
+      "correspondencias": [
+        {
+          "artigo": "473",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "233",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "212",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "14",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "472",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.25
+    },
+    {
+      "id": "adicional_split",
+      "tema": "split",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como funciona a segregação no split payment?",
+      "esperados": [
+        "31"
+      ],
+      "evidencias": {
+        "31": "no momento da liquidação financeira da transação (split payment)"
+      },
+      "encontrados": [
+        "22",
+        "33"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 6.912,
+      "correspondencias": [
+        {
+          "artigo": "22",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "33",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "adicional_pessoal",
+      "tema": "pessoal",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Quais bens são considerados de uso ou consumo pessoal?",
+      "esperados": [
+        "57"
+      ],
+      "evidencias": {
+        "57": "Consideram-se de uso ou consumo pessoal"
+      },
+      "encontrados": [
+        "381"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 7.882,
+      "correspondencias": [
+        {
+          "artigo": "381",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "adicional_documento",
+      "tema": "documento",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Quem deverá emitir documento fiscal eletrônico nas operações de IBS e CBS?",
+      "esperados": [
+        "60"
+      ],
+      "evidencias": {
+        "60": "deverá emitir documento fiscal eletrônico"
+      },
+      "encontrados": [
+        "60",
+        "22",
+        "341-G"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 12.794,
+      "correspondencias": [
+        {
+          "artigo": "60",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "22",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "341-G",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "adicional_saude",
+      "tema": "saude",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual artigo trata dos serviços de saúde relacionados no Anexo III?",
+      "esperados": [
+        "130"
+      ],
+      "evidencias": {
+        "130": "serviços de saúde relacionados no Anexo III"
+      },
+      "encontrados": [
+        "146",
+        "130"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 7.623,
+      "correspondencias": [
+        {
+          "artigo": "146",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        },
+        {
+          "artigo": "130",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 0.5
+    },
+    {
+      "id": "adicional_medicamentos",
+      "tema": "medicamentos",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual artigo trata dos medicamentos registrados na Anvisa e farmácias de manipulação?",
+      "esperados": [
+        "133"
+      ],
+      "evidencias": {
+        "133": "medicamentos registrados na Anvisa ou produzidos por farmácias de manipulação"
+      },
+      "encontrados": [
+        "133"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 6.018,
+      "correspondencias": [
+        {
+          "artigo": "133",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "adicional_comunicacao",
+      "tema": "comunicacao",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como são tratadas as alíquotas dos serviços de comunicação institucional à administração pública?",
+      "esperados": [
+        "140"
+      ],
+      "evidencias": {
+        "140": "serviços de comunicação institucional à administração pública direta"
+      },
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 5.747,
+      "correspondencias": [],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "adicional_urbana",
+      "tema": "urbana",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Qual é o objetivo da reabilitação urbana de zonas históricas?",
+      "esperados": [
+        "159"
+      ],
+      "evidencias": {
+        "159": "A reabilitação urbana de zonas históricas"
+      },
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 6.824,
+      "correspondencias": [],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "adicional_imoveis",
+      "tema": "imoveis",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Onde deverão ser inscritos os bens imóveis urbanos e rurais?",
+      "esperados": [
+        "265"
+      ],
+      "evidencias": {
+        "265": "deverão ser inscritos no CIB"
+      },
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 5.472,
+      "correspondencias": [],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "adicional_produtor",
+      "tema": "produtor",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "Como são tratados créditos presumidos de aquisições de produtor rural?",
+      "esperados": [
+        "168"
+      ],
+      "evidencias": {
+        "168": "relativos às aquisições de bens e serviços de produtor rural"
+      },
+      "encontrados": [
+        "168"
+      ],
+      "status": "encontrado",
+      "duracao_ms": 7.202,
+      "correspondencias": [
+        {
+          "artigo": "168",
+          "posicoes": null,
+          "parcial_v2": null,
+          "termos_ausentes_v2": null
+        }
+      ],
+      "acertou": true,
+      "recall_referencias": 1.0,
+      "reciproco_primeiro_relevante": 1.0
+    },
+    {
+      "id": "adicional_saude_sem_acento",
+      "tema": "saude_sem_acento",
+      "categoria": "pergunta_adicional",
+      "tipo": "artigo",
+      "consulta": "servicos de saude Anexo III",
+      "esperados": [
+        "130"
+      ],
+      "evidencias": {
+        "130": "serviços de saúde relacionados no Anexo III"
+      },
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 5.048,
+      "correspondencias": [],
+      "acertou": false,
+      "recall_referencias": 0.0,
+      "reciproco_primeiro_relevante": 0.0
+    },
+    {
+      "id": "controle_adicional_1",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzcontroleadicionalxyz",
+      "esperados": [],
+      "evidencias": {},
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 5.169,
+      "correspondencias": []
+    },
+    {
+      "id": "controle_adicional_2",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzcontroleadicionalxyz OR zzzoutrotermo",
+      "esperados": [],
+      "evidencias": {},
+      "encontrados": [],
+      "status": "sem_evidencia_na_busca_textual",
+      "duracao_ms": 5.204,
+      "correspondencias": []
+    }
+  ],
+  "ambiente": {
+    "postgres": "17.11 (Debian 17.11-1.pgdg12+2)",
+    "python": "3.14.3"
+  },
+  "por_categoria": {
+    "controle_sintetico": {
+      "casos": 2,
+      "casos_com_artigo": 0,
+      "hit_at_k": null,
+      "recall_referencias_at_k": null,
+      "mrr_at_k": null,
+      "controles_sem_resultado": 2,
+      "controles_corretos": 2
+    },
+    "pergunta_adicional": {
+      "casos": 12,
+      "casos_com_artigo": 12,
+      "hit_at_k": 0.5,
+      "recall_referencias_at_k": 0.5,
+      "mrr_at_k": 0.34027777777777773,
+      "controles_sem_resultado": 0,
+      "controles_corretos": 0
+    }
+  },
+  "executado_em": "2026-11-06T17:08:24.621788+00:00",
+  "metodo": "busca_textual_portugues_v1",
+  "conjunto_sha256": "dc40beb009d37e6d1429e078f2777e1e81b2ab40bfab231cdc9b0b2aa7cb83ec",
+  "codigo": {
+    "commit": "4ada7822fc9ef25704a1323abd2ed58a8d226a23",
+    "alteracoes_locais": true
+  },
+  "avaliador_sha256": "fb4beb385d8d8fb77577ec65089a1e385cfcb0e1e72fe90ba34451966a627cad",
+  "fusao_sha256": "e2cac6ed11c1c1a2d0857ecf0afdce53781f80027de2d85d1bf77b86099c256c",
+  "schema_sha256": "4e2f5164f947bb816599e6a9ea363f7b0379ffffb366d0018ad7fd5f2127559d",
+  "consulta_sha256": "6ff6011c0009ad27f0dd841d04d964bbc6e38554bdda0da833535f66e06d36c9",
+  "busca_sha256": "afc81dd8ffe2a58619800631d20823faaa18ee695131c13656bc6f973a6250c4",
+  "limites": [
+    "Casos elaborados durante o desenvolvimento; sem revisão por especialista tributário e sem amostra independente de usuários.",
+    "Métricas avaliam localização do artigo esperado, não correção jurídica, vigência, qualidade de resposta ou suporte do trecho exibido.",
+    "Referências mínimas: outros artigos retornados podem ser pertinentes; não calculamos precisão.",
+    "Controles sintéticos não demonstram recusa semântica de perguntas fora do escopo.",
+    "Variações do mesmo tema não são observações independentes. Latências locais não são teste de carga.",
+    "Falhas de execução invalidam o relatório; não são convertidas em buscas vazias."
+  ]
+}

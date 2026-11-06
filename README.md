@@ -66,23 +66,20 @@ A data acima reproduz o recorte usado nesta etapa; não representa automaticamen
 
 ## Como medir a busca
 
-O [conjunto de avaliação](evals/README.md) contém perguntas, artigos esperados e fragmentos da fonte. Na primeira medição, o artigo de referência apareceu entre os cinco primeiros em **14 de 20 consultas**. Duas consultas de controle foram avaliadas separadamente. O resultado evidencia limitações em perguntas completas e variações de escrita; não mede precisão jurídica.
+A [avaliação da busca](evals/COMPARACAO.md) compara as versões com gabaritos e resultados por caso. A busca atual mantém os resultados originais e preenche as vagas com candidatos da busca ampliada:
+
+- Conjunto original: **19 de 20 referências entre os cinco primeiros** (antes: 14 de 20).
+- Perguntas adicionais: **11 de 12 referências** (antes: 6 de 12).
+- Nenhum acerto da versão original foi perdido nas duas comparações.
+
+Esses números são de desenvolvimento, sem revisão fiscal independente. Não medem precisão jurídica. Dois controles sintéticos por conjunto ficam fora dos percentuais; as falhas também estão publicadas.
 
 ```powershell
-.venv/Scripts/python.exe -m taxtrace.avaliacao --limite 5
+.venv/Scripts/python.exe -m taxtrace.avaliacao
+.venv/Scripts/python.exe -m taxtrace.avaliacao --casos evals/recuperacao.adicional.v1.json
 ```
 
-Cada execução gera um registro novo em `runs/`, com resultados por caso, identificação do código, gabarito e coleta. Consulte a metodologia e os resultados completos antes de interpretar o percentual.
-
-A versão experimental `v2` acrescenta normalização de acentos e tratamento de perguntas. No mesmo conjunto, recuperou 16 de 20 referências, mas apresentou quatro regressões. **A versão v1 permanece como padrão.** A [comparação completa](evals/README.md#experimento-de-busca-v2--comparação-preservada) explica ganhos, perdas e limites.
-
-Para testar a v2 em um banco já carregado:
-
-```powershell
-.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema
-.venv/Scripts/python.exe -m taxtrace.busca --metodo v2 --consulta "cesta basica"
-.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v2
-```
+Cada execução grava um novo registro em `runs/`, identificando código, gabarito, coleta, artigos e origem dos candidatos. A versão v4 é o padrão; `--metodo v1` reproduz a referência anterior. As versões v2 e v3 permanecem experimentais. Para atualizar um banco já carregado, use `python -m taxtrace.banco --somente-esquema` com o Python da `.venv`.
 
 ## Como conferir a qualidade
 

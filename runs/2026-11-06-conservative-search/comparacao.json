@@ -1,0 +1,94 @@
+{
+  "registrado_em": "2026-11-06T17:12:05.741732+00:00",
+  "padrao": "v4",
+  "politica": "Preservar resultados e ordem da v1 até o limite solicitado; preencher apenas vagas com candidatos inéditos da v2. Não consultar v2 se a lista original já está cheia.",
+  "comparacoes": [
+    {
+      "conjunto": "original",
+      "conjunto_sha256": "237b8441f955b18c20f46756095cf81ace395ba4090b5e6addea084b864f4d60",
+      "referencia": "runs/recuperacao-385f485a-f361-42a2-b445-0db1a7d10d95/resultado.json",
+      "candidata": "runs/recuperacao-0bcd7d45-6325-492c-9497-ff4ffafbb79a/resultado.json",
+      "resumo_v1": {
+        "casos": 22,
+        "casos_com_artigo": 20,
+        "hit_at_k": 0.7,
+        "recall_referencias_at_k": 0.7,
+        "mrr_at_k": 0.495,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 2
+      },
+      "resumo_v4": {
+        "casos": 22,
+        "casos_com_artigo": 20,
+        "hit_at_k": 0.95,
+        "recall_referencias_at_k": 0.95,
+        "mrr_at_k": 0.7116666666666667,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 2
+      },
+      "ganhos": [
+        "instituicao_pergunta",
+        "extincao_pergunta",
+        "profissionais_pergunta",
+        "seletivo_pergunta",
+        "cesta_variacao_18"
+      ],
+      "regressoes": [],
+      "falhas_remanescentes": [
+        "extincao_termos"
+      ],
+      "prefixo_v1_preservado_em_todos_os_casos": true
+    },
+    {
+      "conjunto": "adicional",
+      "conjunto_sha256": "dc40beb009d37e6d1429e078f2777e1e81b2ab40bfab231cdc9b0b2aa7cb83ec",
+      "referencia": "runs/recuperacao-0e794f73-3fd5-4990-9a97-b72e438af345/resultado.json",
+      "candidata": "runs/recuperacao-4a4de808-f350-43d0-ba6c-78f04c93b355/resultado.json",
+      "resumo_v1": {
+        "casos": 14,
+        "casos_com_artigo": 12,
+        "hit_at_k": 0.5,
+        "recall_referencias_at_k": 0.5,
+        "mrr_at_k": 0.34027777777777773,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 2
+      },
+      "resumo_v4": {
+        "casos": 14,
+        "casos_com_artigo": 12,
+        "hit_at_k": 0.9166666666666666,
+        "recall_referencias_at_k": 0.9166666666666666,
+        "mrr_at_k": 0.7152777777777778,
+        "controles_sem_resultado": 2,
+        "controles_corretos": 2
+      },
+      "ganhos": [
+        "adicional_pessoal",
+        "adicional_comunicacao",
+        "adicional_urbana",
+        "adicional_imoveis",
+        "adicional_saude_sem_acento"
+      ],
+      "regressoes": [],
+      "falhas_remanescentes": [
+        "adicional_split"
+      ],
+      "prefixo_v1_preservado_em_todos_os_casos": true
+    }
+  ],
+  "testes": {
+    "executados": 65,
+    "falhas": 0,
+    "ignorados": 0
+  },
+  "qualidade": {
+    "ruff_check": "aprovado",
+    "ruff_format_check": "aprovado"
+  },
+  "limites": [
+    "Os dois conjuntos são de desenvolvimento e têm a mesma autoria, sem revisão fiscal independente.",
+    "As perguntas adicionais foram fixadas antes da primeira fusão RRF e seus resultados foram vistos antes de escolher a estratégia conservadora; não são teste cego final.",
+    "Preservar o ranking original impede melhorar os primeiros resultados quando a lista original já está cheia.",
+    "Métricas de artigo não comprovam a suficiência do trecho exibido nem uma resposta tributária correta."
+  ]
+}

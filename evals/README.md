@@ -1,5 +1,7 @@
 # Avaliação da recuperação de artigos
 
+**Estado atual:** a busca padrão é a v4 conservadora. Veja a [comparação atual](COMPARACAO.md). As medições v1/v2 abaixo são registros históricos das etapas anteriores.
+
 ## Decisão que esta avaliação apoia
 
 Antes de gerar respostas com IA, precisamos saber se a busca consegue localizar o artigo de referência. Uma resposta bem escrita não resolve a ausência do documento necessário. Esta medição cria uma base de comparação para melhorias da busca e, depois, embeddings.
@@ -19,7 +21,7 @@ O avaliador confere os fragmentos no texto pesquisável do banco. O manifesto e 
 Com o banco local carregado e o `.env` configurado, execute da raiz do repositório:
 
 ```powershell
-.venv/Scripts/python.exe -m taxtrace.avaliacao --limite 5
+.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v1 --limite 5
 ```
 
 O comando usa o login somente leitura, mantém a mesma coleta durante toda a execução e grava um novo `runs/recuperacao-<UUID>/resultado.json`. Não sobrescreve execuções anteriores. `--casos` permite selecionar outro arquivo de gabarito; `--limite` aceita de 1 a 20.
