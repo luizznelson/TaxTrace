@@ -74,6 +74,16 @@ O [conjunto de avaliação](evals/README.md) contém perguntas, artigos esperado
 
 Cada execução gera um registro novo em `runs/`, com resultados por caso, identificação do código, gabarito e coleta. Consulte a metodologia e os resultados completos antes de interpretar o percentual.
 
+A versão experimental `v2` acrescenta normalização de acentos e tratamento de perguntas. No mesmo conjunto, recuperou 16 de 20 referências, mas apresentou quatro regressões. **A versão v1 permanece como padrão.** A [comparação completa](evals/README.md#experimento-de-busca-v2--comparação-preservada) explica ganhos, perdas e limites.
+
+Para testar a v2 em um banco já carregado:
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema
+.venv/Scripts/python.exe -m taxtrace.busca --metodo v2 --consulta "cesta basica"
+.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v2
+```
+
 ## Como conferir a qualidade
 
 ```powershell
@@ -92,7 +102,7 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 | `taxtrace/coleta.py`, `integridade.py` | Captura e conferência dos arquivos contra o manifesto |
 | `taxtrace/lei.py`, `tabelas.py`, `ligacao.py` | Interpretação e ligação das fontes |
 | `taxtrace/schema.sql`, `banco.py`, `conexao.py` | Persistência, transações e conexões separadas |
-| `taxtrace/documentos.py`, `busca.py` | Texto pesquisável e busca com citações |
+| `taxtrace/documentos.py`, `consulta.py`, `busca.py` | Texto pesquisável e busca com citações |
 | `tests/` | Verificações automatizadas e isolamento do banco de testes |
 | `evals/`, `taxtrace/avaliacao.py` | Gabaritos, metodologia e avaliação da recuperação |
 | `runs/` | Registros públicos de validação, sem credenciais |

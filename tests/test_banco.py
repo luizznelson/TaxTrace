@@ -100,3 +100,52 @@ class PostgresTest(unittest.TestCase):
         banco.carregar_pasta(self.conn, self.pasta)
         with self.assertRaisesRegex(ValueError, "papel_sem_escrita"):
             busca.pesquisar(self.conn, "tributo")
+
+    def test_v2_acentos_e_texto_decomposto(self):
+        with (self.pasta / "lc214_planalto.html").open("a", encoding="utf-8") as arquivo:
+            arquivo.write("<p>Art. 139. Cesta básica nacional de alimentos.</p>")
+        atualizar_manifesto(self.pasta)
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        for consulta in ("cesta basica", "CESTA BÁSICA", "cesta ba\u0301sica"):
+            with self.subTest(consulta=consulta):
+                resposta = busca.pesquisar(self.conn, consulta, coleta_id=cid, metodo="v2")
+                self.assertEqual(resposta["resultados"][0]["artigo_numero"], "139")
+                self.assertEqual(resposta["resultados"][0]["termos_ausentes"], [])
+        self.assertEqual(busca.pesquisar(self.conn, "cesta basica")["resultados"], [])
+
+    def test_v2_sinaliza_correspondencia_parcial(self):
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        resposta = busca.pesquisar(
+            self.conn, "crédito presumido zzzterm", coleta_id=cid, metodo="v2"
+        )
+        item = resposta["resultados"][0]
+        self.assertTrue(item["correspondencia_parcial"])
+        self.assertIn("zzzterm", item["termos_ausentes"])
+
+    def test_v2_sem_termos_e_entrada_parecida_com_sql(self):
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        for consulta in ("Qual artigo?", "zzzinexistente'; DROP TABLE coletas; --"):
+            self.assertEqual(
+                busca.pesquisar(self.conn, consulta, coleta_id=cid, metodo="v2")["resultados"], []
+            )
+        self.assertEqual(self.conn.execute("SELECT count(*) FROM coletas").fetchone()[0], 1)
+
+    def test_atualizacao_de_esquema_preserva_carga_e_indice_original(self):
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        antes = self.conn.execute("SELECT numero,texto FROM artigos ORDER BY numero").fetchall()
+        banco.criar_esquema(self.conn)
+        banco.criar_esquema(self.conn)
+        self.assertEqual(
+            antes, self.conn.execute("SELECT numero,texto FROM artigos ORDER BY numero").fetchall()
+        )
+        self.assertEqual(
+            self.conn.execute(
+                "SELECT count(*) FROM documentos_busca WHERE coleta_id=%s "
+                "AND termos IS NOT NULL AND termos_v2 IS NOT NULL",
+                (cid,),
+            ).fetchone()[0],
+            2,
+        )

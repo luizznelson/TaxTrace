@@ -90,3 +90,23 @@ CREATE TABLE IF NOT EXISTS documentos_busca (
     FOREIGN KEY (coleta_id, artigo_numero) REFERENCES artigos ON DELETE CASCADE
 );
 CREATE INDEX IF NOT EXISTS documentos_busca_termos ON documentos_busca USING gin(termos);
+
+-- Versão 2 aditiva: preserva o índice original para reproduzir a base de comparação.
+CREATE EXTENSION IF NOT EXISTS unaccent;
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_ts_config c JOIN pg_namespace n ON n.oid=c.cfgnamespace
+    WHERE n.nspname='public' AND c.cfgname='taxtrace_portugues_v2'
+  ) THEN
+    CREATE TEXT SEARCH CONFIGURATION public.taxtrace_portugues_v2 (COPY = pg_catalog.portuguese);
+    ALTER TEXT SEARCH CONFIGURATION public.taxtrace_portugues_v2
+      ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, word, hword, hword_part
+      WITH public.unaccent, pg_catalog.portuguese_stem;
+  END IF;
+END $$;
+ALTER TABLE documentos_busca ADD COLUMN IF NOT EXISTS termos_v2 tsvector
+  GENERATED ALWAYS AS (
+    setweight(to_tsvector('public.taxtrace_portugues_v2', left(texto_ativo, 600)), 'A') ||
+    setweight(to_tsvector('public.taxtrace_portugues_v2', texto_ativo), 'D')
+  ) STORED;
+CREATE INDEX IF NOT EXISTS documentos_busca_termos_v2 ON documentos_busca USING gin(termos_v2);

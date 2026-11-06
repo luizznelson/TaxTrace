@@ -1,0 +1,57 @@
+{
+  "registrado_em": "2026-11-06T17:04:31.560657+00:00",
+  "referencia": "runs/recuperacao-6fee1e49-eb43-46ac-91f6-a7409ee8b64b/resultado.json",
+  "candidata": "runs/recuperacao-1616278c-b2f3-4291-b628-8d9495333ea2/resultado.json",
+  "conjunto_sha256": "237b8441f955b18c20f46756095cf81ace395ba4090b5e6addea084b864f4d60",
+  "k": 5,
+  "resumo_v1": {
+    "casos": 22,
+    "casos_com_artigo": 20,
+    "hit_at_k": 0.7,
+    "recall_referencias_at_k": 0.7,
+    "mrr_at_k": 0.495,
+    "controles_sem_resultado": 2,
+    "controles_corretos": 2
+  },
+  "resumo_v2": {
+    "casos": 22,
+    "casos_com_artigo": 20,
+    "hit_at_k": 0.8,
+    "recall_referencias_at_k": 0.8,
+    "mrr_at_k": 0.6516666666666666,
+    "controles_sem_resultado": 2,
+    "controles_corretos": 2
+  },
+  "ganhos": [
+    "instituicao_pergunta",
+    "extincao_termos",
+    "extincao_pergunta",
+    "profissionais_pergunta",
+    "seletivo_pergunta",
+    "cesta_variacao_18"
+  ],
+  "regressoes": [
+    "fato_gerador_pergunta",
+    "creditos_termos",
+    "creditos_pergunta",
+    "seletivo_termos"
+  ],
+  "falhas_v2": [
+    "fato_gerador_pergunta",
+    "creditos_termos",
+    "creditos_pergunta",
+    "seletivo_termos"
+  ],
+  "decisao": "Manter v1 como padrão; v2 é experimental e selecionável por --metodo v2.",
+  "verificacoes": {
+    "testes_executados": 56,
+    "falhas": 0,
+    "ignorados": 0,
+    "ruff_check": "aprovado",
+    "ruff_format_check": "aprovado"
+  },
+  "limites": [
+    "Comparação em conjunto de desenvolvimento conhecido; não é estimativa independente de qualidade.",
+    "Correção de acentos não resolve regressões de ranking nem implica precisão jurídica."
+  ]
+}

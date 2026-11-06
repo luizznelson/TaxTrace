@@ -57,3 +57,38 @@ Próximos experimentos: tratamento de acentos, processamento das perguntas compl
 - Controles sintéticos não medem recusa semântica para perguntas reais fora de escopo.
 - As variações compartilham temas; não são observações independentes. Não estimamos significância estatística.
 - Tempos locais não representam desempenho sob carga nem latência de uma aplicação hospedada.
+
+
+## Experimento de busca v2 — comparação preservada
+
+A v2 normaliza acentos com um dicionário `unaccent` antes da redução de palavras em português. Remove uma lista curta de palavras de formulação da pergunta, preservando negações, datas e números. Ela permite correspondências parciais com pelo menos 60% dos lexemas da consulta; isso amplia candidatos e também pode trazer artigos pouco úteis.
+
+O índice experimental pondera os primeiros 600 caracteres do artigo e seu texto completo. O ranking prioriza menos termos ausentes e depois pontuação textual normalizada pelo tamanho. Esses são critérios heurísticos de desenvolvimento, não regras fiscais. Os textos originais não são alterados. A implementação se baseia nos recursos de [busca textual do PostgreSQL](https://www.postgresql.org/docs/17/textsearch-controls.html) e [dicionários](https://www.postgresql.org/docs/17/textsearch-dictionaries.html).
+
+Atualize o esquema existente e compare explicitamente as versões:
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema
+.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v1
+.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v2
+.venv/Scripts/python.exe -m taxtrace.busca --metodo v2 --consulta "cesta basica"
+```
+
+A atualização é aditiva e transacional: mantém a coleta, o texto original e o índice v1. Não exige recarregar os arquivos. Em novas instalações, a carga normal já cria os dois índices. As consultas continuam usando o login somente leitura.
+
+| Medida | v1 (padrão) | v2 (experimental) |
+| --- | ---: | ---: |
+| Referência entre os cinco primeiros | 14/20 (70%) | 16/20 (80%) |
+| Consultas por termos | 8/9 | 7/9 |
+| Perguntas completas | 5/9 | 7/9 |
+| Variações de escrita | 1/2 | 2/2 |
+| MRR@5 | 0,495 | 0,652 |
+| Controles sintéticos vazios | 2/2 | 2/2 |
+
+O ganho de dez pontos percentuais resulta de **seis casos recuperados e quatro regressões**. As regressões foram a pergunta sobre fato gerador, as duas consultas sobre créditos e a consulta curta sobre Imposto Seletivo. Por isso, **v1 continua sendo o padrão** e v2 exige seleção explícita; a melhoria agregada ainda não justifica uma troca automática.
+
+Veja a [comparação por caso](../runs/2026-11-06-search-comparison/comparacao.json), a [execução v1](../runs/recuperacao-6fee1e49-eb43-46ac-91f6-a7409ee8b64b/resultado.json) e a [execução v2](../runs/recuperacao-1616278c-b2f3-4291-b628-8d9495333ea2/resultado.json). As primeiras execuções do experimento também foram mantidas em `runs/`, identificadas pelos hashes do código correspondente.
+
+Nos resultados da busca v2, `correspondencia_parcial` informa se houve termos ausentes. `termos_ausentes` lista os lexemas normalizados que faltaram, não palavras literais nem uma medida de confiança. Preservar a palavra “não” na preparação não significa compreender uma negação jurídica. Uma correspondência parcial não deve ser usada automaticamente como fundamento suficiente para gerar uma resposta.
+
+Próximo passo: tratar as regressões de ranking e medir em perguntas adicionais separadas dos casos usados durante o desenvolvimento. Este experimento ainda não usa embeddings ou LLMs.

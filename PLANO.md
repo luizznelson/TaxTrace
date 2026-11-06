@@ -67,6 +67,8 @@
 3. [ ] Busca (pgvector) e respostas com citação.
    - [x] Base de comparação: busca textual em português, com artigo, trecho literal, fonte e versão; login somente leitura. 580 documentos pesquisáveis. Sem embeddings ou geração por IA nesta etapa.
    - [x] Avaliação inicial da recuperação: 22 casos (20 positivos e 2 controles), com fragmentos e coleta fixados. Hit@5 de 70% nos positivos; perguntas completas 5/9. Metodologia em `evals/README.md`. Conjunto de desenvolvimento, sem revisão fiscal independente; falhas por variações de termos preservadas.
+   - [x] Experimento textual v2: acentos, palavras de formulação e correspondências parciais sinalizadas. Hit@5 de 80% (v1: 70%), com seis ganhos e quatro regressões; v1 mantida como padrão. Comparação em `runs/2026-11-06-search-comparison/comparacao.json`.
+   - [ ] Tratar regressões da v2 e avaliar casos adicionais separados antes de trocar o padrão.
    - [ ] Embeddings e comparação com a busca textual.
    - [ ] Validar vigência por dispositivo/data; remover trechos riscados do índice não resolve toda a análise temporal.
 4. [ ] Servidor MCP com as ferramentas de consulta.

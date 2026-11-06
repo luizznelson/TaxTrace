@@ -60,6 +60,18 @@ The [development evaluation set](evals/README.md) provides queries, reference ar
 
 Each run writes a new report under `runs/`, recording per-case results, collection, dataset and code identifiers. Full questions and spelling variations expose weaknesses. This is a development benchmark, not an independent test. The linked methodology explains metrics and limits.
 
+Experimental `v2` adds accent normalization and question preprocessing. It retrieved 16 of 20 references, with six gains and four regressions against v1. **v1 remains the default**. Results do not establish legal accuracy or generalization.
+
+For an existing local database:
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.banco --somente-esquema
+.venv/Scripts/python.exe -m taxtrace.busca --metodo v2 --consulta "cesta basica"
+.venv/Scripts/python.exe -m taxtrace.avaliacao --metodo v2
+```
+
+The additive schema update preserves existing sources and the original index. v2 may return partial lexical matches; each result exposes missing normalized terms. These matches are not sufficient grounds for an automatic legal answer. See the [comparison record](runs/2026-11-06-search-comparison/comparacao.json) and the linked evaluation methodology for regressions and limitations.
+
 ## Checks
 
 ```powershell

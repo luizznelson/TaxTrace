@@ -177,13 +177,21 @@ def main(argv: list[str] | None = None) -> int:
     import json
 
     parser = argparse.ArgumentParser(description="Carrega uma coleta verificada no Postgres local.")
-    parser.add_argument("--pasta", type=Path)
+    modo = parser.add_mutually_exclusive_group()
+    modo.add_argument("--pasta", type=Path)
+    modo.add_argument("--somente-esquema", action="store_true")
     args = parser.parse_args(argv)
     try:
         with conectar(Path.cwd(), autocommit=True) as conn:
             senha = os.environ.get("TAXTRACE_READER_PASSWORD")
             if not senha:
                 raise ValueError("senha_do_leitor_ausente")
+            if args.somente_esquema:
+                with conn.transaction():
+                    criar_esquema(conn)
+                    preparar_leitor(conn, senha)
+                print(json.dumps({"status": "esquema_atualizado"}))
+                return 0
             pasta = args.pasta or tabelas.pasta_mais_recente(Path("data/raw"))
             with conn.transaction():
                 criar_esquema(conn)

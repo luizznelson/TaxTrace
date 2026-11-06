@@ -106,13 +106,13 @@ def resumir(casos):
     }
 
 
-def avaliar(conn, conjunto, *, limite=5):
+def avaliar(conn, conjunto, *, limite=5, metodo="v1"):
     if type(limite) is not int or not 1 <= limite <= 20:
         raise ValueError("limite_invalido")
     with conn.transaction():
         conn.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
         postgres = conn.execute("SHOW server_version").fetchone()[0]
-        coleta = pesquisar(conn, "referencia", limite=1)["coleta"]
+        coleta = pesquisar(conn, "referencia", limite=1, metodo=metodo)["coleta"]
         if coleta["manifesto_sha256"] != conjunto["manifesto_sha256"]:
             raise ValueError("gabarito_de_outra_coleta")
         # O gabarito é conferido no documento inteiro, independente do ranking.
@@ -128,7 +128,9 @@ def avaliar(conn, conjunto, *, limite=5):
         saidas = []
         for caso in conjunto["casos"]:
             inicio = perf_counter()
-            resposta = pesquisar(conn, caso["consulta"], coleta_id=coleta["id"], limite=limite)
+            resposta = pesquisar(
+                conn, caso["consulta"], coleta_id=coleta["id"], limite=limite, metodo=metodo
+            )
             duracao = round((perf_counter() - inicio) * 1000, 3)
             resultados = resposta["resultados"]
             if any(
@@ -178,6 +180,7 @@ def versao_codigo(raiz):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--metodo", choices=["v1", "v2"], default="v1")
     parser.add_argument("--casos", type=Path, default=Path("evals/recuperacao.v1.json"))
     parser.add_argument("--limite", type=int, default=5)
     args = parser.parse_args(argv)
@@ -185,14 +188,20 @@ def main(argv=None):
     try:
         conjunto, checksum = carregar_casos(args.casos)
         with conectar(raiz, leitura=True, autocommit=True) as conn:
-            relatorio = avaliar(conn, conjunto, limite=args.limite)
+            relatorio = avaliar(conn, conjunto, limite=args.limite, metodo=args.metodo)
         relatorio.update(
             {
                 "executado_em": datetime.now(UTC).isoformat(),
-                "metodo": "busca_textual_portugues_v1",
+                "metodo": f"busca_textual_portugues_{args.metodo}",
                 "conjunto_sha256": checksum,
                 "codigo": versao_codigo(raiz),
                 "avaliador_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                "schema_sha256": hashlib.sha256(
+                    (Path(__file__).parent / "schema.sql").read_bytes()
+                ).hexdigest(),
+                "consulta_sha256": hashlib.sha256(
+                    (Path(__file__).parent / "consulta.py").read_bytes()
+                ).hexdigest(),
                 "busca_sha256": hashlib.sha256(
                     (Path(__file__).parent / "busca.py").read_bytes()
                 ).hexdigest(),
