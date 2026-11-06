@@ -66,12 +66,14 @@
    - [x] Banco (Postgres + pgvector): `docker-compose.yml`, `taxtrace/schema.sql` e `taxtrace/banco.py` (`python -m taxtrace.banco`). Cada carga prende tudo a uma coleta (versão da base + data); recarregar a mesma coleta é recusado. Decisão: Docker local para desenvolver, Neon só no deploy. Validado em 06/11/2026 com PostgreSQL local: 580 artigos, 784 alterações, 170 classificações, 169 ligações, 10.515 NCM e 3 divergências. Banco de testes separado, sem TRUNCATE; transações desfeitas ao final. Evidência: `runs/2026-11-06-local-database/verification.json`.
 3. [ ] Busca (pgvector) e respostas com citação.
    - [x] Base de comparação: busca textual em português, com artigo, trecho literal, fonte e versão; login somente leitura. 580 documentos pesquisáveis. Sem embeddings ou geração por IA nesta etapa.
-   - [ ] Avaliar a recuperação com perguntas e artigos esperados; busca atual pode falhar por variação de termos.
+   - [x] Avaliação inicial da recuperação: 22 casos (20 positivos e 2 controles), com fragmentos e coleta fixados. Hit@5 de 70% nos positivos; perguntas completas 5/9. Metodologia em `evals/README.md`. Conjunto de desenvolvimento, sem revisão fiscal independente; falhas por variações de termos preservadas.
    - [ ] Embeddings e comparação com a busca textual.
    - [ ] Validar vigência por dispositivo/data; remover trechos riscados do índice não resolve toda a análise temporal.
 4. [ ] Servidor MCP com as ferramentas de consulta.
 5. [ ] Agente LangGraph com recusa e aprovação humana.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
+   - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.
+   - [ ] Revisão por especialista, conjunto independente e avaliação de respostas/citações/recusas.
 7. [ ] Interface, Docker, CI, deploy, README e vídeo.
 
 ## Regras do projeto

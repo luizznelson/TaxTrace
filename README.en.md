@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-Embeddings, RAG, MCP tools, LangGraph, a labeled evaluation set and a UI are **planned**, not implemented. The pgvector extension is available, but the current search uses neither vectors nor LLMs.
+Embeddings, RAG, MCP tools, LangGraph, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The pgvector extension is available, but the current search uses neither vectors nor LLMs.
 
 ## Recorded local verification
 
@@ -49,6 +49,16 @@ docker compose --profile tests up -d --wait
 The sample date reproduces this development snapshot, not today's date. If the official law download fails, use the collector's `--lei-arquivo` option with a locally saved official HTML file. Raw downloads are excluded from Git. Source terms and API limits remain open items in [PLANO.md](PLANO.md).
 
 Development binds only to loopback port 15433, with persistent storage. Tests bind to 15434, with temporary storage. Avoid `down -v` if development data must be kept. Remote database connections are intentionally blocked at this stage; Neon is deferred until deployment.
+
+## Retrieval evaluation
+
+The [development evaluation set](evals/README.md) provides queries, reference articles and source fragments. The first run retrieved the reference article within the top five results for **14 of 20 positive queries**. Two synthetic empty-result controls are scored separately. These results do not measure legal correctness or generalize to real users.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.avaliacao --limite 5
+```
+
+Each run writes a new report under `runs/`, recording per-case results, collection, dataset and code identifiers. Full questions and spelling variations expose weaknesses. This is a development benchmark, not an independent test. The linked methodology explains metrics and limits.
 
 ## Checks
 

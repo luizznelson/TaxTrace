@@ -1,0 +1,59 @@
+# Avaliação da recuperação de artigos
+
+## Decisão que esta avaliação apoia
+
+Antes de gerar respostas com IA, precisamos saber se a busca consegue localizar o artigo de referência. Uma resposta bem escrita não resolve a ausência do documento necessário. Esta medição cria uma base de comparação para melhorias da busca e, depois, embeddings.
+
+## Como o gabarito foi construído
+
+O arquivo [recuperacao.v1.json](recuperacao.v1.json) reúne 22 casos: nove temas com uma consulta curta e uma pergunta completa por tema, duas variações de escrita sobre cesta básica e dois controles sintéticos com termo inexistente. Um controle inclui texto semelhante a SQL como entrada literal; não é um teste abrangente de segurança.
+
+Os temas foram escolhidos pela leitura da cópia oficial já coletada, antes de executar o ranking deste conjunto. Cada caso positivo indica um artigo de referência e um fragmento literal que justifica sua inclusão. As referências incluem instituição dos tributos, incidência, fato gerador, plataformas digitais, extinção de débitos, créditos, cesta básica, profissionais e Imposto Seletivo.
+
+O avaliador confere os fragmentos no texto pesquisável do banco. O manifesto e o arquivo-fonte estão identificados por SHA-256. Se a coleta não for a esperada, ou o fragmento não conferir, a execução é interrompida. O fragmento comprova a presença textual no artigo; não constitui resposta fiscal revisada por especialista.
+
+É um **conjunto de desenvolvimento**, elaborado com acesso aos documentos. Não é um teste independente, uma pesquisa com usuários nem uma amostra representativa do mercado. As perguntas não têm validação de profissional tributário. Não se deve escolher o artigo esperado apenas porque a busca o retornou; futuras mudanças de gabarito precisam registrar sua justificativa.
+
+## Reprodução
+
+Com o banco local carregado e o `.env` configurado, execute da raiz do repositório:
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.avaliacao --limite 5
+```
+
+O comando usa o login somente leitura, mantém a mesma coleta durante toda a execução e grava um novo `runs/recuperacao-<UUID>/resultado.json`. Não sobrescreve execuções anteriores. `--casos` permite selecionar outro arquivo de gabarito; `--limite` aceita de 1 a 20.
+
+Cada registro contém consultas, referências esperadas, artigos encontrados em ordem, métricas, tempo local por consulta, versão do PostgreSQL e Python, coleta, hash do conjunto, hashes do avaliador e da busca, commit de origem e indicação de alterações locais. Os dados são públicos; nenhuma conexão ou senha é gravada.
+
+Falha de conexão, evidência inconsistente ou citação divergente encerra a avaliação com código 1, sem converter o problema em uma consulta vazia. Código 0 significa que a medição terminou; não significa que a busca atingiu um critério de qualidade. Ainda não definimos uma meta de aceitação para o produto.
+
+## Primeira medição — 06/11/2026
+
+Resultado da [execução completa](../runs/recuperacao-137a3c80-cb35-4071-93b7-1afbb05deec1/resultado.json), com cinco resultados por consulta:
+
+| Tipo de consulta | Casos com artigo | Artigo esperado entre os cinco primeiros |
+| --- | ---: | ---: |
+| Termos curtos | 9 | 8 de 9 (88,9%) |
+| Perguntas completas | 9 | 5 de 9 (55,6%) |
+| Variações de escrita | 2 | 1 de 2 (50,0%) |
+| Total positivo | 20 | 14 de 20 (70,0%) |
+
+Os dois controles não retornaram resultados e ficam fora dos 70%. A [execução preliminar](../runs/recuperacao-0d4cb85a-4cca-4417-8d21-43c9aad08529/resultado.json), anterior à inclusão de métricas por categoria, foi preservada separadamente. Ambas usaram a mesma busca e o mesmo conjunto.
+
+O MRR@5 foi **0,495**: ele atribui 1 quando a primeira referência esperada está no primeiro lugar, 1/2 no segundo, até 1/5 no quinto; ausência recebe zero. O Hit@5 mede a proporção de consultas com pelo menos uma referência esperada. O recall de referências mede a fração das referências do gabarito recuperadas; como esta versão tem uma referência por caso, coincide com o Hit@5.
+
+## Falhas preservadas e próximos experimentos
+
+Seis casos não localizaram a referência entre os cinco primeiros: a pergunta sobre instituição dos tributos, as duas consultas de extinção de débitos, a pergunta sobre profissionais, a pergunta sobre instituição do Imposto Seletivo e “cesta basica” sem acento. Alguns retornaram outros artigos; outros não retornaram nada.
+
+Próximos experimentos: tratamento de acentos, processamento das perguntas completas e comparação com recuperação por embeddings. Cada mudança deve ser medida contra esta versão, preservando falhas e resultados anteriores. Como o conjunto já é conhecido durante o desenvolvimento, também será necessário um conjunto separado de validação antes de comunicar qualidade fora desses casos.
+
+## O que estes números não demonstram
+
+- Não medem correção jurídica, vigência, resposta de LLM nem economia de tempo.
+- Não comprovam que o trecho exibido de até 1.000 caracteres sustenta a resposta: a métrica atual verifica o artigo recuperado, não o recorte apresentado.
+- Outros artigos retornados podem ser pertinentes. O gabarito é mínimo e não exaustivo; não calculamos precisão.
+- Controles sintéticos não medem recusa semântica para perguntas reais fora de escopo.
+- As variações compartilham temas; não são observações independentes. Não estimamos significância estatística.
+- Tempos locais não representam desempenho sob carga nem latência de uma aplicação hospedada.

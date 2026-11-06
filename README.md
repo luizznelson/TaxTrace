@@ -19,7 +19,7 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Busca textual em português, com trechos literais, artigo, URL e identificação da coleta.
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** embeddings, RAG, ferramentas MCP, agente LangGraph, avaliação com gabarito e interface. A extensão pgvector está disponível no banco, mas a busca atual não usa vetores ou modelos de IA.
+**Ainda em desenvolvimento:** embeddings, RAG, ferramentas MCP, agente LangGraph, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A extensão pgvector está disponível no banco, mas a busca atual não usa vetores ou modelos de IA.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -64,6 +64,16 @@ Para obter uma nova coleta e carregá-la:
 
 A data acima reproduz o recorte usado nesta etapa; não representa automaticamente a data atual. Se o Planalto interromper o download, o coletor aceita `--lei-arquivo` com o HTML oficial salvo localmente. Os arquivos brutos ficam fora do Git. Consulte o [plano](PLANO.md) para fontes, achados e pendências de termos de uso.
 
+## Como medir a busca
+
+O [conjunto de avaliação](evals/README.md) contém perguntas, artigos esperados e fragmentos da fonte. Na primeira medição, o artigo de referência apareceu entre os cinco primeiros em **14 de 20 consultas**. Duas consultas de controle foram avaliadas separadamente. O resultado evidencia limitações em perguntas completas e variações de escrita; não mede precisão jurídica.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.avaliacao --limite 5
+```
+
+Cada execução gera um registro novo em `runs/`, com resultados por caso, identificação do código, gabarito e coleta. Consulte a metodologia e os resultados completos antes de interpretar o percentual.
+
 ## Como conferir a qualidade
 
 ```powershell
@@ -84,6 +94,7 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 | `taxtrace/schema.sql`, `banco.py`, `conexao.py` | Persistência, transações e conexões separadas |
 | `taxtrace/documentos.py`, `busca.py` | Texto pesquisável e busca com citações |
 | `tests/` | Verificações automatizadas e isolamento do banco de testes |
+| `evals/`, `taxtrace/avaliacao.py` | Gabaritos, metodologia e avaliação da recuperação |
 | `runs/` | Registros públicos de validação, sem credenciais |
 | `PLANO.md` | Decisões, fontes e entregas pendentes |
 

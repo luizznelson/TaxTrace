@@ -1,0 +1,296 @@
+{
+  "schema": 1,
+  "descricao": "Conjunto inicial de desenvolvimento para localizar artigos na cópia coletada; não é validação fiscal nem teste independente.",
+  "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79",
+  "fonte_sha256": "055a4aba1e035bacc2d2674e9c2ce47a3818c0a0088cb7b1c5458187307f1d9e",
+  "fonte_url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm",
+  "criterio_gabarito": "Artigo de referência selecionado por leitura do texto coletado, antes de executar o ranking; fragmento literal verificável. Conjunto mínimo não exaustivo de artigos relevantes.",
+  "limites": [
+    "Casos elaborados durante o desenvolvimento; sem revisão por especialista tributário e sem amostra independente de usuários.",
+    "Métricas avaliam localização do artigo esperado, não correção jurídica, vigência, qualidade de resposta ou suporte do trecho exibido.",
+    "Referências mínimas: outros artigos retornados podem ser pertinentes; não calculamos precisão.",
+    "Controles sintéticos não demonstram recusa semântica de perguntas fora do escopo.",
+    "Variações do mesmo tema não são observações independentes. Latências locais não são teste de carga.",
+    "Falhas de execução invalidam o relatório; não são convertidas em buscas vazias."
+  ],
+  "casos": [
+    {
+      "id": "instituicao_termos",
+      "tema": "instituicao",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "competência compartilhada",
+      "esperados": [
+        "1"
+      ],
+      "evidencias": {
+        "1": "Ficam instituídos:"
+      }
+    },
+    {
+      "id": "instituicao_pergunta",
+      "tema": "instituicao",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo institui o IBS e a CBS?",
+      "esperados": [
+        "1"
+      ],
+      "evidencias": {
+        "1": "Ficam instituídos:"
+      }
+    },
+    {
+      "id": "incidencia_termos",
+      "tema": "incidencia",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "operações onerosas",
+      "esperados": [
+        "4"
+      ],
+      "evidencias": {
+        "4": "incidem sobre operações onerosas"
+      }
+    },
+    {
+      "id": "incidencia_pergunta",
+      "tema": "incidencia",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "O IBS e a CBS incidem sobre operações onerosas?",
+      "esperados": [
+        "4"
+      ],
+      "evidencias": {
+        "4": "incidem sobre operações onerosas"
+      }
+    },
+    {
+      "id": "fato_gerador_termos",
+      "tema": "fato_gerador",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "momento fornecimento",
+      "esperados": [
+        "10"
+      ],
+      "evidencias": {
+        "10": "no momento do fornecimento"
+      }
+    },
+    {
+      "id": "fato_gerador_pergunta",
+      "tema": "fato_gerador",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quando ocorre o fato gerador do IBS e da CBS?",
+      "esperados": [
+        "10"
+      ],
+      "evidencias": {
+        "10": "no momento do fornecimento"
+      }
+    },
+    {
+      "id": "plataformas_termos",
+      "tema": "plataformas",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "plataformas digitais",
+      "esperados": [
+        "22"
+      ],
+      "evidencias": {
+        "22": "As plataformas digitais, ainda que domiciliadas no exterior"
+      }
+    },
+    {
+      "id": "plataformas_pergunta",
+      "tema": "plataformas",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "As plataformas digitais são responsáveis pelo pagamento de IBS e CBS?",
+      "esperados": [
+        "22"
+      ],
+      "evidencias": {
+        "22": "As plataformas digitais, ainda que domiciliadas no exterior"
+      }
+    },
+    {
+      "id": "extincao_termos",
+      "tema": "extincao",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "extinção débitos modalidades",
+      "esperados": [
+        "27"
+      ],
+      "evidencias": {
+        "27": "serão extintos mediante as seguintes modalidades"
+      }
+    },
+    {
+      "id": "extincao_pergunta",
+      "tema": "extincao",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quais são as modalidades de extinção dos débitos de IBS e CBS?",
+      "esperados": [
+        "27"
+      ],
+      "evidencias": {
+        "27": "serão extintos mediante as seguintes modalidades"
+      }
+    },
+    {
+      "id": "creditos_termos",
+      "tema": "creditos",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "apropriar créditos",
+      "esperados": [
+        "47"
+      ],
+      "evidencias": {
+        "47": "O contribuinte sujeito ao regime regular poderá apropriar créditos"
+      }
+    },
+    {
+      "id": "creditos_pergunta",
+      "tema": "creditos",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quando o contribuinte pode apropriar créditos de IBS e CBS?",
+      "esperados": [
+        "47"
+      ],
+      "evidencias": {
+        "47": "O contribuinte sujeito ao regime regular poderá apropriar créditos"
+      }
+    },
+    {
+      "id": "cesta_termos",
+      "tema": "cesta",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "cesta básica",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      }
+    },
+    {
+      "id": "cesta_pergunta",
+      "tema": "cesta",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo reduz a zero as alíquotas da cesta básica nacional de alimentos?",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      }
+    },
+    {
+      "id": "profissionais_termos",
+      "tema": "profissionais",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "conselho profissional",
+      "esperados": [
+        "127"
+      ],
+      "evidencias": {
+        "127": "submetidas à fiscalização por conselho profissional"
+      }
+    },
+    {
+      "id": "profissionais_pergunta",
+      "tema": "profissionais",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Quais profissionais têm redução de 30% nas alíquotas de IBS e CBS?",
+      "esperados": [
+        "127"
+      ],
+      "evidencias": {
+        "127": "submetidas à fiscalização por conselho profissional"
+      }
+    },
+    {
+      "id": "seletivo_termos",
+      "tema": "seletivo",
+      "categoria": "termos",
+      "tipo": "artigo",
+      "consulta": "imposto seletivo",
+      "esperados": [
+        "409"
+      ],
+      "evidencias": {
+        "409": "Fica instituído o Imposto Seletivo"
+      }
+    },
+    {
+      "id": "seletivo_pergunta",
+      "tema": "seletivo",
+      "categoria": "pergunta",
+      "tipo": "artigo",
+      "consulta": "Qual artigo institui o Imposto Seletivo?",
+      "esperados": [
+        "409"
+      ],
+      "evidencias": {
+        "409": "Fica instituído o Imposto Seletivo"
+      }
+    },
+    {
+      "id": "cesta_variacao_18",
+      "tema": "cesta",
+      "categoria": "variacao_escrita",
+      "tipo": "artigo",
+      "consulta": "cesta basica",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      }
+    },
+    {
+      "id": "cesta_variacao_19",
+      "tema": "cesta",
+      "categoria": "variacao_escrita",
+      "tipo": "artigo",
+      "consulta": "CESTA BÁSICA",
+      "esperados": [
+        "125"
+      ],
+      "evidencias": {
+        "125": "que compõem a Cesta Básica Nacional de Alimentos"
+      }
+    },
+    {
+      "id": "controle_1",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzinexistentetaxtracezz",
+      "esperados": [],
+      "evidencias": {}
+    },
+    {
+      "id": "controle_2",
+      "tema": "controle_sintetico",
+      "categoria": "controle_sintetico",
+      "tipo": "controle_sem_resultado",
+      "consulta": "zzzinexistentetaxtracezz'; DROP TABLE coletas; --",
+      "esperados": [],
+      "evidencias": {}
+    }
+  ]
+}
