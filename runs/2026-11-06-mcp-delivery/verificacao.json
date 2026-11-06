@@ -1,0 +1,20 @@
+{
+  "verificado_em": "2026-11-06T18:08:13.582975+00:00",
+  "protocolo_real": "runs/mcp-ffad7503-4c81-491a-b18b-2d6559d41b07/verificacao.json",
+  "sdk_mcp": "2.3.0",
+  "ferramentas": 4,
+  "chamadas": 13,
+  "testes": {
+    "executados": 87,
+    "falhas": 0,
+    "ignorados": 0
+  },
+  "ruff_check": "aprovado",
+  "ruff_format_check": "aprovado",
+  "pip_check": "sem_incompatibilidades",
+  "valores_privados_locais_em_arquivos_publicaveis": 0,
+  "limites": [
+    "Validação local, sem observar CI remoto.",
+    "Sem agente LLM, aplicativo desktop, HTTP ou parecer jurídico validado."
+  ]
+}

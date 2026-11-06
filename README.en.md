@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-RAG with generation, MCP tools, LangGraph, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
+RAG with generation, LangGraph, answer evaluation with reviewed labels and a UI are **planned**, not implemented. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
 
 ## Recorded local verification
 
@@ -82,6 +82,16 @@ This implements retrieval, not answer generation. Real-model evaluation was loca
 The [hybrid experiment](evals/HIBRIDA.md) combines textual and semantic rankings through RRF. It retrieved 16/20 and 9/12 reference articles, below the default textual search. Select `--metodo hibrida` explicitly after preparing the semantic index; the default remains v4.
 
 Evaluation now checks that returned excerpts are literal source substrings and whether a reference anchor appears in the excerpt of the expected article. Semantic retrieval found the expected article without displaying its anchor in three queries. This metric does not establish sufficient evidence or legal correctness; sufficiency remains unevaluated. Reports preserve excerpts and hashes, and operational failures are not disguised as empty results.
+
+## Read-only MCP tools
+
+The [local MCP server](docs/MCP.md) exposes four structured tools: collection coverage, article search, paginated article reading and exact cClassTrib lookup. Responses identify the collection and source; they do not classify a product or provide tax advice.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.verificar_mcp
+```
+
+The verifier launches a real stdio subprocess, discovers the tools and records successful and expected-error calls under `runs/`. The implementation uses pinned official SDK `mcp==2.3.0`, strict bounded inputs and the read-only database login. No HTTP endpoint, model API key or embeddings download is needed. LLM-agent and desktop-host integration have not been tested in this delivery.
 
 ## Checks
 

@@ -18,9 +18,10 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Carga transacional em PostgreSQL local, vinculada à versão da coleta; duplicatas são recusadas.
 - Busca textual em português, com trechos literais, artigo, URL e identificação da coleta.
 - Recuperação semântica experimental: embeddings locais, trechos por artigo e vetores no pgvector.
+- Servidor MCP local com quatro ferramentas de consulta, fontes e coleta identificada.
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** RAG com geração, ferramentas MCP, agente LangGraph, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
+**Ainda em desenvolvimento:** RAG com geração, agente LangGraph, avaliação de respostas com gabarito revisado e interface. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -94,6 +95,16 @@ O [experimento híbrido](evals/HIBRIDA.md) combina candidatos textuais e semânt
 
 O comando `python -m taxtrace.avaliacao` com o Python da `.venv` gera esses novos indicadores. A presença da frase é uma verificação textual limitada; a suficiência jurídica para uma resposta continua sem avaliação. Use `--metodo hibrida` apenas para explorar o experimento, com o índice semântico já preparado.
 
+## Ferramentas para um assistente
+
+O [servidor MCP](docs/MCP.md) permite que um cliente consulte a base, busque artigos, leia o texto por partes e confira um cClassTrib exato. As quatro ferramentas são somente leitura e informam fonte e versão da coleta. Nenhuma decide o enquadramento de um produto.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.verificar_mcp
+```
+
+O comando inicia um cliente e um servidor locais, confere as chamadas e grava evidências em `runs/`. A integração com um agente de IA vem depois; não é necessária chave de modelo para testar o MCP.
+
 ## Como conferir a qualidade
 
 ```powershell
@@ -114,6 +125,7 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 | `taxtrace/schema.sql`, `banco.py`, `conexao.py` | Persistência, transações e conexões separadas |
 | `taxtrace/documentos.py`, `consulta.py`, `busca.py` | Texto pesquisável e busca com citações |
 | `taxtrace/encoder.py`, `vetores.py` | Modelo local fixado, fragmentação e índice vetorial experimental |
+| `taxtrace/consultas.py`, `servidor_mcp.py`, `verificar_mcp.py` | Consultas de domínio, ferramentas MCP e verificação real do protocolo |
 | `tests/` | Verificações automatizadas e isolamento do banco de testes |
 | `evals/`, `taxtrace/avaliacao.py` | Gabaritos, metodologia e avaliação da recuperação |
 | `runs/` | Registros públicos de validação, sem credenciais |

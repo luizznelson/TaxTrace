@@ -74,7 +74,7 @@
    - [x] Experimento de recuperação combinada RRF: 80% e 75% nos conjuntos conhecidos, inferior à textual v4; mantido como opção explícita. Avaliador verifica trechos literais na fonte e presença de âncora do gabarito, separadamente do acerto de artigo. Ver `evals/HIBRIDA.md`.
    - [ ] Avaliar suficiência para resposta e recusa antes de usar os vetores em geração. Âncora literal não comprova suficiência jurídica.
    - [ ] Validar vigência por dispositivo/data; remover trechos riscados do índice não resolve toda a análise temporal.
-4. [ ] Servidor MCP com as ferramentas de consulta.
+4. [x] Servidor MCP com as ferramentas de consulta: SDK oficial 2.3.0, stdio local, `consultar_base`, `buscar_artigos`, `ler_artigo` e `consultar_classificacao`. Conexão somente leitura, entradas limitadas, contrato estruturado e erros sanitizados. Cliente/servidor reais verificados em 13 chamadas; ver `docs/MCP.md`. Ainda sem integração com LLM, cliente desktop ou transporte HTTP.
 5. [ ] Agente LangGraph com recusa e aprovação humana.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
    - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.

@@ -322,3 +322,62 @@ class PostgresTest(unittest.TestCase):
         with patch("taxtrace.busca.encoder_local", return_value=encoder):
             with self.assertRaisesRegex(ValueError, "indice_semantico_ausente"):
                 busca.pesquisar(self.conn, "crédito presumido", metodo="hibrida")
+
+    def test_consultas_mcp_paginam_e_mantem_coleta(self):
+        from taxtrace.consultas import obter_artigo, obter_classificacao, resumo_base
+
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        base = resumo_base(self.conn, cid)
+        self.assertEqual(base["contagens"]["artigos"], 2)
+        artigo = obter_artigo(self.conn, "138", limite_caracteres=100, coleta_id=cid)
+        self.assertEqual(artigo["citacao"]["artigo"], "138")
+        self.assertNotIn("abacaxiantigo", artigo["texto"])
+        self.assertTrue(artigo["tem_trecho_riscado"])
+        self.assertIsNone(artigo["proximo_inicio"])
+        self.assertEqual(
+            obter_artigo(self.conn, "999")["status"], "artigo_nao_encontrado_nesta_coleta"
+        )
+        self.assertEqual(
+            obter_classificacao(self.conn, "999999")["status"],
+            "classificacao_nao_encontrada_nesta_coleta",
+        )
+        codigo = self.conn.execute("SELECT codigo FROM classificacoes LIMIT 1").fetchone()[0]
+        classificacao = obter_classificacao(self.conn, codigo, cid)
+        self.assertEqual(classificacao["registro"]["codigo"], codigo)
+        self.assertEqual(classificacao["coleta"]["id"], cid)
+
+    def test_consultas_mcp_recusam_admin_e_coleta_inexistente(self):
+        from taxtrace.consultas import obter_artigo, resumo_base
+
+        banco.carregar_pasta(self.conn, self.pasta)
+        with self.assertRaisesRegex(ValueError, "login_restrito"):
+            resumo_base(self.conn)
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        with self.assertRaisesRegex(ValueError, "coleta_verificada_nao_encontrada"):
+            resumo_base(self.conn, 999999)
+        with self.assertRaisesRegex(ValueError, "inicio_fora"):
+            obter_artigo(self.conn, "1", inicio=1000)
+
+    def test_paginacao_de_artigo_reconstroi_texto_literal(self):
+        from test_tabelas import atualizar_manifesto
+
+        from taxtrace.consultas import obter_artigo
+
+        texto = "Texto longo de exemplo. " * 30
+        (self.pasta / "lc214_planalto.html").write_text(
+            "<p>Art. 1º " + texto + "</p>", encoding="utf-8"
+        )
+        atualizar_manifesto(self.pasta)
+        cid = banco.carregar_pasta(self.conn, self.pasta)
+        original = self.conn.execute(
+            "SELECT texto_ativo FROM documentos_busca WHERE coleta_id=%s", (cid,)
+        ).fetchone()[0]
+        self.conn.execute("SET LOCAL ROLE taxtrace_reader")
+        partes = []
+        inicio = 0
+        while inicio is not None:
+            r = obter_artigo(self.conn, "1", inicio=inicio, limite_caracteres=100, coleta_id=cid)
+            partes.append(r["texto"])
+            inicio = r["proximo_inicio"]
+        self.assertEqual("".join(partes), original)
