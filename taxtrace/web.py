@@ -20,6 +20,7 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from taxtrace.conexao import conectar
 from taxtrace.consultas import resumo_base
+from taxtrace.leitura import ler_integral
 from taxtrace.revisao import decidir, iniciar, inspecionar
 
 
@@ -52,7 +53,7 @@ def falha_publica(erro):
     codigo = str(erro) if type(erro) is ValueError else "servico_indisponivel"
     if codigo in conflitos:
         return HTTPException(409, detail={"codigo": codigo})
-    if codigo == "revisao_nao_encontrada":
+    if codigo in {"revisao_nao_encontrada", "artigo_integral_indisponivel"}:
         return HTTPException(404, detail={"codigo": codigo})
     if isinstance(erro, Timeout):
         return HTTPException(409, detail={"codigo": "revisao_em_uso"})
@@ -186,6 +187,19 @@ def criar_app(raiz=None):
     async def recuperar(revisao_id: UUID):
         try:
             return resposta_json(await inspecionar(str(revisao_id), raiz=raiz))
+        except Exception as erro:
+            raise falha_publica(erro) from None
+
+    @app.get("/api/revisoes/{revisao_id}/artigos/{numero}")
+    async def artigo_integral(revisao_id: UUID, numero: str):
+        try:
+            relatorio = await inspecionar(str(revisao_id), raiz=raiz)
+
+            def ler():
+                with conectar(raiz, leitura=True, autocommit=True) as conn:
+                    return ler_integral(conn, relatorio, numero, raiz)
+
+            return resposta_json(await asyncio.to_thread(ler))
         except Exception as erro:
             raise falha_publica(erro) from None
 

@@ -1613,3 +1613,82 @@ body[data-view="research"]:not([data-step="query"]) .page-heading .lead {
         animation: none;
     }
 }
+
+.reading-tabs {
+    display: flex;
+    gap: 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 20px;
+}
+.reading-tabs button {
+    font-size: 11px;
+    padding: 8px 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--muted);
+}
+.reading-tabs [aria-pressed="true"] {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+.document p.reader-status,
+.document p.reader-scope {
+    font: 11px/1.7 var(--sans);
+    color: var(--muted);
+    margin: 0 0 20px;
+}
+.document p.reader-scope {
+    border-top: 1px solid var(--line);
+    padding-top: 13px;
+    margin-top: 20px;
+}
+.law-text p {
+    margin: 0 0 16px;
+    font-size: 15px;
+    line-height: 1.9;
+}
+.law-text .law-inciso {
+    padding-left: 20px;
+}
+.law-text .law-alinea {
+    padding-left: 38px;
+}
+.law-text del {
+    color: #805c59;
+    text-decoration-thickness: 1px;
+}
+.review-scope {
+    font-size: 11px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 13px 0;
+    margin: 18px 0;
+}
+.review-scope summary {
+    color: var(--accent);
+}
+.review-scope h4 {
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+.review-scope p {
+    font-size: 11px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.review-scope[open] {
+    max-height: 320px;
+    overflow: auto;
+}
+.law-text {
+    max-height: 58vh;
+    overflow: auto;
+    padding-right: 12px;
+    overscroll-behavior: contain;
+}
+body[data-step="review"] .result-grid {
+    max-height: none;
+    overflow: clip;
+}

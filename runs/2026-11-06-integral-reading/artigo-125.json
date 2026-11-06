@@ -1,0 +1,53 @@
+{
+  "status": "artigo_integral_da_coleta",
+  "numero": "125",
+  "coleta": {
+    "id": 1,
+    "coletado_em": "2026-11-05 21:34:28+00:00",
+    "data_consulta": "2027-01-01",
+    "versao_app": "1.6.2-a39944eb",
+    "versao_base": "V0066",
+    "data_base": "2026-10-28",
+    "ambiente": "apr",
+    "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+  },
+  "texto": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023.\nParágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+  "paragrafos": [
+    {
+      "tipo": "caput",
+      "partes": [
+        {
+          "texto": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023.",
+          "riscado": false
+        }
+      ]
+    },
+    {
+      "tipo": "paragrafo",
+      "partes": [
+        {
+          "texto": "Parágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+          "riscado": false
+        }
+      ]
+    }
+  ],
+  "texto_sha256": "1bfa47d979395deb7199c5c2f5d46ecd0db38df67678ee6c657947bc7b6002ff",
+  "total_caracteres": 529,
+  "hierarquia": {
+    "livro": "LIVRO I — DO IMPOSTO SOBRE BENS E SERVIÇOS (IBS) E DA CONTRIBUIÇÃO SOCIAL SOBRE BENS E SERVIÇOS (CBS)",
+    "titulo": "TÍTULO III — DA DEVOLUÇÃO PERSONALIZADA DO IBS E DA CBS (CASHBACK) E DA CESTA BÁSICA NACIONAL DE ALIMENTOS",
+    "capitulo": "CAPÍTULO II — DA CESTA BÁSICA NACIONAL DE ALIMENTOS"
+  },
+  "tem_trecho_riscado": false,
+  "citacao": {
+    "nome": "lc214_planalto",
+    "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art125",
+    "sha256": "055a4aba1e035bacc2d2674e9c2ce47a3818c0a0088cb7b1c5458187307f1d9e",
+    "norma": "LC 214/2025",
+    "artigo": "125"
+  },
+  "localizacao_oficial": "ancora_verificada_na_coleta",
+  "escopo": "leitura_complementar_nao_altera_dossie_da_revisao",
+  "dossie_sha256": "878a5482d67d55f3160ea5e73f355bec528e751338d94b86570fbd5a5e6be403"
+}

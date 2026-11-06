@@ -98,7 +98,7 @@ const strings = {
         person: "Pessoa neste computador",
         automatic: "Teste automatizado",
         reason: "O que foi conferido? Quais são as ressalvas?",
-        check: "Conferi o material exibido. Esta decisão registra somente a revisão documental.",
+        check: "Conferi as evidências registradas nesta consulta. Esta decisão registra somente a revisão documental.",
         approve: "Registrar aprovação",
         reject: "Registrar rejeição",
         recorded: "Decisão registrada",
@@ -228,6 +228,22 @@ const strings = {
         exampleArticle125: "Artigo 125 · cesta básica",
         exampleArticle126: "Artigo 126",
         exampleCode000001: "000001 · tributação integral",
+        fullExport: "Baixar artigo e origem (JSON) ↓",
+        fullArticle: "Artigo integral",
+        queryEvidence: "Evidência da consulta",
+        loadingArticle: "Carregando o artigo integral da coleta…",
+        fullReadNote:
+            "Texto integral preservado na coleta, com parágrafos e marcações de redações riscadas. A leitura não comprova vigência atual.",
+        fullReadScope:
+            "Leitura de apoio. A decisão de revisão permanece vinculada às evidências registradas na consulta.",
+        fullReadError:
+            "Não foi possível carregar o artigo integral. A evidência original continua disponível; tente novamente.",
+        retryRead: "Tentar carregar novamente",
+        reviewScope: "Evidências vinculadas a esta revisão",
+        reviewScopeText:
+            "A decisão registra o material recuperado abaixo. A leitura integral ao lado serve para conferir o contexto e não amplia esse conjunto.",
+        textLocator:
+            "A fonte não tem uma âncora de artigo identificada na coleta. O link tenta localizar o texto; o comportamento depende do navegador.",
     },
     en: {
         skip: "Skip to query",
@@ -326,7 +342,7 @@ const strings = {
         person: "Person on this computer",
         automatic: "Automated test",
         reason: "What was checked? What caveats remain?",
-        check: "I checked the displayed material. This decision records document review only.",
+        check: "I checked the evidence recorded in this query. This decision records document review only.",
         approve: "Record approval",
         reject: "Record rejection",
         recorded: "Decision recorded",
@@ -457,10 +473,27 @@ const strings = {
         exampleArticle125: "Article 125 · basic food basket",
         exampleArticle126: "Article 126",
         exampleCode000001: "000001 · full taxation",
+        fullExport: "Download article and source (JSON) ↓",
+        fullArticle: "Full article",
+        queryEvidence: "Query evidence",
+        loadingArticle: "Loading the complete article from the snapshot…",
+        fullReadNote:
+            "Complete text preserved in the snapshot, including paragraphs and strikethrough markings. Reading does not establish current legal validity.",
+        fullReadScope:
+            "Context reading. The review decision remains bound to the evidence recorded in the query.",
+        fullReadError:
+            "The complete article could not be loaded. The original evidence remains available; try again.",
+        retryRead: "Retry loading",
+        reviewScope: "Evidence bound to this review",
+        reviewScopeText:
+            "Your decision records the retrieved material below. The full article alongside provides context and does not expand this evidence set.",
+        textLocator:
+            "No article anchor was identified in the snapshot. The link attempts a text lookup; behavior depends on the browser.",
     },
 };
 
 let selectedDocument = 0;
+const fullArticles = new Map();
 let activeStep = "query";
 function setStep(step) {
     if (step !== "query" && !current) return;
@@ -705,6 +738,13 @@ function sourceLink(source, label = t("source")) {
     try {
         const url = new URL(source.url);
         if (url.protocol !== "https:") return el("small", "", t("unknown"));
+        if (
+            source.artigo &&
+            /(^|\.)planalto\.gov\.br$/.test(url.hostname) &&
+            !url.hash
+        ) {
+            url.hash = `:~:text=${encodeURIComponent(`Art. ${source.artigo}.`)}`;
+        }
         const a = el("a", "source-link", label);
         a.href = url.href;
         a.target = "_blank";
@@ -714,15 +754,101 @@ function sourceLink(source, label = t("source")) {
         return el("small", "", t("unknown"));
     }
 }
-function documentCard(numberValue, text, source, warnings = {}) {
+function legalParagraphs(paragraphs) {
+    const container = el("div", "law-text");
+    container.tabIndex = 0;
+    container.setAttribute("role", "region");
+    container.setAttribute("aria-label", t("fullArticle"));
+    for (const block of paragraphs) {
+        const p = el(
+            "p",
+            `law-${["caput", "inciso", "paragrafo", "alinea"].includes(block.tipo) ? block.tipo : "texto"}`,
+        );
+        for (const part of block.partes)
+            p.append(el(part.riscado ? "del" : "span", "", part.texto));
+        container.append(p);
+    }
+    return container;
+}
+function documentCard(numberValue, text, source, warnings = {}, report) {
     const card = el("article", "document");
     card.append(el("h3", "", `${t("article")} ${numberValue}`));
-    card.append(el("p", "", text));
-
-    if (warnings.excerpt) card.append(el("p", "notice", t("excerptNotice")));
-    if (warnings.partial) card.append(el("p", "notice", t("partial")));
-    if (warnings.struck) card.append(el("small", "", t("struck")));
-    if (source) card.append(sourceLink(source));
+    const tabs = el("div", "reading-tabs");
+    const full = el("button", "", t("fullArticle"));
+    const original = el("button", "", t("queryEvidence"));
+    full.type = original.type = "button";
+    const fullPane = el("div", "full-article-pane");
+    const evidencePane = el("div", "query-evidence-pane");
+    evidencePane.append(el("p", "", text));
+    if (warnings.excerpt)
+        evidencePane.append(el("p", "notice", t("excerptNotice")));
+    if (warnings.partial) evidencePane.append(el("p", "notice", t("partial")));
+    if (warnings.struck) evidencePane.append(el("small", "", t("struck")));
+    if (source) evidencePane.append(sourceLink(source));
+    tabs.append(full, original);
+    card.append(tabs, evidencePane, fullPane);
+    let loading = false;
+    let loaded = false;
+    function show(isFull) {
+        fullPane.hidden = !isFull;
+        evidencePane.hidden = isFull;
+        full.setAttribute("aria-pressed", String(isFull));
+        original.setAttribute("aria-pressed", String(!isFull));
+    }
+    async function loadComplete() {
+        if (loading || loaded) return;
+        loading = true;
+        fullPane.replaceChildren(el("p", "reader-status", t("loadingArticle")));
+        const key = `${report.revisao_id}:${numberValue}`;
+        try {
+            const data =
+                fullArticles.get(key) ||
+                (await api(
+                    `/api/revisoes/${encodeURIComponent(report.revisao_id)}/artigos/${encodeURIComponent(numberValue)}`,
+                ));
+            if (
+                data.numero !== numberValue ||
+                data.coleta.id !== report.estado.coleta.id ||
+                data.coleta.manifesto_sha256 !==
+                    report.estado.coleta.manifesto_sha256 ||
+                data.dossie_sha256 !== report.pacote_revisao.dossie_sha256
+            )
+                throw new Error("error");
+            if (fullArticles.size >= 30)
+                fullArticles.delete(fullArticles.keys().next().value);
+            fullArticles.set(key, data);
+            fullPane.replaceChildren(
+                el("p", "reader-status", t("fullReadNote")),
+                legalParagraphs(data.paragrafos),
+                sourceLink(data.citacao),
+                el("p", "reader-scope", t("fullReadScope")),
+            );
+            if (data.localizacao_oficial === "busca_por_fragmento_de_texto")
+                fullPane.append(el("p", "reader-status", t("textLocator")));
+            const download = el("a", "source-link", t("fullExport"));
+            download.href = `/api/revisoes/${encodeURIComponent(report.revisao_id)}/artigos/${encodeURIComponent(numberValue)}`;
+            download.download = `taxtrace-artigo-${numberValue}-${report.revisao_id}.json`;
+            fullPane.append(download);
+            loaded = true;
+        } catch {
+            const retry = el("button", "button quiet", t("retryRead"));
+            retry.type = "button";
+            retry.addEventListener("click", loadComplete);
+            fullPane.replaceChildren(
+                el("p", "notice error", t("fullReadError")),
+                retry,
+            );
+        } finally {
+            loading = false;
+        }
+    }
+    card.loadComplete = loadComplete;
+    full.addEventListener("click", () => {
+        show(true);
+        loadComplete();
+    });
+    original.addEventListener("click", () => show(false));
+    show(true);
     return card;
 }
 function renderResult(report) {
@@ -748,19 +874,31 @@ function renderResult(report) {
             (query.status === "artigo_recuperado" ? query : null);
     if (opened?.texto)
         documents.append(
-            documentCard(opened.numero, opened.texto, opened.citacao, {
-                partial: opened.proximo_inicio != null,
-                struck: opened.tem_trecho_riscado,
-            }),
+            documentCard(
+                opened.numero,
+                opened.texto,
+                opened.citacao,
+                {
+                    partial: opened.proximo_inicio != null,
+                    struck: opened.tem_trecho_riscado,
+                },
+                report,
+            ),
         );
     (query.resultados || [])
         .filter((x) => x.artigo_numero !== opened?.numero)
         .forEach((r) =>
             documents.append(
-                documentCard(r.artigo_numero, r.trecho, r.citacao, {
-                    struck: r.tem_trecho_riscado,
-                    excerpt: true,
-                }),
+                documentCard(
+                    r.artigo_numero,
+                    r.trecho,
+                    r.citacao,
+                    {
+                        struck: r.tem_trecho_riscado,
+                        excerpt: true,
+                    },
+                    report,
+                ),
             ),
         );
     if (query.registro) {
@@ -864,6 +1002,7 @@ function renderResult(report) {
     const selected = Math.min(selectedDocument, Math.max(0, cards.length - 1));
     const selectCard = (index) => {
         selectedDocument = index;
+        cards[index]?.loadComplete?.();
         cards.forEach((card, i) => {
             card.hidden = i !== index;
         });
@@ -955,6 +1094,37 @@ function renderResult(report) {
 function reviewForm(report) {
     const form = el("form", "review-panel");
     form.append(el("h3", "", t("reviewTitle")), el("p", "", t("reviewText")));
+    const scope = el("details", "review-scope");
+    scope.append(
+        el("summary", "", t("reviewScope")),
+        el("p", "", t("reviewScopeText")),
+    );
+    const responses = report.estado.respostas || {};
+    const query = responses.consulta || {};
+    const seen = new Set();
+    for (const item of [responses.artigo, query]) {
+        if (item?.texto && !seen.has(item.numero)) {
+            scope.append(
+                el("h4", "", `${t("article")} ${item.numero}`),
+                el("p", "", item.texto),
+            );
+            seen.add(item.numero);
+        }
+    }
+    for (const item of query.resultados || [])
+        scope.append(
+            el("h4", "", `${t("article")} ${item.artigo_numero}`),
+            el("p", "", item.trecho),
+        );
+    if (query.registro)
+        scope.append(
+            el(
+                "p",
+                "",
+                `${t("classification")} ${query.registro.codigo}: ${query.registro.descricao}`,
+            ),
+        );
+    form.append(scope);
     const row = el("div", "form-row");
     const name = el("input");
     name.name = "revisor";

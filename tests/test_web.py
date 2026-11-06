@@ -102,6 +102,28 @@ class WebTest(unittest.TestCase):
         self.assertEqual(r.status_code, 503)
         self.assertNotIn("PRIVATE_SENTINEL", r.text)
 
+    def test_leitura_integral_usa_revisao_e_nao_aceita_coleta_do_cliente(self):
+        rid = str(uuid4())
+        report = {"estado": {"coleta": {"id": 7}}}
+        with (
+            patch("taxtrace.web.inspecionar", return_value=report),
+            patch("taxtrace.web.conectar"),
+            patch("taxtrace.web.ler_integral", return_value={"numero": "125"}) as ler,
+        ):
+            r = self.client.get(f"/api/revisoes/{rid}/artigos/125")
+        self.assertEqual(r.status_code, 200)
+        self.assertIs(ler.call_args.args[1], report)
+        self.assertEqual(ler.call_args.args[2], "125")
+        with (
+            patch("taxtrace.web.inspecionar", return_value=report),
+            patch("taxtrace.web.conectar"),
+            patch(
+                "taxtrace.web.ler_integral", side_effect=ValueError("artigo_integral_indisponivel")
+            ),
+        ):
+            r = self.client.get(f"/api/revisoes/{rid}/artigos/126")
+        self.assertEqual(r.status_code, 404)
+
     def test_decisao_preserva_hash_e_origem_de_teste(self):
         payload = {
             "decisao": "rejeitar",

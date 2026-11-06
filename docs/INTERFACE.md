@@ -33,6 +33,16 @@ O modo direto não usa API de IA. A escolha do Gemini envia a pergunta ao planej
 
 O histórico mantém até dez identificadores e perguntas no armazenamento da aba. Recarregar preserva essa lista; os checkpoints ficam no servidor. Também é possível retomar uma revisão pelo UUID. Trocar de idioma preserva os campos de nome e motivo ainda não enviados; a confirmação deve ser marcada novamente.
 
+## Leitura integral e navegação na fonte
+
+O leitor abre o **Artigo integral** preservado em `artigos.texto`: parágrafos, incisos, alíneas e redações riscadas. A pesquisa continua usando seus trechos limitados; a aba **Evidência da consulta** permite conferir exatamente o material recuperado pelo agente.
+
+A leitura complementar usa `GET /api/revisoes/{id}/artigos/{numero}`. O artigo precisa ter aparecido nas respostas ou referências da consulta. A coleta, o manifesto e a fonte devem coincidir com o registro original; a conexão é somente leitura. Textos acima de 200 mil caracteres são recusados com erro, sem truncamento silencioso. A maior extensão da coleta local inspecionada é de 25.082 caracteres. Não há chamada de modelo ou alteração do checkpoint nessa leitura.
+
+Os links oficiais usam âncoras verificadas no HTML de origem pelo hash da fonte (`#art125`, por exemplo). Quando o HTML não tem uma âncora correspondente ou não está disponível localmente, o link tenta um fragmento de texto; o funcionamento depende do navegador e da página oficial. A leitura no app não depende de o Planalto aceitar acesso naquele momento.
+
+O JSON complementar inclui o texto, a estrutura, os hashes, a coleta e a localização oficial. O download separado **Baixar artigo e origem (JSON)** não substitui o registro da revisão. O conjunto original continua identificado pelo mesmo hash; o formulário explicita as evidências vinculadas à decisão e distingue a leitura de contexto. A interface não interpreta HTML da fonte: monta os elementos de texto e de risco explicitamente.
+
 ## Conferência e decisão
 
 O botão de revisão e a navegação superior abrem o formulário mantendo os documentos acessíveis. A decisão exige nome declarado, motivo, origem e confirmação de leitura, e usa o hash do conjunto retornado. Origem de teste automatizado não representa revisão humana real. As decisões não validam parecer fiscal.
@@ -40,6 +50,8 @@ O botão de revisão e a navegação superior abrem o formulário mantendo os do
 JSON técnico e exportação estão disponíveis para conferir os registros. Conteúdos vindos da fonte são renderizados como texto, sem interpretar HTML. Links externos aceitam somente HTTPS. Requisições de alteração usam token local e checagem de origem. Entradas são limitadas e mensagens de driver não são expostas. Repetir uma tentativa com a mesma chave reutiliza a tarefa durante a vida do processo, sem garantir idempotência depois de reiniciar o servidor. Há limite de duas consultas simultâneas.
 
 ## Verificação desta etapa
+
+A leitura integral e seus limites estão registrados em [integral-reading](../runs/2026-11-06-integral-reading/verification.md).
 
 As verificações desta reorganização estão em [runs/2026-11-06-product-interface/verification.md](../runs/2026-11-06-product-interface/verification.md). A etapa anterior está preservada em [research-workspace](../runs/2026-11-06-research-workspace/verification.md).
 
