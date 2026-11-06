@@ -5,6 +5,19 @@
 - Entregas: servidor MCP, agente LangGraph, RAG com citação e vigência, avaliação com gabarito, recusa e guardrails.
 - Projeto 4 (separado): monitor no n8n de novos atos, com aprovação humana.
 
+## Prioridade atual e critério de conclusão
+
+RAG com geração de respostas fundamentadas faz parte do escopo original e permanece pendente. A interface de consulta, a recuperação de documentos e a leitura integral não encerram essa entrega. Hospedagem e vídeo não substituem as etapas 3, 5 e 6.
+
+Ordem de trabalho a partir da interface atual:
+1. Definir e avaliar suficiência das evidências, casos de recusa e limites de interpretação temporal, antes de habilitar geração para o usuário.
+2. Implementar geração limitada aos documentos recuperados, com citações verificáveis, coleta/data identificadas e indicação de evidência insuficiente.
+3. Integrar resposta, fontes e revisão humana ao mesmo conjunto registrado, com hash e rastreabilidade. A revisão documental existente não deve ser apresentada como aprovação de uma resposta ainda não implementada.
+4. Avaliar respostas, citações e recusas com gabarito, distinguindo conjuntos de desenvolvimento de avaliação independente e registrando a ausência de revisão especializada quando aplicável.
+5. Concluir a preparação para acesso público e, depois, publicação, apresentação e vídeo.
+
+Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendida, conferir este plano, o código e as evidências em `runs/` e `evals/`. Distinguir implementação, teste local, avaliação independente e operação publicada. As marcações pendentes abaixo só devem ser concluídas com evidência correspondente.
+
 ## Fontes oficiais (levantamento de 05/11/2026)
 
 ### Verificado diretamente (acesso em 05/11/2026)
