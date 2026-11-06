@@ -1692,3 +1692,78 @@ body[data-step="review"] .result-grid {
     max-height: none;
     overflow: clip;
 }
+
+.rag-answer {
+    background: #fff;
+    border: 1px solid #ccd8eb;
+    border-left: 3px solid var(--accent);
+    padding: 24px;
+    margin: 0 0 24px;
+    min-width: 0;
+}
+.rag-answer h2 {
+    font-size: 18px;
+    color: var(--ink);
+    margin: 0 0 10px;
+}
+.rag-answer > p {
+    font-size: 13px;
+    line-height: 1.8;
+}
+.rag-point {
+    margin-top: 20px;
+}
+.rag-point > p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-bottom: 9px;
+    overflow-wrap: anywhere;
+}
+.citation {
+    border: 1px solid #c9d7ed;
+    background: #eef3fc;
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 10px;
+    color: var(--accent);
+    margin: 0 6px 8px 0;
+}
+.rag-quotes summary {
+    font-size: 11px;
+    color: var(--muted);
+}
+.rag-quotes blockquote,
+.review-scope blockquote {
+    font-size: 12px;
+    line-height: 1.8;
+    border-left: 2px solid var(--line);
+    padding-left: 12px;
+    margin: 12px 0;
+    color: var(--text);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.rag-answer .rag-limit {
+    border-top: 1px solid var(--line);
+    padding-top: 15px;
+    margin: 20px 0 0;
+    font-size: 11px;
+    color: var(--muted);
+}
+body[data-step="review"] .rag-answer {
+    grid-column: 1/-1;
+}
+body[data-step="review"] .rag-answer ~ .result-grid {
+    grid-row: auto;
+}
+body[data-step="review"] #result:has(.rag-answer) .review-panel {
+    grid-row: 4;
+}
+body[data-step="review"] #result:has(.rag-answer) .result-grid {
+    grid-row: 4;
+}
+.query-evidence-pane mark {
+    background: #fff1b8;
+    color: inherit;
+}

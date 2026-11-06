@@ -1,5 +1,10 @@
 # Revisão documental com pausa e retomada
 
+## Atualização: RAG documental
+
+O modo `rag` acrescenta triagem técnica e síntese Gemini com citações. Resposta, contexto e citações integram o hash da revisão (checkpoint v2). O modo direto e o planejador existente permanecem disponíveis. Recusas ou falhas de geração não são encaminhadas como respostas aprováveis. Ver [RAG.md](RAG.md) e [avaliação](../evals/RAG.md). As seções históricas abaixo descrevem a entrega documental anterior; seus resultados não substituem a validação do RAG.
+
+
 ## Por que existe esta etapa
 
 Uma execução pode reunir documentos sem que alguém já tenha conferido o material. O fluxo de revisão mantém essa diferença explícita: o sistema recupera as evidências, salva um retrato da consulta e pausa. Um operador pode abrir esse material e registrar sua decisão depois, inclusive em outro processo.

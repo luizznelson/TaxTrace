@@ -102,6 +102,18 @@ class WebTest(unittest.TestCase):
         self.assertEqual(r.status_code, 503)
         self.assertNotIn("PRIVATE_SENTINEL", r.text)
 
+    def test_modo_rag_e_encaminhado_explicitamente_sem_troca_silenciosa(self):
+        with patch(
+            "taxtrace.web.iniciar", return_value={"status": "aguardando_revisao"}
+        ) as iniciar:
+            r = self.client.post(
+                "/api/consultas",
+                headers=self.headers(),
+                json={"pergunta": "cesta basica", "modo": "rag"},
+            )
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(iniciar.call_args.kwargs["modo"], "rag")
+
     def test_leitura_integral_usa_revisao_e_nao_aceita_coleta_do_cliente(self):
         rid = str(uuid4())
         report = {"estado": {"coleta": {"id": 7}}}

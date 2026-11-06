@@ -1,0 +1,30 @@
+{
+  "python": {
+    "descobertos": 132,
+    "aprovados": 111,
+    "ignorados_opt_in": 21
+  },
+  "javascript": {
+    "aprovados": 6
+  },
+  "triagem_desenvolvimento": {
+    "casos": 12,
+    "criterios_atendidos": 12
+  },
+  "geracao_desenvolvimento": {
+    "primeira_rodada": {
+      "minimos_atendidos": 2,
+      "casos": 3
+    },
+    "apos_correcao": {
+      "minimos_atendidos": 3,
+      "casos": 3
+    }
+  },
+  "revisao_real_modelo_decisao": "teste_automatizado_rejeitar",
+  "recusa_sem_chamada_modelo": true,
+  "registros_verificados_sem_chaves_ou_conexoes_reais": 6,
+  "deploy_realizado": false,
+  "avaliacao_fiscal_independente": false,
+  "vigencia_por_dispositivo_validada": false
+}

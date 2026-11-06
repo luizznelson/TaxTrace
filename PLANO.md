@@ -7,7 +7,7 @@
 
 ## Prioridade atual e critério de conclusão
 
-RAG com geração de respostas fundamentadas faz parte do escopo original e permanece pendente. A interface de consulta, a recuperação de documentos e a leitura integral não encerram essa entrega. Hospedagem e vídeo não substituem as etapas 3, 5 e 6.
+RAG com geração de respostas fundamentadas faz parte do escopo original. A primeira versão documental está implementada e avaliada em desenvolvimento; avaliação independente e validação temporal continuam pendentes. A interface de consulta, a recuperação de documentos e a leitura integral não encerram essa entrega. Hospedagem e vídeo não substituem as etapas 3, 5 e 6.
 
 Ordem de trabalho a partir da interface atual:
 1. Definir e avaliar suficiência das evidências, casos de recusa e limites de interpretação temporal, antes de habilitar geração para o usuário.
@@ -82,6 +82,7 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Avaliação inicial da recuperação: 22 casos (20 positivos e 2 controles), com fragmentos e coleta fixados. Hit@5 de 70% nos positivos; perguntas completas 5/9. Metodologia em `evals/README.md`. Conjunto de desenvolvimento, sem revisão fiscal independente; falhas por variações de termos preservadas.
    - [x] Experimento textual v2: acentos, palavras de formulação e correspondências parciais sinalizadas. Hit@5 de 80% (v1: 70%), com seis ganhos e quatro regressões; v1 mantida como padrão. Comparação em `runs/2026-11-06-search-comparison/comparacao.json`.
    - [x] Tratar regressões e avaliar perguntas adicionais: v4 preserva a ordem v1 e completa vagas. Hit@5 de 95% no conjunto original e 91,7% no adicional, sem perdas contra v1; v4 adotada como padrão. RRF v3 não resolveu as regressões e ficou experimental. Metodologia em `evals/COMPARACAO.md`. O conjunto adicional foi consultado durante a decisão, portanto não é teste independente.
+   - [x] Primeira síntese RAG documental: triagem técnica, até uma chamada Gemini, schema e citações literais verificadas, recusa e erros explícitos. Contexto completo de até 8.000 caracteres por artigo e 12.000 por conjunto; sem confirmação de vigência atual. Ver `docs/RAG.md`.
    - [ ] Avaliação independente de recuperação e suficiência dos trechos; ainda sem revisão fiscal especializada.
    - [x] Embeddings e comparação com a busca textual: E5-small local ONNX quantizado, revisão e hashes fixados, 990 trechos/580 artigos, vetores 384D e busca exata pgvector. Recuperação semântica de 60% e 75% nos conjuntos conhecidos, inferior à v4 (95% e 91,7%); controles vazios 0/2 em ambos. Textual mantida como padrão. Ver `evals/SEMANTICA.md`.
    - [x] Experimento de recuperação combinada RRF: 80% e 75% nos conjuntos conhecidos, inferior à textual v4; mantido como opção explícita. Avaliador verifica trechos literais na fonte e presença de âncora do gabarito, separadamente do acerto de artigo. Ver `evals/HIBRIDA.md`.
@@ -92,10 +93,13 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Fluxo de planejamento limitado, consultas MCP reais, conferência de coleta/citações e rastro local. Modo por regras e modo Gemini (gemini-3.5-flash-lite), com três chamadas reais registradas. Até uma requisição de modelo e três chamadas MCP; sem síntese fiscal. Ver `docs/AGENTE.md`.
    - [x] Checkpoint SQLite local e pausa/retomada tipada para revisão documental. Decisão exige hash, origem e motivo; trava por revisão, recusa de decisão duplicada e bloqueio após mudança do código identificado. Retomada sem chamadas MCP/Gemini. Teste entre processos com decisões sintéticas identificado; sem alegar revisão humana real. Ver `docs/REVISAO.md`.
    - [x] Interface local de revisão documental com fontes acessíveis e decisão vinculada ao conjunto exibido.
-   - [ ] Autenticação de revisores para exposição pública; revisão fiscal e geração de respostas continuam pendentes.
-   - [ ] Avaliação independente de planejamento, recusa e suficiência antes da geração de respostas.
+   - [x] Resposta, contexto, citações e metadados vinculados ao hash da revisão; checkpoint v2 e retomada sem repetir modelo/MCP. Origem sintética identificada nos testes.
+   - [ ] Autenticação de revisores para exposição pública e revisão fiscal especializada.
+   - [x] Critérios de evidência/recusa anteriores ao modelo e gabarito de desenvolvimento de 12 casos; três perguntas de geração real, com falhas preliminares preservadas. Ver `evals/RAG.md`.
+   - [ ] Avaliação independente de planejamento, recusa, suficiência e respostas; a triagem técnica não certifica suficiência jurídica.
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
    - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.
+   - [x] Gabarito mínimo de respostas/citações e recusas no desenvolvimento: 12/12 triagens e 3/3 positivos após correção. Não independente, sem revisão fiscal; ver `evals/RAG.md`.
    - [ ] Revisão por especialista, conjunto independente e avaliação de respostas/citações/recusas.
 7. [ ] Interface, Docker, CI, deploy, README e vídeo.
    - [x] Interface local FastAPI com bancada de pesquisa, lista selecionável, leitor de fontes e revisão contextual, PT/EN, histórico da aba, exportação e decisão vinculada ao hash. Teste visual de computador e tela pequena; ver `docs/INTERFACE.md`.

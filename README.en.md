@@ -19,7 +19,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-RAG with generation, authenticated multi-user review and answer evaluation with reviewed labels remain **planned**. A local document review interface is available. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval are available explicitly; no LLM answers are generated.
+**Document RAG is implemented locally:** retrieved evidence, Gemini synthesis with checked literal citations, conservative refusals and an answer-bound review hash. See [workflow and limits](docs/RAG.md) and [development evaluation](evals/RAG.md). Authenticated multi-user review, device/date-specific legal validity verification and independent expert-reviewed answer evaluation remain **pending**. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval remain explicit alternatives; the RAG workflow uses the stronger textual baseline.
 
 ## Recorded local verification
 
@@ -75,7 +75,7 @@ A pinned, local multilingual E5 model generated 384-dimensional vectors for **99
 
 See [setup, methodology and limitations](evals/SEMANTICA.md). Optional dependencies are in `requirements-embeddings.txt`. Download weights explicitly with `python -m taxtrace.vetores preparar-modelo`, then build the local index with `python -m taxtrace.vetores indexar`, using the virtual environment's Python. Query or evaluate with `--metodo semantica`. Model files are hashed and excluded from Git. No queries are sent to an AI provider by this encoder.
 
-This implements retrieval, not answer generation. Real-model evaluation was local; core CI uses synthetic vectors and does not download model weights.
+This experiment evaluates retrieval only; answer generation is evaluated separately in [RAG evaluation](evals/RAG.md). Real-model evaluation was local; core CI uses synthetic vectors and does not download model weights.
 
 ## Hybrid retrieval and excerpt checks
 
@@ -102,7 +102,7 @@ The [LangGraph workflow](docs/AGENTE.md) selects a bounded action, calls the rea
 .venv/Scripts/python.exe -m taxtrace.agente --modo gemini --consulta "Qual artigo trata da cesta basica?"
 ```
 
-Gemini mode requires `GEMINI_API_KEY` in the local `.env`; the current model setting is `GEMINI_MODEL=gemini-3.5-flash-lite`. Each run permits at most one model request and three MCP calls. Operational failures remain distinct from missing references. Local audit records include the plan, collection, tool responses and code hashes; LangSmith tracing is explicitly disabled. Fiscal answer generation remains unimplemented. Persistent review is now available through the separate module below.
+Gemini mode requires `GEMINI_API_KEY` in the local `.env`; the current model setting is `GEMINI_MODEL=gemini-3.5-flash-lite`. Each run permits at most one model request and three MCP calls. Operational failures remain distinct from missing references. Local audit records include the plan, collection, tool responses and code hashes; LangSmith tracing is explicitly disabled. The separate `rag` mode generates a documentary answer with citations; it does not provide individualized tax advice. Persistent review includes the generated answer when this mode is selected.
 
 ## Persistent document review
 

@@ -19,6 +19,7 @@ from mcp import Client, StdioServerParameters
 from pydantic import BaseModel, ConfigDict, Field
 
 from taxtrace.planejamento import FalhaPlanejamento, planejar_gemini, planejar_local
+from taxtrace.rag import FalhaGeracao, gerar_gemini, preparar_contexto, validar_resposta
 
 
 class Estado(TypedDict, total=False):
@@ -35,6 +36,7 @@ class Estado(TypedDict, total=False):
     codigo_revisao: str
     versao_revisao: int
     origem_execucao: str
+    rag: dict
 
 
 class DecisaoRevisao(BaseModel):
@@ -48,11 +50,15 @@ class DecisaoRevisao(BaseModel):
 
 def dossie_revisao(estado):
     dados = {k: estado.get(k) for k in ("pergunta", "modo", "plano", "coleta", "respostas")}
+    if estado.get("rag") is not None:
+        dados["rag"] = estado["rag"]
     checksum = hashlib.sha256(
         json.dumps(dados, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
     return {
-        "escopo": "revisao_documental",
+        "escopo": "resposta_e_evidencias"
+        if estado.get("rag", {}).get("status") == "respondida"
+        else "revisao_documental",
         "dossie": dados,
         "dossie_sha256": checksum,
         "aviso": "A decisão revisa este retrato documental; não valida vigência ou parecer fiscal.",
@@ -65,6 +71,7 @@ def criar_grafo(
     *,
     coleta_id=None,
     planejador_ia=planejar_gemini,
+    gerador_ia=gerar_gemini,
     checkpointer=None,
     revisao_humana=False,
 ):
@@ -134,7 +141,9 @@ def criar_grafo(
             args.update(consulta=plano["alvo"], limite=3)
         elif plano["acao"] == "ler_artigo":
             nome = "ler_artigo"
-            args.update(numero=plano["alvo"], limite_caracteres=3000)
+            args.update(
+                numero=plano["alvo"], limite_caracteres=8000 if estado["modo"] == "rag" else 3000
+            )
         else:
             nome = "consultar_classificacao"
             args.update(codigo=plano["alvo"])
@@ -162,7 +171,11 @@ def criar_grafo(
         dados, evento = await chamar(
             estado,
             "ler_artigo",
-            {"numero": numero, "limite_caracteres": 3000, "coleta_id": estado["coleta"]["id"]},
+            {
+                "numero": numero,
+                "limite_caracteres": 8000 if estado["modo"] == "rag" else 3000,
+                "coleta_id": estado["coleta"]["id"],
+            },
         )
         return {
             "respostas": {**estado["respostas"], "artigo": dados},
@@ -204,6 +217,55 @@ def criar_grafo(
                 + [{"etapa": "conferir", "erro": "referencias_inconsistentes"}],
             }
 
+    async def avaliar_contexto(estado):
+        avaliacao = preparar_contexto(estado)
+        return {
+            "rag": {
+                "status": "pronta_para_geracao" if avaliacao["elegivel"] else "recusada",
+                "avaliacao": avaliacao,
+                "vigencia_verificada": False,
+            },
+            "rastro": estado["rastro"]
+            + [
+                {
+                    "etapa": "avaliar_contexto",
+                    "status": "elegivel_tecnicamente" if avaliacao["elegivel"] else "recusada",
+                    "motivo": avaliacao["motivo"],
+                    "contexto_sha256": avaliacao["contexto_sha256"],
+                }
+            ],
+        }
+
+    async def gerar_resposta(estado):
+        inicio = perf_counter()
+        avaliacao = estado["rag"]["avaliacao"]
+        try:
+            saida, meta = await asyncio.to_thread(gerador_ia, estado["pergunta"], avaliacao, raiz)
+            saida = validar_resposta(saida, avaliacao)
+            rag = {
+                **estado["rag"],
+                **saida,
+                "modelo": meta,
+                "validacao": {"citacoes_literais": True, "implicacao_semantica": "exige_revisao"},
+            }
+            evento = {
+                "etapa": "gerar_resposta",
+                "status": saida["status"],
+                "resposta_sha256": hashlib.sha256(
+                    json.dumps(saida, sort_keys=True).encode()
+                ).hexdigest(),
+                "duracao_ms": round((perf_counter() - inicio) * 1000, 3),
+            }
+        except Exception as erro:
+            codigo = erro.codigo if isinstance(erro, FalhaGeracao) else "falha_na_geracao"
+            rag = {**estado["rag"], "status": "falha", "erro": codigo}
+            evento = {
+                "etapa": "gerar_resposta",
+                "erro": codigo,
+                "duracao_ms": round((perf_counter() - inicio) * 1000, 3),
+            }
+        return {"rag": rag, "rastro": estado["rastro"] + [evento]}
+
     async def revisar(estado):
         # Somente cálculo puro antes de interrupt: este início é reexecutado na retomada.
         pacote = dossie_revisao(estado)
@@ -234,10 +296,28 @@ def criar_grafo(
             status = "execucao_nao_concluida"
         elif estado.get("revisao"):
             status = (
-                "revisao_documental_aprovada"
+                (
+                    "resposta_documental_aprovada"
+                    if estado.get("rag", {}).get("status") == "respondida"
+                    else "revisao_documental_aprovada"
+                )
                 if estado["revisao"]["decisao"] == "aprovar"
-                else "revisao_documental_rejeitada"
+                else (
+                    "resposta_documental_rejeitada"
+                    if estado.get("rag", {}).get("status") == "respondida"
+                    else "revisao_documental_rejeitada"
+                )
             )
+        elif estado.get("rag", {}).get("status") == "falha":
+            status = "resposta_indisponivel"
+        elif estado.get("rag", {}).get("status") in {
+            "recusada",
+            "evidencia_insuficiente",
+            "fora_do_escopo",
+        }:
+            status = "evidencia_insuficiente_para_resposta"
+        elif estado.get("rag", {}).get("status") == "respondida":
+            status = "resposta_documental_gerada"
         elif estado["plano"]["acao"] == "recusar":
             status = "recusado_pelo_planejador"
         elif r.get("status") in {
@@ -251,7 +331,9 @@ def criar_grafo(
         return {
             "resultado": {
                 "status": status,
-                "suficiencia_para_resposta": "nao_avaliada",
+                "suficiencia_para_resposta": estado.get("rag", {}).get("status", "nao_avaliada"),
+                "resposta_documental_gerada": estado.get("rag", {}).get("status") == "respondida",
+                "vigencia_verificada": False,
                 "resposta_fiscal_gerada": False,
                 "aprovacao_humana_realizada": (
                     estado.get("revisao", {}).get("origem") == "operador_local"
@@ -272,6 +354,8 @@ def criar_grafo(
         ("recuperar", recuperar),
         ("aprofundar", aprofundar),
         ("conferir", conferir),
+        ("avaliar_contexto", avaliar_contexto),
+        ("gerar_resposta", gerar_resposta),
         ("finalizar", finalizar),
     ):
         graph.add_node(nome, funcao)
@@ -288,20 +372,36 @@ def criar_grafo(
         if checkpointer is None:
             raise ValueError("revisao_exige_checkpointer")
         graph.add_node("revisar", revisar)
-
-        def depois_conferencia(e):
-            status = e.get("respostas", {}).get("consulta", {}).get("status")
-            ausentes = {
-                "sem_evidencia_na_busca_textual",
-                "artigo_nao_encontrado_nesta_coleta",
-                "classificacao_nao_encontrada_nesta_coleta",
-            }
-            return "finalizar" if e.get("erro") or status in ausentes else "revisar"
-
-        graph.add_conditional_edges("conferir", depois_conferencia)
         graph.add_edge("revisar", "finalizar")
-    else:
-        graph.add_edge("conferir", "finalizar")
+
+    def depois_conferencia(e):
+        if e.get("erro"):
+            return "finalizar"
+        if e.get("modo") == "rag":
+            return "avaliar_contexto"
+        ausentes = {
+            "sem_evidencia_na_busca_textual",
+            "artigo_nao_encontrado_nesta_coleta",
+            "classificacao_nao_encontrada_nesta_coleta",
+        }
+        return (
+            "revisar"
+            if revisao_humana
+            and e.get("respostas", {}).get("consulta", {}).get("status") not in ausentes
+            else "finalizar"
+        )
+
+    graph.add_conditional_edges("conferir", depois_conferencia)
+    graph.add_conditional_edges(
+        "avaliar_contexto",
+        lambda e: "gerar_resposta" if e["rag"]["avaliacao"]["elegivel"] else "finalizar",
+    )
+    graph.add_conditional_edges(
+        "gerar_resposta",
+        lambda e: (
+            "revisar" if revisao_humana and e["rag"]["status"] == "respondida" else "finalizar"
+        ),
+    )
     graph.add_edge("finalizar", END)
     return graph.compile(checkpointer=checkpointer)
 
@@ -309,7 +409,7 @@ def criar_grafo(
 async def executar(pergunta, *, modo="local", coleta_id=None):
     if not isinstance(pergunta, str) or not 3 <= len(pergunta.strip()) <= 500:
         raise ValueError("pergunta_invalida")
-    if modo not in {"local", "gemini"} or (
+    if modo not in {"local", "gemini", "rag"} or (
         coleta_id is not None and (type(coleta_id) is not int or coleta_id < 1)
     ):
         raise ValueError("configuracao_invalida")
@@ -334,14 +434,15 @@ async def executar(pergunta, *, modo="local", coleta_id=None):
         **estado,
         "limites": [
             "Modo local usa regras, não um modelo de linguagem.",
-            "Modelo Gemini, quando usado, planeja a consulta; não decide a resposta fiscal.",
+            "No modo gemini, o modelo planeja; no modo rag, sintetiza os documentos recuperados.",
+            "Síntese e citações verificadas não comprovam suficiência jurídica ou vigência.",
             "Abrir o primeiro candidato não comprova relevância ou suficiência.",
             "Esta execução direta não pausa; use o módulo revisao "
             "para checkpoint e decisão registrada.",
         ],
         "codigo_sha256": {
             n: hashlib.sha256((raiz / "taxtrace" / n).read_bytes()).hexdigest()
-            for n in ("agente.py", "planejamento.py", "servidor_mcp.py")
+            for n in ("agente.py", "planejamento.py", "rag.py", "servidor_mcp.py")
         },
     }
 
@@ -349,7 +450,7 @@ async def executar(pergunta, *, modo="local", coleta_id=None):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--consulta", required=True)
-    parser.add_argument("--modo", choices=["local", "gemini"], default="local")
+    parser.add_argument("--modo", choices=["local", "gemini", "rag"], default="local")
     parser.add_argument("--coleta", type=int)
     args = parser.parse_args(argv)
     try:
@@ -368,7 +469,11 @@ def main(argv=None):
                 ensure_ascii=False,
             )
         )
-        return 1 if report["resultado"]["status"] == "execucao_nao_concluida" else 0
+        return (
+            1
+            if report["resultado"]["status"] in {"execucao_nao_concluida", "resposta_indisponivel"}
+            else 0
+        )
     except Exception as erro:
         print(json.dumps({"status": "execucao_nao_concluida", "tipo": type(erro).__name__}))
         return 1

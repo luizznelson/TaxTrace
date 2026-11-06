@@ -1,5 +1,10 @@
 # Interface local de pesquisa tributária
 
+## Atualização: RAG documental
+
+O modo `rag` acrescenta triagem técnica e síntese Gemini com citações. Resposta, contexto e citações integram o hash da revisão (checkpoint v2). O modo direto e o planejador existente permanecem disponíveis. Recusas ou falhas de geração não são encaminhadas como respostas aprováveis. Ver [RAG.md](RAG.md) e [avaliação](../evals/RAG.md). As seções históricas abaixo descrevem a entrega documental anterior; seus resultados não substituem a validação do RAG.
+
+
 Uma equipe fiscal precisa localizar a base normativa, conferir seu contexto e deixar claro o que foi revisado. O TaxTrace reúne essas ações em uma bancada de pesquisa, sem gerar parecer fiscal nem afirmar economia de tempo ainda não medida.
 
 ## Organização da experiência

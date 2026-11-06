@@ -19,7 +19,7 @@ from mcp import Client, StdioServerParameters
 
 from taxtrace.agente import DecisaoRevisao, criar_grafo, dossie_revisao
 
-VERSAO = 1
+VERSAO = 2
 
 
 def impressao_codigo():
@@ -29,6 +29,7 @@ def impressao_codigo():
         for n in (
             "agente.py",
             "planejamento.py",
+            "rag.py",
             "revisao.py",
             "servidor_mcp.py",
             "consultas.py",
@@ -116,10 +117,10 @@ def registrar(raiz, retrato_atual, operacao):
     return {**retrato_atual, "registro": str(pasta.relative_to(raiz))}
 
 
-async def iniciar(pergunta, *, modo="local", coleta_id=None, raiz=None, cliente=None):
+async def iniciar(pergunta, *, modo="local", coleta_id=None, raiz=None, cliente=None, gerador=None):
     if not isinstance(pergunta, str) or not 3 <= len(pergunta.strip()) <= 500:
         raise ValueError("pergunta_invalida")
-    if modo not in {"local", "gemini"} or (
+    if modo not in {"local", "gemini", "rag"} or (
         coleta_id is not None and (type(coleta_id) is not int or coleta_id < 1)
     ):
         raise ValueError("configuracao_invalida")
@@ -131,7 +132,12 @@ async def iniciar(pergunta, *, modo="local", coleta_id=None, raiz=None, cliente=
         async with AsyncSqliteSaver.from_conn_string(str(banco)) as saver:
             async with cliente_mcp(raiz, cliente) as remoto:
                 grafo = criar_grafo(
-                    remoto, raiz, coleta_id=coleta_id, checkpointer=saver, revisao_humana=True
+                    remoto,
+                    raiz,
+                    coleta_id=coleta_id,
+                    checkpointer=saver,
+                    revisao_humana=True,
+                    **({"gerador_ia": gerador} if gerador is not None else {}),
                 )
                 await grafo.ainvoke(
                     {
@@ -188,7 +194,7 @@ def main(argv=None):
     comandos = parser.add_subparsers(dest="acao", required=True)
     novo = comandos.add_parser("iniciar")
     novo.add_argument("--consulta", required=True)
-    novo.add_argument("--modo", choices=["local", "gemini"], default="local")
+    novo.add_argument("--modo", choices=["local", "gemini", "rag"], default="local")
     novo.add_argument("--coleta", type=int)
     olhar = comandos.add_parser("inspecionar")
     olhar.add_argument("--revisao", required=True)
@@ -230,7 +236,7 @@ def main(argv=None):
                 ensure_ascii=False,
             )
         )
-        return 1 if report["status"] == "execucao_nao_concluida" else 0
+        return 1 if report["status"] in {"execucao_nao_concluida", "resposta_indisponivel"} else 0
     except Timeout:
         print(json.dumps({"status": "revisao_em_uso_tente_novamente"}))
         return 1

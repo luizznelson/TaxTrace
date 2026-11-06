@@ -27,7 +27,7 @@ from taxtrace.revisao import decidir, iniciar, inspecionar
 class ConsultaWeb(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     pergunta: Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=500)]
-    modo: Literal["local", "gemini"] = "local"
+    modo: Literal["local", "gemini", "rag"] = "local"
     coleta_id: Annotated[int, Field(ge=1)] | None = None
 
 
@@ -129,6 +129,7 @@ def criar_app(raiz=None):
         return {
             "csrf": csrf,
             "gemini_disponivel": bool(cfg.get("GEMINI_API_KEY")),
+            "rag_disponivel": bool(cfg.get("GEMINI_API_KEY")),
             "ambiente": "local_sem_autenticacao_multiusuario",
         }
 

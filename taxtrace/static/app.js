@@ -159,7 +159,7 @@ const strings = {
         sourcesNav: "Base e fontes",
         snapshotLabel: "Coleta documental",
         researchDescription:
-            "O TaxTrace pesquisa artigos da legislação da reforma tributária e consulta classificações de IBS e CBS. Você confere o texto, identifica a fonte e registra sua revisão documental.",
+            "Pesquise a legislação e as classificações de IBS e CBS. No modo Resposta com fontes, receba uma explicação com citações para conferir e revisar.",
         sessionsDescription:
             "Retome as consultas desta aba para conferir fontes, concluir uma revisão ou baixar o registro.",
         sourcesDescription:
@@ -203,7 +203,7 @@ const strings = {
             "Informe sua decisão e justificativa. O registro e as evidências podem ser baixados.",
         scopeTitle: "O que não é feito aqui",
         scopeText:
-            "Cálculo de tributos, enquadramento automático de produtos ou emissão de parecer fiscal.",
+            "Cálculo de tributos, enquadramento automático de produtos ou confirmação de vigência atual. A resposta com IA é uma síntese documental, sujeita a revisão.",
         sessionLimit: "Até 10 consultas · histórico da aba",
         restoreText: "Use o identificador de um registro salvo neste ambiente.",
         sourceIntro:
@@ -244,6 +244,53 @@ const strings = {
             "A decisão registra o material recuperado abaixo. A leitura integral ao lado serve para conferir o contexto e não amplia esse conjunto.",
         textLocator:
             "A fonte não tem uma âncora de artigo identificada na coleta. O link tenta localizar o texto; o comportamento depende do navegador.",
+        ragNotGenerated: "Resposta não gerada",
+        ragMode: "Resposta com fontes · RAG",
+        ragHelp:
+            "Busca documentos e envia a pergunta e o contexto público ao Gemini para gerar uma explicação com citações. Uma chamada de síntese; sem parecer fiscal.",
+        ragTitle: "Resposta com fontes",
+        ragDraft: "Rascunho · aguardando revisão",
+        ragApproved: "Resposta revisada e aprovada",
+        ragRejected: "Resposta revisada e rejeitada",
+        ragUnavailable: "Geração indisponível",
+        ragInsufficient:
+            "Não há evidência suficiente para responder com segurança",
+        ragLimit:
+            "Esta é uma síntese documental da coleta, não confirmação de vigência atual ou orientação de enquadramento. As citações foram conferidas literalmente; a interpretação ainda exige revisão.",
+        ragQuotes: "Conferir trechos de apoio",
+        ragCitation: "Abrir evidência",
+        ragFailed:
+            "A resposta não foi liberada. O modelo pode estar indisponível ou a saída pode ter sido recusada pela validação. Os documentos recuperados continuam disponíveis.",
+        ragReviewTitle: "Revisar resposta e evidências",
+        ragReviewText:
+            "Confira as afirmações e seus trechos de apoio antes de decidir. A decisão fica vinculada ao texto da resposta, contexto e citações registrados; não é validação fiscal.",
+        ragScopeText:
+            "Este conjunto inclui a resposta gerada, suas citações e os documentos recuperados. A leitura integral complementar continua separada.",
+        ragCheck:
+            "Conferi a resposta e as evidências registradas. Esta decisão não certifica vigência ou enquadramento fiscal.",
+        ragRule: "Busca por regras e síntese com Gemini",
+        avaliar_contexto: "Verificação dos critérios de evidência",
+        gerar_resposta: "Geração e conferência das citações",
+        reason_vigencia_nao_verificada:
+            "A coleta não permite confirmar a vigência de uma regra na data solicitada. Consulte o documento e confira as alterações na fonte oficial.",
+        reason_aplicacao_individual_fora_do_escopo:
+            "O TaxTrace não calcula tributos nem decide o enquadramento de uma empresa ou produto. Reformule como uma pergunta sobre o que um documento informa.",
+        reason_anexo_nao_disponivel:
+            "A resposta exige conteúdo de anexo que não está disponível como evidência neste fluxo. O artigo pode mencionar o anexo sem listar os seus itens.",
+        reason_pedido_inseguro:
+            "Este pedido não pode ser atendido. A aplicação se limita à pesquisa e explicação documental de IBS e CBS.",
+        reason_fora_do_escopo:
+            "A pergunta não pertence ao escopo documental de IBS e CBS.",
+        reason_evidencia_incompleta:
+            "O contexto enviado para síntese não contém o artigo completo. Você pode ler a versão integral no leitor, mas ela não foi usada nesta geração.",
+        reason_redacao_alterada_exige_conferencia:
+            "O artigo tem histórico de texto riscado na coleta e exige conferência das redações. A síntese automática foi bloqueada nesta versão.",
+        reason_sem_contexto_completo:
+            "A recuperação não trouxe um documento completo para sustentar a resposta. Experimente um assunto mais específico ou informe um artigo.",
+        reason_conteudo_suspeito_na_evidencia:
+            "O documento contém conteúdo que exige conferência antes de gerar uma resposta.",
+        reason_contexto_nao_cobre_pergunta:
+            "Os documentos disponíveis não sustentaram uma resposta para esta pergunta. Reformule ou confira as fontes.",
     },
     en: {
         skip: "Skip to query",
@@ -403,7 +450,7 @@ const strings = {
         sourcesNav: "Collection and sources",
         snapshotLabel: "Document snapshot",
         researchDescription:
-            "TaxTrace searches Brazilian tax reform articles and looks up IBS and CBS classifications. Inspect the text, identify its source and record your document review.",
+            "Search IBS and CBS legislation and classifications. Answer with sources provides a cited explanation for inspection and review.",
         sessionsDescription:
             "Resume queries from this tab to inspect sources, complete a review or download the record.",
         sourcesDescription:
@@ -446,7 +493,7 @@ const strings = {
             "Enter your decision and reasoning. The record and evidence can be downloaded.",
         scopeTitle: "Outside this application",
         scopeText:
-            "Tax calculation, automatic product classification or tax advice.",
+            "Tax calculation, automatic product classification or confirmation of current legal validity. AI answers are document syntheses requiring review.",
         sessionLimit: "Up to 10 queries · tab history",
         restoreText:
             "Use the identifier of a record saved in this environment.",
@@ -489,20 +536,77 @@ const strings = {
             "Your decision records the retrieved material below. The full article alongside provides context and does not expand this evidence set.",
         textLocator:
             "No article anchor was identified in the snapshot. The link attempts a text lookup; behavior depends on the browser.",
+        ragNotGenerated: "Answer not generated",
+        ragMode: "Answer with sources · RAG",
+        ragHelp:
+            "Retrieves documents and sends the question and public context to Gemini for a cited explanation. One synthesis call; no tax advice.",
+        ragTitle: "Answer with sources",
+        ragDraft: "Draft · awaiting review",
+        ragApproved: "Answer reviewed and approved",
+        ragRejected: "Answer reviewed and rejected",
+        ragUnavailable: "Generation unavailable",
+        ragInsufficient: "Insufficient evidence to answer safely",
+        ragLimit:
+            "This is a snapshot-based document synthesis, not confirmation of current legal validity or product classification advice. Quotes were checked literally; interpretation still requires review.",
+        ragQuotes: "Inspect supporting excerpts",
+        ragCitation: "Open evidence",
+        ragFailed:
+            "No answer was released. The model may be unavailable or validation may have rejected its output. Retrieved documents remain available.",
+        ragReviewTitle: "Review answer and evidence",
+        ragReviewText:
+            "Check claims and supporting excerpts before deciding. The decision is bound to the recorded answer, context and citations; it is not a tax validation.",
+        ragScopeText:
+            "This package includes the generated answer, its citations and retrieved documents. Supplementary full-article reading remains separate.",
+        ragCheck:
+            "I checked the recorded answer and evidence. This decision does not certify legal validity or tax classification.",
+        ragRule: "Rule-based retrieval and Gemini synthesis",
+        avaliar_contexto: "Evidence eligibility checks",
+        gerar_resposta: "Generation and citation validation",
+        reason_vigencia_nao_verificada:
+            "The snapshot cannot confirm legal validity at the requested date. Inspect the document and changes in the official source.",
+        reason_aplicacao_individual_fora_do_escopo:
+            "TaxTrace does not calculate taxes or classify a company or product. Ask what a document states instead.",
+        reason_anexo_nao_disponivel:
+            "Answering requires annex content not available as evidence in this workflow. An article may mention an annex without listing its items.",
+        reason_pedido_inseguro:
+            "This request cannot be fulfilled. The application only supports IBS and CBS document research and explanation.",
+        reason_fora_do_escopo:
+            "The question is outside the IBS and CBS document scope.",
+        reason_evidencia_incompleta:
+            "The synthesis context does not contain the complete article. You can read it in the reader, but that supplementary text was not used for this generation.",
+        reason_redacao_alterada_exige_conferencia:
+            "The article contains historical strikethrough text requiring verification. Automatic synthesis is blocked in this version.",
+        reason_sem_contexto_completo:
+            "Retrieval did not provide a complete document to support an answer. Try a more specific topic or an article number.",
+        reason_conteudo_suspeito_na_evidencia:
+            "The document contains content requiring inspection before answer generation.",
+        reason_contexto_nao_cobre_pergunta:
+            "The available documents did not support an answer. Rephrase or inspect the sources.",
     },
 };
 
 let selectedDocument = 0;
 const fullArticles = new Map();
 let activeStep = "query";
+function stepDisabled(step) {
+    if (step === "query") return false;
+    if (!current) return true;
+    return (
+        step === "review" &&
+        !(
+            (current.pendente && current.codigo_compativel) ||
+            current.estado.revisao
+        )
+    );
+}
 function setStep(step) {
-    if (step !== "query" && !current) return;
+    if (stepDisabled(step)) return;
     activeStep = step;
     document.body.dataset.step = step;
     setView("research", false);
 
     document.querySelectorAll("[data-step-target]").forEach((b) => {
-        b.disabled = busy || (b.dataset.stepTarget !== "query" && !current);
+        b.disabled = busy || stepDisabled(b.dataset.stepTarget);
         if (b.dataset.stepTarget === step)
             b.setAttribute("aria-current", "step");
         else b.removeAttribute("aria-current");
@@ -584,9 +688,7 @@ function setBusy(value) {
     document
         .querySelectorAll("[data-step-target]")
         .forEach(
-            (b) =>
-                (b.disabled =
-                    value || (b.dataset.stepTarget !== "query" && !current)),
+            (b) => (b.disabled = value || stepDisabled(b.dataset.stepTarget)),
         );
     $("#working").hidden = !value;
     $("#send").disabled = value || !base || !context;
@@ -675,10 +777,15 @@ function applyLanguage() {
     persist();
 }
 function modeHelp() {
-    $("#mode-help").textContent =
-        $("#mode").value === "gemini" ? t("aiHelp") : t("directHelp");
-    if (context && !context.gemini_disponivel)
-        $('#mode option[value="gemini"]').disabled = true;
+    $("#mode-help").textContent = t(
+        { local: "directHelp", gemini: "aiHelp", rag: "ragHelp" }[
+            $("#mode").value
+        ],
+    );
+    if (context) {
+        $('#mode option[value="gemini"]').disabled = !context.gemini_disponivel;
+        $('#mode option[value="rag"]').disabled = !context.rag_disponivel;
+    }
 }
 function renderBase() {
     if (!base) return;
@@ -696,6 +803,10 @@ function statusKey(status) {
             aguardando_revisao: "pending",
             revisao_documental_aprovada: "approved",
             revisao_documental_rejeitada: "rejected",
+            resposta_documental_aprovada: "ragApproved",
+            resposta_documental_rejeitada: "ragRejected",
+            resposta_indisponivel: "ragUnavailable",
+            evidencia_insuficiente_para_resposta: "ragNotGenerated",
             referencia_nao_encontrada_nesta_consulta: "absent",
             recusado_pelo_planejador: "refused",
             execucao_nao_concluida: "failed",
@@ -772,6 +883,7 @@ function legalParagraphs(paragraphs) {
 }
 function documentCard(numberValue, text, source, warnings = {}, report) {
     const card = el("article", "document");
+    card.dataset.article = numberValue;
     card.append(el("h3", "", `${t("article")} ${numberValue}`));
     const tabs = el("div", "reading-tabs");
     const full = el("button", "", t("fullArticle"));
@@ -843,6 +955,17 @@ function documentCard(numberValue, text, source, warnings = {}, report) {
         }
     }
     card.loadComplete = loadComplete;
+    card.showEvidence = (quote) => {
+        show(false);
+        const p = evidencePane.querySelector("p");
+        const index = text.indexOf(quote);
+        if (index >= 0)
+            p.replaceChildren(
+                document.createTextNode(text.slice(0, index)),
+                el("mark", "", quote),
+                document.createTextNode(text.slice(index + quote.length)),
+            );
+    };
     full.addEventListener("click", () => {
         show(true);
         loadComplete();
@@ -903,6 +1026,7 @@ function renderResult(report) {
         );
     if (query.registro) {
         const c = el("article", "document");
+        c.dataset.code = query.registro.codigo;
         c.append(
             el("h3", "", `${t("classification")} ${query.registro.codigo}`),
             el("p", "", query.registro.descricao),
@@ -982,7 +1106,11 @@ function renderResult(report) {
         el(
             "p",
             "",
-            report.estado.modo === "gemini" ? t("planAI") : t("planRule"),
+            report.estado.modo === "rag"
+                ? t("ragRule")
+                : report.estado.modo === "gemini"
+                  ? t("planAI")
+                  : t("planRule"),
         ),
     );
     trace.append(meta);
@@ -1042,6 +1170,24 @@ function renderResult(report) {
     selectCard(selected);
     documents.append(el("p", "reader-note", t("sourceContext")));
     grid.append(findings, documents);
+    if (report.estado.rag)
+        root.append(
+            answerPanel(report, (doc, quote) => {
+                const index = cards.findIndex((c) =>
+                    doc.artigo
+                        ? c.dataset.article === doc.artigo
+                        : c.dataset.code === doc.codigo,
+                );
+                if (index >= 0) {
+                    selectCard(index);
+                    cards[index].showEvidence?.(quote);
+                    cards[index].scrollIntoView({
+                        block: "start",
+                        behavior: "smooth",
+                    });
+                }
+            }),
+        );
     root.append(grid, trace);
     if (report.pendente && report.codigo_compativel)
         root.append(reviewForm(report));
@@ -1067,7 +1213,7 @@ function renderResult(report) {
         el("pre", "", JSON.stringify(report, null, 2)),
     );
     root.append(technical);
-    if (!report.pendente && !report.estado.revisao) {
+    if (!report.pendente && !report.estado.revisao && !report.estado.rag) {
         root.append(
             el(
                 "p",
@@ -1091,14 +1237,106 @@ function renderResult(report) {
     heading.append(actions);
     root.append(back);
 }
+function answerPanel(report, openEvidence) {
+    const rag = report.estado.rag;
+    const panel = el("section", "rag-answer");
+    const answered = rag.status === "respondida";
+    panel.append(
+        el(
+            "h2",
+            "",
+            t(
+                answered
+                    ? "ragTitle"
+                    : rag.status === "falha"
+                      ? "ragUnavailable"
+                      : "ragInsufficient",
+            ),
+        ),
+    );
+    if (!answered) {
+        const reason = rag.avaliacao?.motivo;
+        const key = `reason_${reason}`;
+        panel.append(
+            el(
+                "p",
+                "",
+                t(
+                    rag.status === "falha"
+                        ? "ragFailed"
+                        : strings[lang][key]
+                          ? key
+                          : "reason_contexto_nao_cobre_pergunta",
+                ),
+            ),
+        );
+        return panel;
+    }
+    panel.append(
+        el(
+            "span",
+            "badge",
+            t(
+                report.estado.revisao
+                    ? report.estado.revisao.decisao === "aprovar"
+                        ? "ragApproved"
+                        : "ragRejected"
+                    : "ragDraft",
+            ),
+        ),
+    );
+    const docs = new Map(
+        rag.avaliacao.contexto.documentos.map((d) => [d.id, d]),
+    );
+    for (const point of rag.afirmacoes) {
+        const item = el("div", "rag-point");
+        item.append(el("p", "", point.texto));
+        const quotes = el("details", "rag-quotes");
+        quotes.append(el("summary", "", t("ragQuotes")));
+        for (const cite of point.citacoes) {
+            const doc = docs.get(cite.documento_id);
+            if (!doc) continue;
+            const button = el(
+                "button",
+                "citation",
+                doc.artigo
+                    ? `${t("article")} ${doc.artigo}`
+                    : `cClassTrib ${doc.codigo}`,
+            );
+            button.type = "button";
+            button.title = t("ragCitation");
+            button.addEventListener("click", () =>
+                openEvidence(doc, cite.trecho_literal),
+            );
+            item.append(button);
+            quotes.append(el("blockquote", "", cite.trecho_literal));
+        }
+        item.append(quotes);
+        panel.append(item);
+    }
+    panel.append(el("p", "rag-limit", t("ragLimit")));
+    return panel;
+}
 function reviewForm(report) {
     const form = el("form", "review-panel");
-    form.append(el("h3", "", t("reviewTitle")), el("p", "", t("reviewText")));
+    const isRag = report.estado.rag?.status === "respondida";
+    form.append(
+        el("h3", "", t(isRag ? "ragReviewTitle" : "reviewTitle")),
+        el("p", "", t(isRag ? "ragReviewText" : "reviewText")),
+    );
     const scope = el("details", "review-scope");
     scope.append(
         el("summary", "", t("reviewScope")),
-        el("p", "", t("reviewScopeText")),
+        el("p", "", t(isRag ? "ragScopeText" : "reviewScopeText")),
     );
+    if (isRag)
+        for (const point of report.estado.rag.afirmacoes)
+            scope.append(
+                el("p", "", point.texto),
+                ...point.citacoes.map((c) =>
+                    el("blockquote", "", c.trecho_literal),
+                ),
+            );
     const responses = report.estado.respostas || {};
     const query = responses.consulta || {};
     const seen = new Set();
@@ -1160,7 +1398,7 @@ function reviewForm(report) {
         check = el("input");
     check.type = "checkbox";
     check.required = true;
-    checkLabel.append(check, el("span", "", t("check")));
+    checkLabel.append(check, el("span", "", t(isRag ? "ragCheck" : "check")));
     form.append(checkLabel);
     const actions = el("div", "review-actions");
     [
@@ -1220,6 +1458,12 @@ async function restore(id) {
         const article = /^Leia o artigo ([1-9][0-9]{0,3})\.$/.exec(question);
         const code = /^Consulte o cClassTrib ([0-9]{6})\.$/.exec(question);
         activeTask = article ? "article" : code ? "code" : "search";
+        $("#mode").value = ["local", "gemini", "rag"].includes(
+            current.estado.modo,
+        )
+            ? current.estado.modo
+            : "local";
+        modeHelp();
         $("#question").value = article?.[1] || code?.[1] || question;
         taskDrafts[activeTask] = $("#question").value;
         renderTask();

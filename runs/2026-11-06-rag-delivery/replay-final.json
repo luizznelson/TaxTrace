@@ -1,0 +1,63 @@
+{
+  "origem": "reexecucao_de_saidas_reais_salvas_sem_nova_chamada_de_modelo",
+  "arquivo_de_origem": "runs\\rag-db4649cc-4f9e-45d4-8c68-eacf418d08c1\\avaliacao.json",
+  "codigo_sha256": {
+    "rag.py": "1f670e04c9137e19106740b441d8e503e5be2c477793dae4aabbe02a92a919f0",
+    "agente.py": "2fa09887f9e230aa05dd22a1ad312dc256fd6542a742a70813704ac854b95ded",
+    "revisao.py": "2d3b73e135171a2251c3d5c27a47be32c0ca335162df8361b74d1b3424c88e3b",
+    "avaliar_rag.py": "85402775dd58f2971f2c79e72a196e954cbb171f29fb91ce387051144f434b8e"
+  },
+  "casos": [
+    {
+      "id": "cesta-art125",
+      "triagem_compativel": true,
+      "resposta_aceita_pelo_validador_atual": true
+    },
+    {
+      "id": "cesta-busca",
+      "triagem_compativel": true,
+      "resposta_aceita_pelo_validador_atual": true
+    },
+    {
+      "id": "classificacao-geral",
+      "triagem_compativel": true,
+      "resposta_aceita_pelo_validador_atual": true
+    },
+    {
+      "id": "vigencia-hoje",
+      "triagem_compativel": true
+    },
+    {
+      "id": "data-futura",
+      "triagem_compativel": true
+    },
+    {
+      "id": "calculo",
+      "triagem_compativel": true
+    },
+    {
+      "id": "enquadramento",
+      "triagem_compativel": true
+    },
+    {
+      "id": "anexo-ausente",
+      "triagem_compativel": true
+    },
+    {
+      "id": "injecao",
+      "triagem_compativel": true
+    },
+    {
+      "id": "fora-escopo",
+      "triagem_compativel": true
+    },
+    {
+      "id": "artigo-ausente",
+      "triagem_compativel": true
+    },
+    {
+      "id": "leitura-parcial",
+      "triagem_compativel": true
+    }
+  ]
+}

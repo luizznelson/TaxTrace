@@ -19,9 +19,10 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 - Busca textual em português, com trechos literais, artigo, URL e identificação da coleta.
 - Recuperação semântica experimental: embeddings locais, trechos por artigo e vetores no pgvector.
 - Servidor MCP local com quatro ferramentas de consulta, fontes e coleta identificada.
+- **RAG documental:** explicação com citações clicáveis, recusa quando o contexto não atende aos critérios e resposta vinculada à revisão. Veja [funcionamento e limites](docs/RAG.md).
 - Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
 
-**Ainda em desenvolvimento:** RAG com geração, autenticação de revisores para publicação multiusuário e avaliação de respostas com gabarito revisado. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
+**Pendente:** autenticação para publicação multiusuário, validação temporal por dispositivo/data e avaliação independente de respostas com revisão especializada. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
 
 ## Perguntas que a primeira versão ajuda a investigar
 
@@ -38,6 +39,10 @@ A captura ocorreu em **05/11/2026**, com a API consultada para **01/01/2027**, b
 
 O registro inclui consultas bem-sucedidas e sem resultado, conferência das permissões e recusa de uma carga repetida. É uma verificação local, não uma execução comprovada do CI remoto.
 
+## Resposta com fontes
+
+Na interface, escolha **Pesquisar um tema → Resposta com fontes · RAG**. Exemplo: “O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?”. Cada afirmação traz uma citação para abrir o trecho de apoio. A resposta é um rascunho documental, com revisão declarada; não certifica enquadramento ou vigência. Os [resultados de desenvolvimento](evals/RAG.md) distinguem triagem, geração e suas limitações.
+
 ## Como executar no Windows
 
 Pré-requisitos: Python 3.14 e Docker Desktop ativo. Execute na pasta do projeto.
@@ -48,7 +53,7 @@ python -m venv .venv
 Copy-Item .env.example .env
 ```
 
-Se o `.env` já existir, preserve-o. Edite esse arquivo e substitua as três senhas de exemplo, mantendo cada senha correspondente na respectiva URL. Não publique o arquivo. Não é necessária chave de IA nesta etapa.
+Se o `.env` já existir, preserve-o. Edite esse arquivo e substitua as três senhas de exemplo, mantendo cada senha correspondente na respectiva URL. Não publique o arquivo. O modo direto não exige chave. Planejamento com Gemini e síntese RAG usam a chave opcional configurada no `.env`.
 
 ```powershell
 docker compose --profile tests up -d --wait
