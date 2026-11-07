@@ -123,6 +123,31 @@ def criar_app(raiz=None):
     async def pagina():
         return FileResponse(assets / "index.html")
 
+    @app.get("/health/live")
+    async def vivo():
+        # Não consulta dependências: o banco fora do ar não implica processo morto.
+        return {"status": "vivo"}
+
+    @app.get("/health/ready")
+    async def pronto():
+        def conferir():
+            with conectar(raiz, leitura=True, autocommit=True) as conn:
+                resumo = resumo_base(conn)
+                return (
+                    resumo.get("status") == "base_disponivel"
+                    and resumo.get("contagens", {}).get("artigos", 0) > 0
+                )
+
+        try:
+            disponivel = await asyncio.to_thread(conferir)
+        except Exception:
+            disponivel = False
+        # Não testa Gemini, não gasta cota e não expõe conexão ou detalhes privados.
+        return JSONResponse(
+            {"status": "pronto" if disponivel else "base_indisponivel"},
+            status_code=200 if disponivel else 503,
+        )
+
     @app.get("/api/contexto")
     async def contexto():
         cfg = dotenv_values(raiz / ".env")

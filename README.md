@@ -178,3 +178,5 @@ O índice remove os trechos marcados como riscados, mas isso não substitui aná
 **Apoio à consulta, não parecer tributário.** Confira a fonte oficial antes de tomar uma decisão.
 
 A avaliação das respostas inclui [casos adversariais](evals/RAG.md) e um [pacote para revisão de qualidade](docs/REVISAO_AVALIACAO.md). Os 12 casos do pacote ainda aguardam avaliação; exportar o material não comprova revisão independente.
+
+Diagnóstico do serviço e execução automática dos casos adversariais: [operação e evidências](docs/OPERACAO.md).

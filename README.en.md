@@ -148,3 +148,5 @@ Search depends on the entered terms and can miss relevant articles. An empty res
 This is lookup support, not tax advice. Verify the official source before making a decision.
 
 Answer evaluation includes [adversarial cases](evals/RAG.md) and a [quality review package](docs/REVISAO_AVALIACAO.md). All 12 package cases await review; exporting this material does not establish independent review.
+
+Service diagnostics and automated adversarial evaluation: [operation and evidence](docs/OPERACAO.md) (Portuguese).

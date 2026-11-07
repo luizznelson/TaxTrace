@@ -1,0 +1,118 @@
+{
+  "executado_em": "2026-11-07T19:53:59.929095+00:00",
+  "conjunto_sha256": "6e15c511c451892f943aac5b5aa064c0c50735c41384c82e8923c37d5ee68891",
+  "natureza": "adversarial_de_desenvolvimento_com_saida_real_salva_e_mutacoes_sinteticas",
+  "chamadas_de_modelo": 0,
+  "resumo": {
+    "casos": 14,
+    "bloqueios_esperados": 10,
+    "bloqueios_corretos": 10,
+    "controles_semanticos_nao_cobertos": 2
+  },
+  "limites": [
+    "Não há chamada de modelo nesta avaliação.",
+    "Controles semânticos não são pontuados como respostas corretas.",
+    "A revisão especializada e independente permanece pendente."
+  ],
+  "casos": [
+    {
+      "id": "controle-resposta-real",
+      "aceita": true,
+      "erro": null,
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "documento-inexistente",
+      "aceita": false,
+      "erro": "citacao_nao_confere",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "trecho-inventado",
+      "aceita": false,
+      "erro": "citacao_nao_confere",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "numero-parcial-12-em-125",
+      "aceita": false,
+      "erro": "numero_sem_apoio_literal",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "limite-semantico-data-como-prazo",
+      "aceita": true,
+      "erro": null,
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": true
+    },
+    {
+      "id": "percentual-inventado",
+      "aceita": false,
+      "erro": "numero_sem_apoio_literal",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "certeza-temporal",
+      "aceita": false,
+      "erro": "afirmacao_fora_dos_limites",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "link-criado-pelo-modelo",
+      "aceita": false,
+      "erro": "afirmacao_fora_dos_limites",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "recusa-com-afirmacoes",
+      "aceita": false,
+      "erro": "resposta_inconsistente",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "resposta-sem-citacao",
+      "aceita": false,
+      "erro": "schema_invalido",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "resposta-vazia",
+      "aceita": false,
+      "erro": "resposta_inconsistente",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "controle-recusa-estruturada",
+      "aceita": true,
+      "erro": null,
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    },
+    {
+      "id": "limite-semantico-negacao",
+      "aceita": true,
+      "erro": null,
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": true
+    },
+    {
+      "id": "numero-parcial-202-em-2023",
+      "aceita": false,
+      "erro": "numero_sem_apoio_literal",
+      "comportamento_estrutural_esperado": true,
+      "exige_julgamento_semantico": false
+    }
+  ],
+  "codigo_sha256": "1bc7d424c068521ad49c3a46f38d45299504c1ac54356345f45d7e8ba36dc9e7"
+}

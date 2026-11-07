@@ -1,0 +1,29 @@
+{
+  "executado_em": "2026-11-07T19:54:33.608050+00:00",
+  "natureza": "validacao_local_sem_deploy",
+  "testes": {
+    "python_descobertos": 145,
+    "python_aprovados": 124,
+    "python_opcionais_ignorados": 21,
+    "javascript_aprovados": 6,
+    "ruff_check": "aprovado",
+    "ruff_format": "68 arquivos conformes",
+    "git_diff_check": "aprovado"
+  },
+  "casos_operacionais": [
+    "Processo responde sem consultar o banco.",
+    "Indisponibilidade do banco resulta em 503 sem mensagem privada.",
+    "Prontidão exige coleta consultável e artigos, usando backend simulado em teste.",
+    "Arquivo de avaliação existente não é sobrescrito.",
+    "Divergência estrutural produz código de saída 1 e preserva relatório."
+  ],
+  "avaliacao_adversarial": "adversarial.json",
+  "chamadas_de_modelo": 0,
+  "ci_remoto_executado_nesta_etapa": false,
+  "limites": [
+    "Não foi validada prontidão contra PostgreSQL real nesta rodada.",
+    "O diagnóstico não verifica Gemini, checkpoints, suficiência jurídica ou vigência.",
+    "O fluxo de CI foi alterado localmente; execução no GitHub depende do push.",
+    "Autenticação para exposição pública e revisão especializada continuam pendentes."
+  ]
+}

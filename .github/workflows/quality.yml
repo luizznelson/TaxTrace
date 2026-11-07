@@ -5,6 +5,7 @@ permissions:
 jobs:
   checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     services:
       postgres:
         image: pgvector/pgvector@sha256:7d0a41464797aeb9862dfdc0bbf1526b82cfd324cdd8036df19e3545f4a9ccb8
@@ -30,3 +31,13 @@ jobs:
       - run: node --test tests/query-input.test.mjs
       - run: ruff check .
       - run: ruff format --check .
+      - name: Evaluate saved adversarial cases without model calls
+        run: python -m taxtrace.avaliar_adversarial --saida artifacts/rag-adversarial.json
+      - name: Preserve evaluation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rag-adversarial-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/rag-adversarial.json
+          if-no-files-found: warn
+          retention-days: 30

@@ -52,20 +52,23 @@ def avaliar(conjunto):
     }
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--casos", type=Path)
-    args = parser.parse_args()
+    parser.add_argument("--saida", type=Path, help="Arquivo JSON novo; não sobrescreve evidências.")
+    args = parser.parse_args(argv)
     raiz = Path(__file__).resolve().parent.parent
     caminho = args.casos or raiz / "evals/rag.adversarial.v2.json"
     r = avaliar(json.loads(caminho.read_text(encoding="utf-8")))
     r["codigo_sha256"] = checksum((raiz / "taxtrace/rag.py").read_text(encoding="utf-8"))
-    pasta = raiz / "runs" / f"rag-adversarial-{uuid4()}"
-    pasta.mkdir()
-    (pasta / "avaliacao.json").write_text(
-        json.dumps(r, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
-    print(json.dumps({"registro": str(pasta.relative_to(raiz)), **r["resumo"]}, ensure_ascii=False))
+    if args.saida:
+        destino = args.saida
+    else:
+        destino = raiz / "runs" / f"rag-adversarial-{uuid4()}" / "avaliacao.json"
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    with destino.open("x", encoding="utf-8") as arquivo:
+        arquivo.write(json.dumps(r, ensure_ascii=False, indent=2) + "\n")
+    print(json.dumps({"registro": str(destino), **r["resumo"]}, ensure_ascii=False))
     return 0 if all(c["comportamento_estrutural_esperado"] for c in r["casos"]) else 1
 
 
