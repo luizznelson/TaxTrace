@@ -78,3 +78,8 @@ O estado atual depende de arquivos persistentes: SQLite de checkpoints, vínculo
 Para manter essa hospedagem, a próxima adaptação precisa mover o estado persistente para um serviço adequado, tratar identidade/segredos fora do filesystem efêmero e validar conexão remota segura. As fontes preservadas também precisam de uma estratégia de disponibilização sem embutir dados privados. Ainda faltam configuração de domínio/HTTPS, cotas, acesso público e validação de recursos. Nenhum deploy foi realizado nem custo assumido nesta etapa.
 
 Referências de implementação: [boas práticas de build](https://docs.docker.com/build/building/best-practices/), [contexto e dockerignore](https://docs.docker.com/build/concepts/context/#dockerignore-files), [serviços do Compose](https://docs.docker.com/reference/compose-file/services/).
+
+
+## Backend de checkpoints opcional
+
+A composição também permite selecionar checkpoints e eventos PostgreSQL, após preparação explícita do schema e do papel `taxtrace_state`. Isso não migra vínculos de acesso ou a conta local, nem habilita Neon ou Render. Veja [persistência e validações pendentes](PERSISTENCIA.md). O padrão permanece SQLite.

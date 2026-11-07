@@ -186,3 +186,5 @@ Para registrar uma decisão na interface, configure a [conta local de revisor](d
 As revisões e exportações são restritas ao navegador que iniciou a consulta ou à conta administrativa de revisor. Veja [quem pode acessar cada registro](docs/AUTORIZACAO.md).
 
 Execução local da aplicação em contêiner, volumes privados e verificação da imagem: [Docker e limites para hospedagem](docs/DOCKER.md). A construção e execução da imagem ainda precisam de validação com o motor Docker ativo.
+
+Checkpoints e eventos podem usar um backend PostgreSQL opcional em Docker/Linux. O SQLite permanece como padrão. A [adaptação de persistência](docs/PERSISTENCIA.md) ainda exige integração real e não habilita o deploy por si só.

@@ -1,0 +1,44 @@
+{
+  "executado_em": "2026-11-07T21:04:53.594240+00:00",
+  "natureza": "implementacao_opcional_sem_integracao_postgres_real_nesta_rodada",
+  "testes": {
+    "python_descobertos": 173,
+    "python_aprovados": 149,
+    "python_desativados": 24,
+    "integracao_postgres_checkpoint_desativados": 3,
+    "javascript_aprovados": 6
+  },
+  "verificacao_apos_ajuste_da_representacao_do_evento": {
+    "checkpoint_unitarios_aprovados": 6,
+    "integracao_checkpoint_desativados": 3,
+    "revisao_sqlite_aprovados": 9
+  },
+  "qualidade": {
+    "ruff_check": "aprovado",
+    "ruff_format": "81 arquivos conformes",
+    "pip_check": "sem dependências incompatíveis",
+    "compose_config": "aprovado",
+    "git_diff_check": "aprovado"
+  },
+  "backend_padrao": "sqlite",
+  "adaptador_postgres": "langgraph-checkpoint-postgres==3.2.0",
+  "codigo_sha256": {
+    "taxtrace/checkpoints.py": "f7b8c4d56bbb94a0c98a246987577ff8fa2598e580d8993ab335e0c659cc515e",
+    "taxtrace/revisao.py": "d2c15098dc16f3c2acabf58bda07c26acdc7fe336516e765d23e50c4799a2093",
+    "requirements.txt": "d93b95f6e2b3364df90c93ec467d0ab2ff21abe6a183f103ebddfcfc480ae292",
+    "tests/test_checkpoints.py": "c3ed8047974add49b1a88d85736c8c15abdd17a0eed44d57f290fcebf78b30f3"
+  },
+  "conexoes_reais_de_checkpoint_executadas": false,
+  "estado_existente_migrado": false,
+  "novas_chamadas_de_modelo": 0,
+  "deploy_realizado": false,
+  "limitacoes": [
+    "Portas locais 15433 e 15434 indisponíveis; três testes novos de integração não executados.",
+    "Backend de execução PostgreSQL limitado ao Docker/Linux e a destino local/Compose explicitamente permitido.",
+    "Neon e conexão remota ainda não habilitados.",
+    "Vínculos de acesso e credencial do revisor ainda dependem de arquivos locais.",
+    "Preparação de schema e grants implementada, mas não executada contra um banco real nesta rodada.",
+    "Sem migração automática dos checkpoints SQLite; arquivos originais preservados."
+  ],
+  "fonte_adaptador": "https://docs.langchain.com/oss/python/langgraph/persistence"
+}

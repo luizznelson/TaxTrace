@@ -156,3 +156,5 @@ Recording a web review decision requires a [local reviewer account](docs/AUTENTI
 Reviews and exports are restricted to the browser that started the query or the administrative reviewer account. See the [access policy](docs/AUTORIZACAO.md) (Portuguese).
 
 Local application container, private volumes and image verification: [Docker and hosting limits](docs/DOCKER.md) (Portuguese). Image build and runtime still require validation with an available Docker engine.
+
+Checkpoints and review events have an optional PostgreSQL backend for Docker/Linux. SQLite remains the default. The [persistence adaptation](docs/PERSISTENCIA.md) (Portuguese) still requires real integration validation and does not enable deployment by itself.

@@ -18,6 +18,7 @@ from langsmith import tracing_context
 from mcp import Client, StdioServerParameters
 
 from taxtrace.agente import DecisaoRevisao, criar_grafo, dossie_revisao
+from taxtrace.checkpoints import abrir_postgres, backend, registrar_evento
 from taxtrace.conexao import ambiente_mcp
 
 VERSAO = 2
@@ -30,6 +31,7 @@ def impressao_codigo():
         for n in (
             "agente.py",
             "conexao.py",
+            "checkpoints.py",
             "autenticacao.py",
             "propriedade.py",
             "web.py",
@@ -44,6 +46,7 @@ def impressao_codigo():
     dados = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in arquivos}
     dados["langgraph"] = version("langgraph")
     dados["checkpointer"] = version("langgraph-checkpoint-sqlite")
+    dados["checkpointer_postgres"] = version("langgraph-checkpoint-postgres")
     return hashlib.sha256(json.dumps(dados, sort_keys=True).encode()).hexdigest()
 
 
@@ -122,6 +125,28 @@ def registrar(raiz, retrato_atual, operacao):
     return {**retrato_atual, "registro": str(pasta.relative_to(raiz))}
 
 
+@asynccontextmanager
+async def armazenamento(raiz, revisao_id, *, criar=False):
+    validar_id(revisao_id)
+    if backend(raiz) == "postgres":
+        async with abrir_postgres(raiz, revisao_id) as aberto:
+            yield aberto
+        return
+    banco, trava = caminhos(raiz, revisao_id)
+    if not criar and not banco.is_file():
+        raise ValueError("revisao_nao_encontrada")
+    banco.parent.mkdir(parents=True, exist_ok=True)
+    with FileLock(trava, timeout=0):
+        async with AsyncSqliteSaver.from_conn_string(str(banco)) as saver:
+            yield saver, None
+
+
+async def persistir_registro(raiz, atual, operacao, conn):
+    if conn is None:
+        return registrar(raiz, atual, operacao)
+    return await registrar_evento(conn, atual, operacao)
+
+
 async def iniciar(pergunta, *, modo="local", coleta_id=None, raiz=None, cliente=None, gerador=None):
     if not isinstance(pergunta, str) or not 3 <= len(pergunta.strip()) <= 500:
         raise ValueError("pergunta_invalida")
@@ -131,10 +156,8 @@ async def iniciar(pergunta, *, modo="local", coleta_id=None, raiz=None, cliente=
         raise ValueError("configuracao_invalida")
     raiz = Path(raiz) if raiz else Path(__file__).resolve().parent.parent
     revisao_id = str(uuid4())
-    banco, trava = caminhos(raiz, revisao_id)
-    banco.parent.mkdir(parents=True, exist_ok=True)
-    with FileLock(trava, timeout=0), tracing_context(enabled=False):
-        async with AsyncSqliteSaver.from_conn_string(str(banco)) as saver:
+    with tracing_context(enabled=False):
+        async with armazenamento(raiz, revisao_id, criar=True) as (saver, conn):
             async with cliente_mcp(raiz, cliente) as remoto:
                 grafo = criar_grafo(
                     remoto,
@@ -158,29 +181,23 @@ async def iniciar(pergunta, *, modo="local", coleta_id=None, raiz=None, cliente=
                     config(revisao_id),
                 )
                 atual = retrato(await grafo.aget_state(config(revisao_id)), revisao_id)
-        return registrar(raiz, atual, "iniciar")
+            return await persistir_registro(raiz, atual, "iniciar", conn)
 
 
 async def inspecionar(revisao_id, *, raiz=None):
     raiz = Path(raiz) if raiz else Path(__file__).resolve().parent.parent
-    banco, trava = caminhos(raiz, revisao_id)
-    if not banco.is_file():
-        raise ValueError("revisao_nao_encontrada")
-    with FileLock(trava, timeout=0), tracing_context(enabled=False):
-        async with AsyncSqliteSaver.from_conn_string(str(banco)) as saver:
+    with tracing_context(enabled=False):
+        async with armazenamento(raiz, revisao_id) as (saver, conn):
             grafo = criar_grafo(SemFerramentas(), raiz, checkpointer=saver, revisao_humana=True)
             atual = retrato(await grafo.aget_state(config(revisao_id)), revisao_id)
-        return registrar(raiz, atual, "inspecionar")
+            return await persistir_registro(raiz, atual, "inspecionar", conn)
 
 
 async def decidir(revisao_id, decisao, *, raiz=None):
     decisao = DecisaoRevisao.model_validate(decisao)
     raiz = Path(raiz) if raiz else Path(__file__).resolve().parent.parent
-    banco, trava = caminhos(raiz, revisao_id)
-    if not banco.is_file():
-        raise ValueError("revisao_nao_encontrada")
-    with FileLock(trava, timeout=0), tracing_context(enabled=False):
-        async with AsyncSqliteSaver.from_conn_string(str(banco)) as saver:
+    with tracing_context(enabled=False):
+        async with armazenamento(raiz, revisao_id) as (saver, conn):
             grafo = criar_grafo(SemFerramentas(), raiz, checkpointer=saver, revisao_humana=True)
             antes = retrato(await grafo.aget_state(config(revisao_id)), revisao_id)
             if not antes["pendente"]:
@@ -191,7 +208,7 @@ async def decidir(revisao_id, decisao, *, raiz=None):
                 raise ValueError("dossie_da_decisao_divergente")
             await grafo.ainvoke(Command(resume=decisao.model_dump()), config(revisao_id))
             depois = retrato(await grafo.aget_state(config(revisao_id)), revisao_id)
-        return registrar(raiz, depois, "decidir")
+            return await persistir_registro(raiz, depois, "decidir", conn)
 
 
 def main(argv=None):

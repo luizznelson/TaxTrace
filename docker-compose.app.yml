@@ -11,6 +11,8 @@ services:
       - "127.0.0.1:8017:8015"
     environment:
       TAXTRACE_DATABASE_MODE: compose
+      TAXTRACE_CHECKPOINT_BACKEND: ${TAXTRACE_CHECKPOINT_BACKEND:-sqlite}
+      TAXTRACE_CHECKPOINT_DATABASE_URL: "postgresql://taxtrace_state:${TAXTRACE_CHECKPOINT_PASSWORD:-}@db:5432/taxtrace"
       TAXTRACE_READER_DATABASE_URL: "postgresql://taxtrace_reader:${TAXTRACE_READER_PASSWORD:?Configure o .env}@db:5432/taxtrace"
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash-lite}
