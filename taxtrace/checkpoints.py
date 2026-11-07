@@ -20,6 +20,7 @@ from psycopg.conninfo import conninfo_to_dict
 from psycopg.rows import dict_row
 
 from taxtrace.conexao import opcoes
+from taxtrace.remoto import opcoes_neon
 
 SCHEMA = "taxtrace_workflow"
 OPTIONS = "-c search_path=taxtrace_workflow,pg_catalog -c statement_timeout=10000"
@@ -45,6 +46,14 @@ def parametros(raiz):
         and p.get("host") == "db"
         and str(p.get("port")) == "5432"
     )
+    if not (local or compose) and os.environ.get("TAXTRACE_DATABASE_MODE") == "neon":
+        p = opcoes_neon(p, "taxtrace_state")
+        return {
+            **p,
+            "connect_timeout": 5,
+            "application_name": "taxtrace-checkpoints",
+            "options": OPTIONS,
+        }
     if (
         not (local or compose)
         or p.get("dbname") != "taxtrace"

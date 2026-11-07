@@ -7,6 +7,8 @@ import psycopg
 from dotenv import load_dotenv
 from psycopg.conninfo import conninfo_to_dict
 
+from taxtrace.remoto import opcoes_neon
+
 
 def opcoes(raiz: Path, *, teste=False, leitura=False) -> dict:
     load_dotenv(raiz / ".env", override=False)
@@ -44,7 +46,10 @@ def opcoes(raiz: Path, *, teste=False, leitura=False) -> dict:
             and params.get("dbname") == "taxtrace"
         )
         if not compose:
-            raise ValueError("somente_banco_local_nesta_etapa")
+            if leitura and os.environ.get("TAXTRACE_DATABASE_MODE") == "neon":
+                params = opcoes_neon(params, "taxtrace_reader")
+            else:
+                raise ValueError("somente_banco_local_nesta_etapa")
     if leitura and params.get("user") != "taxtrace_reader":
         raise ValueError("leitura_exige_login_restrito")
     params.update(connect_timeout=5, application_name="taxtrace-test" if teste else "taxtrace")
@@ -64,7 +69,12 @@ def ambiente_mcp(raiz: Path) -> dict:
         "PYTHONIOENCODING": "utf-8",
         **{
             chave: os.environ[chave]
-            for chave in ("TAXTRACE_READER_DATABASE_URL", "TAXTRACE_DATABASE_MODE")
+            for chave in (
+                "TAXTRACE_READER_DATABASE_URL",
+                "TAXTRACE_DATABASE_MODE",
+                "TAXTRACE_NEON_HOST",
+                "TAXTRACE_NEON_DATABASE",
+            )
             if os.environ.get(chave)
         },
     }

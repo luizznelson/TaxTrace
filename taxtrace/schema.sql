@@ -141,3 +141,14 @@ CREATE TABLE IF NOT EXISTS fragmentos_semanticos (
     CHECK (char_length(texto)=fim-inicio)
 );
 -- Busca exata neste corpus pequeno; sem índice aproximado ou perda de recall de ANN.
+
+
+-- Arquivos originais ligados à captura; fora da imagem e do Git.
+CREATE TABLE IF NOT EXISTS fontes_preservadas (
+    coleta_id bigint NOT NULL REFERENCES coletas(id),
+    nome text NOT NULL,
+    sha256 text NOT NULL CHECK (sha256 ~ '^[0-9a-f]{64}$'),
+    bytes_originais integer NOT NULL CHECK (bytes_originais BETWEEN 0 AND 16777216),
+    conteudo_gzip bytea NOT NULL CHECK (octet_length(conteudo_gzip) <= 33554432),
+    PRIMARY KEY (coleta_id,nome)
+);

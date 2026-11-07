@@ -143,8 +143,9 @@ Integration tests require explicit opt-in and the dedicated local test database,
 
 ## Operation and evidence
 
-Docker/Linux execution with real PostgreSQL passed **180 tests**, with three skipped without the official raw collection. Tests covered checkpoints, events, browser isolation and runtime-role permissions. [Evidence](runs/2026-11-07-persistent-access/verification.json) preserves preliminary failures and the cleanup fix. No deployment or automatic history migration was performed.
+Docker/Linux execution with real PostgreSQL passed **193 tests**, with three skipped without the official raw collection. Tests covered checkpoints, events, browser isolation and runtime-role permissions. [Evidence](runs/2026-11-07-neon-runtime-preparation/verification.json) preserves preliminary failures and the cleanup fix. No deployment or automatic history migration was performed.
 
+- [Neon and preserved-source preparation](docs/NEON.md): private configuration, pinned destination, TLS policy and source snapshots in PostgreSQL.
 - [Docker](docs/DOCKER.md): local runtime and disposable integration environment.
 - [Persistence](docs/PERSISTENCIA.md): SQLite by default; optional PostgreSQL checkpoints, events and access bindings.
 - [Reviewer authentication](docs/AUTENTICACAO.md) and [access authorization](docs/AUTORIZACAO.md): authenticated decisions and browser-owned or administrative reads. Credentials may come from private runtime configuration.

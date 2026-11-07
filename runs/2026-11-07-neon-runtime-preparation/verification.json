@@ -1,0 +1,71 @@
+{
+  "executado_em": "2026-11-07T21:58:19.234041+00:00",
+  "natureza": "preparacao_runtime_neon_sem_conexao_ao_projeto_remoto",
+  "imagem_validada": "sha256:1d666bceab315049a02726508ba99a80c67887bbda03819d2e42b9c8568f6c42",
+  "suite_docker_linux": {
+    "descobertos": 196,
+    "aprovados": 193,
+    "desativados": 3,
+    "motivo_desativacao": "sem montagem da coleta oficial na suíte padrão"
+  },
+  "javascript_aprovados": 6,
+  "politica_tls": "testes de configuração, host fixado e TLS verify-full; sem handshake contra Neon real",
+  "captura_oficial_adicional": {
+    "status": "captura_preservada_verificada",
+    "pasta_da_captura": "2026-11-05",
+    "versao_base": "V0066",
+    "contagens": {
+      "artigos": 580,
+      "classificacoes": 170,
+      "ligacoes": 169,
+      "ncm": 10515,
+      "divergencias": 3
+    },
+    "arquivos_preservados": 7,
+    "fontes_oficiais": 6,
+    "inclui_manifesto_original": true,
+    "bytes_originais": 6482869,
+    "bytes_gzip": 517414,
+    "leitura_sem_arquivos_locais": {
+      "artigo": "125",
+      "localizacao": "ancora_verificada_na_coleta",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art125",
+      "texto_sha256": "1bfa47d979395deb7199c5c2f5d46ecd0db38df67678ee6c657947bc7b6002ff"
+    },
+    "alteracoes_desfeitas": true,
+    "suficiencia_juridica": "nao_avaliada",
+    "chamadas_de_modelo": 0
+  },
+  "rollback_confirmado_por_consulta": "to_regclass('public.coletas') IS NULL retornou true após a verificação",
+  "estado_de_desenvolvimento_alterado": false,
+  "conexao_neon_real_executada": false,
+  "normalizador_do_arquivo_privado_real_executado": false,
+  "objetos_neon_criados": false,
+  "deploy_realizado": false,
+  "novas_chamadas_de_modelo": 0,
+  "codigo_sha256": {
+    "taxtrace/remoto.py": "7891d06237028958d8c5fb082d239969c30fdb1ed21154579a3370dbe20cd020",
+    "taxtrace/conexao.py": "309cc1483f1314aeb75d2554cd429bd4210a98c4fe75e29c55e34e6155a67e42",
+    "taxtrace/checkpoints.py": "134b15e86a3985a435bc5fea17bdec2a5a60fc0c436e3b23c66ec61ce0ff68e9",
+    "taxtrace/fontes.py": "417e209454fdd445820d169df71ed955475a3f16b91ae5bd357af6e3582fa73d",
+    "taxtrace/banco.py": "1cacf6ff809e9423c0f4804eeaff2f56780045fa9d2c64fbf1e0aa760aba3b72",
+    "taxtrace/leitura.py": "3652a72f323a0de997cb2ed225025ce2363abc158c753de5dd40f8165173aaf6",
+    "taxtrace/schema.sql": "5c80f4a5802b98119f16911ec5909d0edbfdb9874d42025a910540b5c5380084",
+    "taxtrace/configurar_neon.py": "f5e6ff6507e9be80b36e72c7b30a6e02ea75d923a2fba6b2a758c5a1a3430673",
+    "scripts/verify_preserved_capture.py": "278e6fd51b5bf98dac9011d56e9aface60ea63c29cd73defeaa43f4fc06d8604",
+    "tests/test_remote_policy.py": "b41ec003ba564663af0583122ba7f43fbd36b404ca416fd651347cebddd461d8",
+    "tests/test_fontes.py": "7b638f3d3415aa5fd6771090e76d28077a0780b968436eff52bf1821bb34a8be"
+  },
+  "limites": [
+    "TLS de destino real ainda depende da configuração privada e de validação posterior.",
+    "Manutenção remota não foi liberada nas funções administrativas padrão.",
+    "A captura é de 2026-11-05, API para 2027-01-01 e versão V0066; não confirma vigência atual.",
+    "Leitura de fonte e verificação de hash não substituem revisão fiscal.",
+    "Papéis e schemas remotos precisam de plano e preparação explícitos antes de habilitar runtime."
+  ],
+  "referencias": [
+    "https://neon.com/docs/connect/connect-securely",
+    "https://neon.com/docs/connect/connection-pooling",
+    "https://www.postgresql.org/docs/current/libpq-ssl.html"
+  ]
+}

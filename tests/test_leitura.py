@@ -8,6 +8,11 @@ from taxtrace.leitura import ler_integral, link_artigo, paragrafos
 
 
 class LeituraTest(unittest.TestCase):
+    def setUp(self):
+        patcher = patch("taxtrace.leitura.ler_fonte_preservada", return_value=None)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_preserva_paragrafos_e_riscado_entre_linhas_sem_interpretar_html(self):
         texto = (
             "Art. 1. Texto.\n§ 1º ⟦antigo\nainda antigo⟧ novo "

@@ -17,6 +17,7 @@ from psycopg.types.json import Jsonb
 from taxtrace import lei, ligacao, tabelas
 from taxtrace.conexao import conectar
 from taxtrace.documentos import texto_ativo
+from taxtrace.fontes import preservar
 from taxtrace.integridade import verificar
 from taxtrace.tabelas import Tabelas
 
@@ -151,7 +152,12 @@ def carregar_pasta(conn: psycopg.Connection, pasta: Path) -> int:
     t = tabelas.carregar(pasta)
     artigos = lei.ler_artigos((pasta / "lc214_planalto.html").read_bytes())
     ligacoes = ligacao.ligar(t.classificacoes, artigos)
-    return gravar(conn, t, artigos, ligacoes, manifesto=manifesto, manifesto_sha256=checksum)
+    with conn.transaction():
+        coleta_id = gravar(
+            conn, t, artigos, ligacoes, manifesto=manifesto, manifesto_sha256=checksum
+        )
+        preservar(conn, coleta_id, pasta)
+    return coleta_id
 
 
 def preparar_leitor(conn, senha):
@@ -168,7 +174,7 @@ def preparar_leitor(conn, senha):
     conn.execute("REVOKE ALL ON ALL TABLES IN SCHEMA public FROM taxtrace_reader")
     conn.execute(
         "GRANT SELECT ON coletas,artigos,alteracoes,classificacoes,ligacoes,ncm,"
-        "divergencias,documentos_busca,indices_semanticos,fragmentos_semanticos "
+        "divergencias,documentos_busca,indices_semanticos,fragmentos_semanticos,fontes_preservadas "
         "TO taxtrace_reader"
     )
 

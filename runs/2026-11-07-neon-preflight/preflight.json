@@ -1,0 +1,25 @@
+{
+  "executado_em": "2026-11-07T22:00:06.928683+00:00",
+  "status": "preflight_somente_leitura_concluido",
+  "identificacao": {
+    "banco": "neondb",
+    "papel": "neondb_owner",
+    "somente_leitura": "on"
+  },
+  "tls": {
+    "ssl": false,
+    "version": null,
+    "cipher": null
+  },
+  "tabelas_existentes": [],
+  "papeis_runtime_existentes": [],
+  "extensao_vector": [
+    {
+      "name": "vector",
+      "default_version": "0.8.6",
+      "installed_version": null
+    }
+  ],
+  "objetos_criados": false,
+  "dados_alterados": false
+}

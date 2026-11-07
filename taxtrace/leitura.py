@@ -10,6 +10,7 @@ from urllib.parse import quote, urlsplit, urlunsplit
 from psycopg.rows import dict_row
 
 from taxtrace.consultas import fonte, metadados, selecionar_coleta
+from taxtrace.fontes import ler_fonte_preservada
 from taxtrace.lei import ABRE_RISCADO, FECHA_RISCADO, decodificar
 
 
@@ -128,12 +129,18 @@ def ler_integral(conn, relatorio, numero, raiz):
             (coleta["id"], numero),
         )
         registro = cur.fetchone()
+        conteudo_fonte = ler_fonte_preservada(cur, coleta["id"], "lc214_planalto", origem["sha256"])
     if not registro:
         raise ValueError("artigo_integral_indisponivel")
     texto = registro["texto"]
     if len(texto) > 200000:
         raise ValueError("artigo_integral_excede_limite")
-    ancoras = ancoras_verificadas(str(raiz), origem["sha256"])
+    if conteudo_fonte is not None:
+        parser = Ancora()
+        parser.feed(decodificar(conteudo_fonte))
+        ancoras = frozenset(parser.nomes)
+    else:
+        ancoras = ancoras_verificadas(str(raiz), origem["sha256"])
     url = link_artigo(origem["url"], numero, ancoras)
     return {
         "status": "artigo_integral_da_coleta",

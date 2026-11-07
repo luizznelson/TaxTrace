@@ -28,7 +28,7 @@ A URL de checkpoints é independente da URL de consulta e da administrativa. Sã
 - local: papel `taxtrace_state`, banco `taxtrace`, loopback e porta 15433;
 - Compose: mesmo papel e banco, host `db`, porta 5432, com modo Compose explícito.
 
-Hosts remotos, papel administrativo, banco de testes e opções arbitrárias são recusados. **A conexão Neon ainda não está habilitada por esta entrega.** O estado usa schema próprio e a configuração de checkpoints não é encaminhada ao subprocesso MCP, que recebe apenas a conexão de leitura das fontes.
+Por padrão, hosts remotos continuam recusados. A exceção Neon exige host e banco fixados e TLS verificado; papel administrativo, banco de testes e opções arbitrárias continuam recusados no runtime. **O suporte Neon passou a ser opcional por configuração explícita, descrita em [NEON.md](NEON.md); a conexão com o destino real ainda não foi executada.** O estado usa schema próprio e a configuração de checkpoints não é encaminhada ao subprocesso MCP, que recebe apenas a conexão de leitura das fontes.
 
 ## Preparar o banco local explicitamente
 
@@ -79,3 +79,6 @@ Para um banco já preparado na etapa anterior, execute novamente a preparação 
 A configuração `TAXTRACE_REVIEWER_CREDENTIAL_JSON` pode conter a credencial com salt e hash já gerada localmente. Ela prevalece sobre o arquivo de conta quando preenchida. Não é uma senha em texto puro, mas é material privado e deve ser protegido como segredo. Configuração inválida impede inicialização, sem voltar silenciosamente ao arquivo. Quando ausente ou vazia, permanece o comportamento local anterior. Veja [como preparar o acesso](AUTENTICACAO.md).
 
 As sessões autenticadas e o limitador de tentativas continuam em memória: reiniciar exige novo login. A credencial configurada pode ser restaurada pelo ambiente, enquanto checkpoints e vínculos permanecem no PostgreSQL. Esta entrega continua limitada a uma instância local de validação; não habilita Neon, HTTPS, cotas ou transporte público automaticamente.
+
+
+As fontes originais também podem ser preservadas no PostgreSQL. Isso remove a dependência de `data/raw` para o leitor quando a captura correspondente está arquivada; veja [preparação remota e fontes](NEON.md). A carga remota ainda depende da preparação do destino.

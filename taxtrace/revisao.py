@@ -31,6 +31,7 @@ def impressao_codigo():
         for n in (
             "agente.py",
             "conexao.py",
+            "remoto.py",
             "checkpoints.py",
             "autenticacao.py",
             "propriedade.py",
