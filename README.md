@@ -182,3 +182,5 @@ A avaliação das respostas inclui [casos adversariais](evals/RAG.md) e um [paco
 Diagnóstico do serviço e execução automática dos casos adversariais: [operação e evidências](docs/OPERACAO.md).
 
 Para registrar uma decisão na interface, configure a [conta local de revisor](docs/AUTENTICACAO.md). Sem login, as decisões ficam bloqueadas; a autenticação local ainda não encerra os requisitos para publicação multiusuário.
+
+As revisões e exportações são restritas ao navegador que iniciou a consulta ou à conta administrativa de revisor. Veja [quem pode acessar cada registro](docs/AUTORIZACAO.md).

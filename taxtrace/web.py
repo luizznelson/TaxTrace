@@ -22,6 +22,7 @@ from taxtrace.autenticacao import COOKIE, DURACAO, AcessoRevisor
 from taxtrace.conexao import conectar
 from taxtrace.consultas import resumo_base
 from taxtrace.leitura import ler_integral
+from taxtrace.propriedade import COOKIE_VISITANTE, VALIDADE, Propriedade, dono
 from taxtrace.revisao import decidir, iniciar, inspecionar
 
 
@@ -74,6 +75,7 @@ def criar_app(raiz=None):
     ativos = 0
     csrf = secrets.token_urlsafe(32)
     acesso = AcessoRevisor(raiz)
+    propriedade = Propriedade(raiz)
     login_lock = asyncio.Lock()
 
     @asynccontextmanager
@@ -91,6 +93,19 @@ def criar_app(raiz=None):
     app.add_middleware(
         TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost"], www_redirect=False
     )
+
+    async def autorizar(revisao_id, request):
+        if acesso.usuario(request.cookies.get(COOKIE)) is not None:
+            return
+        try:
+            permitido = await asyncio.to_thread(
+                propriedade.permite, str(revisao_id), dono(request.cookies.get(COOKIE_VISITANTE))
+            )
+        except Exception as erro:
+            raise falha_publica(erro) from None
+        if not permitido:
+            # Mesmo resultado para ID inexistente e revisão de outra sessão.
+            raise HTTPException(404, detail={"codigo": "revisao_nao_encontrada"})
 
     @app.middleware("http")
     async def proteger(request: Request, call_next):
@@ -160,7 +175,7 @@ def criar_app(raiz=None):
     @app.get("/api/contexto")
     async def contexto(request: Request):
         cfg = dotenv_values(raiz / ".env")
-        return {
+        dados = {
             "csrf": csrf,
             "gemini_disponivel": bool(cfg.get("GEMINI_API_KEY")),
             "rag_disponivel": bool(cfg.get("GEMINI_API_KEY")),
@@ -170,6 +185,19 @@ def criar_app(raiz=None):
                 "usuario": acesso.usuario(request.cookies.get(COOKIE)),
             },
         }
+
+        response = JSONResponse(dados)
+        if dono(request.cookies.get(COOKIE_VISITANTE)) is None:
+            response.set_cookie(
+                COOKIE_VISITANTE,
+                secrets.token_hex(32),
+                max_age=VALIDADE,
+                httponly=True,
+                samesite="strict",
+                secure=request.url.scheme == "https",
+                path="/",
+            )
+        return response
 
     @app.post("/api/acesso/entrar")
     async def entrar(dados: LoginWeb, request: Request):
@@ -225,6 +253,10 @@ def criar_app(raiz=None):
             raise HTTPException(
                 422, detail={"codigo": "identificador_de_tentativa_invalido"}
             ) from None
+        proprietario = dono(request.cookies.get(COOKIE_VISITANTE))
+        if proprietario is None:
+            raise HTTPException(401, detail={"codigo": "sessao_navegador_necessaria"})
+        identificador = (proprietario, identificador)
         fingerprint = hashlib.sha256(dados.model_dump_json().encode()).hexdigest()
         if identificador in cache:
             anterior, tarefa = cache[identificador]
@@ -243,9 +275,13 @@ def criar_app(raiz=None):
             async def trabalho():
                 nonlocal ativos
                 try:
-                    return await iniciar(
+                    relatorio = await iniciar(
                         dados.pergunta, modo=dados.modo, coleta_id=dados.coleta_id, raiz=raiz
                     )
+                    await asyncio.to_thread(
+                        propriedade.vincular, relatorio["revisao_id"], proprietario
+                    )
+                    return relatorio
                 finally:
                     ativos -= 1
 
@@ -257,14 +293,16 @@ def criar_app(raiz=None):
             raise falha_publica(erro) from None
 
     @app.get("/api/revisoes/{revisao_id}")
-    async def recuperar(revisao_id: UUID):
+    async def recuperar(revisao_id: UUID, request: Request):
+        await autorizar(revisao_id, request)
         try:
             return resposta_json(await inspecionar(str(revisao_id), raiz=raiz))
         except Exception as erro:
             raise falha_publica(erro) from None
 
     @app.get("/api/revisoes/{revisao_id}/artigos/{numero}")
-    async def artigo_integral(revisao_id: UUID, numero: str):
+    async def artigo_integral(revisao_id: UUID, numero: str, request: Request):
+        await autorizar(revisao_id, request)
         try:
             relatorio = await inspecionar(str(revisao_id), raiz=raiz)
 
@@ -294,7 +332,8 @@ def criar_app(raiz=None):
             raise falha_publica(erro) from None
 
     @app.get("/api/revisoes/{revisao_id}/exportar")
-    async def exportar(revisao_id: UUID):
+    async def exportar(revisao_id: UUID, request: Request):
+        await autorizar(revisao_id, request)
         try:
             dados = await inspecionar(str(revisao_id), raiz=raiz)
             return Response(

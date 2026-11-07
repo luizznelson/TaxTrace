@@ -7,6 +7,7 @@ from uuid import uuid4
 
 from fastapi.testclient import TestClient
 
+from taxtrace.propriedade import COOKIE_VISITANTE, Propriedade, dono
 from taxtrace.web import criar_app
 
 
@@ -18,6 +19,11 @@ class WebTest(unittest.TestCase):
         self.client.__enter__()
         self.addCleanup(self.client.__exit__, None, None, None)
         self.token = self.client.get("/api/contexto").json()["csrf"]
+
+    def vincular(self, rid):
+        Propriedade(Path(self.tmp.name)).vincular(
+            rid, dono(self.client.cookies.get(COOKIE_VISITANTE))
+        )
 
     def headers(self, key=None):
         return {
@@ -97,14 +103,17 @@ class WebTest(unittest.TestCase):
         self.assertEqual(c.status_code, 409)
 
     def test_falha_privada_nao_aparece_na_resposta(self):
+        rid = str(uuid4())
+        self.vincular(rid)
         with patch("taxtrace.web.inspecionar", side_effect=RuntimeError("PRIVATE_SENTINEL")):
-            r = self.client.get("/api/revisoes/" + str(uuid4()))
+            r = self.client.get("/api/revisoes/" + rid)
         self.assertEqual(r.status_code, 503)
         self.assertNotIn("PRIVATE_SENTINEL", r.text)
 
     def test_modo_rag_e_encaminhado_explicitamente_sem_troca_silenciosa(self):
         with patch(
-            "taxtrace.web.iniciar", return_value={"status": "aguardando_revisao"}
+            "taxtrace.web.iniciar",
+            return_value={"status": "aguardando_revisao", "revisao_id": str(uuid4())},
         ) as iniciar:
             r = self.client.post(
                 "/api/consultas",
@@ -116,6 +125,7 @@ class WebTest(unittest.TestCase):
 
     def test_leitura_integral_usa_revisao_e_nao_aceita_coleta_do_cliente(self):
         rid = str(uuid4())
+        self.vincular(rid)
         report = {"estado": {"coleta": {"id": 7}}}
         with (
             patch("taxtrace.web.inspecionar", return_value=report),

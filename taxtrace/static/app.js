@@ -2,6 +2,10 @@ import { prepareQuery } from "./query-input.mjs";
 const $ = (q) => document.querySelector(q);
 const strings = {
     pt: {
+        browserSessionRequired:
+            "Recarregue a página e permita cookies deste site para iniciar uma consulta.",
+        reviewerScope:
+            "Esta conta de revisor tem acesso administrativo às revisões deste ambiente.",
         accountAuthenticated: "Conta de revisor autenticada localmente",
         accessTitle: "Acesso do revisor",
         accessHint:
@@ -29,7 +33,7 @@ const strings = {
         identifier: "Identificador da revisão",
         open: "Abrir revisão",
         sideNote:
-            "Histórico desta aba. Os registros de revisão podem ser retomados pelo identificador.",
+            "Histórico desta aba. Abra registros do mesmo navegador ou entre como revisor para acessar outros registros.",
         understand: "Como usar",
         scope: "REFORMA TRIBUTÁRIA · IBS E CBS",
         hero: "Qual referência você precisa conferir?",
@@ -86,7 +90,8 @@ const strings = {
         conflict:
             "A revisão mudou ou já foi encerrada. Abra-a novamente antes de decidir.",
         busy: "Já há consultas em andamento. Aguarde e tente novamente.",
-        notFound: "Revisão não encontrada neste ambiente.",
+        notFound:
+            "Revisão não disponível para esta sessão. Confira o identificador ou entre como revisor.",
         evidence: "Resultados da pesquisa",
         pending: "Aguardando revisão",
         approved: "Revisão aprovada",
@@ -223,7 +228,8 @@ const strings = {
         scopeText:
             "Cálculo de tributos, enquadramento automático de produtos ou confirmação de vigência atual. A resposta com IA é uma síntese documental, sujeita a revisão.",
         sessionLimit: "Até 10 consultas · histórico da aba",
-        restoreText: "Use o identificador de um registro salvo neste ambiente.",
+        restoreText:
+            "Use o identificador de uma consulta deste navegador. Registros antigos ou de outro navegador exigem acesso de revisor.",
         sourceIntro:
             "As consultas usam uma coleta identificada, não uma busca em tempo real na legislação. Confira as datas e a fonte oficial antes de interpretar o resultado.",
         catalogTitle: "Conteúdo das fontes",
@@ -315,6 +321,10 @@ const strings = {
             "Os documentos disponíveis não sustentaram uma resposta para esta pergunta. Reformule ou confira as fontes.",
     },
     en: {
+        browserSessionRequired:
+            "Reload the page and allow cookies for this site before starting a query.",
+        reviewerScope:
+            "This reviewer account has administrative access to reviews in this environment.",
         accountAuthenticated: "Locally authenticated reviewer account",
         accessTitle: "Reviewer access",
         accessHint:
@@ -342,7 +352,7 @@ const strings = {
         identifier: "Review identifier",
         open: "Open review",
         sideNote:
-            "History for this tab. Review records can be resumed using their identifier.",
+            "History for this tab. Open records from the same browser or sign in as a reviewer to access other records.",
         understand: "How to use",
         scope: "BRAZILIAN TAX REFORM · IBS AND CBS",
         hero: "Which reference do you need to check?",
@@ -399,7 +409,8 @@ const strings = {
         conflict:
             "The review changed or is already closed. Open it again before deciding.",
         busy: "Other queries are running. Please wait and try again.",
-        notFound: "Review not found in this environment.",
+        notFound:
+            "Review unavailable for this session. Check the identifier or sign in as a reviewer.",
         evidence: "Research results",
         pending: "Awaiting review",
         approved: "Review approved",
@@ -536,7 +547,7 @@ const strings = {
             "Tax calculation, automatic product classification or confirmation of current legal validity. AI answers are document syntheses requiring review.",
         sessionLimit: "Up to 10 queries · tab history",
         restoreText:
-            "Use the identifier of a record saved in this environment.",
+            "Use the identifier of a query from this browser. Older records or records from another browser require reviewer access.",
         sourceIntro:
             "Queries use an identified snapshot, not a live legal search. Check capture dates and official sources before interpreting results.",
         catalogTitle: "Source content",
@@ -761,23 +772,25 @@ async function api(path, options = {}) {
     }
     if (!response.ok) {
         const key =
-            response.status === 401
-                ? path === "/api/acesso/entrar"
-                    ? "loginError"
-                    : "loginRequired"
-                : data.codigo === "acesso_em_espera"
-                  ? "accessWait"
-                  : response.status === 403
-                    ? "expired"
-                    : response.status === 409
-                      ? "conflict"
-                      : response.status === 429
-                        ? "busy"
-                        : response.status === 404
-                          ? "notFound"
-                          : response.status === 422
-                            ? "inputError"
-                            : "error";
+            data.detail?.codigo === "sessao_navegador_necessaria"
+                ? "browserSessionRequired"
+                : response.status === 401
+                  ? path === "/api/acesso/entrar"
+                      ? "loginError"
+                      : "loginRequired"
+                  : data.codigo === "acesso_em_espera"
+                    ? "accessWait"
+                    : response.status === 403
+                      ? "expired"
+                      : response.status === 409
+                        ? "conflict"
+                        : response.status === 429
+                          ? "busy"
+                          : response.status === 404
+                            ? "notFound"
+                            : response.status === 422
+                              ? "inputError"
+                              : "error";
         throw new Error(key);
     }
     return data;
@@ -1402,6 +1415,7 @@ function renderAccess() {
             el("strong", "", `${t("accessActive")}: ${access.usuario.nome}`),
         );
         panel.append(el("p", "", t("accessLimit")));
+        panel.append(el("p", "", t("reviewerScope")));
         const exit = el("button", "button quiet", t("accessExit"));
         exit.type = "button";
         exit.addEventListener("click", async () => {

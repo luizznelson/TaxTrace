@@ -152,3 +152,5 @@ Answer evaluation includes [adversarial cases](evals/RAG.md) and a [quality revi
 Service diagnostics and automated adversarial evaluation: [operation and evidence](docs/OPERACAO.md) (Portuguese).
 
 Recording a web review decision requires a [local reviewer account](docs/AUTENTICACAO.md) (Portuguese). Decisions are blocked without a login; local authentication does not complete public multi-user deployment requirements.
+
+Reviews and exports are restricted to the browser that started the query or the administrative reviewer account. See the [access policy](docs/AUTORIZACAO.md) (Portuguese).

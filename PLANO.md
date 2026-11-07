@@ -108,6 +108,7 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Interface local FastAPI com bancada de pesquisa, lista selecionável, leitor de fontes e revisão contextual, PT/EN, histórico da aba, exportação e decisão vinculada ao hash. Teste visual de computador e tela pequena; ver `docs/INTERFACE.md`.
    - [x] Versão, captura e data consultada na API visíveis no painel de cada resposta, com aviso de vigência não confirmada. Essa apresentação não encerra a validação temporal por dispositivo.
    - [x] Diagnósticos separados de processo e base, sem chamadas ao modelo; avaliação adversarial incorporada ao CI com relatório preservado e falha em divergências estruturais. Execução remota ainda precisa ser conferida após o push. Ver `docs/OPERACAO.md`.
+   - [x] Autorização de revisões por sessão do navegador: leitura, exportação e fonte vinculada protegidas, idempotência isolada, vínculo persistente e acesso administrativo explícito do revisor. Validado localmente com dados sintéticos; ver `docs/AUTORIZACAO.md`.
    - [ ] Autenticação adequada antes de exposição pública, publicação e vídeo.
 
 ## Regras do projeto

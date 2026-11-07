@@ -1,0 +1,35 @@
+{
+  "executado_em": "2026-11-07T20:21:55.575480+00:00",
+  "natureza": "testes_locais_com_sessoes_e_credenciais_sinteticas",
+  "testes": {
+    "python_descobertos": 159,
+    "python_aprovados": 138,
+    "python_opcionais_ignorados": 21,
+    "javascript_aprovados": 6,
+    "ruff_check": "aprovado",
+    "ruff_format": "75 arquivos conformes"
+  },
+  "verificacoes": [
+    "Navegador proprietário consegue abrir a revisão e exportar JSON.",
+    "Outro navegador recebe HTTP 404 antes de acessar checkpoint ou fonte vinculada.",
+    "Identificador de tentativa igual em outro navegador não reutiliza a resposta anterior.",
+    "Vínculo de autorização persiste ao recriar a aplicação com os mesmos arquivos locais.",
+    "Perda do cookie, expiração do vínculo ou dono divergente não autorizam leitura anônima.",
+    "Conta de revisor autenticada acessa registros legados; logout remove essa permissão administrativa.",
+    "Banco de vínculos corrompido resulta em falha sanitizada, sem acesso ao checkpoint.",
+    "Token não aparece no JSON de contexto nem é guardado em texto puro no banco de vínculos."
+  ],
+  "codigo_sha256": {
+    "taxtrace/propriedade.py": "dae87209e45926c4a8ed2b64a8d088f90583ddfdf6919642e05cc6985bb2bf0e",
+    "taxtrace/web.py": "8e6cbe78eb186ee42743e9398c0c1b19a5f30f8fa276f57dcb3fdac01f93f293",
+    "tests/test_propriedade.py": "af8547a3f2f4d9fe5523733baaf9d90611744a97ade3fa1cb69ae3599eb84bb4"
+  },
+  "novas_chamadas_de_modelo": 0,
+  "publicado": false,
+  "limites": [
+    "PostgreSQL, MCP e Gemini não foram exercitados nesta validação de autorização; respostas de consulta foram simuladas.",
+    "Sem auditoria independente de segurança ou revisão fiscal realizada.",
+    "Serviço continua limitado a localhost e uma instância com arquivos persistentes.",
+    "Autenticação adequada ao destino público, HTTPS, cotas e configuração de hospedagem permanecem pendentes."
+  ]
+}

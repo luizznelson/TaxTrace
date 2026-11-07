@@ -29,6 +29,7 @@ def impressao_codigo():
         for n in (
             "agente.py",
             "autenticacao.py",
+            "propriedade.py",
             "web.py",
             "planejamento.py",
             "rag.py",
