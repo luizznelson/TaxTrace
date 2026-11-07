@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import json
+import os
 import secrets
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -177,8 +178,8 @@ def criar_app(raiz=None):
         cfg = dotenv_values(raiz / ".env")
         dados = {
             "csrf": csrf,
-            "gemini_disponivel": bool(cfg.get("GEMINI_API_KEY")),
-            "rag_disponivel": bool(cfg.get("GEMINI_API_KEY")),
+            "gemini_disponivel": bool(os.environ.get("GEMINI_API_KEY", cfg.get("GEMINI_API_KEY"))),
+            "rag_disponivel": bool(os.environ.get("GEMINI_API_KEY", cfg.get("GEMINI_API_KEY"))),
             "ambiente": "local_com_revisao_restrita",
             "acesso": {
                 "configurado": acesso.credencial is not None,

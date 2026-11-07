@@ -18,6 +18,7 @@ from langsmith import tracing_context
 from mcp import Client, StdioServerParameters
 
 from taxtrace.agente import DecisaoRevisao, criar_grafo, dossie_revisao
+from taxtrace.conexao import ambiente_mcp
 
 VERSAO = 2
 
@@ -28,6 +29,7 @@ def impressao_codigo():
         raiz / "taxtrace" / n
         for n in (
             "agente.py",
+            "conexao.py",
             "autenticacao.py",
             "propriedade.py",
             "web.py",
@@ -71,7 +73,7 @@ async def cliente_mcp(raiz, cliente=None):
             command=sys.executable,
             args=["-m", "taxtrace.servidor_mcp"],
             cwd=raiz,
-            env={"PYTHONIOENCODING": "utf-8"},
+            env=ambiente_mcp(raiz),
         )
         async with Client(parametros, read_timeout_seconds=15) as remoto:
             yield remoto

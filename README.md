@@ -184,3 +184,5 @@ Diagnóstico do serviço e execução automática dos casos adversariais: [opera
 Para registrar uma decisão na interface, configure a [conta local de revisor](docs/AUTENTICACAO.md). Sem login, as decisões ficam bloqueadas; a autenticação local ainda não encerra os requisitos para publicação multiusuário.
 
 As revisões e exportações são restritas ao navegador que iniciou a consulta ou à conta administrativa de revisor. Veja [quem pode acessar cada registro](docs/AUTORIZACAO.md).
+
+Execução local da aplicação em contêiner, volumes privados e verificação da imagem: [Docker e limites para hospedagem](docs/DOCKER.md). A construção e execução da imagem ainda precisam de validação com o motor Docker ativo.

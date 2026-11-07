@@ -109,6 +109,9 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Versão, captura e data consultada na API visíveis no painel de cada resposta, com aviso de vigência não confirmada. Essa apresentação não encerra a validação temporal por dispositivo.
    - [x] Diagnósticos separados de processo e base, sem chamadas ao modelo; avaliação adversarial incorporada ao CI com relatório preservado e falha em divergências estruturais. Execução remota ainda precisa ser conferida após o push. Ver `docs/OPERACAO.md`.
    - [x] Autorização de revisões por sessão do navegador: leitura, exportação e fonte vinculada protegidas, idempotência isolada, vínculo persistente e acesso administrativo explícito do revisor. Validado localmente com dados sintéticos; ver `docs/AUTORIZACAO.md`.
+   - [x] Pacote Docker local e composição com volumes privados, coleta somente leitura e usuário sem root; configuração Compose validada. Ambiente mínimo de leitura encaminhado ao MCP; disponibilidade de IA considera variáveis do processo.
+   - [ ] Construir e executar a imagem Docker: motor local sem resposta nesta rodada. Smoke e job de CI preparados, ainda sem execução comprovada. Ver `docs/DOCKER.md`.
+   - [ ] Adaptar estado persistente antes de Render Free: checkpoints, vínculos e conta não podem depender do filesystem efêmero. Conexão remota segura e identidade para hospedagem seguem pendentes.
    - [ ] Autenticação adequada antes de exposição pública, publicação e vídeo.
 
 ## Regras do projeto

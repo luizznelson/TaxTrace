@@ -154,3 +154,5 @@ Service diagnostics and automated adversarial evaluation: [operation and evidenc
 Recording a web review decision requires a [local reviewer account](docs/AUTENTICACAO.md) (Portuguese). Decisions are blocked without a login; local authentication does not complete public multi-user deployment requirements.
 
 Reviews and exports are restricted to the browser that started the query or the administrative reviewer account. See the [access policy](docs/AUTORIZACAO.md) (Portuguese).
+
+Local application container, private volumes and image verification: [Docker and hosting limits](docs/DOCKER.md) (Portuguese). Image build and runtime still require validation with an available Docker engine.

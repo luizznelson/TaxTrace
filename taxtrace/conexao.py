@@ -35,8 +35,16 @@ def opcoes(raiz: Path, *, teste=False, leitura=False) -> dict:
         ):
             raise ValueError("teste_exige_banco_local_isolado")
     elif not local:
-        # Liberação de acesso remoto é deliberada; não é usada no desenvolvimento.
-        raise ValueError("somente_banco_local_nesta_etapa")
+        # Exceção explícita para leitura no serviço privado do Compose local.
+        compose = (
+            os.environ.get("TAXTRACE_DATABASE_MODE") == "compose"
+            and leitura
+            and params.get("host") == "db"
+            and str(params.get("port")) == "5432"
+            and params.get("dbname") == "taxtrace"
+        )
+        if not compose:
+            raise ValueError("somente_banco_local_nesta_etapa")
     if leitura and params.get("user") != "taxtrace_reader":
         raise ValueError("leitura_exige_login_restrito")
     params.update(connect_timeout=5, application_name="taxtrace-test" if teste else "taxtrace")
@@ -47,3 +55,16 @@ def opcoes(raiz: Path, *, teste=False, leitura=False) -> dict:
 
 def conectar(raiz: Path, *, teste=False, leitura=False, **kwargs):
     return psycopg.connect(**opcoes(raiz, teste=teste, leitura=leitura), **kwargs)
+
+
+def ambiente_mcp(raiz: Path) -> dict:
+    """Encaminha somente a conexão de leitura; nunca a chave de IA ou a de manutenção."""
+    load_dotenv(raiz / ".env", override=False)
+    return {
+        "PYTHONIOENCODING": "utf-8",
+        **{
+            chave: os.environ[chave]
+            for chave in ("TAXTRACE_READER_DATABASE_URL", "TAXTRACE_DATABASE_MODE")
+            if os.environ.get(chave)
+        },
+    }

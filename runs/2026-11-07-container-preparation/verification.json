@@ -1,0 +1,42 @@
+{
+  "executado_em": "2026-11-07T20:48:08.865760+00:00",
+  "natureza": "preparacao_de_container_sem_execucao_da_imagem",
+  "testes": {
+    "python_descobertos": 164,
+    "python_aprovados": 143,
+    "python_opcionais_ignorados": 21,
+    "javascript_aprovados": 6,
+    "ruff_check": "aprovado",
+    "ruff_format": "78 arquivos conformes"
+  },
+  "compose_config_validado": true,
+  "compose_verificacoes": [
+    "porta vinculada somente a loopback",
+    "sistema de arquivos raiz somente leitura",
+    "somente configuração de leitura e Gemini no ambiente da aplicação",
+    "coleta montada somente para leitura"
+  ],
+  "novas_chamadas_de_modelo": 0,
+  "docker_local": "motor não respondeu à verificação com limite de 8 segundos",
+  "imagem_construida": false,
+  "imagem_executada": false,
+  "ci_remoto_verificado": false,
+  "deploy_realizado": false,
+  "codigo_sha256": {
+    "Dockerfile": "ead393deec670559227a006e942a94949e88813f6cfd2a82c62e160eafdeeb60",
+    ".dockerignore": "032e268b1f08abc28d48318b35a947a53ff18be31505fcfb4f7ab8760c511905",
+    "docker-compose.app.yml": "814cbf3f12f39cd152263aa3b4e6cf94ed07ffac62df3bc6bb7cae3523ec68b9",
+    "scripts/smoke_container.py": "7a6a9454ff5c762a1a579e11a64d5ca621e62c8c8191c08f931e95172f17e73b",
+    "taxtrace/conexao.py": "c5f74922a828c1486ef4fc191a718023c2bb576600c6b5d29a2bc2f8b2b38c04"
+  },
+  "limites": [
+    "Configuração validada não comprova execução da imagem.",
+    "Sem consultas reais ao PostgreSQL/MCP nesta rodada; testes de configuração usam valores sintéticos.",
+    "O modo Compose não libera banco remoto nem conexão administrativa.",
+    "Publicação no Render Free exige adaptar persistência; SQLite local não pode ser mantido em filesystem efêmero."
+  ],
+  "fonte_hospedagem": {
+    "url": "https://render.com/docs/free",
+    "consultada_em": "2026-11-07"
+  }
+}

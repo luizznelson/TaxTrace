@@ -18,6 +18,7 @@ from langsmith import tracing_context
 from mcp import Client, StdioServerParameters
 from pydantic import BaseModel, ConfigDict, Field
 
+from taxtrace.conexao import ambiente_mcp
 from taxtrace.planejamento import FalhaPlanejamento, planejar_gemini, planejar_local
 from taxtrace.rag import FalhaGeracao, gerar_gemini, preparar_contexto, validar_resposta
 
@@ -420,7 +421,7 @@ async def executar(pergunta, *, modo="local", coleta_id=None):
         command=sys.executable,
         args=["-m", "taxtrace.servidor_mcp"],
         cwd=raiz,
-        env={"PYTHONIOENCODING": "utf-8"},
+        env=ambiente_mcp(raiz),
     )
     with tracing_context(enabled=False):
         async with Client(parametros, read_timeout_seconds=15) as cliente:

@@ -1,0 +1,14 @@
+# Build context allowlist: credentials, downloads and evidence stay outside.
+**
+!Dockerfile
+!requirements.txt
+!taxtrace/
+!taxtrace/*.py
+!taxtrace/*.sql
+!taxtrace/static/
+!taxtrace/static/**
+**/__pycache__/
+**/.env*
+**/*.sqlite*
+**/*.pem
+**/*.key

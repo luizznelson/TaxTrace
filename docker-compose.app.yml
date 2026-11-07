@@ -1,0 +1,37 @@
+# Local app overlay; combine with docker-compose.yml. No public binding.
+services:
+  app:
+    build: .
+    image: taxtrace:local
+    init: true
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8017:8015"
+    environment:
+      TAXTRACE_DATABASE_MODE: compose
+      TAXTRACE_READER_DATABASE_URL: "postgresql://taxtrace_reader:${TAXTRACE_READER_PASSWORD:?Configure o .env}@db:5432/taxtrace"
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash-lite}
+      GEMINI_RAG_MODEL: ${GEMINI_RAG_MODEL:-}
+    volumes:
+      - taxtrace-checkpoints:/app/data/checkpoints
+      - taxtrace-runs:/app/runs
+      - type: bind
+        source: ./data/raw
+        target: /app/data/raw
+        read_only: true
+        bind:
+          create_host_path: false
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    stop_grace_period: 30s
+volumes:
+  taxtrace-checkpoints:
+  taxtrace-runs:

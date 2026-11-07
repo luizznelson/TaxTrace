@@ -12,13 +12,15 @@ from uuid import uuid4
 
 from mcp import Client, StdioServerParameters
 
+from taxtrace.conexao import ambiente_mcp
+
 
 async def verificar(raiz):
     parametros = StdioServerParameters(
         command=sys.executable,
         args=["-m", "taxtrace.servidor_mcp"],
         cwd=raiz,
-        env={"PYTHONIOENCODING": "utf-8"},
+        env=ambiente_mcp(raiz),
     )
     chamadas = []
     async with Client(parametros, read_timeout_seconds=15) as cliente:

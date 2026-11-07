@@ -41,3 +41,24 @@ jobs:
           path: artifacts/rag-adversarial.json
           if-no-files-found: warn
           retention-days: 30
+
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Build application image without credentials
+        run: docker build --pull -t taxtrace:ci .
+      - name: Verify container runtime
+        run: python scripts/smoke_container.py --imagem taxtrace:ci --saida artifacts/container-smoke.json
+      - name: Preserve container evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: container-smoke-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/container-smoke.json
+          if-no-files-found: warn
+          retention-days: 30
