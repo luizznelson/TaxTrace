@@ -146,3 +146,5 @@ Integration tests require explicit opt-in and the dedicated local test database,
 Search depends on the entered terms and can miss relevant articles. An empty result is not proof that the law contains no evidence. Ranking is not legal confidence. Removing strikethrough text from the index does not establish legal validity; the original text remains stored. Hashes check consistency against the manifest, not the source's digital signature.
 
 This is lookup support, not tax advice. Verify the official source before making a decision.
+
+Answer evaluation includes [adversarial cases](evals/RAG.md) and a [quality review package](docs/REVISAO_AVALIACAO.md). All 12 package cases await review; exporting this material does not establish independent review.

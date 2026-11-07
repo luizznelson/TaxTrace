@@ -31,3 +31,17 @@ Cada arquivo preserva pergunta, estado, contexto, fontes, resposta admitida ou c
 Os testes de CI não usam chaves e não chamam o provedor. Configuração ausente, falha ou limite de API não provam ausência de dados. O resumo conta gabaritos mínimos, não acurácia jurídica. Três respostas positivas e nove recusas não demonstram cobertura ampla de perguntas, robustez geral a injeção ou validade atual de uma regra.
 
 A etapa de avaliação independente prevista no plano permanece aberta. Deve usar casos congelados não utilizados em ajustes, revisão de especialista e análise de afirmações sem apoio, condicionantes omitidas, citações insuficientes e recusas indevidas.
+
+## Avaliação adversarial posterior
+
+A etapa seguinte adicionou saídas sinteticamente adulteradas sobre um contexto real salvo, sem novas chamadas de modelo. O conjunto [v1](rag.adversarial.v1.json) e seu resultado preliminar foram preservados. Um gabarito tratava “20 dias” como número ausente, mas a fonte contém o dia 20 de uma data: o problema era semântico, não ausência literal do número.
+
+Na [v2](rag.adversarial.v2.json), esse caso passou a controle semântico, e um caso `202` versus `2023` testa número parcial. São 14 casos: dez rejeições estruturais esperadas, dois controles válidos e dois limites semânticos explícitos. Os dez bloqueios foram observados no [registro final](../runs/rag-adversarial-c7ee6ed3-225a-4c77-9dcf-a6cfe9dd5146/avaliacao.json).
+
+Os dois controles semânticos mostram que números e citações presentes não bastam: uma frase pode contradizer a fonte ou transformar uma data em prazo sem que o validador estrutural resolva a interpretação. Esses casos **não contam como respostas corretas**, nem como prova de robustez semântica. Eles fundamentam a necessidade de revisão e avaliação especializada antes de ampliar o uso.
+
+```powershell
+.venv/Scripts/python.exe -m taxtrace.avaliar_adversarial
+```
+
+O pacote e a rubrica para revisão declarada estão em [REVISAO_AVALIACAO.md](../docs/REVISAO_AVALIACAO.md). Exportação, testes sintéticos e revisão independente são entregas distintas.

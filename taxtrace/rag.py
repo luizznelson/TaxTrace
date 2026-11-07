@@ -181,6 +181,17 @@ class FalhaGeracao(Exception):
         super().__init__(codigo)
 
 
+def numeros_em(texto):
+    """Compara tokens inteiros: 12 não é apoio literal para 125; preserva a unidade %."""
+    numeros = set()
+    for bruto in re.findall(r"[0-9]+(?:[.,][0-9]+)?\s*%?", texto):
+        valor = bruto.strip()
+        percentual = valor.endswith("%")
+        decimal = Decimal(valor.rstrip("% ").replace(",", "."))
+        numeros.add(format(decimal.normalize(), "f") + ("%" if percentual else ""))
+    return numeros
+
+
 def validar_resposta(bruto, avaliacao):
     saida = RespostaModelo.model_validate(bruto)
     if checksum(avaliacao["contexto"]) != avaliacao["contexto_sha256"]:
@@ -205,9 +216,14 @@ def validar_resposta(bruto, avaliacao):
         ):
             raise FalhaGeracao("afirmacao_fora_dos_limites")
         # Uma cifra não pode aparecer na paráfrase sem constar nos trechos citados.
-        numeros = re.findall(r"\b\d+(?:[.,]\d+)?\s*%?", ponto.texto)
-        if any(n.strip() not in " ".join(apoio) for n in numeros):
+        if not numeros_em(ponto.texto) <= numeros_em(" ".join(apoio)):
             raise FalhaGeracao("numero_sem_apoio_literal")
+        codigos = re.findall(
+            r"(?:cclasstrib|classificacao(?: tributaria)?)\s+([0-9]+)", normalizar(ponto.texto)
+        )
+        citados = {docs[c.documento_id].get("codigo") for c in ponto.citacoes}
+        if any(codigo not in citados for codigo in codigos):
+            raise FalhaGeracao("codigo_nao_citado")
         artigos = re.findall(r"\bart(?:igo|\.)?\s*(\d+(?:-[A-Z]{1,2})?)", ponto.texto, re.I)
         if any(
             a not in {d.get("artigo") for d in docs.values()}

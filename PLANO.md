@@ -100,9 +100,12 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
 6. [ ] Conjunto de perguntas com gabarito e avaliação.
    - [x] Primeira avaliação de recuperação de artigos, sem geração de resposta.
    - [x] Gabarito mínimo de respostas/citações e recusas no desenvolvimento: 12/12 triagens e 3/3 positivos após correção. Não independente, sem revisão fiscal; ver `evals/RAG.md`.
+   - [x] Avaliação adversarial de saídas: 14 casos, dez bloqueios estruturais esperados e dois limites semânticos explicitados, sem novas chamadas de modelo. Números passam a ser comparados por tokens completos, preservando a identidade dos códigos.
+   - [x] Exportação e conferência de pacote para revisão de qualidade, com rubrica, hashes e pendências explícitas. Pacote entregue sem revisor e sem notas; não representa revisão independente realizada.
    - [ ] Revisão por especialista, conjunto independente e avaliação de respostas/citações/recusas.
 7. [ ] Interface, Docker, CI, deploy, README e vídeo.
    - [x] Interface local FastAPI com bancada de pesquisa, lista selecionável, leitor de fontes e revisão contextual, PT/EN, histórico da aba, exportação e decisão vinculada ao hash. Teste visual de computador e tela pequena; ver `docs/INTERFACE.md`.
+   - [x] Versão, captura e data consultada na API visíveis no painel de cada resposta, com aviso de vigência não confirmada. Essa apresentação não encerra a validação temporal por dispositivo.
    - [ ] Autenticação adequada antes de exposição pública, publicação e vídeo.
 
 ## Regras do projeto

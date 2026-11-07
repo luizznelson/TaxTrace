@@ -1,0 +1,49 @@
+{
+  "executado_em": "2026-11-07T19:46:07.204891+00:00",
+  "natureza": "desenvolvimento_sem_revisao_independente",
+  "codigo_rag_sha256": "fd9d7d205b937ec231ae49790b2e982c2b19275006017bf58c484ae517fb7b83",
+  "execucao_reutilizada": "runs/rag-db4649cc-4f9e-45d4-8c68-eacf418d08c1/avaliacao.json",
+  "revalidacao_de_respostas_salvas": [
+    {
+      "id": "cesta-art125",
+      "validacao_estrutural": "aceita"
+    },
+    {
+      "id": "cesta-busca",
+      "validacao_estrutural": "aceita"
+    },
+    {
+      "id": "classificacao-geral",
+      "validacao_estrutural": "aceita"
+    }
+  ],
+  "novas_chamadas_de_modelo": 0,
+  "testes": {
+    "python_descobertos": 141,
+    "python_aprovados": 120,
+    "python_opcionais_ignorados": 21,
+    "javascript_aprovados": 6
+  },
+  "adversarial": {
+    "casos": 14,
+    "bloqueios_estruturais_esperados": 10,
+    "bloqueios_observados": 10,
+    "controles_validos": 2,
+    "limites_semanticos_nao_cobertos": 2
+  },
+  "revisao_de_qualidade": {
+    "casos_pendentes": 12,
+    "casos_concluidos": 0,
+    "revisor": null,
+    "revisao_especializada_comprovada": false
+  },
+  "interface": {
+    "conferido": "Resposta histórica carregada com versão V0066, captura 2026-11-05 e data consultada na API 2027-01-01. Aviso de vigência não confirmada visível.",
+    "limite": "PostgreSQL local indisponível durante esta conferência; não foi validada nova consulta ao banco nesta rodada."
+  },
+  "limites": [
+    "Validação estrutural não comprova coerência semântica nem suficiência jurídica.",
+    "Nenhuma vigência atual confirmada.",
+    "Nenhuma publicação ou aprovação fiscal realizada."
+  ]
+}

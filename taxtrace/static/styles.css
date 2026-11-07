@@ -1767,3 +1767,38 @@ body[data-step="review"] #result:has(.rag-answer) .result-grid {
     background: #fff1b8;
     color: inherit;
 }
+
+.answer-provenance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    margin: 18px 0 9px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+.answer-provenance dt {
+    font-size: 10px;
+    color: var(--muted);
+}
+.answer-provenance dd {
+    font-size: 12px;
+    color: var(--ink);
+    margin: 3px 0 0;
+    font-variant-numeric: tabular-nums;
+}
+.rag-answer .answer-date-note {
+    font-size: 10px;
+    color: #805d2a;
+    margin: 7px 0;
+}
+.answer-date-help {
+    font-size: 10px;
+    color: var(--muted);
+    margin: 0 0 18px;
+}
+.answer-date-help p {
+    max-width: 750px;
+    font-size: 11px;
+    line-height: 1.7;
+}

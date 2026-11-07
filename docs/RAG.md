@@ -74,3 +74,7 @@ Reutiliza `GEMINI_API_KEY` e `GEMINI_MODEL` configurados no `.env`. `GEMINI_RAG_
 ## Registro da entrega
 
 A [verificação local](../runs/2026-11-06-rag-delivery/verification.md) reúne testes, capturas, saídas e decisão sintética. As falhas preliminares estão preservadas.
+
+## Ampliação da avaliação e metadados
+
+A comparação numérica passou a usar tokens completos e códigos são conferidos pela identidade, sem aceitar prefixos. A avaliação adversarial explicita também os limites de interpretação que exigem revisão. A interface apresenta versão e datas da coleta junto da resposta; não infere vigência a partir delas. Veja a [rubrica de revisão](REVISAO_AVALIACAO.md) e a [metodologia ampliada](../evals/RAG.md).

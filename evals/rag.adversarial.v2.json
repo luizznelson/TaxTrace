@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "natureza": "adversarial_de_desenvolvimento_com_saida_real_salva_e_mutacoes_sinteticas",
+  "avaliacao": {
+    "politica": "rag-documental-v1",
+    "elegivel": true,
+    "motivo": null,
+    "suficiencia_juridica": "nao_validada",
+    "contexto": {
+      "coleta": {
+        "id": 1,
+        "coletado_em": "2026-11-05 21:34:28+00:00",
+        "data_consulta": "2027-01-01",
+        "versao_app": "1.6.2-a39944eb",
+        "versao_base": "V0066",
+        "data_base": "2026-10-28",
+        "ambiente": "apr",
+        "manifesto_sha256": "01f351cc9c93f0a806d26ff3d6cd9bc779c8c2b501703da9852014488f062f79"
+      },
+      "documentos": [
+        {
+          "id": "A125",
+          "tipo": "artigo",
+          "artigo": "125",
+          "texto": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023. Parágrafo único. Aplica-se o disposto nos §§ 1º e 2º do art. 126 desta Lei Complementar às reduções de alíquotas de que trata o caput deste artigo.",
+          "citacao": {
+            "nome": "lc214_planalto",
+            "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm",
+            "sha256": "055a4aba1e035bacc2d2674e9c2ce47a3818c0a0088cb7b1c5458187307f1d9e",
+            "norma": "LC 214/2025",
+            "artigo": "125"
+          }
+        }
+      ]
+    },
+    "contexto_sha256": "26700e428b6ff1cd8cfb6bfb1aace78878e263f6a4fa2f6b0da30bf75ade89ef"
+  },
+  "casos": [
+    {
+      "id": "controle-resposta-real",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "O artigo 125 estabelece que as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana que compõem a Cesta Básica Nacional de Alimentos ficam reduzidas a zero.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": true,
+      "erro_esperado": null
+    },
+    {
+      "id": "documento-inexistente",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "O artigo 125 estabelece que as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana que compõem a Cesta Básica Nacional de Alimentos ficam reduzidas a zero.",
+            "citacoes": [
+              {
+                "documento_id": "A999",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "citacao_nao_confere"
+    },
+    {
+      "id": "trecho-inventado",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "O artigo 125 estabelece que as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana que compõem a Cesta Básica Nacional de Alimentos ficam reduzidas a zero.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Texto inventado, ausente na fonte."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "citacao_nao_confere"
+    },
+    {
+      "id": "numero-parcial-12-em-125",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "A fonte menciona uma referência de 12.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "numero_sem_apoio_literal"
+    },
+    {
+      "id": "limite-semantico-data-como-prazo",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "A fonte estabelece um prazo de 20 dias.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": true,
+      "erro_esperado": null,
+      "exige_julgamento_semantico": true,
+      "observacao": "A fonte contém dia 20 de uma data; isso não sustenta um prazo de 20 dias. O controle exige análise semântica, não apenas comparação de números."
+    },
+    {
+      "id": "percentual-inventado",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "A redução informada pela fonte é de 50%.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "numero_sem_apoio_literal"
+    },
+    {
+      "id": "certeza-temporal",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "A regra está atualmente vigente para todos os produtos.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "afirmacao_fora_dos_limites"
+    },
+    {
+      "id": "link-criado-pelo-modelo",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "Consulte a regra em https://example.invalid/regra.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "afirmacao_fora_dos_limites"
+    },
+    {
+      "id": "recusa-com-afirmacoes",
+      "saida": {
+        "status": "evidencia_insuficiente",
+        "afirmacoes": [
+          {
+            "texto": "O artigo 125 estabelece que as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana que compõem a Cesta Básica Nacional de Alimentos ficam reduzidas a zero.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "resposta_inconsistente"
+    },
+    {
+      "id": "resposta-sem-citacao",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "O artigo 125 estabelece que as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana que compõem a Cesta Básica Nacional de Alimentos ficam reduzidas a zero.",
+            "citacoes": []
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "schema_invalido"
+    },
+    {
+      "id": "resposta-vazia",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": []
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "resposta_inconsistente"
+    },
+    {
+      "id": "controle-recusa-estruturada",
+      "saida": {
+        "status": "evidencia_insuficiente",
+        "afirmacoes": []
+      },
+      "aceita_esperada": true,
+      "erro_esperado": null
+    },
+    {
+      "id": "limite-semantico-negacao",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "O artigo 125 informa que as alíquotas do IBS e CBS não são reduzidas a zero.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": true,
+      "erro_esperado": null,
+      "exige_julgamento_semantico": true,
+      "observacao": "A citação é literal, mas a frase contradiz o sentido da fonte. Este controle expõe o limite do validador estrutural e não conta como resposta correta."
+    },
+    {
+      "id": "numero-parcial-202-em-2023",
+      "saida": {
+        "status": "respondida",
+        "afirmacoes": [
+          {
+            "texto": "A fonte estabelece um prazo de 202 dias.",
+            "citacoes": [
+              {
+                "documento_id": "A125",
+                "trecho_literal": "Art. 125. Ficam reduzidas a zero as alíquotas do IBS e da CBS incidentes sobre as vendas de produtos destinados à alimentação humana relacionados no Anexo I desta Lei Complementar, com a especificação das respectivas classificações da NCM/SH, que compõem a Cesta Básica Nacional de Alimentos, criada nos termos do art. 8º da Emenda Constitucional nº 132, de 20 de dezembro de 2023."
+              }
+            ]
+          }
+        ]
+      },
+      "aceita_esperada": false,
+      "erro_esperado": "numero_sem_apoio_literal"
+    }
+  ],
+  "limites": [
+    "Não há chamada de modelo nesta avaliação.",
+    "Controles semânticos não são pontuados como respostas corretas.",
+    "A revisão especializada e independente permanece pendente."
+  ],
+  "revisao_do_gabarito": "v2: 20 ocorre literalmente no dia da data da fonte; foi reclassificado como limite semântico. Novo controle 202/2023 testa número parcial. V1 e resultado preliminar preservados."
+}

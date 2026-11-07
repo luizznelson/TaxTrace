@@ -248,6 +248,10 @@ const strings = {
         ragMode: "Resposta com fontes · RAG",
         ragHelp:
             "Busca documentos e envia a pergunta e o contexto público ao Gemini para gerar uma explicação com citações. Uma chamada de síntese; sem parecer fiscal.",
+        provenanceTitle: "Base utilizada nesta resposta",
+        temporalUnverified: "Vigência atual não confirmada",
+        datesHelp:
+            "Captura é quando os dados foram coletados. A data consultada na API identifica o recorte solicitado à Receita; nenhuma delas, sozinha, comprova vigência jurídica.",
         ragTitle: "Resposta com fontes",
         ragDraft: "Rascunho · aguardando revisão",
         ragApproved: "Resposta revisada e aprovada",
@@ -540,6 +544,10 @@ const strings = {
         ragMode: "Answer with sources · RAG",
         ragHelp:
             "Retrieves documents and sends the question and public context to Gemini for a cited explanation. One synthesis call; no tax advice.",
+        provenanceTitle: "Collection used for this answer",
+        temporalUnverified: "Current legal validity not confirmed",
+        datesHelp:
+            "Capture is when the data was collected. The API query date identifies the requested Federal Revenue snapshot; neither date alone establishes legal validity.",
         ragTitle: "Answer with sources",
         ragDraft: "Draft · awaiting review",
         ragApproved: "Answer reviewed and approved",
@@ -1254,6 +1262,28 @@ function answerPanel(report, openEvidence) {
             ),
         ),
     );
+    const collection = report.estado.coleta || {};
+    const provenance = el("dl", "answer-provenance");
+    provenance.setAttribute("aria-label", t("provenanceTitle"));
+    for (const [label, value] of [
+        ["version", collection.versao_base || "—"],
+        ["captured", date(collection.coletado_em)],
+        ["apiDate", date(collection.data_consulta)],
+    ]) {
+        const cell = el("div");
+        cell.append(el("dt", "", t(label)), el("dd", "", value));
+        provenance.append(cell);
+    }
+    panel.append(
+        provenance,
+        el("p", "answer-date-note", t("temporalUnverified")),
+    );
+    const dates = el("details", "answer-date-help");
+    dates.append(
+        el("summary", "", t("provenanceTitle")),
+        el("p", "", t("datesHelp")),
+    );
+    panel.append(dates);
     if (!answered) {
         const reason = rag.avaliacao?.motivo;
         const key = `reason_${reason}`;

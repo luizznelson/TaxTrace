@@ -176,3 +176,5 @@ A busca atual depende dos termos digitados e pode deixar de encontrar trechos re
 O índice remove os trechos marcados como riscados, mas isso não substitui análise de vigência. O original e suas marcações permanecem armazenados. Os hashes verificam correspondência ao manifesto; não constituem assinatura digital da fonte. As conexões estão restritas ao ambiente local nesta etapa; Neon ficará para a publicação.
 
 **Apoio à consulta, não parecer tributário.** Confira a fonte oficial antes de tomar uma decisão.
+
+A avaliação das respostas inclui [casos adversariais](evals/RAG.md) e um [pacote para revisão de qualidade](docs/REVISAO_AVALIACAO.md). Os 12 casos do pacote ainda aguardam avaliação; exportar o material não comprova revisão independente.

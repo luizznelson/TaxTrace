@@ -1,0 +1,13 @@
+{
+  "execucao_sha256": "c8525e4a0bf8a99385fa67b394ef2520f5b8a8c72c71ebb0666034ca3ea1fa44",
+  "pacote_sha256": "411616672b981cc5072cc205eeaca6e6f06d6bc2e22cc50bed8376f46b1cb6a6",
+  "casos": 12,
+  "casos_completos": 0,
+  "casos_pendentes": 12,
+  "casos_com_reprovacao": [],
+  "revisor": null,
+  "identidade_verificada": false,
+  "independencia_comprovada": false,
+  "revisao_especializada_comprovada": false,
+  "publicacao_autorizada_automaticamente": false
+}

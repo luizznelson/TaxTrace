@@ -128,6 +128,40 @@ class RagTest(unittest.TestCase):
         with self.assertRaisesRegex(FalhaGeracao, "numero_sem_apoio"):
             validar_resposta(r, avaliacao)
 
+    def test_numero_nao_pode_ser_substring_do_apoio(self):
+        a = preparar_contexto(estado())
+        r = resposta()
+        r["afirmacoes"][0]["texto"] = "A fonte estabelece uma referência de 12."
+        with self.assertRaisesRegex(FalhaGeracao, "numero_sem_apoio"):
+            validar_resposta(r, a)
+
+    def test_codigo_nao_pode_ser_reduzido_a_um_numero_equivalente(self):
+        from taxtrace.rag import checksum
+
+        a = preparar_contexto(estado())
+        doc = {
+            "id": "C000001",
+            "tipo": "classificacao",
+            "codigo": "000001",
+            "texto": "cClassTrib 000001: Regra de teste com redução informada de 0.0%.",
+            "citacao": FONTE,
+        }
+        a["contexto"]["documentos"] = [doc]
+        a["contexto_sha256"] = checksum(a["contexto"])
+        r = {
+            "status": "respondida",
+            "afirmacoes": [
+                {
+                    "texto": "O cClassTrib 1 informa redução de 0%.",
+                    "citacoes": [{"documento_id": "C000001", "trecho_literal": doc["texto"]}],
+                }
+            ],
+        }
+        with self.assertRaisesRegex(FalhaGeracao, "codigo_nao_citado"):
+            validar_resposta(r, a)
+        r["afirmacoes"][0]["texto"] = "O cClassTrib 000001 informa redução de 0%."
+        self.assertEqual(validar_resposta(r, a)["status"], "respondida")
+
     def test_referencia_com_ordinal_e_aceita_apenas_se_estiver_no_apoio(self):
         e = estado()
         texto = TEXTO + " Criada nos termos do art. 8º da Emenda Constitucional nº 132."
