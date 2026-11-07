@@ -1,0 +1,14 @@
+{
+  "executado_em": "2026-11-07T21:24:00.015705+00:00",
+  "imagem": "taxtrace:ci",
+  "container_de_teste": "taxtrace-smoke-941c12ddc3ac",
+  "natureza": "smoke_sem_banco_sem_modelo",
+  "verificacoes": [
+    "processo_ativo",
+    "base_indisponivel_explicitamente_sem_conexao",
+    "interface_com_cabecalhos_de_seguranca",
+    "nenhuma_chave_ou_conta_embutida",
+    "usuario_sem_root_e_imagem_sem_dados_privados"
+  ],
+  "aprovado": true
+}

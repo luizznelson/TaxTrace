@@ -118,6 +118,13 @@ async def preparar_estruturas(conn):
         registrado_em TIMESTAMPTZ NOT NULL DEFAULT now()
     )""")
 
+    await conn.execute("""CREATE TABLE IF NOT EXISTS acessos_revisao (
+        revisao_id UUID PRIMARY KEY,
+        dono CHAR(64) NOT NULL CHECK (dono ~ '^[0-9a-f]{64}$'),
+        expira_em TIMESTAMPTZ NOT NULL,
+        criado_em TIMESTAMPTZ NOT NULL DEFAULT clock_timestamp()
+    )""")
+
 
 async def preparar(raiz):
     # Manutenção explícita pelo administrador local; nunca executada pelo servidor web.
@@ -154,7 +161,9 @@ async def preparar(raiz):
             "checkpoint_writes TO taxtrace_state"
         )
         await conn.execute("GRANT SELECT ON checkpoint_migrations TO taxtrace_state")
-        await conn.execute("GRANT SELECT,INSERT ON eventos_revisao TO taxtrace_state")
+        await conn.execute(
+            "GRANT SELECT,INSERT ON eventos_revisao,acessos_revisao TO taxtrace_state"
+        )
 
 
 def main():

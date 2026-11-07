@@ -27,7 +27,7 @@ O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é re
 ## Perguntas que a primeira versão ajuda a investigar
 
 - Quais artigos mencionam os termos que preciso conferir?
-- A qual artigo uma classificação da tabela se refere? Essa ligação já está armazenada, mas ainda não tem ferramenta própria de consulta.
+- A qual artigo uma classificação da tabela se refere? Consulte o código no modo cClassTrib e confira sua fundamentação recuperada.
 - Qual fonte, versão e data sustentam o resultado encontrado?
 - Há divergências entre as tabelas coletadas que exigem revisão?
 
@@ -169,6 +169,16 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 | `runs/`                                                        | Registros públicos de validação, sem credenciais                      |
 | `PLANO.md`                                                     | Decisões, fontes e entregas pendentes                                 |
 
+## Operação e evidências
+
+A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: **180 testes aprovados e três desativados sem a coleta oficial**. Checkpoints, eventos, isolamento entre navegadores e permissões do papel de aplicação foram exercitados. A [evidência completa](runs/2026-11-07-persistent-access/verification.json) registra também falhas preliminares e a correção da limpeza de testes. Não houve deploy ou migração automática do histórico.
+
+- [Docker](docs/DOCKER.md): execução local com volumes privados e ambiente descartável de integração.
+- [Persistência](docs/PERSISTENCIA.md): SQLite como padrão; checkpoints, eventos e vínculos PostgreSQL opcionais.
+- [Acesso do revisor](docs/AUTENTICACAO.md) e [autorização dos registros](docs/AUTORIZACAO.md): decisões com login; leitura pela sessão proprietária ou conta administrativa. A credencial também pode vir da configuração privada.
+- [Diagnósticos e avaliação automática](docs/OPERACAO.md): processo ativo, base disponível e relatórios de desenvolvimento.
+- [Casos adversariais](evals/RAG.md) e [revisão de qualidade](docs/REVISAO_AVALIACAO.md): 12 casos ainda aguardam avaliação especializada; exportar o pacote não comprova revisão independente.
+
 ## Limites de interpretação
 
 A busca atual depende dos termos digitados e pode deixar de encontrar trechos relevantes. Um resultado vazio significa apenas que essa busca não encontrou correspondência. O ranking não é uma medida de confiança jurídica.
@@ -176,15 +186,3 @@ A busca atual depende dos termos digitados e pode deixar de encontrar trechos re
 O índice remove os trechos marcados como riscados, mas isso não substitui análise de vigência. O original e suas marcações permanecem armazenados. Os hashes verificam correspondência ao manifesto; não constituem assinatura digital da fonte. As conexões estão restritas ao ambiente local nesta etapa; Neon ficará para a publicação.
 
 **Apoio à consulta, não parecer tributário.** Confira a fonte oficial antes de tomar uma decisão.
-
-A avaliação das respostas inclui [casos adversariais](evals/RAG.md) e um [pacote para revisão de qualidade](docs/REVISAO_AVALIACAO.md). Os 12 casos do pacote ainda aguardam avaliação; exportar o material não comprova revisão independente.
-
-Diagnóstico do serviço e execução automática dos casos adversariais: [operação e evidências](docs/OPERACAO.md).
-
-Para registrar uma decisão na interface, configure a [conta local de revisor](docs/AUTENTICACAO.md). Sem login, as decisões ficam bloqueadas; a autenticação local ainda não encerra os requisitos para publicação multiusuário.
-
-As revisões e exportações são restritas ao navegador que iniciou a consulta ou à conta administrativa de revisor. Veja [quem pode acessar cada registro](docs/AUTORIZACAO.md).
-
-Execução local da aplicação em contêiner, volumes privados e verificação da imagem: [Docker e limites para hospedagem](docs/DOCKER.md). A construção e execução da imagem ainda precisam de validação com o motor Docker ativo.
-
-Checkpoints e eventos podem usar um backend PostgreSQL opcional em Docker/Linux. O SQLite permanece como padrão. A [adaptação de persistência](docs/PERSISTENCIA.md) ainda exige integração real e não habilita o deploy por si só.

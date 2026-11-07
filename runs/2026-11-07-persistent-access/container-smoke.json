@@ -1,0 +1,8 @@
+{
+  "executado_em": "2026-11-07T21:15:07.030880+00:00",
+  "imagem": "taxtrace:ci",
+  "natureza": "smoke_sem_banco_sem_modelo",
+  "verificacoes": [],
+  "aprovado": false,
+  "tipo_de_falha": "CalledProcessError"
+}

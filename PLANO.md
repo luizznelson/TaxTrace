@@ -110,10 +110,11 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Diagnósticos separados de processo e base, sem chamadas ao modelo; avaliação adversarial incorporada ao CI com relatório preservado e falha em divergências estruturais. Execução remota ainda precisa ser conferida após o push. Ver `docs/OPERACAO.md`.
    - [x] Autorização de revisões por sessão do navegador: leitura, exportação e fonte vinculada protegidas, idempotência isolada, vínculo persistente e acesso administrativo explícito do revisor. Validado localmente com dados sintéticos; ver `docs/AUTORIZACAO.md`.
    - [x] Pacote Docker local e composição com volumes privados, coleta somente leitura e usuário sem root; configuração Compose validada. Ambiente mínimo de leitura encaminhado ao MCP; disponibilidade de IA considera variáveis do processo.
-   - [ ] Construir e executar a imagem Docker: motor local sem resposta nesta rodada. Smoke e job de CI preparados, ainda sem execução comprovada. Ver `docs/DOCKER.md`.
-   - [x] Implementação opcional de checkpoints e eventos PostgreSQL com adaptador oficial, schema e papel separados e trava por revisão. SQLite mantido como padrão; integração real PostgreSQL ainda não comprovada. Ver `docs/PERSISTENCIA.md`.
-   - [ ] Executar os três testes de integração de checkpoints em PostgreSQL isolado no Docker/Linux ou CI; portas locais indisponíveis nesta rodada.
-   - [ ] Adaptar estado persistente antes de Render Free: checkpoints, vínculos e conta não podem depender do filesystem efêmero. Conexão remota segura e identidade para hospedagem seguem pendentes.
+   - [x] Imagem construída e smoke executado no Docker local após ativação do motor. Suíte Linux com PostgreSQL descartável: 180 aprovados, três desativados sem coleta oficial. CI remoto ainda não verificado; ver `docs/DOCKER.md`.
+   - [x] Implementação opcional de checkpoints e eventos PostgreSQL com adaptador oficial, schema e papel separados e trava por revisão. SQLite mantido como padrão; integração real PostgreSQL comprovada na rodada Docker posterior. Ver `docs/PERSISTENCIA.md`.
+   - [x] Três testes reais de checkpoints executados em PostgreSQL isolado no Docker/Linux, com retomada entre conexões e trava por revisão.
+   - [x] Vínculos PostgreSQL no mesmo backend dos checkpoints, gravação transacional e grants restritos, com quatro integrações reais aprovadas. Credencial de revisor opcional por configuração privada, sem arquivo obrigatório no disco da aplicação.
+   - [ ] Adaptar estado persistente antes de Render Free: conectar o PostgreSQL remoto com validação TLS e preparar as fontes preservadas no destino. Backends de checkpoints/vínculos e credencial por configuração implementados; configuração e validação da hospedagem seguem pendentes.
    - [ ] Autenticação adequada antes de exposição pública, publicação e vídeo.
 
 ## Regras do projeto

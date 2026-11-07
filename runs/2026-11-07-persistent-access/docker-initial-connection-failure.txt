@@ -1,0 +1,7 @@
+ Network taxtrace-integration_default Creating 
+ Network taxtrace-integration_default Created 
+ Container taxtrace-integration-integration-db-1 Creating 
+ Container taxtrace-integration-integration-db-1 Created 
+ Container taxtrace-integration-integration-tests-1 Creating 
+ Container taxtrace-integration-integration-tests-1 error during connect: Post "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.54/containers/create?name=taxtrace-integration-integration-tests-1": EOF 
+error during connect: Post "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/v1.54/containers/create?name=taxtrace-integration-integration-tests-1": EOF

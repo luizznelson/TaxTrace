@@ -38,3 +38,12 @@ Mudanças no código de revisão e autenticação alteram a impressão do códig
 ## Validação
 
 Os testes usam exclusivamente contas e senhas sintéticas em pastas temporárias. Cobrem recusa sem login, nome atribuído pelo servidor, hash com salt, cookie, expiração, logout, reinício, limite de sessões, espera após falhas, origem/CSRF e recusa de configuração inválida. Não representam uma revisão fiscal real nem uma auditoria externa de segurança.
+
+
+## Credencial por configuração privada
+
+Para um ambiente que perde arquivos locais, o mesmo documento de credencial pode ser fornecido em `TAXTRACE_REVIEWER_CREDENTIAL_JSON`. Gere primeiro a conta pelo comando já descrito; não monte o JSON manualmente e não use a senha como valor da variável. Abra o arquivo privado gerado em um editor e use seu conteúdo apenas na configuração secreta do destino autorizado. Não o envie pelo chat nem o publique no Git.
+
+Se a variável estiver preenchida, ela prevalece sobre `data/checkpoints/revisor.json`. Se estiver ausente ou vazia, o arquivo continua sendo usado. Configuração preenchida mas inválida impede inicialização: não há fallback silencioso para outra conta. A estrutura aceita somente versão, conta, nome, salt e hash; campo de senha em texto puro é recusado. O valor não aparece no contexto público, não é incluído na imagem e não é encaminhado ao processo MCP.
+
+Ao trocar a credencial configurada, reinicie a aplicação. As sessões anteriores são encerradas; a nova credencial precisa ser mantida pelo ambiente de hospedagem. Essa configuração foi testada com dados sintéticos em novas instâncias, sem criar arquivo de conta. Ela não verifica identidade civil ou qualificação e não substitui a validação de HTTPS e dos controles do destino público.

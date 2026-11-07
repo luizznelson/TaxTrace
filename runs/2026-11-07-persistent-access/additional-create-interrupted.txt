@@ -1,0 +1,5 @@
+ Network taxtrace-integration_default Creating 
+ Network taxtrace-integration_default Created 
+ Container taxtrace-integration-integration-db-1 Creating 
+ Container taxtrace-integration-integration-db-1 Created 
+ Container taxtrace-integration-integration-tests-1 Creating 

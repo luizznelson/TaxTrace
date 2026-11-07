@@ -24,11 +24,15 @@ def verificar(imagem):
     resultado = {
         "executado_em": datetime.now(UTC).isoformat(),
         "imagem": imagem,
+        "container_de_teste": nome,
         "natureza": "smoke_sem_banco_sem_modelo",
         "verificacoes": verificacoes,
         "aprovado": False,
     }
     try:
+        # O daemon pode criar/iniciar o contêiner e interromper a resposta ao cliente.
+        # Tentar limpar também quando o comando de criação retornar erro.
+        iniciado = True
         docker(
             "run",
             "--detach",
@@ -46,7 +50,6 @@ def verificar(imagem):
             "127.0.0.1::8015",
             imagem,
         )
-        iniciado = True
         porta = int(docker("port", nome, "8015/tcp").rsplit(":", 1)[1])
         base = f"http://127.0.0.1:{porta}"
         limite = time.monotonic() + 30

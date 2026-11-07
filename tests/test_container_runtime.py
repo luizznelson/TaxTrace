@@ -60,6 +60,7 @@ class ContainerRuntimeTest(unittest.TestCase):
             "GEMINI_API_KEY": "PRIVATE_MODEL_KEY",
             "TAXTRACE_READER_PASSWORD": "PRIVATE_PASSWORD",
             "OTHER_SECRET": "PRIVATE_OTHER",
+            "TAXTRACE_REVIEWER_CREDENTIAL_JSON": "PRIVATE_REVIEWER_CREDENTIAL",
             "TAXTRACE_CHECKPOINT_DATABASE_URL": "PRIVATE_CHECKPOINT_CONNECTION",
         }
         with patch.dict(os.environ, cfg, clear=True), patch.object(conexao, "load_dotenv"):

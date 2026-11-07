@@ -1,0 +1,10 @@
+{
+  "verificado_em": "2026-11-07T21:29:42.984695+00:00",
+  "criacao_tardia_apos_cancelamento": true,
+  "container": "taxtrace-integration-integration-tests-1",
+  "estado_antes_da_remocao": "created",
+  "projeto_confirmado": "taxtrace-integration",
+  "removido_sem_forcar": true,
+  "verificacao_final": "nenhum contêiner restante do projeto de integração ou do smoke",
+  "dados_de_desenvolvimento_alterados": false
+}

@@ -1,0 +1,296 @@
+ Container taxtrace-integration-integration-tests-1 Stopping 
+ Container taxtrace-integration-integration-tests-1 Stopped 
+ Container taxtrace-integration-integration-tests-1 Removing 
+ Container taxtrace-integration-integration-tests-1 Removed 
+Attaching to a042358f5b28_taxtrace-integration-integration-tests-1, integration-db-1
+ Container taxtrace-integration-integration-db-1 Starting 
+ Container taxtrace-integration-integration-db-1 Started 
+ Container taxtrace-integration-integration-db-1 Waiting 
+integration-db-1  | The files belonging to this database system will be owned by user "postgres".
+integration-db-1  | This user must also own the server process.
+integration-db-1  | 
+integration-db-1  | The database cluster will be initialized with locale "en_US.utf8".
+integration-db-1  | The default database encoding has accordingly been set to "UTF8".
+integration-db-1  | The default text search configuration will be set to "english".
+integration-db-1  | 
+integration-db-1  | Data page checksums are disabled.
+integration-db-1  | 
+integration-db-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+integration-db-1  | creating subdirectories ... ok
+integration-db-1  | selecting dynamic shared memory implementation ... posix
+integration-db-1  | selecting default "max_connections" ... 100
+integration-db-1  | selecting default "shared_buffers" ... 128MB
+integration-db-1  | selecting default time zone ... Etc/UTC
+integration-db-1  | creating configuration files ... ok
+integration-db-1  | running bootstrap script ... ok
+integration-db-1  | performing post-bootstrap initialization ... ok
+integration-db-1  | syncing data to disk ... ok
+integration-db-1  | initdb: warning: enabling "trust" authentication for local connections
+integration-db-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+integration-db-1  | 
+integration-db-1  | 
+integration-db-1  | Success. You can now start the database server using:
+integration-db-1  | 
+integration-db-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+integration-db-1  | 
+integration-db-1  | waiting for server to start....2026-11-07 21:19:21.253 UTC [49] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+integration-db-1  | 2026-11-07 21:19:21.374 UTC [49] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+integration-db-1  | 2026-11-07 21:19:21.377 UTC [52] LOG:  database system was shut down at 2026-11-07 21:19:21 UTC
+integration-db-1  | 2026-11-07 21:19:21.383 UTC [49] LOG:  database system is ready to accept connections
+integration-db-1  |  done
+integration-db-1  | server started
+integration-db-1  | CREATE DATABASE
+integration-db-1  | 
+integration-db-1  | 
+integration-db-1  | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+integration-db-1  | 
+integration-db-1  | waiting for server to shut down...2026-11-07 21:19:21.553 UTC [49] LOG:  received fast shutdown request
+integration-db-1  | 2026-11-07 21:19:21.553 UTC [49] LOG:  aborting any active transactions
+integration-db-1  | .2026-11-07 21:19:21.558 UTC [49] LOG:  background worker "logical replication launcher" (PID 55) exited with exit code 1
+integration-db-1  | 2026-11-07 21:19:21.558 UTC [50] LOG:  shutting down
+integration-db-1  | 2026-11-07 21:19:21.558 UTC [50] LOG:  checkpoint starting: shutdown immediate
+integration-db-1  | 2026-11-07 21:19:21.572 UTC [50] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.013 s, sync=0.001 s, total=0.014 s; sync files=301, longest=0.001 s, average=0.001 s; distance=4238 kB, estimate=4238 kB; lsn=0/190A9C8, redo lsn=0/190A9C8
+integration-db-1  | 2026-11-07 21:19:21.588 UTC [49] LOG:  database system is shut down
+integration-db-1  |  done
+integration-db-1  | server stopped
+integration-db-1  | 
+integration-db-1  | PostgreSQL init process complete; ready for start up.
+integration-db-1  | 
+integration-db-1  | 2026-11-07 21:19:21.687 UTC [1] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+integration-db-1  | 2026-11-07 21:19:21.688 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 15434
+integration-db-1  | 2026-11-07 21:19:21.688 UTC [1] LOG:  listening on IPv6 address "::", port 15434
+integration-db-1  | 2026-11-07 21:19:21.691 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.15434"
+integration-db-1  | 2026-11-07 21:19:21.694 UTC [65] LOG:  database system was shut down at 2026-11-07 21:19:21 UTC
+integration-db-1  | 2026-11-07 21:19:21.700 UTC [1] LOG:  database system is ready to accept connections
+ Container taxtrace-integration-integration-db-1 Healthy 
+ Container a042358f5b28_taxtrace-integration-integration-tests-1 Starting 
+ Container a042358f5b28_taxtrace-integration-integration-tests-1 Started 
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_bloqueios_e_limites_semanticos_sao_pontuados_separadamente (test_adversarial.AdversarialTest.test_bloqueios_e_limites_semanticos_sao_pontuados_separadamente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_citacao_de_fonte_diferente_e_recusada (test_agente.GrafoTest.test_citacao_de_fonte_diferente_e_recusada) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_coleta_misturada_interrompe_antes_de_ler_artigo (test_agente.GrafoTest.test_coleta_misturada_interrompe_antes_de_ler_artigo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_operacional_nao_vira_ausencia_de_dados (test_agente.GrafoTest.test_falha_operacional_nao_vira_ausencia_de_dados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_fluxo_real_do_grafo_chama_ferramentas_e_fixa_coleta (test_agente.GrafoTest.test_fluxo_real_do_grafo_chama_ferramentas_e_fixa_coleta) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_orcamento_de_chamadas_nao_acumula_entre_invocacoes (test_agente.GrafoTest.test_orcamento_de_chamadas_nao_acumula_entre_invocacoes) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_recusa_do_planejador_sintetico_nao_consulta_banco (test_agente.GrafoTest.test_recusa_do_planejador_sintetico_nao_consulta_banco) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_limite_de_api_sem_retry_e_sem_detalhe_privado (test_agente.PlanejamentoTest.test_limite_de_api_sem_retry_e_sem_detalhe_privado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_modelo_nao_pode_inventar_referencia_ou_acao (test_agente.PlanejamentoTest.test_modelo_nao_pode_inventar_referencia_ou_acao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_regras_explicitas_e_ambiguidades (test_agente.PlanejamentoTest.test_regras_explicitas_e_ambiguidades) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_bad_file_fails_closed_and_bad_account_rejected (test_autenticacao.AcessoTest.test_bad_file_fails_closed_and_bad_account_rejected) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_cookie_login_csrf_logout_and_identity_from_server (test_autenticacao.AcessoTest.test_cookie_login_csrf_logout_and_identity_from_server) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_https_cookie_and_origin (test_autenticacao.AcessoTest.test_https_cookie_and_origin) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_logout_expiration_restart_and_session_bound (test_autenticacao.AcessoTest.test_logout_expiration_restart_and_session_bound) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_rate_limit_then_expiration (test_autenticacao.AcessoTest.test_rate_limit_then_expiration) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_salted_hash_and_invalid_credentials (test_autenticacao.AcessoTest.test_salted_hash_and_invalid_credentials) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_controles_nao_inflam_metrica_de_artigos (test_avaliacao.MetricasTest.test_controles_nao_inflam_metrica_de_artigos) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_operacional_nao_grava_resultado_nem_expoe_conexao (test_avaliacao.MetricasTest.test_falha_operacional_nao_grava_resultado_nem_expoe_conexao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_fragmento_incorreto_interrompe_antes_das_perguntas (test_avaliacao.MetricasTest.test_fragmento_incorreto_interrompe_antes_das_perguntas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_gabarito_invalido_recusado (test_avaliacao.MetricasTest.test_gabarito_invalido_recusado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_outra_coleta_interrompe_sem_medir (test_avaliacao.MetricasTest.test_outra_coleta_interrompe_sem_medir) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_ranking_parcial_e_duplicatas (test_avaliacao.MetricasTest.test_ranking_parcial_e_duplicatas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_sem_correspondencia_nao_pontua (test_avaliacao.MetricasTest.test_sem_correspondencia_nao_pontua) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_ancora_em_artigo_errado_ou_chave_extra_nao_inflam_resultado (test_avaliacao.TrechosTest.test_ancora_em_artigo_errado_ou_chave_extra_nao_inflam_resultado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_ancora_literal_correta_nao_comprova_suficiencia (test_avaliacao.TrechosTest.test_ancora_literal_correta_nao_comprova_suficiencia) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_artigo_correto_sem_ancora_nao_conta_como_trecho_util (test_avaliacao.TrechosTest.test_artigo_correto_sem_ancora_nao_conta_como_trecho_util) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_offset_incorreto_nao_e_aceito_mesmo_com_trecho_literal (test_avaliacao.TrechosTest.test_offset_incorreto_nao_e_aceito_mesmo_com_trecho_literal) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_trecho_inventado_ou_vazio_interrompe_verificacao (test_avaliacao.TrechosTest.test_trecho_inventado_ou_vazio_interrompe_verificacao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_artigos_e_alteracoes (test_banco.LinhasTest.test_artigos_e_alteracoes) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_ligacoes_e_divergencias (test_banco.LinhasTest.test_ligacoes_e_divergencias) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_administrador_nao_e_aceito_pela_busca (test_banco.PostgresTest.test_administrador_nao_e_aceito_pela_busca) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_atualizacao_de_esquema_preserva_carga_e_indice_original (test_banco.PostgresTest.test_atualizacao_de_esquema_preserva_carga_e_indice_original) ... ok
+integration-db-1                                       | 2026-11-07 21:19:31.548 UTC [111] ERROR:  permission denied for table coletas
+integration-db-1                                       | 2026-11-07 21:19:31.548 UTC [111] STATEMENT:  DELETE FROM coletas
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_busca_cita_a_coleta_e_ignora_texto_riscado (test_banco.PostgresTest.test_busca_cita_a_coleta_e_ignora_texto_riscado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_carga_completa_duplicada_e_proveniencia (test_banco.PostgresTest.test_carga_completa_duplicada_e_proveniencia) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_consultas_mcp_paginam_e_mantem_coleta (test_banco.PostgresTest.test_consultas_mcp_paginam_e_mantem_coleta) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_consultas_mcp_recusam_admin_e_coleta_inexistente (test_banco.PostgresTest.test_consultas_mcp_recusam_admin_e_coleta_inexistente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_erro_no_indice_nao_deixa_carga_parcial (test_banco.PostgresTest.test_erro_no_indice_nao_deixa_carga_parcial) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_de_integridade_nao_cria_coleta (test_banco.PostgresTest.test_falha_de_integridade_nao_cria_coleta) ... ok
+integration-db-1                                       | 2026-11-07 21:19:32.171 UTC [117] ERROR:  falha simulada
+integration-db-1                                       | 2026-11-07 21:19:32.171 UTC [117] CONTEXT:  PL/pgSQL function falhar_fragmento_teste() line 1 at RAISE
+integration-db-1                                       | 2026-11-07 21:19:32.171 UTC [117] STATEMENT:  INSERT INTO fragmentos_semanticos (indice_id,coleta_id,artigo_numero,ordem,inicio,fim,texto,texto_sha256,vetor) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::vector)
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_na_gravacao_de_fragmentos_reverte_indice_inteiro (test_banco.PostgresTest.test_falha_na_gravacao_de_fragmentos_reverte_indice_inteiro) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hibrida_com_indice_ausente_nao_oculta_falha_com_resposta_textual (test_banco.PostgresTest.test_hibrida_com_indice_ausente_nao_oculta_falha_com_resposta_textual) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hibrida_combina_e_preserva_citacao_com_encoder_sintetico (test_banco.PostgresTest.test_hibrida_combina_e_preserva_citacao_com_encoder_sintetico) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_indice_ausente_e_alteracao_de_coleta_nao_viram_busca_vazia (test_banco.PostgresTest.test_indice_ausente_e_alteracao_de_coleta_nao_viram_busca_vazia) ... ok
+integration-db-1                                       | 2026-11-07 21:19:32.614 UTC [121] ERROR:  duplicate key value violates unique constraint "indices_semanticos_coleta_id_config_sha256_key"
+integration-db-1                                       | 2026-11-07 21:19:32.614 UTC [121] DETAIL:  Key (coleta_id, config_sha256)=(1, 2e8fa2478a6214dc9a46f2318c741d901f5b8c2bb5a3529cf8d5e49cdb9547ad) already exists.
+integration-db-1                                       | 2026-11-07 21:19:32.614 UTC [121] STATEMENT:  INSERT INTO indices_semanticos (id,coleta_id,config_sha256,config,corpus_sha256,artigos,fragmentos) VALUES ($1,$2,$3,$4,$5,$6,$7)
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_indice_duplicado_nao_deixa_fragmentos_parciais (test_banco.PostgresTest.test_indice_duplicado_nao_deixa_fragmentos_parciais) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_padrao_v4_nao_consulta_v2_quando_nao_ha_vagas (test_banco.PostgresTest.test_padrao_v4_nao_consulta_v2_quando_nao_ha_vagas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_paginacao_de_artigo_reconstroi_texto_literal (test_banco.PostgresTest.test_paginacao_de_artigo_reconstroi_texto_literal) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_v2_acentos_e_texto_decomposto (test_banco.PostgresTest.test_v2_acentos_e_texto_decomposto) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_v2_sem_termos_e_entrada_parecida_com_sql (test_banco.PostgresTest.test_v2_sem_termos_e_entrada_parecida_com_sql) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_v2_sinaliza_correspondencia_parcial (test_banco.PostgresTest.test_v2_sinaliza_correspondencia_parcial) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_v3_citacoes_versao_e_consulta_sem_evidencia (test_banco.PostgresTest.test_v3_citacoes_versao_e_consulta_sem_evidencia) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_v4_preserva_ranking_original_e_completa_vagas (test_banco.PostgresTest.test_v4_preserva_ranking_original_e_completa_vagas) ... ok
+integration-db-1                                       | 2026-11-07 21:19:33.556 UTC [137] ERROR:  permission denied for table indices_semanticos
+integration-db-1                                       | 2026-11-07 21:19:33.556 UTC [137] STATEMENT:  DELETE FROM indices_semanticos
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_vetores_exatos_deduplicam_artigo_e_leitor_nao_escreve (test_banco.PostgresTest.test_vetores_exatos_deduplicam_artigo_e_leitor_nao_escreve) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_event_is_written_to_database_without_local_run_files (test_checkpoints.CheckpointControlTest.test_event_is_written_to_database_without_local_run_files) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_lock_collision_closes_connection_before_yield (test_checkpoints.CheckpointControlTest.test_lock_collision_closes_connection_before_yield) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_postgres_failure_does_not_open_sqlite (test_checkpoints.CheckpointControlTest.test_postgres_failure_does_not_open_sqlite) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_backend_default_and_invalid_value (test_checkpoints.ConfigCheckpointTest.test_backend_default_and_invalid_value) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_missing_dsn_is_not_replaced_by_admin_or_reader_connection (test_checkpoints.ConfigCheckpointTest.test_missing_dsn_is_not_replaced_by_admin_or_reader_connection) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_role_and_destination_are_restricted_without_fallback (test_checkpoints.ConfigCheckpointTest.test_role_and_destination_are_restricted_without_fallback) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hash_mismatch_does_not_consume_pending_review (test_checkpoints.PostgresCheckpointTest.test_hash_mismatch_does_not_consume_pending_review) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_resume_across_connections_without_tools_and_with_events (test_checkpoints.PostgresCheckpointTest.test_resume_across_connections_without_tools_and_with_events) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_two_connections_cannot_decide_same_review_concurrently (test_checkpoints.PostgresCheckpointTest.test_two_connections_cannot_decide_same_review_concurrently) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_baixar_desiste_depois_das_tentativas_em_erro_de_rede (test_coleta.ColetaTest.test_baixar_desiste_depois_das_tentativas_em_erro_de_rede) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_baixar_repete_em_5xx_e_desiste_em_4xx (test_coleta.ColetaTest.test_baixar_repete_em_5xx_e_desiste_em_4xx) ... /usr/local/lib/python3.14/tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 503: 'indisponivel'>
+a042358f5b28_taxtrace-integration-integration-tests-1  |   _warnings.warn(self.warn_message, ResourceWarning)
+a042358f5b28_taxtrace-integration-integration-tests-1  | /usr/local/lib/python3.14/tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 404: 'nf'>
+a042358f5b28_taxtrace-integration-integration-tests-1  |   _warnings.warn(self.warn_message, ResourceWarning)
+a042358f5b28_taxtrace-integration-integration-tests-1  | ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_coleta_grava_arquivos_e_manifesto (test_coleta.ColetaTest.test_coleta_grava_arquivos_e_manifesto) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_data_vai_na_url_exceto_na_versao (test_coleta.ColetaTest.test_data_vai_na_url_exceto_na_versao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_fonte_com_erro_vai_para_erros_e_nao_some (test_coleta.ColetaTest.test_fonte_com_erro_vai_para_erros_e_nao_some) ... /usr/local/lib/python3.14/tempfile.py:538: ResourceWarning: Implicitly cleaning up <HTTPError 404: 'Not Found'>
+a042358f5b28_taxtrace-integration-integration-tests-1  |   _warnings.warn(self.warn_message, ResourceWarning)
+a042358f5b28_taxtrace-integration-integration-tests-1  | ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_lei_de_arquivo_local_quando_planalto_bloqueia (test_coleta.ColetaTest.test_lei_de_arquivo_local_quando_planalto_bloqueia) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_planalto_bloqueado_sem_arquivo_vira_erro (test_coleta.ColetaTest.test_planalto_bloqueado_sem_arquivo_vira_erro) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_resposta_que_nao_e_json_vira_erro (test_coleta.ColetaTest.test_resposta_que_nao_e_json_vira_erro) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_normaliza_unicode_sem_alterar_o_original (test_consulta.ConsultaTest.test_normaliza_unicode_sem_alterar_o_original) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_preserva_negacao_valores_e_datas (test_consulta.ConsultaTest.test_preserva_negacao_valores_e_datas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_compose_does_not_allow_arbitrary_host_port_database_or_admin (test_container_runtime.ContainerRuntimeTest.test_compose_does_not_allow_arbitrary_host_port_database_or_admin) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_compose_does_not_relax_test_database_isolation (test_container_runtime.ContainerRuntimeTest.test_compose_does_not_relax_test_database_isolation) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_compose_reader_requires_explicit_mode_and_keeps_read_only (test_container_runtime.ContainerRuntimeTest.test_compose_reader_requires_explicit_mode_and_keeps_read_only) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_mcp_inherits_reader_configuration_without_other_secrets (test_container_runtime.ContainerRuntimeTest.test_mcp_inherits_reader_configuration_without_other_secrets) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_model_availability_uses_runtime_environment_without_exposing_key (test_container_runtime.ContainerRuntimeTest.test_model_availability_uses_runtime_environment_without_exposing_key) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_classificacoes_tem_versao_da_base (test_dados_reais.DadosReaisTest.test_classificacoes_tem_versao_da_base) ... skipped 'sem coleta completa em data/raw'
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_lei_vai_do_artigo_1_ao_544_sem_buracos (test_dados_reais.DadosReaisTest.test_lei_vai_do_artigo_1_ao_544_sem_buracos) ... skipped 'sem coleta completa em data/raw'
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_todo_artigo_citado_pelas_classificacoes_existe_na_lei (test_dados_reais.DadosReaisTest.test_todo_artigo_citado_pelas_classificacoes_existe_na_lei) ... skipped 'sem coleta completa em data/raw'
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_download_com_hash_errado_nao_publica_arquivo (test_encoder.EncoderTest.test_download_com_hash_errado_nao_publica_arquivo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_janelas_sobrepostas_cobrem_fim_sem_cruzar_artigos (test_encoder.EncoderTest.test_janelas_sobrepostas_cobrem_fim_sem_cruzar_artigos) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_sem_arquivo_nao_tenta_baixar_durante_consulta (test_encoder.EncoderTest.test_sem_arquivo_nao_tenta_baixar_durante_consulta) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_trechos_inventados_ou_com_lacuna_nao_sao_aceitos (test_encoder.EncoderTest.test_trechos_inventados_ou_com_lacuna_nao_sao_aceitos) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_vetor_recusa_nan_dimensao_errada_e_norma_invalida (test_encoder.EncoderTest.test_vetor_recusa_nan_dimensao_errada_e_norma_invalida) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_lista_principal_cheia_nao_perde_resultados (test_fusao.ComplementoTest.test_lista_principal_cheia_nao_perde_resultados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_preserva_prefixo_e_preenche_sem_duplicatas (test_fusao.ComplementoTest.test_preserva_prefixo_e_preenche_sem_duplicatas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_consenso_supera_item_em_uma_unica_lista (test_fusao.FusaoTest.test_consenso_supera_item_em_uma_unica_lista) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_duplicata_nao_duplica_voto (test_fusao.FusaoTest.test_duplicata_nao_duplica_voto) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_metadados_parciais_e_entradas_preservados (test_fusao.FusaoTest.test_metadados_parciais_e_entradas_preservados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_vazio_empate_e_limite (test_fusao.FusaoTest.test_vazio_empate_e_limite) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hash_alterado_e_manifesto_com_travessia_sao_recusados (test_isolamento.IsolamentoTest.test_hash_alterado_e_manifesto_com_travessia_sao_recusados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_lei_obrigatoria_na_carga (test_isolamento.IsolamentoTest.test_lei_obrigatoria_na_carga) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_sem_opt_in_e_leitura_com_administrador_sao_recusados (test_isolamento.IsolamentoTest.test_sem_opt_in_e_leitura_com_administrador_sao_recusados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_teste_nao_usa_conexao_de_desenvolvimento_ou_neon (test_isolamento.IsolamentoTest.test_teste_nao_usa_conexao_de_desenvolvimento_ou_neon) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_texto_riscado_fica_fora_da_busca_sem_excluir_redacao_nova (test_isolamento.IsolamentoTest.test_texto_riscado_fica_fora_da_busca_sem_excluir_redacao_nova) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_alteracoes_registradas (test_lei.LeiTest.test_alteracoes_registradas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_anotacao_com_decreto (test_lei.LeiTest.test_anotacao_com_decreto) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_assinatura_e_anexos_ficam_de_fora (test_lei.LeiTest.test_assinatura_e_anexos_ficam_de_fora) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_cabecalho_novo_limpa_niveis_inferiores (test_lei.LeiTest.test_cabecalho_novo_limpa_niveis_inferiores) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_cabecalho_riscado_abre_o_artigo_e_a_redacao_nova_se_junta (test_lei.LeiTest.test_cabecalho_riscado_abre_o_artigo_e_a_redacao_nova_se_junta) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_citacao_e_linha_fora_de_ordem_ficam_no_artigo_corrente (test_lei.LeiTest.test_citacao_e_linha_fora_de_ordem_ficam_no_artigo_corrente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_decodifica_windows_1252 (test_lei.LeiTest.test_decodifica_windows_1252) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hierarquia (test_lei.LeiTest.test_hierarquia) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_id_estavel (test_lei.LeiTest.test_id_estavel) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_numeros_em_ordem_e_sem_anexo (test_lei.LeiTest.test_numeros_em_ordem_e_sem_anexo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_texto_do_artigo_junta_linhas_do_mesmo_paragrafo (test_lei.LeiTest.test_texto_do_artigo_junta_linhas_do_mesmo_paragrafo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_trecho_riscado_marcado (test_lei.LeiTest.test_trecho_riscado_marcado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_veto (test_lei.LeiTest.test_veto) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_artigo_integral_nao_trunca_e_nao_muda_dossie (test_leitura.LeituraTest.test_artigo_integral_nao_trunca_e_nao_muda_dossie) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_fonte_divergente_nao_e_usada_como_contexto (test_leitura.LeituraTest.test_fonte_divergente_nao_e_usada_como_contexto) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_link_usa_ancora_verificada_e_tenta_texto_quando_ausente (test_leitura.LeituraTest.test_link_usa_ancora_verificada_e_tenta_texto_quando_ausente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_marcacoes_invalidas_nao_viram_texto_vigente (test_leitura.LeituraTest.test_marcacoes_invalidas_nao_viram_texto_vigente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_outro_artigo_e_outra_coleta_sao_recusados (test_leitura.LeituraTest.test_outro_artigo_e_outra_coleta_sao_recusados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_preserva_paragrafos_e_riscado_entre_linhas_sem_interpretar_html (test_leitura.LeituraTest.test_preserva_paragrafos_e_riscado_entre_linhas_sem_interpretar_html) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_separa_achados_ausentes_e_regra_geral (test_ligacao.LigarTest.test_separa_achados_ausentes_e_regra_geral) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_padroes_da_api (test_ligacao.NumerosDeArtigosTest.test_padroes_da_api) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_descoberta_schemas_e_anotacoes_somente_leitura (test_mcp.MCPTest.test_descoberta_schemas_e_anotacoes_somente_leitura) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_entradas_invalidas_nao_abrem_conexao (test_mcp.MCPTest.test_entradas_invalidas_nao_abrem_conexao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_de_banco_nao_vaza_detalhe_privado (test_mcp.MCPTest.test_falha_de_banco_nao_vaza_detalhe_privado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_export_and_refuse_overwrite (test_operational_readiness.EvaluationCommandTest.test_export_and_refuse_overwrite) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_mismatch_fails_command_but_preserves_report (test_operational_readiness.EvaluationCommandTest.test_mismatch_fails_command_but_preserves_report) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_process_alive_even_when_database_is_down (test_operational_readiness.ReadinessTest.test_process_alive_even_when_database_is_down) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_ready_requires_loaded_articles_without_model_call (test_operational_readiness.ReadinessTest.test_ready_requires_loaded_articles_without_model_call) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_configured_hash_survives_new_instance_without_file_or_key_disclosure (test_persistent_access.CredentialConfigurationTest.test_configured_hash_survives_new_instance_without_file_or_key_disclosure) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_explicit_configuration_has_priority_but_invalid_configuration_fails_closed (test_persistent_access.CredentialConfigurationTest.test_explicit_configuration_has_priority_but_invalid_configuration_fails_closed) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_bad_inputs_do_not_open_database (test_persistent_access.PersistentAccessTest.test_bad_inputs_do_not_open_database) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_conflicting_owner_cannot_bind (test_persistent_access.PersistentAccessTest.test_conflicting_owner_cannot_bind) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_factory_uses_same_backend_as_checkpoint (test_persistent_access.PersistentAccessTest.test_factory_uses_same_backend_as_checkpoint) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_postgres_failure_does_not_use_an_existing_sqlite_permission (test_persistent_access.PersistentAccessTest.test_postgres_failure_does_not_use_an_existing_sqlite_permission) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_new_store_keeps_permission_and_expiration_uses_database_clock (test_persistent_access.PostgresAccessIntegrationTest.test_new_store_keeps_permission_and_expiration_uses_database_clock) ... ok
+integration-db-1                                       | 2026-11-07 21:19:36.387 UTC [168] ERROR:  permission denied for table acessos_revisao
+integration-db-1                                       | 2026-11-07 21:19:36.387 UTC [168] STATEMENT:  UPDATE acessos_revisao SET dono=$1 WHERE revisao_id=$2
+integration-db-1                                       | 2026-11-07 21:19:36.396 UTC [169] ERROR:  permission denied for table acessos_revisao
+integration-db-1                                       | 2026-11-07 21:19:36.396 UTC [169] STATEMENT:  DELETE FROM acessos_revisao WHERE revisao_id=$1
+integration-db-1                                       | 2026-11-07 21:19:36.403 UTC [170] ERROR:  permission denied for table eventos_revisao
+integration-db-1                                       | 2026-11-07 21:19:36.403 UTC [170] STATEMENT:  DELETE FROM eventos_revisao WHERE revisao_id=$1
+integration-db-1                                       | 2026-11-07 21:19:36.409 UTC [171] ERROR:  permission denied for schema taxtrace_workflow at character 14
+integration-db-1                                       | 2026-11-07 21:19:36.409 UTC [171] STATEMENT:  CREATE TABLE taxtrace_workflow.nao_permitida (id INT)
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_runtime_role_can_bind_but_cannot_change_delete_or_create_tables (test_persistent_access.PostgresAccessIntegrationTest.test_runtime_role_can_bind_but_cannot_change_delete_or_create_tables) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_two_owners_racing_have_only_one_winner_and_do_not_renew_expiration (test_persistent_access.PostgresAccessIntegrationTest.test_two_owners_racing_have_only_one_winner_and_do_not_renew_expiration) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_web_sessions_are_isolated_with_real_postgres_bindings (test_persistent_access.PostgresAccessIntegrationTest.test_web_sessions_are_isolated_with_real_postgres_bindings) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_binding_is_persistent_and_cannot_be_transferred (test_propriedade.PropriedadeTest.test_binding_is_persistent_and_cannot_be_transferred) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_expiration_unknown_tokens_and_invalid_bindings (test_propriedade.PropriedadeTest.test_expiration_unknown_tokens_and_invalid_bindings) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_browser_cookie_keeps_permission_after_app_restart (test_propriedade.SessionIsolationTest.test_browser_cookie_keeps_permission_after_app_restart) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_cookie_is_private_and_not_in_response_body_or_binding (test_propriedade.SessionIsolationTest.test_cookie_is_private_and_not_in_response_body_or_binding) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_missing_cookie_and_corrupt_ownership_store_fail_closed (test_propriedade.SessionIsolationTest.test_missing_cookie_and_corrupt_ownership_store_fail_closed) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_other_browser_cannot_read_export_or_load_source (test_propriedade.SessionIsolationTest.test_other_browser_cannot_read_export_or_load_source) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_reviewer_can_read_legacy_records_but_logout_revokes_admin_access (test_propriedade.SessionIsolationTest.test_reviewer_can_read_legacy_records_but_logout_revokes_admin_access) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_same_idempotency_key_is_scoped_to_browser (test_propriedade.SessionIsolationTest.test_same_idempotency_key_is_scoped_to_browser) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_recusa_tecnica_nao_chama_gerador (test_rag.RagGrafoTest.test_recusa_tecnica_nao_chama_gerador) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_resposta_adulterada_e_recusada_pelo_grafo (test_rag.RagGrafoTest.test_resposta_adulterada_e_recusada_pelo_grafo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_resposta_persistida_retomada_sem_modelo_e_hash_adulterado_recusado (test_rag.RagGrafoTest.test_resposta_persistida_retomada_sem_modelo_e_hash_adulterado_recusado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_alteracao_do_contexto_e_detectada (test_rag.RagTest.test_alteracao_do_contexto_e_detectada) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_citacao_literal_id_e_numeros_precisam_conferir (test_rag.RagTest.test_citacao_literal_id_e_numeros_precisam_conferir) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_codigo_nao_pode_ser_reduzido_a_um_numero_equivalente (test_rag.RagTest.test_codigo_nao_pode_ser_reduzido_a_um_numero_equivalente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_contexto_exige_leitura_completa_e_nao_usa_redacao_riscada (test_rag.RagTest.test_contexto_exige_leitura_completa_e_nao_usa_redacao_riscada) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hash_da_revisao_cobre_texto_da_resposta_e_citacoes (test_rag.RagTest.test_hash_da_revisao_cobre_texto_da_resposta_e_citacoes) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_http_429_nao_expoe_erro_privado_nem_repete (test_rag.RagTest.test_http_429_nao_expoe_erro_privado_nem_repete) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_instrucao_embutida_na_fonte_nao_e_enviada_ao_modelo (test_rag.RagTest.test_instrucao_embutida_na_fonte_nao_e_enviada_ao_modelo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_json_invalido_e_resposta_cortada_sao_falhas_sem_detalhe_privado (test_rag.RagTest.test_json_invalido_e_resposta_cortada_sao_falhas_sem_detalhe_privado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_numero_nao_pode_ser_substring_do_apoio (test_rag.RagTest.test_numero_nao_pode_ser_substring_do_apoio) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_recusa_nao_pode_esconder_afirmacoes_e_garantias_sao_bloqueadas (test_rag.RagTest.test_recusa_nao_pode_esconder_afirmacoes_e_garantias_sao_bloqueadas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_referencia_com_ordinal_e_aceita_apenas_se_estiver_no_apoio (test_rag.RagTest.test_referencia_com_ordinal_e_aceita_apenas_se_estiver_no_apoio) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_triagem_recusa_antes_do_modelo (test_rag.RagTest.test_triagem_recusa_antes_do_modelo) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_decisao_exige_origem_explicita_e_nao_aceita_aprovacao_coerciva (test_revisao.DecisaoTest.test_decisao_exige_origem_explicita_e_nao_aceita_aprovacao_coerciva) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_codigo_modificado_bloqueia_retomada_mas_permite_inspecao (test_revisao.RevisaoTest.test_codigo_modificado_bloqueia_retomada_mas_permite_inspecao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_mcp_nao_e_encaminhada_para_aprovacao (test_revisao.RevisaoTest.test_falha_mcp_nao_e_encaminhada_para_aprovacao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_hash_divergente_preserva_pendencia (test_revisao.RevisaoTest.test_hash_divergente_preserva_pendencia) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_id_inexistente_e_id_com_caminho_nao_criam_revisao (test_revisao.RevisaoTest.test_id_inexistente_e_id_com_caminho_nao_criam_revisao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_pausa_persistida_e_retomada_sem_repetir_ferramentas (test_revisao.RevisaoTest.test_pausa_persistida_e_retomada_sem_repetir_ferramentas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_rejeicao_fica_registrada_e_nao_admite_segunda_decisao (test_revisao.RevisaoTest.test_rejeicao_fica_registrada_e_nao_admite_segunda_decisao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_revisoes_distintas_nao_compartilham_decisoes (test_revisao.RevisaoTest.test_revisoes_distintas_nao_compartilham_decisoes) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_trava_impede_duas_operacoes_simultaneas (test_revisao.RevisaoTest.test_trava_impede_duas_operacoes_simultaneas) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_casos_duplicados_nao_podem_substituir_casos_pendentes (test_revisao_avaliacao.PacoteTest.test_casos_duplicados_nao_podem_substituir_casos_pendentes) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_exportacao_nao_inventa_revisor_nem_aprovacao (test_revisao_avaliacao.PacoteTest.test_exportacao_nao_inventa_revisor_nem_aprovacao) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_outra_execucao_e_material_trocado_sao_recusados (test_revisao_avaliacao.PacoteTest.test_outra_execucao_e_material_trocado_sao_recusados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_preenchimento_sintetico_nunca_comprova_revisao_independente (test_revisao_avaliacao.PacoteTest.test_preenchimento_sintetico_nunca_comprova_revisao_independente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_reprovacao_exige_justificativa_e_notas_invalidas_falham (test_revisao_avaliacao.PacoteTest.test_reprovacao_exige_justificativa_e_notas_invalidas_falham) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_tudo_nao_aplicavel_nao_e_avaliacao_concluida (test_revisao_avaliacao.PacoteTest.test_tudo_nao_aplicavel_nao_e_avaliacao_concluida) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_package_has_version (test_smoke.SmokeTest.test_package_has_version) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_carrega_e_aponta_divergencias (test_tabelas.TabelasTest.test_carrega_e_aponta_divergencias) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_coleta_incompleta_nao_carrega (test_tabelas.TabelasTest.test_coleta_incompleta_nao_carrega) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_pasta_mais_recente (test_tabelas.TabelasTest.test_pasta_mais_recente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_registra_classificacao_sem_fundamento (test_tabelas.TabelasTest.test_registra_classificacao_sem_fundamento) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_decisao_sem_login_nao_chama_backend (test_web.WebTest.test_decisao_sem_login_nao_chama_backend) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_falha_privada_nao_aparece_na_resposta (test_web.WebTest.test_falha_privada_nao_aparece_na_resposta) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_leitura_integral_usa_revisao_e_nao_aceita_coleta_do_cliente (test_web.WebTest.test_leitura_integral_usa_revisao_e_nao_aceita_coleta_do_cliente) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_limites_e_campos_extras_nao_chamam_backend (test_web.WebTest.test_limites_e_campos_extras_nao_chamam_backend) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_mesma_tentativa_nao_repete_consulta_e_conteudo_diferente_e_recusado (test_web.WebTest.test_mesma_tentativa_nao_repete_consulta_e_conteudo_diferente_e_recusado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_modo_rag_e_encaminhado_explicitamente_sem_troca_silenciosa (test_web.WebTest.test_modo_rag_e_encaminhado_explicitamente_sem_troca_silenciosa) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_pagina_assets_csp_e_arquivos_privados (test_web.WebTest.test_pagina_assets_csp_e_arquivos_privados) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | test_post_sem_token_ou_origem_externa_e_recusado (test_web.WebTest.test_post_sem_token_ou_origem_externa_e_recusado) ... ok
+a042358f5b28_taxtrace-integration-integration-tests-1  | 
+a042358f5b28_taxtrace-integration-integration-tests-1  | ----------------------------------------------------------------------
+a042358f5b28_taxtrace-integration-integration-tests-1  | Ran 183 tests in 12.039s
+a042358f5b28_taxtrace-integration-integration-tests-1  | 
+a042358f5b28_taxtrace-integration-integration-tests-1  | OK (skipped=3)
+
+ Compose Stopping Aborting on container exit...
+a042358f5b28_taxtrace-integration-integration-tests-1 exited with code 0
+ Container a042358f5b28_taxtrace-integration-integration-tests-1 Stopping 
+ Container a042358f5b28_taxtrace-integration-integration-tests-1 Stopped 
+ Container taxtrace-integration-integration-db-1 Stopping 
+integration-db-1                                       | 2026-11-07 21:19:42.368 UTC [1] LOG:  received fast shutdown request
+integration-db-1                                       | 2026-11-07 21:19:42.368 UTC [1] LOG:  aborting any active transactions
+integration-db-1                                       | 2026-11-07 21:19:42.375 UTC [1] LOG:  background worker "logical replication launcher" (PID 68) exited with exit code 1
+integration-db-1                                       | 2026-11-07 21:19:42.378 UTC [63] LOG:  shutting down
+integration-db-1                                       | 2026-11-07 21:19:42.378 UTC [63] LOG:  checkpoint starting: shutdown immediate
+integration-db-1                                       | 2026-11-07 21:19:42.406 UTC [207] FATAL:  the database system is shutting down
+integration-db-1                                       | 2026-11-07 21:19:42.422 UTC [63] LOG:  checkpoint complete: wrote 1175 buffers (7.2%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.016 s, sync=0.011 s, total=0.045 s; sync files=1229, longest=0.001 s, average=0.001 s; distance=14981 kB, estimate=14981 kB; lsn=0/27AC198, redo lsn=0/27AC198
+integration-db-1                                       | 2026-11-07 21:19:42.446 UTC [1] LOG:  database system is shut down
+ Container taxtrace-integration-integration-db-1 Stopped 
+
+integration-db-1 exited with code 0

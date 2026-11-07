@@ -67,7 +67,7 @@ python scripts/smoke_container.py --imagem taxtrace:ci --saida runs/minha-valida
 
 O relatório não sobrescreve evidência anterior. No CI, o artefato `container-smoke-<execução>-<tentativa>` é preservado por 30 dias quando houver relatório. Uma falha de build impede sua geração e não deve ser chamada de teste de runtime aprovado.
 
-Nesta entrega local, o Compose foi validado sem exibir configuração, mas o Docker não respondeu à verificação do motor. **A imagem ainda não foi construída ou executada nesta rodada.** O job remoto também precisa ser conferido após o push. Os testes Python validam configurações e isolamento, não substituem o smoke real nem validam consultas MCP contra PostgreSQL dentro do contêiner.
+Nesta entrega local, o Compose foi validado sem exibir configuração, mas o Docker não respondeu à verificação do motor. **Esse registro descreve a preparação inicial; a imagem foi construída e executada na validação posterior, abaixo.** O job remoto também precisa ser conferido após o push. Os testes Python validam configurações e isolamento, não substituem o smoke real nem validam consultas MCP contra PostgreSQL dentro do contêiner.
 
 A imagem usa a tag oficial `python:3.14-slim`, sem digest fixado nesta etapa. Dependências diretas têm versões fixadas; a tag e dependências transitivas ainda podem mudar. Não alegamos build idêntico byte a byte. Depois do primeiro build validado, registrar digest e avaliar congelamento completo das dependências continua sendo uma melhoria possível.
 
@@ -82,4 +82,24 @@ Referências de implementação: [boas práticas de build](https://docs.docker.c
 
 ## Backend de checkpoints opcional
 
-A composição também permite selecionar checkpoints e eventos PostgreSQL, após preparação explícita do schema e do papel `taxtrace_state`. Isso não migra vínculos de acesso ou a conta local, nem habilita Neon ou Render. Veja [persistência e validações pendentes](PERSISTENCIA.md). O padrão permanece SQLite.
+A composição também permite selecionar checkpoints e eventos PostgreSQL, após preparação explícita do schema e do papel `taxtrace_state`. O backend PostgreSQL também guarda os vínculos de acesso; a credencial pode vir da configuração privada. Isso não migra dados locais automaticamente nem habilita Neon ou Render. Veja [persistência e validações pendentes](PERSISTENCIA.md). O padrão permanece SQLite.
+
+
+## Integração Linux validada
+
+Depois de ativar o Docker, a suíte passou em um PostgreSQL descartável: 180 testes aprovados e três desativados por ausência da coleta oficial. O smoke da imagem também passou, verificando processo ativo, diagnóstico da base, cabeçalhos, usuário sem root e ausência de dados privados na imagem. A primeira tentativa e a falha inicial por gabaritos não montados foram preservadas; o ambiente de testes passou a montar `evals/` somente para leitura. Os gabaritos continuam fora da imagem de runtime.
+
+Para reproduzir sem utilizar o banco de desenvolvimento, construa a imagem e execute:
+
+```powershell
+docker build --pull -t taxtrace:ci .
+docker compose -p taxtrace-integration -f docker-compose.integration.yml up --abort-on-container-exit --exit-code-from integration-tests
+```
+
+A composição de integração usa um banco em memória temporária, sem portas publicadas e com senha exclusiva de teste. Monta apenas `tests/` e `evals/` como leitura; não recebe `.env`, coleta bruta ou chaves reais. A imagem executa os testes em Linux, inclusive os checkpoints PostgreSQL. Para limpar apenas os contêineres e a rede desse projeto de testes:
+
+```powershell
+docker compose -p taxtrace-integration -f docker-compose.integration.yml down
+```
+
+Não substitua esse comando pelo projeto de desenvolvimento nem acrescente exclusão de volumes. Essa validação local não comprova que o CI remoto já executou. Veja [o registro completo](../runs/2026-11-07-persistent-access/verification.json).

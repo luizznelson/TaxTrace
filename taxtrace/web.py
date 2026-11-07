@@ -23,7 +23,7 @@ from taxtrace.autenticacao import COOKIE, DURACAO, AcessoRevisor
 from taxtrace.conexao import conectar
 from taxtrace.consultas import resumo_base
 from taxtrace.leitura import ler_integral
-from taxtrace.propriedade import COOKIE_VISITANTE, VALIDADE, Propriedade, dono
+from taxtrace.propriedade import COOKIE_VISITANTE, VALIDADE, criar_propriedade, dono
 from taxtrace.revisao import decidir, iniciar, inspecionar
 
 
@@ -76,7 +76,7 @@ def criar_app(raiz=None):
     ativos = 0
     csrf = secrets.token_urlsafe(32)
     acesso = AcessoRevisor(raiz)
-    propriedade = Propriedade(raiz)
+    propriedade = criar_propriedade(raiz)
     login_lock = asyncio.Lock()
 
     @asynccontextmanager

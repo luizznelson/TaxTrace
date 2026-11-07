@@ -1,0 +1,37 @@
+# Disposable Linux integration tests. No development data, .env or host ports.
+services:
+  integration-db:
+    image: pgvector/pgvector@sha256:7d0a41464797aeb9862dfdc0bbf1526b82cfd324cdd8036df19e3545f4a9ccb8
+    command: ["postgres", "-p", "15434"]
+    environment:
+      POSTGRES_USER: taxtrace_test
+      POSTGRES_PASSWORD: isolated-integration-only
+      POSTGRES_DB: taxtrace_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p 15434 -U taxtrace_test -d taxtrace_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+  integration-tests:
+    image: taxtrace:ci
+    init: true
+    network_mode: service:integration-db
+    depends_on:
+      integration-db:
+        condition: service_healthy
+    environment:
+      TAXTRACE_TEST_DATABASE: "1"
+      TAXTRACE_TEST_DATABASE_URL: postgresql://taxtrace_test:isolated-integration-only@127.0.0.1:15434/taxtrace_test
+    volumes:
+      - ./tests:/app/tests:ro
+      - ./evals:/app/evals:ro
+      - ./scripts:/app/scripts:ro
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=128m
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    command: ["python", "-m", "unittest", "discover", "-s", "tests", "-v"]

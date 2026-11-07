@@ -141,20 +141,18 @@ Integration tests require explicit opt-in and the dedicated local test database,
 
 `taxtrace/` contains collection, integrity checks, parsers, linking, persistence and search. `tests/` contains automated checks. `runs/` holds public verification records without secrets. `PLANO.md` tracks source research and pending milestones.
 
+## Operation and evidence
+
+Docker/Linux execution with real PostgreSQL passed **180 tests**, with three skipped without the official raw collection. Tests covered checkpoints, events, browser isolation and runtime-role permissions. [Evidence](runs/2026-11-07-persistent-access/verification.json) preserves preliminary failures and the cleanup fix. No deployment or automatic history migration was performed.
+
+- [Docker](docs/DOCKER.md): local runtime and disposable integration environment.
+- [Persistence](docs/PERSISTENCIA.md): SQLite by default; optional PostgreSQL checkpoints, events and access bindings.
+- [Reviewer authentication](docs/AUTENTICACAO.md) and [access authorization](docs/AUTORIZACAO.md): authenticated decisions and browser-owned or administrative reads. Credentials may come from private runtime configuration.
+- [Diagnostics and evaluation](docs/OPERACAO.md): service status and development reports.
+- [Adversarial cases](evals/RAG.md) and [quality review package](docs/REVISAO_AVALIACAO.md): all 12 cases still await specialist review; exporting a package does not establish independent review. Technical guides are currently in Portuguese.
+
 ## Interpretation limits
 
 Search depends on the entered terms and can miss relevant articles. An empty result is not proof that the law contains no evidence. Ranking is not legal confidence. Removing strikethrough text from the index does not establish legal validity; the original text remains stored. Hashes check consistency against the manifest, not the source's digital signature.
 
 This is lookup support, not tax advice. Verify the official source before making a decision.
-
-Answer evaluation includes [adversarial cases](evals/RAG.md) and a [quality review package](docs/REVISAO_AVALIACAO.md). All 12 package cases await review; exporting this material does not establish independent review.
-
-Service diagnostics and automated adversarial evaluation: [operation and evidence](docs/OPERACAO.md) (Portuguese).
-
-Recording a web review decision requires a [local reviewer account](docs/AUTENTICACAO.md) (Portuguese). Decisions are blocked without a login; local authentication does not complete public multi-user deployment requirements.
-
-Reviews and exports are restricted to the browser that started the query or the administrative reviewer account. See the [access policy](docs/AUTORIZACAO.md) (Portuguese).
-
-Local application container, private volumes and image verification: [Docker and hosting limits](docs/DOCKER.md) (Portuguese). Image build and runtime still require validation with an available Docker engine.
-
-Checkpoints and review events have an optional PostgreSQL backend for Docker/Linux. SQLite remains the default. The [persistence adaptation](docs/PERSISTENCIA.md) (Portuguese) still requires real integration validation and does not enable deployment by itself.

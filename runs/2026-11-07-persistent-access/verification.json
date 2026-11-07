@@ -1,0 +1,72 @@
+{
+  "executado_em": "2026-11-07T21:28:23.520090+00:00",
+  "natureza": "validacao_local_docker_linux_postgres_real_com_dados_sinteticos",
+  "base_git": "34e6eb30e691fbe2d8572bd4fa41b377086bdf96",
+  "alteracoes_ainda_nao_commitadas": true,
+  "imagem": "sha256:3af45cd7333403bd89360520ba549e1d4c492706a067155440df5e4ce8bb2fe3",
+  "python_base_digest": "sha256:af8a5aa14780025dbfbcfbc81bd8a91ebd87711dd5b0f48ed71090949dd7cb1d",
+  "suite_linux": {
+    "descobertos": 183,
+    "aprovados": 180,
+    "desativados": 3,
+    "motivo_desativacao": "coleta oficial não montada no ambiente descartável"
+  },
+  "suite_windows_previa": {
+    "descobertos": 182,
+    "aprovados": 155,
+    "desativados": 27
+  },
+  "regressao_de_limpeza_adicionada_apos_suite_linux": {
+    "testes_locais_aprovados": 1,
+    "descricao": "criação interrompida ainda tenta encerrar o contêiner nomeado"
+  },
+  "javascript_aprovados": 6,
+  "checkpoint_postgres_integracoes_aprovadas": 3,
+  "autorizacao_postgres_integracoes_aprovadas": 4,
+  "papel_runtime_validado": {
+    "permite": [
+      "SELECT",
+      "INSERT em acessos_revisao"
+    ],
+    "recusa": [
+      "UPDATE em acessos_revisao",
+      "DELETE em acessos_revisao",
+      "DELETE em eventos_revisao",
+      "CREATE TABLE no schema de estado"
+    ]
+  },
+  "schema_preparado_no_banco_descartavel": true,
+  "imagem_executada": true,
+  "smoke_final": "container-smoke-final.json",
+  "historico_de_tentativas": [
+    "Primeira criação interrompida pela comunicação Docker.",
+    "Primeiro smoke retornou erro ao cliente, mas deixou contêiner ativo; identificado, encerrado e verificador corrigido.",
+    "Primeira suíte: 182 descobertos, três erros por evals não montado, três desativados.",
+    "Após montar evals: 183 descobertos, 180 aprovados, três desativados.",
+    "Regressão adicional da limpeza passou localmente; tentativa de repetir toda a suíte foi interrompida durante criação e não conta como execução de testes."
+  ],
+  "limpeza": {
+    "containers_integracao_e_rede": "removidos",
+    "container_smoke_inicial_remanescente": "identificado pela imagem, comando e horário, encerrado; não há remanescentes do verificador",
+    "volumes_de_desenvolvimento_alterados": false
+  },
+  "codigo_sha256": {
+    "taxtrace/propriedade.py": "971b24155d5413898f06b6c286af0ab4b48f05e0414a575d4956b45e45efe55b",
+    "taxtrace/autenticacao.py": "502e6599af7740c753c6543688717f6c55e638672dfd13dd5e3fb7f29fa6b684",
+    "taxtrace/checkpoints.py": "877042b41eff487b96550584e70ac9ca40232a5d35c1887d6613e59da1572093",
+    "taxtrace/web.py": "4bbd4994deec83e1d8e3131b7e9ecc41b15723a49e7130a22d1bd43c6470fab3",
+    "scripts/smoke_container.py": "ac8175cbd0abee699bef8a9d67e3687c7f0a70f2854aee8312ed98edf4c397c2",
+    "tests/test_persistent_access.py": "3a85a6a91338f086faea5bc7095664d455fa3632637244c1cb9bbf00fdf12ed1",
+    "tests/test_container_cleanup.py": "e057fc19ba91b98ad9d1496fc706239aabb914bd56d9750329c38bfc9ab8f05d",
+    "docker-compose.integration.yml": "bf4884e43a783f643b1603fa858b6ddd306573118b807bc6e074a5b1ea145709"
+  },
+  "novas_chamadas_de_modelo": 0,
+  "deploy_realizado": false,
+  "dados_existentes_migrados": false,
+  "limites": [
+    "Banco real usado exclusivamente em contêiner descartável, sem dataset ou credenciais de desenvolvimento.",
+    "Credencial por ambiente testada com hash sintético; não foi configurada conta real de hospedagem.",
+    "Conexão remota/Neon, TLS do destino e CI remoto ainda não validados.",
+    "Não houve revisão fiscal especializada ou auditoria externa de segurança."
+  ]
+}

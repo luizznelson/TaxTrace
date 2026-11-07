@@ -5,10 +5,13 @@ import getpass
 import hashlib
 import hmac
 import json
+import os
 import re
 import secrets
 import time
 from pathlib import Path
+
+from dotenv import dotenv_values
 
 COOKIE = "taxtrace_revisor"
 DURACAO = 3600
@@ -35,6 +38,23 @@ def criar_credencial(conta, nome, senha):
     }
 
 
+def validar_credencial(c):
+    if (
+        not isinstance(c, dict)
+        or set(c) != {"versao", "conta", "nome", "salt", "hash"}
+        or type(c["versao"]) is not int
+        or c["versao"] != 1
+        or not all(isinstance(c[k], str) for k in ("conta", "nome", "salt", "hash"))
+        or not re.fullmatch(r"[a-z][a-z0-9_.-]{2,39}", c["conta"])
+        or not 3 <= len(c["nome"].strip()) <= 80
+        or any(ord(ch) < 32 for ch in c["nome"])
+        or not re.fullmatch(r"[0-9a-f]{32}", c["salt"])
+        or not re.fullmatch(r"[0-9a-f]{128}", c["hash"])
+    ):
+        raise ValueError("credencial_de_revisor_invalida")
+    return dict(c)
+
+
 class AcessoRevisor:
     def __init__(self, raiz, relogio=time.monotonic):
         self.relogio = relogio
@@ -43,21 +63,20 @@ class AcessoRevisor:
         self.bloqueado_ate = 0
         self.credencial = None
         caminho = Path(raiz) / "data/checkpoints/revisor.json"
-        if caminho.exists():
-            try:
-                c = json.loads(caminho.read_text(encoding="utf-8"))
-                if (
-                    set(c) != {"versao", "conta", "nome", "salt", "hash"}
-                    or c["versao"] != 1
-                    or not re.fullmatch(r"[a-z][a-z0-9_.-]{2,39}", c["conta"])
-                    or not 3 <= len(c["nome"]) <= 80
-                    or not re.fullmatch(r"[0-9a-f]{32}", c["salt"])
-                    or not re.fullmatch(r"[0-9a-f]{128}", c["hash"])
-                ):
-                    raise ValueError
-                self.credencial = c
-            except Exception:
-                raise ValueError("credencial_de_revisor_invalida") from None
+        cfg = dotenv_values(Path(raiz) / ".env")
+        configurada = os.environ.get(
+            "TAXTRACE_REVIEWER_CREDENTIAL_JSON", cfg.get("TAXTRACE_REVIEWER_CREDENTIAL_JSON")
+        )
+        try:
+            # Configuração explícita prevalece; inválida não volta ao arquivo.
+            if configurada:
+                self.credencial = validar_credencial(json.loads(configurada))
+            elif caminho.exists():
+                self.credencial = validar_credencial(
+                    json.loads(caminho.read_text(encoding="utf-8"))
+                )
+        except Exception:
+            raise ValueError("credencial_de_revisor_invalida") from None
 
     def verificar(self, conta, senha):
         if self.relogio() < self.bloqueado_ate:
