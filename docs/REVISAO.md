@@ -65,7 +65,7 @@ Em outro terminal ou depois de reiniciar o processo, use o UUID e o hash registr
 
 ## O que significa “humana” nesta implementação
 
-`revisor` e `origem` são declarações do operador local. Não há login, assinatura digital ou verificação de identidade: `identidade_verificada` permanece falso. O campo de aprovação humana do resultado indica a combinação declarada de origem `operador_local` com decisão `aprovar`; não é uma comprovação independente de quem executou o comando.
+Pela CLI, `revisor` e `origem` são declarações do operador local. Na interface web, uma sessão local de revisor é exigida e o servidor atribui o nome da conta. Não há assinatura digital ou verificação de identidade civil: `identidade_verificada` permanece falso. O campo de aprovação humana do resultado indica a combinação declarada de origem `operador_local` com decisão `aprovar`; não é uma comprovação independente de quem executou o comando.
 
 Automações precisam usar `--origem teste_automatizado`. Nesse caso, mesmo uma decisão de aprovação mantém `aprovacao_humana_realizada` falso. Rejeição continua sendo uma decisão registrada e não é chamada de aprovação. A suficiência jurídica permanece `nao_avaliada` em todos os caminhos.
 
@@ -89,6 +89,11 @@ O hash serve para conferir correspondência do conjunto, não para autenticar o 
 
 ## Escopo que continua aberto
 
-O fluxo não é memória de conversa nem retomada arbitrária de qualquer etapa interrompida. Esta versão retoma revisões que chegaram ao ponto de pausa; não migra checkpoints entre alterações de código. Não há interface de revisão, autenticação de revisores, envio de notificações ou validação fiscal especializada.
+O fluxo não é memória de conversa nem retomada arbitrária de qualquer etapa interrompida. Esta versão retoma revisões que chegaram ao ponto de pausa; não migra checkpoints entre alterações de código. Há interface de revisão e sessão local de revisor. Permanecem pendentes autenticação multiusuário para publicação, notificações e validação fiscal especializada.
 
-A próxima etapa pode apresentar o conjunto de evidências e a decisão numa interface, preservando a separação entre revisão documental e interpretação tributária.
+Na interface web, registrar decisões exige a conta local descrita em [autenticação](AUTENTICACAO.md). A CLI permanece um canal administrativo local, sob controle de quem acessa o computador. Esses canais não comprovam qualificação fiscal.
+
+
+## Conta local na interface web
+
+A sessão do revisor registra `autenticacao=sessao_local` e `conta_revisor`, com nome atribuído pelo servidor. `identidade_verificada` continua falso: autenticar acesso à conta não identifica civilmente a pessoa. Registros anteriores mantêm seu significado original. A mudança do código exige iniciar novas revisões para decidir; o histórico continua legível.

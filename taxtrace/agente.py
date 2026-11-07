@@ -46,6 +46,8 @@ class DecisaoRevisao(BaseModel):
     motivo: str = Field(min_length=5, max_length=1000)
     origem: Literal["operador_local", "teste_automatizado"]
     dossie_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    autenticacao: Literal["nao_autenticado", "sessao_local"] = "nao_autenticado"
+    conta_revisor: str | None = Field(default=None, pattern=r"^[a-z][a-z0-9_.-]{2,39}$")
 
 
 def dossie_revisao(estado):

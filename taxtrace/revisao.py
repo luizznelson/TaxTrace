@@ -28,6 +28,8 @@ def impressao_codigo():
         raiz / "taxtrace" / n
         for n in (
             "agente.py",
+            "autenticacao.py",
+            "web.py",
             "planejamento.py",
             "rag.py",
             "revisao.py",

@@ -180,3 +180,5 @@ O índice remove os trechos marcados como riscados, mas isso não substitui aná
 A avaliação das respostas inclui [casos adversariais](evals/RAG.md) e um [pacote para revisão de qualidade](docs/REVISAO_AVALIACAO.md). Os 12 casos do pacote ainda aguardam avaliação; exportar o material não comprova revisão independente.
 
 Diagnóstico do serviço e execução automática dos casos adversariais: [operação e evidências](docs/OPERACAO.md).
+
+Para registrar uma decisão na interface, configure a [conta local de revisor](docs/AUTENTICACAO.md). Sem login, as decisões ficam bloqueadas; a autenticação local ainda não encerra os requisitos para publicação multiusuário.

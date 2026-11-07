@@ -2,6 +2,24 @@ import { prepareQuery } from "./query-input.mjs";
 const $ = (q) => document.querySelector(q);
 const strings = {
     pt: {
+        accountAuthenticated: "Conta de revisor autenticada localmente",
+        accessTitle: "Acesso do revisor",
+        accessHint:
+            "Consultar fontes não exige login. Para aprovar ou rejeitar, entre com a conta de revisor.",
+        accessMissing:
+            "A conta de revisor ainda não foi configurada neste computador. As consultas continuam disponíveis; decisões estão bloqueadas.",
+        accessAccount: "Conta",
+        accessPassword: "Senha",
+        accessEnter: "Entrar para revisar",
+        accessExit: "Encerrar sessão",
+        accessActive: "Sessão de revisão",
+        accessLimit:
+            "Conta autenticada localmente; identidade civil e qualificação fiscal não verificadas. A sessão expira em uma hora.",
+        loginRequired:
+            "Entre com a conta de revisor para registrar uma decisão. Confira a área de acesso no início da página.",
+        loginError: "Não foi possível entrar. Confira a conta e a senha.",
+        accessWait:
+            "Muitas tentativas de acesso. Aguarde um minuto e tente novamente.",
         skip: "Ir para a consulta",
         brand: "PESQUISA TRIBUTÁRIA",
         local: "Ambiente local",
@@ -297,6 +315,24 @@ const strings = {
             "Os documentos disponíveis não sustentaram uma resposta para esta pergunta. Reformule ou confira as fontes.",
     },
     en: {
+        accountAuthenticated: "Locally authenticated reviewer account",
+        accessTitle: "Reviewer access",
+        accessHint:
+            "Reading sources does not require a login. Sign in with the reviewer account to approve or reject.",
+        accessMissing:
+            "No reviewer account is configured on this computer. Queries remain available; decisions are blocked.",
+        accessAccount: "Account",
+        accessPassword: "Password",
+        accessEnter: "Sign in to review",
+        accessExit: "Sign out",
+        accessActive: "Review session",
+        accessLimit:
+            "Locally authenticated account; civil identity and tax qualifications are unverified. The session expires in one hour.",
+        loginRequired:
+            "Sign in as a reviewer before recording a decision. See reviewer access at the top of the page.",
+        loginError: "Unable to sign in. Check the account and password.",
+        accessWait:
+            "Too many sign-in attempts. Wait one minute before trying again.",
         skip: "Skip to query",
         brand: "TAX RESEARCH",
         local: "Local workspace",
@@ -725,17 +761,23 @@ async function api(path, options = {}) {
     }
     if (!response.ok) {
         const key =
-            response.status === 403
-                ? "expired"
-                : response.status === 409
-                  ? "conflict"
-                  : response.status === 429
-                    ? "busy"
-                    : response.status === 404
-                      ? "notFound"
-                      : response.status === 422
-                        ? "inputError"
-                        : "error";
+            response.status === 401
+                ? path === "/api/acesso/entrar"
+                    ? "loginError"
+                    : "loginRequired"
+                : data.codigo === "acesso_em_espera"
+                  ? "accessWait"
+                  : response.status === 403
+                    ? "expired"
+                    : response.status === 409
+                      ? "conflict"
+                      : response.status === 429
+                        ? "busy"
+                        : response.status === 404
+                          ? "notFound"
+                          : response.status === 422
+                            ? "inputError"
+                            : "error";
         throw new Error(key);
     }
     return data;
@@ -750,6 +792,7 @@ function applyLanguage() {
           }
         : null;
 
+    if (!$("#base-error").hidden) $("#base-error").textContent = t("baseError");
     document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
     document.title =
         lang === "pt"
@@ -773,6 +816,7 @@ function applyLanguage() {
     renderTask();
     renderBase();
     renderHistory();
+    renderAccess();
     modeHelp();
     if (current) renderResult(current);
     if (draft && document.querySelector(".review-panel")) {
@@ -1207,7 +1251,7 @@ function renderResult(report) {
             el(
                 "p",
                 "decision-note",
-                `${t("recorded")}: ${t(r.decisao === "aprovar" ? "approved" : "rejected")}\n${r.revisor} · ${r.origem === "teste_automatizado" ? t("autoLabel") : t("declared")}\n${t("reasonSaved")}: ${r.motivo}`,
+                `${t("recorded")}: ${t(r.decisao === "aprovar" ? "approved" : "rejected")}\n${r.revisor} · ${r.origem === "teste_automatizado" ? t("autoLabel") : r.autenticacao === "sessao_local" ? t("accountAuthenticated") : t("declared")}\n${t("reasonSaved")}: ${r.motivo}`,
             ),
         );
     }
@@ -1347,7 +1391,94 @@ function answerPanel(report, openEvidence) {
     panel.append(el("p", "rag-limit", t("ragLimit")));
     return panel;
 }
+function renderAccess() {
+    const panel = $("#reviewer-access");
+    panel.replaceChildren();
+    if (!context) return;
+    panel.setAttribute("aria-label", t("accessTitle"));
+    const access = context.acesso;
+    if (access?.usuario) {
+        panel.append(
+            el("strong", "", `${t("accessActive")}: ${access.usuario.nome}`),
+        );
+        panel.append(el("p", "", t("accessLimit")));
+        const exit = el("button", "button quiet", t("accessExit"));
+        exit.type = "button";
+        exit.addEventListener("click", async () => {
+            exit.disabled = true;
+            try {
+                await api("/api/acesso/sair", { method: "POST", body: "{}" });
+                context = await api("/api/contexto");
+                renderAccess();
+                if (current) renderResult(current);
+            } catch (e) {
+                feedback(e.message);
+                exit.disabled = false;
+            }
+        });
+        panel.append(exit);
+        return;
+    }
+    const details = el("details");
+    details.append(el("summary", "", t("accessTitle")));
+    details.append(
+        el("p", "", t(access?.configurado ? "accessHint" : "accessMissing")),
+    );
+    if (!access?.configurado) {
+        panel.append(details);
+        return;
+    }
+    const form = el("form", "access-form");
+    const account = el("input"),
+        password = el("input");
+    account.name = "conta";
+    account.autocomplete = "username";
+    account.required = true;
+    account.maxLength = 40;
+    password.name = "senha";
+    password.type = "password";
+    password.autocomplete = "current-password";
+    password.required = true;
+    password.maxLength = 256;
+    const accountLabel = el("label", "", t("accessAccount"));
+    accountLabel.append(account);
+    const passwordLabel = el("label", "", t("accessPassword"));
+    passwordLabel.append(password);
+    const enter = el("button", "button primary", t("accessEnter"));
+    enter.type = "submit";
+    form.append(accountLabel, passwordLabel, enter);
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        enter.disabled = true;
+        try {
+            await api("/api/acesso/entrar", {
+                method: "POST",
+                body: JSON.stringify({
+                    conta: account.value,
+                    senha: password.value,
+                }),
+            });
+            context = await api("/api/contexto");
+            renderAccess();
+            if (current) renderResult(current);
+        } catch (e) {
+            feedback(e.message);
+            enter.disabled = false;
+        } finally {
+            password.value = "";
+        }
+    });
+    details.append(form);
+    panel.append(details);
+}
 function reviewForm(report) {
+    if (!context?.acesso?.usuario) {
+        const notice = el("div", "notice", t("loginRequired"));
+        const link = el("a", "", t("accessTitle"));
+        link.href = "#reviewer-access";
+        notice.append(el("br"), link);
+        return notice;
+    }
     const form = el("form", "review-panel");
     const isRag = report.estado.rag?.status === "respondida";
     form.append(
@@ -1396,6 +1527,8 @@ function reviewForm(report) {
     const row = el("div", "form-row");
     const name = el("input");
     name.name = "revisor";
+    name.value = context.acesso.usuario.nome;
+    name.readOnly = true;
     name.required = true;
     name.minLength = 3;
     name.maxLength = 80;
@@ -1403,11 +1536,9 @@ function reviewForm(report) {
     nameLabel.append(name);
     const origin = el("select");
     origin.name = "origem";
+    origin.disabled = true;
     origin.setAttribute("aria-label", t("origin"));
-    [
-        ["operador_local", "person"],
-        ["teste_automatizado", "automatic"],
-    ].forEach(([v, k]) => {
+    [["operador_local", "person"]].forEach(([v, k]) => {
         const o = el("option", "", t(k));
         o.value = v;
         origin.append(o);
@@ -1440,7 +1571,7 @@ function reviewForm(report) {
         b.value = value;
         actions.append(b);
     });
-    form.append(actions, el("small", "", t("declared")));
+    form.append(actions, el("small", "", t("accessLimit")));
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!form.reportValidity() || busy) return;
@@ -1678,6 +1809,7 @@ applyLanguage();
 setBusy(false);
 try {
     context = await api("/api/contexto");
+    renderAccess();
     modeHelp();
 } catch {
     feedback("error");

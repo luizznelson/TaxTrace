@@ -18,6 +18,7 @@ from filelock import Timeout
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from taxtrace.autenticacao import COOKIE, DURACAO, AcessoRevisor
 from taxtrace.conexao import conectar
 from taxtrace.consultas import resumo_base
 from taxtrace.leitura import ler_integral
@@ -29,6 +30,12 @@ class ConsultaWeb(BaseModel):
     pergunta: Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=500)]
     modo: Literal["local", "gemini", "rag"] = "local"
     coleta_id: Annotated[int, Field(ge=1)] | None = None
+
+
+class LoginWeb(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    conta: str = Field(min_length=3, max_length=40)
+    senha: str = Field(min_length=1, max_length=256)
 
 
 class DecisaoWeb(BaseModel):
@@ -66,6 +73,8 @@ def criar_app(raiz=None):
     cache = {}
     ativos = 0
     csrf = secrets.token_urlsafe(32)
+    acesso = AcessoRevisor(raiz)
+    login_lock = asyncio.Lock()
 
     @asynccontextmanager
     async def lifespan(_app):
@@ -149,14 +158,52 @@ def criar_app(raiz=None):
         )
 
     @app.get("/api/contexto")
-    async def contexto():
+    async def contexto(request: Request):
         cfg = dotenv_values(raiz / ".env")
         return {
             "csrf": csrf,
             "gemini_disponivel": bool(cfg.get("GEMINI_API_KEY")),
             "rag_disponivel": bool(cfg.get("GEMINI_API_KEY")),
-            "ambiente": "local_sem_autenticacao_multiusuario",
+            "ambiente": "local_com_revisao_restrita",
+            "acesso": {
+                "configurado": acesso.credencial is not None,
+                "usuario": acesso.usuario(request.cookies.get(COOKIE)),
+            },
         }
+
+    @app.post("/api/acesso/entrar")
+    async def entrar(dados: LoginWeb, request: Request):
+        if login_lock.locked():
+            return JSONResponse({"codigo": "acesso_em_espera"}, status_code=429)
+        async with login_lock:
+            try:
+                await asyncio.to_thread(acesso.verificar, dados.conta, dados.senha)
+            except ValueError as erro:
+                codigo = str(erro)
+                return JSONResponse(
+                    {"codigo": codigo},
+                    status_code=429 if codigo == "acesso_em_espera" else 401,
+                )
+            acesso.sair(request.cookies.get(COOKIE))
+            token = acesso.abrir()
+        response = JSONResponse({"usuario": acesso.usuario(token)})
+        response.set_cookie(
+            COOKIE,
+            token,
+            max_age=DURACAO,
+            httponly=True,
+            samesite="strict",
+            secure=request.url.scheme == "https",
+            path="/",
+        )
+        return response
+
+    @app.post("/api/acesso/sair")
+    async def sair(request: Request):
+        acesso.sair(request.cookies.get(COOKIE))
+        response = JSONResponse({"status": "sessao_encerrada"})
+        response.delete_cookie(COOKIE, path="/", httponly=True, samesite="strict")
+        return response
 
     @app.get("/api/base")
     async def base():
@@ -230,9 +277,19 @@ def criar_app(raiz=None):
             raise falha_publica(erro) from None
 
     @app.post("/api/revisoes/{revisao_id}/decisao")
-    async def decisao(revisao_id: UUID, dados: DecisaoWeb):
+    async def decisao(revisao_id: UUID, dados: DecisaoWeb, request: Request):
+        usuario = acesso.usuario(request.cookies.get(COOKIE))
+        if usuario is None:
+            raise HTTPException(401, detail={"codigo": "login_de_revisor_necessario"})
+        registrada = {
+            **dados.model_dump(),
+            "revisor": usuario["nome"],
+            "origem": "operador_local",
+            "autenticacao": "sessao_local",
+            "conta_revisor": usuario["conta"],
+        }
         try:
-            return resposta_json(await decidir(str(revisao_id), dados.model_dump(), raiz=raiz))
+            return resposta_json(await decidir(str(revisao_id), registrada, raiz=raiz))
         except Exception as erro:
             raise falha_publica(erro) from None
 

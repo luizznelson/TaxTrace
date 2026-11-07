@@ -94,6 +94,7 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Checkpoint SQLite local e pausa/retomada tipada para revisão documental. Decisão exige hash, origem e motivo; trava por revisão, recusa de decisão duplicada e bloqueio após mudança do código identificado. Retomada sem chamadas MCP/Gemini. Teste entre processos com decisões sintéticas identificado; sem alegar revisão humana real. Ver `docs/REVISAO.md`.
    - [x] Interface local de revisão documental com fontes acessíveis e decisão vinculada ao conjunto exibido.
    - [x] Resposta, contexto, citações e metadados vinculados ao hash da revisão; checkpoint v2 e retomada sem repetir modelo/MCP. Origem sintética identificada nos testes.
+   - [x] Conta local de revisor, senha com hash scrypt, sessão expiráveis e decisão com identidade da conta atribuída pelo servidor. Sem conta/sessão, decisões web bloqueadas. Identidade civil e qualificação continuam não verificadas. Ver `docs/AUTENTICACAO.md`.
    - [ ] Autenticação de revisores para exposição pública e revisão fiscal especializada.
    - [x] Critérios de evidência/recusa anteriores ao modelo e gabarito de desenvolvimento de 12 casos; três perguntas de geração real, com falhas preliminares preservadas. Ver `evals/RAG.md`.
    - [ ] Avaliação independente de planejamento, recusa, suficiência e respostas; a triagem técnica não certifica suficiência jurídica.

@@ -136,7 +136,7 @@ class WebTest(unittest.TestCase):
             r = self.client.get(f"/api/revisoes/{rid}/artigos/126")
         self.assertEqual(r.status_code, 404)
 
-    def test_decisao_preserva_hash_e_origem_de_teste(self):
+    def test_decisao_sem_login_nao_chama_backend(self):
         payload = {
             "decisao": "rejeitar",
             "revisor": "Revisor de teste",
@@ -150,8 +150,8 @@ class WebTest(unittest.TestCase):
             r = self.client.post(
                 "/api/revisoes/" + str(uuid4()) + "/decisao", headers=self.headers(), json=payload
             )
-        self.assertEqual(r.status_code, 200)
-        self.assertEqual(decidir.call_args.args[1], payload)
+        self.assertEqual(r.status_code, 401)
+        decidir.assert_not_called()
 
 
 if __name__ == "__main__":

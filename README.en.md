@@ -150,3 +150,5 @@ This is lookup support, not tax advice. Verify the official source before making
 Answer evaluation includes [adversarial cases](evals/RAG.md) and a [quality review package](docs/REVISAO_AVALIACAO.md). All 12 package cases await review; exporting this material does not establish independent review.
 
 Service diagnostics and automated adversarial evaluation: [operation and evidence](docs/OPERACAO.md) (Portuguese).
+
+Recording a web review decision requires a [local reviewer account](docs/AUTENTICACAO.md) (Portuguese). Decisions are blocked without a login; local authentication does not complete public multi-user deployment requirements.

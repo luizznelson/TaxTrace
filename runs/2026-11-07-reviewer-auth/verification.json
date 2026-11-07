@@ -1,0 +1,20 @@
+{
+  "executado_em": "2026-11-07T20:10:16.228933+00:00",
+  "natureza": "validacao_local_com_credenciais_sinteticas_em_testes",
+  "testes": {
+    "python_descobertos": 151,
+    "python_aprovados": 130,
+    "python_opcionais_ignorados": 21,
+    "javascript_aprovados": 6
+  },
+  "interface": "Orientação sem conta configurada conferida em PT e EN. Formulário autenticado e envio de decisão cobertos por testes da API; não foi configurada conta real de usuário nesta etapa.",
+  "novas_chamadas_de_modelo": 0,
+  "publicado": false,
+  "revisao_fiscal_realizada": false,
+  "limites": [
+    "Autenticação de uma conta local não comprova identidade civil ou qualificação.",
+    "Publicação multiusuário continua bloqueada por requisitos pendentes.",
+    "PostgreSQL local indisponível na conferência visual; consultas reais não foram validadas nesta rodada.",
+    "Esta alteração invalida novas decisões em checkpoints de código anterior."
+  ]
+}
