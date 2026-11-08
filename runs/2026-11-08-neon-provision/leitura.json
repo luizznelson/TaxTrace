@@ -1,0 +1,14 @@
+{
+  "status": "leitura_e_permissoes_verificadas",
+  "contagens": {
+    "artigos": 580,
+    "classificacoes": 170,
+    "ligacoes": 169,
+    "ncm": 10515,
+    "divergencias": 3
+  },
+  "fontes_e_manifesto_conferidos": 7,
+  "tls_cliente_ativo_nos_dois_papeis": true,
+  "artigo_sem_disco_local": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm#art125",
+  "texto_sha256": "1bfa47d979395deb7199c5c2f5d46ecd0db38df67678ee6c657947bc7b6002ff"
+}

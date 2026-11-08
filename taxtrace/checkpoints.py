@@ -161,18 +161,18 @@ async def preparar(raiz):
         if not await cur.fetchone():
             raise ValueError("crie_papel_restrito_taxtrace_state_antes_da_preparacao")
         await preparar_estruturas(conn)
-        await conn.execute("GRANT USAGE ON SCHEMA taxtrace_workflow TO taxtrace_state")
-        await conn.execute(
-            "REVOKE ALL ON ALL TABLES IN SCHEMA taxtrace_workflow FROM taxtrace_state"
-        )
-        await conn.execute(
-            "GRANT SELECT,INSERT,UPDATE,DELETE ON checkpoints,checkpoint_blobs,"
-            "checkpoint_writes TO taxtrace_state"
-        )
-        await conn.execute("GRANT SELECT ON checkpoint_migrations TO taxtrace_state")
-        await conn.execute(
-            "GRANT SELECT,INSERT ON eventos_revisao,acessos_revisao TO taxtrace_state"
-        )
+        await conceder_permissoes_estado(conn)
+
+
+async def conceder_permissoes_estado(conn):
+    await conn.execute("GRANT USAGE ON SCHEMA taxtrace_workflow TO taxtrace_state")
+    await conn.execute("REVOKE ALL ON ALL TABLES IN SCHEMA taxtrace_workflow FROM taxtrace_state")
+    await conn.execute(
+        "GRANT SELECT,INSERT,UPDATE,DELETE ON checkpoints,checkpoint_blobs,"
+        "checkpoint_writes TO taxtrace_state"
+    )
+    await conn.execute("GRANT SELECT ON checkpoint_migrations TO taxtrace_state")
+    await conn.execute("GRANT SELECT,INSERT ON eventos_revisao,acessos_revisao TO taxtrace_state")
 
 
 def main():

@@ -1,0 +1,8 @@
+{
+  "registrado_em": "2026-11-08T23:21:54.621085+00:00",
+  "status": "estrutura_neon_preparada",
+  "plano_sha256": "c32aaec5a5b934a46dd7a335fb28078936e361144e9cd5b9b4c7ef398aa01afd",
+  "coleta_id": 1,
+  "runtime_privado_criado": true,
+  "deploy_realizado": false
+}

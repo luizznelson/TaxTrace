@@ -25,7 +25,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 
 The [verification record](runs/2026-11-06-local-database/verification.json) contains 580 articles, 170 classifications, 169 links, 10,515 NCM records and three preserved source discrepancies. Capture date: 2026-11-05. API query date: 2027-01-01. Dataset: V0066. These dates have different meanings and do not establish legal validity.
 
-The record includes successful and empty searches, read-only permission checks and duplicate-load rejection. It does not claim that remote CI or Neon has been verified.
+The record includes successful and empty searches, read-only permission checks and duplicate-load rejection. It does not establish remote CI execution. Neon provisioning was subsequently verified separately, as documented below.
 
 ## Local setup (Windows)
 
@@ -48,7 +48,7 @@ docker compose --profile tests up -d --wait
 
 The sample date reproduces this development snapshot, not today's date. If the official law download fails, use the collector's `--lei-arquivo` option with a locally saved official HTML file. Raw downloads are excluded from Git. Source terms and API limits remain open items in [PLANO.md](PLANO.md).
 
-Development binds only to loopback port 15433, with persistent storage. Tests bind to 15434, with temporary storage. Avoid `down -v` if development data must be kept. Remote database connections are intentionally blocked at this stage; Neon is deferred until deployment.
+Development binds only to loopback port 15433, with persistent storage. Tests bind to 15434, with temporary storage. Avoid `down -v` if development data must be kept. Remote maintenance remains blocked in normal runtime. Optional Neon access requires pinned destination settings and restricted reader/state roles; provisioning uses a separate explicit administrative command.
 
 ## Retrieval evaluation
 
@@ -144,6 +144,8 @@ Integration tests require explicit opt-in and the dedicated local test database,
 ## Operation and evidence
 
 Docker/Linux execution with real PostgreSQL passed **193 tests**, with three skipped without the official raw collection. Tests covered checkpoints, events, browser isolation and runtime-role permissions. [Evidence](runs/2026-11-07-neon-runtime-preparation/verification.json) preserves preliminary failures and the cleanup fix. No deployment or automatic history migration was performed.
+
+Authorized Neon provisioning was completed on November 8, 2026: **580 articles, 170 classifications, 10,515 NCM records and seven preserved files**. Restricted roles, client TLS, source integrity and review resumption across two Linux processes were verified. The technical review used no model API and recorded an automated rejection, not human approval. [Remote evidence](runs/2026-11-08-neon-provision/README.md). The application is not deployed yet.
 
 - [Neon and preserved-source preparation](docs/NEON.md): private configuration, pinned destination, TLS policy and source snapshots in PostgreSQL.
 - [Docker](docs/DOCKER.md): local runtime and disposable integration environment.

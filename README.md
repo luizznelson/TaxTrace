@@ -173,6 +173,8 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 
 A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: **193 testes aprovados e três desativados sem a coleta oficial**. Checkpoints, eventos, isolamento entre navegadores e permissões do papel de aplicação foram exercitados. A [evidência completa](runs/2026-11-07-neon-runtime-preparation/verification.json) registra também falhas preliminares e a correção da limpeza de testes. Não houve deploy ou migração automática do histórico.
 
+A preparação autorizada no Neon também foi concluída: **580 artigos, 170 classificações, 10.515 NCM e sete arquivos preservados**, com acesso de leitura e estado separados. A revisão técnica foi retomada em outro processo Linux, sem chamadas a modelos e sem aprovação humana. [Evidências no destino real](runs/2026-11-08-neon-provision/README.md).
+
 - [Preparação do Neon e das fontes](docs/NEON.md): configuração privada, política TLS e originais preservados no banco.
 - [Docker](docs/DOCKER.md): execução local com volumes privados e ambiente descartável de integração.
 - [Persistência](docs/PERSISTENCIA.md): SQLite como padrão; checkpoints, eventos e vínculos PostgreSQL opcionais.
@@ -184,6 +186,6 @@ A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: *
 
 A busca atual depende dos termos digitados e pode deixar de encontrar trechos relevantes. Um resultado vazio significa apenas que essa busca não encontrou correspondência. O ranking não é uma medida de confiança jurídica.
 
-O índice remove os trechos marcados como riscados, mas isso não substitui análise de vigência. O original e suas marcações permanecem armazenados. Os hashes verificam correspondência ao manifesto; não constituem assinatura digital da fonte. O uso local continua como padrão. A conexão Neon é opcional, exige destino fixado e TLS verificado e ainda aguarda validação contra o projeto real antes da publicação.
+O índice remove os trechos marcados como riscados, mas isso não substitui análise de vigência. O original e suas marcações permanecem armazenados. Os hashes verificam correspondência ao manifesto; não constituem assinatura digital da fonte. O uso local continua como padrão. A conexão Neon é opcional, exige destino fixado e TLS verificado e foi validada contra o projeto real em 08/11/2026; a publicação permanece pendente.
 
 **Apoio à consulta, não parecer tributário.** Confira a fonte oficial antes de tomar uma decisão.

@@ -114,9 +114,9 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Implementação opcional de checkpoints e eventos PostgreSQL com adaptador oficial, schema e papel separados e trava por revisão. SQLite mantido como padrão; integração real PostgreSQL comprovada na rodada Docker posterior. Ver `docs/PERSISTENCIA.md`.
    - [x] Três testes reais de checkpoints executados em PostgreSQL isolado no Docker/Linux, com retomada entre conexões e trava por revisão.
    - [x] Vínculos PostgreSQL no mesmo backend dos checkpoints, gravação transacional e grants restritos, com quatro integrações reais aprovadas. Credencial de revisor opcional por configuração privada, sem arquivo obrigatório no disco da aplicação.
-   - [x] Runtime Neon opt-in com host/banco fixados, TLS verify-full, CA do pacote e canal SCRAM vinculado; manutenção e testes remotos continuam bloqueados. Política validada sem conexão ao projeto real.
+   - [x] Runtime Neon opt-in com host/banco fixados, TLS verify-full, CA do pacote e canal SCRAM vinculado; manutenção e testes remotos continuam bloqueados. Política testada e conexões reais dos dois papéis verificadas em 08/11/2026.
    - [x] Fontes e manifesto originais preservados com gzip e hashes no PostgreSQL; leitura integral com âncoras sem disco local. Suíte Linux: 193 aprovados e três sem coleta; captura oficial também conferida no banco descartável com rollback. Ver `docs/NEON.md`.
-   - [ ] Adaptar estado persistente antes de Render Free: preparar schemas/papéis e importar a captura no projeto Neon autorizado; validar conexão TLS e permissões no destino. Código de conexão e fontes preparado; configuração real e hospedagem seguem pendentes.
+   - [x] Preparar schemas/papéis e importar a captura no projeto Neon autorizado; TLS e permissões dos dois acessos restritos confirmados em 08/11/2026. Pausa e retomada em processos Linux separados, controle de sessão e originais sem disco local verificados. Ver `runs/2026-11-08-neon-provision/README.md`. A hospedagem segue pendente.
    - [ ] Autenticação adequada antes de exposição pública, publicação e vídeo.
 
 ## Regras do projeto
