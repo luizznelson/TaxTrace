@@ -1,4 +1,4 @@
-# Interface local de pesquisa tributária
+# Interface de consulta e revisão documental
 
 ## Atualização: RAG documental
 
@@ -12,7 +12,7 @@ Uma equipe fiscal precisa localizar a base normativa, conferir seu contexto e de
 A navegação fixa tem três áreas, nomeadas pelas tarefas do usuário:
 
 - **Consulta documental:** pesquisar um tema da legislação, abrir um artigo por número ou consultar um cClassTrib com seis dígitos. Cada opção tem campo, orientação e exemplo próprios. Só a pesquisa de temas oferece planejamento por IA; as referências explícitas usam o modo direto. Nenhum NCM é convertido automaticamente em classificação.
-- **Revisões da sessão:** lista das últimas dez consultas desta aba, com status e retomada. É possível abrir outro registro local pelo identificador. O histórico da aba não é apresentado como cadastro permanente de usuários.
+- **Revisões da sessão:** lista das últimas dez consultas desta aba, com status e retomada. É possível abrir um registro autorizado pelo identificador; o ID não concede acesso a outra sessão. O histórico da aba não é apresentado como cadastro permanente de usuários.
 - **Base e fontes:** cobertura real, versão, datas e conteúdo das fontes. As consultas usam uma coleta, não acesso em tempo real à legislação. Os totais de NCM não significam uma ferramenta de enquadramento disponível.
 
 A abertura explica em linguagem direta o que o TaxTrace pesquisa e entrega. Os exemplos ficam antes do campo: cesta básica, crédito presumido e redução de alíquotas; nas tarefas específicas, artigos 125/126 e cClassTrib 000001. Clicar em um exemplo apenas preenche o campo; o usuário pode editar e precisa acionar Consultar. Os textos da interface têm versão em português e inglês.
@@ -44,7 +44,7 @@ O leitor abre o **Artigo integral** preservado em `artigos.texto`: parágrafos, 
 
 A leitura complementar usa `GET /api/revisoes/{id}/artigos/{numero}`. O artigo precisa ter aparecido nas respostas ou referências da consulta. A coleta, o manifesto e a fonte devem coincidir com o registro original; a conexão é somente leitura. Textos acima de 200 mil caracteres são recusados com erro, sem truncamento silencioso. A maior extensão da coleta local inspecionada é de 25.082 caracteres. Não há chamada de modelo ou alteração do checkpoint nessa leitura.
 
-Os links oficiais usam âncoras verificadas no HTML de origem pelo hash da fonte (`#art125`, por exemplo). Quando o HTML não tem uma âncora correspondente ou não está disponível localmente, o link tenta um fragmento de texto; o funcionamento depende do navegador e da página oficial. A leitura no app não depende de o Planalto aceitar acesso naquele momento.
+Os links oficiais usam âncoras verificadas no HTML de origem pelo hash da fonte (`#art125`, por exemplo). Quando o HTML não tem uma âncora correspondente ou o HTML correspondente não está disponível na captura preservada nem no arquivo local compatível, o link tenta um fragmento de texto; o funcionamento depende do navegador e da página oficial. A leitura no app não depende de o Planalto aceitar acesso naquele momento.
 
 O JSON complementar inclui o texto, a estrutura, os hashes, a coleta e a localização oficial. O download separado **Baixar artigo e origem (JSON)** não substitui o registro da revisão. O conjunto original continua identificado pelo mesmo hash; o formulário explicita as evidências vinculadas à decisão e distingue a leitura de contexto. A interface não interpreta HTML da fonte: monta os elementos de texto e de risco explicitamente.
 
@@ -62,4 +62,4 @@ As verificações desta reorganização estão em [runs/2026-11-06-product-inter
 
 Os testes das entradas estruturadas podem ser executados com `node --test tests/query-input.test.mjs` (Node.js 24).
 
-A validação visual não substitui auditoria completa de acessibilidade, teste de carga ou segurança para exposição pública. Não houve deploy nem alteração de autenticação. Veja [REVISAO.md](REVISAO.md) para os limites do checkpoint e da identidade autodeclarada.
+A validação visual não substitui auditoria completa de acessibilidade, teste de carga ou segurança para exposição pública. Aquela verificação inicial precedeu a publicação. A revisão posterior no [serviço hospedado](../runs/2026-11-08-reviewer-hosted/README.md) conferiu login, decisão de teste, recuperação, logout e apresentação PT/EN. Veja [REVISAO.md](REVISAO.md) e [autenticação](AUTENTICACAO.md) para os limites de identidade e qualificação.

@@ -89,7 +89,7 @@ O hash serve para conferir correspondência do conjunto, não para autenticar o 
 
 ## Escopo que continua aberto
 
-O fluxo não é memória de conversa nem retomada arbitrária de qualquer etapa interrompida. Esta versão retoma revisões que chegaram ao ponto de pausa; não migra checkpoints entre alterações de código. Há interface de revisão e sessão local de revisor. Permanecem pendentes autenticação multiusuário para publicação, notificações e validação fiscal especializada.
+O fluxo não é memória de conversa nem retomada arbitrária de qualquer etapa interrompida. Esta versão retoma revisões que chegaram ao ponto de pausa; não migra checkpoints entre alterações de código. Há interface de revisão e sessão local de revisor. A aplicação publicada já exige conta de revisor e vínculo do navegador. Permanecem pendentes gestão de múltiplos revisores, notificações e validação fiscal especializada. [Verificação hospedada](../runs/2026-11-08-reviewer-hosted/README.md).
 
 Na interface web, registrar decisões exige a conta local descrita em [autenticação](AUTENTICACAO.md). A CLI permanece um canal administrativo local, sob controle de quem acessa o computador. Esses canais não comprovam qualificação fiscal.
 

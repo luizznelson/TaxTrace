@@ -1,201 +1,121 @@
 # TaxTrace
 
-Consulta rastreável de fontes da Reforma Tributária do consumo: encontre o artigo, confira sua origem e identifique qual versão dos dados foi utilizada.
+**Pergunte sobre IBS e CBS. Confira a fonte. Preserve o que foi revisado.**
 
-English: [README.en.md](README.en.md)
+[![Quality](https://github.com/luizznelson/TaxTrace/actions/workflows/quality.yml/badge.svg?branch=main)](https://github.com/luizznelson/TaxTrace/actions/workflows/quality.yml)
 
-## O problema que orienta o projeto
+[Aplicação publicada](https://taxtrace.onrender.com/) · [English](README.en.md) · [Estudo de caso](docs/case-study.md) · [Arquitetura](docs/architecture.md) · [Documentação](docs/README.md)
 
-Uma equipe fiscal precisa conferir a base normativa de uma classificação tributária. A informação está distribuída entre o texto legal e tabelas estruturadas; encontrar um trecho sem registrar a fonte e a versão dificulta revisar a conclusão depois.
+O TaxTrace apoia a conferência documental da Reforma Tributária do consumo. Reúne pesquisa de artigos, consulta de classificações tributárias e explicações de IA com citações, mantendo a origem e a versão dos dados acessíveis. **A consulta pública não exige cadastro; aprovar ou rejeitar uma revisão exige conta autorizada.**
 
-O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é reduzir a procura manual e tornar cada consulta verificável. Ainda não medimos economia de tempo nem validamos o uso por uma equipe fiscal.
+## Em um minuto
 
+| Pergunta | Resposta |
+| --- | --- |
+| **Qual problema resolve?** | Localizar uma referência é apenas parte da tarefa: é preciso conferir o texto, identificar a fonte e registrar o que sustentou uma conclusão. |
+| **O que foi construído?** | Aplicação PT-BR/EN com busca, leitor de fontes, RAG citado, rastro das etapas e revisão documental persistida. |
+| **O que foi medido?** | A busca textual v4 localizou a referência entre os cinco primeiros em **19/20** e **11/12** casos positivos de desenvolvimento. Isso não mede precisão jurídica. |
+| **O que a engenharia demonstra?** | RAG, MCP, LangGraph, avaliação comparativa, persistência, controle de acesso, Docker e operação com Render + Neon. |
+| **Onde conferir?** | [Caso de uso](docs/case-study.md), [decisões técnicas](docs/architecture.md), [qualidade](docs/quality.md) e [evidências indexadas](runs/README.md). |
 
-## Veja a aplicação em 74 segundos
+## 1. O problema: encontrar um trecho não encerra a análise
 
-[![Demonstração do TaxTrace: pergunta, fontes e revisão](docs/media/taxtrace-demo-poster.jpg)](docs/media/taxtrace-demo.pt-BR.mp4)
+**Cenário ilustrativo:** uma pessoa da área fiscal precisa conferir uma informação sobre IBS e CBS antes de incluí-la em uma análise. O texto legal e as tabelas são fontes diferentes. Uma resposta sem origem, recorte ou registro da revisão dificulta explicar o que foi conferido depois.
 
-[Assistir ou baixar o vídeo em português](docs/media/taxtrace-demo.pt-BR.mp4) · [English captions edition](docs/media/taxtrace-demo.en.mp4) · [Testar a aplicação](https://taxtrace.onrender.com/)
+A proposta do TaxTrace é organizar esse percurso: **perguntar → localizar a referência → ler a evidência → registrar a revisão → exportar o conjunto**. A interpretação e a responsabilidade pela decisão continuam com a pessoa. Não foram medidos ganhos de produtividade nem validado o uso por uma equipe fiscal.
 
-A demonstração usa a aplicação publicada: pergunta, resposta com citações, artigo integral, rastro e um registro anterior de revisão de teste. Edições legendadas, sem áudio; a espera da consulta foi encurtada e sinalizada. Veja [roteiro e limites](docs/DEMONSTRACAO.md) e [registro de verificação](runs/2026-11-08-demo-video/verification.json).
+## 2. Veja e experimente
 
-## O que funciona hoje
+[![Demonstração real do TaxTrace: pergunta, fonte e revisão](docs/media/taxtrace-demo-poster.jpg)](docs/media/taxtrace-demo.pt-BR.mp4)
 
-- Coleta de fontes oficiais com URL, data, tamanho e hash dos arquivos.
-- Leitura da LC 214/2025 por artigo, preservando o registro de alterações e texto riscado.
-- Organização das tabelas da API da Receita e ligação das classificações aos artigos citados.
-- Carga transacional em PostgreSQL local, vinculada à versão da coleta; duplicatas são recusadas.
-- Busca textual em português, com trechos literais, artigo, URL e identificação da coleta.
-- Recuperação semântica experimental: embeddings locais, trechos por artigo e vetores no pgvector.
-- Servidor MCP local com quatro ferramentas de consulta, fontes e coleta identificada.
-- **RAG documental:** explicação com citações clicáveis, recusa quando o contexto não atende aos critérios e resposta vinculada à revisão. Veja [funcionamento e limites](docs/RAG.md).
-- Login de consulta somente leitura e banco de testes separado do banco de desenvolvimento.
+**Vídeo de 74 s:** [português](docs/media/taxtrace-demo.pt-BR.mp4) · [English captions](docs/media/taxtrace-demo.en.mp4). Captura real editada, com legendas e sem áudio; espera encurtada e identificada. A decisão exibida é um registro anterior de rejeição de teste. [Roteiro e limites](docs/DEMONSTRACAO.md).
 
-**Pendente:** autenticação para publicação multiusuário, validação temporal por dispositivo/data e avaliação independente de respostas com revisão especializada. A avaliação inicial da recuperação de artigos já está disponível. A busca textual v4 permanece como padrão; a alternativa semântica é selecionada explicitamente.
+Na [aplicação publicada](https://taxtrace.onrender.com/):
 
-## Perguntas que a primeira versão ajuda a investigar
+1. Escolha **Pesquisar um tema → Resposta com fontes · RAG**.
+2. Pergunte: **“O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?”**
+3. Abra a citação, compare o trecho e leia o artigo integral. Confira versão e datas da coleta.
+4. Retome a consulta em **Revisões da sessão** ou baixe o registro JSON. Decisões ficam restritas ao revisor autenticado.
 
-- Quais artigos mencionam os termos que preciso conferir?
-- A qual artigo uma classificação da tabela se refere? Consulte o código no modo cClassTrib e confira sua fundamentação recuperada.
-- Qual fonte, versão e data sustentam o resultado encontrado?
-- Há divergências entre as tabelas coletadas que exigem revisão?
+| Necessidade | Como explorar |
+| --- | --- |
+| Localizar a referência de um assunto | **Pesquisar um tema**: tente `cesta básica` com busca direta |
+| Entender um dispositivo com apoio das fontes | **Pesquisar um tema → Resposta com fontes · RAG**: use a pergunta acima |
+| Conferir um artigo conhecido | **Abrir um artigo**: informe `125` |
+| Consultar uma classificação da tabela | **Consultar cClassTrib**: informe `000001`, preservando os zeros |
 
-## Evidência da execução local
+O histórico pertence à aba; não é memória de conversa. As consultas usam uma coleta armazenada, não legislação atualizada em tempo real. O serviço gratuito pode levar um tempo para reativar após inatividade. [Operação e limites](docs/RENDER.md).
 
-A [verificação registrada](runs/2026-11-06-local-database/verification.json) carregou 580 artigos, 170 classificações, 169 ligações e 10.515 NCM. Três divergências entre tabelas foram preservadas, sem completar informações por suposição.
+## 3. Onde entra a IA
 
-A captura ocorreu em **05/11/2026**, com a API consultada para **01/01/2027**, base **V0066**. Essas datas têm significados diferentes; nenhuma delas, isoladamente, comprova a vigência jurídica de uma conclusão.
+| Modo | Papel do modelo | Resultado |
+| --- | --- | --- |
+| **Busca direta** | Nenhuma chamada ao modelo; plano por regras | Referências e textos para conferir |
+| **Planejar consulta com IA** | Gemini escolhe uma ação de consulta permitida | Evidências recuperadas, sem síntese da resposta |
+| **Resposta com fontes · RAG** | Plano por regras; até uma chamada Gemini para síntese | Rascunho citado, vinculado às evidências e à revisão |
 
-O registro inclui consultas bem-sucedidas e sem resultado, conferência das permissões e recusa de uma carga repetida. É uma verificação local, não uma execução comprovada do CI remoto.
+A recuperação padrão é **textual v4**. Embeddings e busca híbrida foram implementados e comparados, mas ficaram abaixo dessa referência nos conjuntos conhecidos; permanecem experimentos explícitos. Não há SQL livre gerado pelo modelo. [Fluxo e critérios do RAG](docs/RAG.md).
 
-## Resposta com fontes
-
-Na interface, escolha **Pesquisar um tema → Resposta com fontes · RAG**. Exemplo: “O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?”. Cada afirmação traz uma citação para abrir o trecho de apoio. A resposta é um rascunho documental, com revisão declarada; não certifica enquadramento ou vigência. Os [resultados de desenvolvimento](evals/RAG.md) distinguem triagem, geração e suas limitações.
-
-## Como executar no Windows
-
-Pré-requisitos: Python 3.14 e Docker Desktop ativo. Execute na pasta do projeto.
-
-```powershell
-python -m venv .venv
-.venv/Scripts/python.exe -m pip install -r requirements.txt -r requirements-dev.txt
-Copy-Item .env.example .env
+```mermaid
+flowchart LR
+    Q["Pergunta"] --> P["Plano limitado"]
+    P --> M["MCP · leitura das fontes"]
+    M --> C["Coleta e evidências conferidas"]
+    C --> G["RAG: critérios e síntese citada"]
+    C --> D["Busca: referências"]
+    G --> R["Revisão e exportação"]
+    D --> R
 ```
 
-Se o `.env` já existir, preserve-o. Edite esse arquivo e substitua as três senhas de exemplo, mantendo cada senha correspondente na respectiva URL. Não publique o arquivo. O modo direto não exige chave. Planejamento com Gemini e síntese RAG usam a chave opcional configurada no `.env`.
+## 4. Resultados e evidências
 
-```powershell
-docker compose --profile tests up -d --wait
-```
+| O que foi verificado | Resultado registrado | Limite da conclusão |
+| --- | --- | --- |
+| Cobertura da captura | **580 artigos, 170 classificações, 169 ligações e 10.515 NCM**; três divergências preservadas | Cobertura de uma coleta, não confirmação de vigência |
+| Recuperação textual v4 | **19/20** e **11/12** referências no top 5 | Casos conhecidos de desenvolvimento; sem teste independente |
+| Síntese documental | **3/3** casos positivos atenderam ao gabarito mínimo após correção; primeira rodada teve falha preservada | Checagem lexical e estrutural, não avaliação jurídica |
+| Software em Linux/PostgreSQL | **209 testes aprovados, três desativados**, mais **seis testes JavaScript** na rodada registrada | Execução local de integração; o badge mostra o CI remoto separadamente |
+| Aplicação hospedada | RAG real, recuperação da revisão, exportação e rejeição técnica autenticada conferidos | Teste operacional, sem aprovação fiscal humana |
 
-Os bancos aceitam conexões apenas pelo próprio computador: desenvolvimento na porta 15433 e testes na 15434. O volume de desenvolvimento é persistente; o banco de testes usa armazenamento temporário. Não use `down -v` se quiser preservar os dados de desenvolvimento.
+[Metodologia e falhas](docs/quality.md) · [Comparação de busca](evals/COMPARACAO.md) · [Avaliação do RAG](evals/RAG.md) · [Índice das execuções](runs/README.md)
 
-Para obter uma nova coleta e carregá-la:
+As fontes são a **LC 214/2025, no Planalto**, e tabelas da **API pública da calculadora da Receita Federal**. A captura de referência é de **05/11/2026**, base **V0066**, com data consultada na API **01/01/2027**. Data da captura, data consultada e vigência têm significados diferentes. [Origem e escopo](docs/case-study.md#fontes-e-recorte).
 
-```powershell
-.venv/Scripts/python.exe -m taxtrace.coleta --data 2027-01-01
-.venv/Scripts/python.exe -m taxtrace.banco
-.venv/Scripts/python.exe -m taxtrace.busca --consulta "credito presumido" --limite 3
-```
+## 5. Habilidades demonstradas — e onde conferir
 
-A data acima reproduz o recorte usado nesta etapa; não representa automaticamente a data atual. Se o Planalto interromper o download, o coletor aceita `--lei-arquivo` com o HTML oficial salvo localmente. Os arquivos brutos ficam fora do Git. Consulte o [plano](PLANO.md) para fontes, achados e pendências de termos de uso.
+| Habilidade | Decisão concreta | Código ou evidência |
+| --- | --- | --- |
+| **RAG e saídas estruturadas** | Exigir documento identificado, citações literais e contrato de saída; bloquear respostas inválidas | [rag.py](taxtrace/rag.py), [limites semânticos](evals/RAG.md) |
+| **Agentes e MCP** | Plano tipado, quatro ferramentas de leitura e até três chamadas MCP por consulta | [agente.py](taxtrace/agente.py), [servidor MCP](taxtrace/servidor_mcp.py) |
+| **Avaliação de recuperação** | Comparar textual, embeddings e RRF antes de escolher o padrão | [Experimentos](evals/), [decisão](docs/architecture.md) |
+| **Revisão com persistência** | Pausar o grafo e retomar pelo hash do conjunto, sem repetir modelo ou ferramentas | [revisao.py](taxtrace/revisao.py), [checkpoints](taxtrace/checkpoints.py) |
+| **Dados auditáveis** | Captura com manifesto, carga transacional e originais preservados no PostgreSQL | [integridade.py](taxtrace/integridade.py), [fontes.py](taxtrace/fontes.py) |
+| **API e controle de acesso** | Cookies seguros, CSRF, vínculo da consulta à sessão e decisão restrita ao revisor | [web.py](taxtrace/web.py), [autorização](docs/AUTORIZACAO.md) |
+| **Operação de IA aplicada** | Imagem sem segredos, acessos de banco separados, estado no Neon e Blueprint Render | [Dockerfile](Dockerfile), [render.yaml](render.yaml), [operação](docs/RENDER.md) |
 
-## Como medir a busca
+## 6. Executar e investigar o repositório
 
-A [avaliação da busca](evals/COMPARACAO.md) compara as versões com gabaritos e resultados por caso. A busca atual mantém os resultados originais e preenche as vagas com candidatos da busca ampliada:
+Para experimentar, use o app publicado. Para reproduzir, siga o [guia de desenvolvimento](docs/development.md): Python 3.14, Docker/PostgreSQL, configuração privada e carga das fontes. O modo direto não exige chave de modelo; Gemini e RAG exigem a configuração correspondente.
 
-- Conjunto original: **19 de 20 referências entre os cinco primeiros** (antes: 14 de 20).
-- Perguntas adicionais: **11 de 12 referências** (antes: 6 de 12).
-- Nenhum acerto da versão original foi perdido nas duas comparações.
+| Local | Responsabilidade |
+| --- | --- |
+| [`taxtrace/`](taxtrace/) | Coleta, domínio, consultas, RAG, grafo e aplicação |
+| [`taxtrace/static/`](taxtrace/static/) | Interface e cliente HTTP PT-BR/EN |
+| [`tests/`](tests/) | Contratos, falhas, segurança das entradas e integrações |
+| [`evals/`](evals/) | Gabaritos, metodologia e comparação de recuperação/geração |
+| [`runs/`](runs/README.md) | Evidências históricas preservadas e índice por etapa |
+| [`docs/`](docs/README.md) | Caso de uso, decisões, reprodução e operação |
+| [`scripts/`](scripts/) | Verificações operacionais explícitas |
+| [`PLANO.md`](PLANO.md) | Escopo, decisões e pendências; não substitui evidência de entrega |
 
-Esses números são de desenvolvimento, sem revisão fiscal independente. Não medem precisão jurídica. Dois controles sintéticos por conjunto ficam fora dos percentuais; as falhas também estão publicadas.
+Credenciais, bancos locais, pesos e downloads brutos ficam fora do Git. As fontes da captura hospedada estão preservadas no Neon. [Como contribuir](CONTRIBUTING.md).
 
-```powershell
-.venv/Scripts/python.exe -m taxtrace.avaliacao
-.venv/Scripts/python.exe -m taxtrace.avaliacao --casos evals/recuperacao.adicional.v1.json
-```
+## 7. Limites da entrega
 
-Cada execução grava um novo registro em `runs/`, identificando código, gabarito, coleta, artigos e origem dos candidatos. A versão v4 é o padrão; `--metodo v1` reproduz a referência anterior. As versões v2 e v3 permanecem experimentais. Para atualizar um banco já carregado, use `python -m taxtrace.banco --somente-esquema` com o Python da `.venv`.
+- Não calcula tributos, enquadra produtos ou confirma vigência jurídica atual.
+- Citação literal e números presentes não provam que a paráfrase está correta; a avaliação adversarial documenta esse limite.
+- Não há validação independente por especialista, gestão de múltiplos revisores ou medição de economia de trabalho.
+- Há uma conta administrativa de revisão; limites de consumo e sessões autenticadas usam memória de uma instância e reiniciam com o processo.
+- O hash confere correspondência ao manifesto; não é assinatura digital nem proteção contra quem controla o banco e os arquivos.
 
-## Recuperação semântica experimental
-
-O modelo de embeddings roda localmente, sem chave de API, e indexou **990 trechos de 580 artigos**. Na avaliação, recuperou 12/20 e 9/12 referências, abaixo da busca textual (19/20 e 11/12). Também retornou vizinhos para termos inexistentes; não há recusa semântica calibrada. Por isso, a busca padrão foi preservada.
-
-Consulte [instalação, comparação e limites](evals/SEMANTICA.md) para testar com `--metodo semantica`. Os arquivos do modelo ficam fora do Git e seu download é explícito. Embeddings são recuperação de informação; a aplicação ainda não gera respostas por IA.
-
-## Qualidade dos trechos e busca combinada
-
-O [experimento híbrido](evals/HIBRIDA.md) combina candidatos textuais e semânticos, mas ficou abaixo da busca padrão: 16/20 e 9/12 referências encontradas. A avaliação agora também confere a literalidade dos recortes na fonte e a presença da frase de referência no trecho exibido. Na busca semântica, três consultas encontraram o artigo esperado sem mostrar essa frase.
-
-O comando `python -m taxtrace.avaliacao` com o Python da `.venv` gera esses novos indicadores. A presença da frase é uma verificação textual limitada; a suficiência jurídica para uma resposta continua sem avaliação. Use `--metodo hibrida` apenas para explorar o experimento, com o índice semântico já preparado.
-
-## Ferramentas para um assistente
-
-O [servidor MCP](docs/MCP.md) permite que um cliente consulte a base, busque artigos, leia o texto por partes e confira um cClassTrib exato. As quatro ferramentas são somente leitura e informam fonte e versão da coleta. Nenhuma decide o enquadramento de um produto.
-
-```powershell
-.venv/Scripts/python.exe -m taxtrace.verificar_mcp
-```
-
-O comando inicia um cliente e um servidor locais, confere as chamadas e grava evidências em `runs/`. O fluxo LangGraph já usa essas ferramentas; não é necessária chave de modelo para testar o MCP isolado.
-
-## Fluxo LangGraph com rastro das chamadas
-
-O [fluxo de consulta](docs/AGENTE.md) planeja uma ação limitada, consulta a base por MCP, recupera referências e confere a coleta e as citações. O modo local usa regras; o modo Gemini usa IA apenas no planejamento. Foram executados testes reais de ambos, com registros em `runs/`.
-
-```powershell
-.venv/Scripts/python.exe -m taxtrace.agente --consulta "Leia o artigo 125."
-.venv/Scripts/python.exe -m taxtrace.agente --modo gemini --consulta "Qual artigo trata da cesta basica?"
-```
-
-O modo Gemini exige a chave no `.env`. O resultado é um conjunto de evidências para revisão, com no máximo três chamadas MCP; ainda não há parecer fiscal ou memória de conversa. A pausa e a retomada já estão disponíveis no módulo de revisão documental.
-
-## Revisão com pausa e retomada
-
-O [fluxo de revisão](docs/REVISAO.md) salva o estado em SQLite, permite inspecionar as evidências e retoma com uma decisão declarada de aprovação ou rejeição. A decisão exige o hash do conjunto revisado; revisão encerrada não aceita outra decisão. A retomada não repete chamadas MCP ou Gemini.
-
-```powershell
-.venv/Scripts/python.exe -m taxtrace.revisao iniciar --consulta "Leia o artigo 125."
-.venv/Scripts/python.exe -m taxtrace.verificar_revisao
-```
-
-O segundo comando é uma demonstração automatizada identificada, não revisão humana real. Checkpoints privados ficam fora do Git; os eventos publicáveis ficam em `runs/`. A identidade do revisor é autodeclarada e a decisão documental não valida um parecer fiscal.
-
-## Aplicação local
-
-A [interface do TaxTrace](docs/INTERFACE.md) reúne **pesquisa, leitura das fontes e revisão documental** em uma bancada: lista selecionável de resultados, leitor ao lado e decisão com a fonte acessível. A navegação separa Consulta documental, Revisões da sessão e Base e fontes. Há entradas específicas para tema, número de artigo e cClassTrib, histórico da aba e exportação do registro. Português e inglês disponíveis; os documentos oficiais preservam o texto original.
-
-```powershell
-.venv/Scripts/python.exe -m taxtrace.web
-```
-
-Abra [a aplicação local](http://127.0.0.1:8015/). A base precisa estar ativa. Esta etapa não publica o app nem oferece autenticação multiusuário.
-
-## Como conferir a qualidade
-
-```powershell
-$env:TAXTRACE_TEST_DATABASE='1'
-.venv/Scripts/python.exe -m unittest discover -s tests -q
-node --test tests/query-input.test.mjs
-.venv/Scripts/ruff.exe check .
-.venv/Scripts/ruff.exe format --check .
-```
-
-Os testes de banco exigem a habilitação explícita acima e uma conexão local para `taxtrace_test`, na porta 15434, com usuário próprio. Não usam a conexão de desenvolvimento como alternativa. Os testes de integração desfazem suas transações; não executam limpeza das tabelas de desenvolvimento. Sem a habilitação, esses testes são ignorados. Testes que dependem da coleta real também são ignorados quando os arquivos locais não existem.
-
-## Organização
-
-| Local                                                          | Responsabilidade                                                      |
-| -------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `taxtrace/coleta.py`, `integridade.py`                         | Captura e conferência dos arquivos contra o manifesto                 |
-| `taxtrace/lei.py`, `tabelas.py`, `ligacao.py`                  | Interpretação e ligação das fontes                                    |
-| `taxtrace/schema.sql`, `banco.py`, `conexao.py`                | Persistência, transações e conexões separadas                         |
-| `taxtrace/documentos.py`, `consulta.py`, `busca.py`            | Texto pesquisável e busca com citações                                |
-| `taxtrace/encoder.py`, `vetores.py`                            | Modelo local fixado, fragmentação e índice vetorial experimental      |
-| `taxtrace/consultas.py`, `servidor_mcp.py`, `verificar_mcp.py` | Consultas de domínio, ferramentas MCP e verificação real do protocolo |
-| `tests/`                                                       | Verificações automatizadas e isolamento do banco de testes            |
-| `evals/`, `taxtrace/avaliacao.py`                              | Gabaritos, metodologia e avaliação da recuperação                     |
-| `runs/`                                                        | Registros públicos de validação, sem credenciais                      |
-| `PLANO.md`                                                     | Decisões, fontes e entregas pendentes                                 |
-
-## Operação e evidências
-
-A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: **193 testes aprovados e três desativados sem a coleta oficial**. Checkpoints, eventos, isolamento entre navegadores e permissões do papel de aplicação foram exercitados. A [evidência completa](runs/2026-11-07-neon-runtime-preparation/verification.json) registra também falhas preliminares e a correção da limpeza de testes. Naquela etapa não houve deploy ou migração automática do histórico; a publicação posterior está registrada abaixo.
-
-A preparação autorizada no Neon também foi concluída: **580 artigos, 170 classificações, 10.515 NCM e sete arquivos preservados**, com acesso de leitura e estado separados. A revisão técnica foi retomada em outro processo Linux, sem chamadas a modelos e sem aprovação humana. [Evidências no destino real](runs/2026-11-08-neon-provision/README.md).
-
-- [Publicação no Render Free](docs/RENDER.md): configuração preparada, cookies HTTPS, limites de uso e variáveis privadas. [Serviço publicado](https://taxtrace.onrender.com/) com consulta RAG real e revisão persistida verificadas; conta de revisor e rejeição de teste [validadas pela interface](runs/2026-11-08-reviewer-hosted/README.md). [Evidências](runs/2026-11-08-render-live/verification.json).
-- [Preparação do Neon e das fontes](docs/NEON.md): configuração privada, política TLS e originais preservados no banco.
-- [Docker](docs/DOCKER.md): execução local com volumes privados e ambiente descartável de integração.
-- [Persistência](docs/PERSISTENCIA.md): SQLite como padrão; checkpoints, eventos e vínculos PostgreSQL opcionais.
-- [Acesso do revisor](docs/AUTENTICACAO.md) e [autorização dos registros](docs/AUTORIZACAO.md): decisões com login; leitura pela sessão proprietária ou conta administrativa. A credencial também pode vir da configuração privada.
-- [Diagnósticos e avaliação automática](docs/OPERACAO.md): processo ativo, base disponível e relatórios de desenvolvimento.
-- [Casos adversariais](evals/RAG.md) e [revisão de qualidade](docs/REVISAO_AVALIACAO.md): 12 casos ainda aguardam avaliação especializada; exportar o pacote não comprova revisão independente.
-
-## Limites de interpretação
-
-A busca atual depende dos termos digitados e pode deixar de encontrar trechos relevantes. Um resultado vazio significa apenas que essa busca não encontrou correspondência. O ranking não é uma medida de confiança jurídica.
-
-O índice remove os trechos marcados como riscados, mas isso não substitui análise de vigência. O original e suas marcações permanecem armazenados. Os hashes verificam correspondência ao manifesto; não constituem assinatura digital da fonte. O uso local continua como padrão. A conexão Neon é opcional, exige destino fixado e TLS verificado e foi validada contra o projeto real em 08/11/2026; a publicação permanece pendente.
-
-**Apoio à consulta, não parecer tributário.** Confira a fonte oficial antes de tomar uma decisão.
+Desenvolvido por Luiz Nelson, com assistência de IA. A responsabilidade por compreender, revisar e verificar a entrega permanece com o mantenedor. A [licença MIT](LICENSE) cobre o código; as fontes públicas têm origem e condições próprias.

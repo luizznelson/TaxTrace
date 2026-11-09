@@ -34,3 +34,6 @@ data/models/
 
 # Private workflow checkpoints, SQLite WAL files and local locks
 data/checkpoints/
+
+# Temporary CI outputs; reviewed execution evidence belongs in runs/.
+artifacts/

@@ -15,3 +15,12 @@ evals/*.json text eol=lf
 
 # Evidence hashes cover exact bytes; Git must not convert generated JSON line endings.
 runs/**/*.json -text
+
+# Source modules and presentation media.
+*.mjs text eol=lf
+*.mp4 binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.pdf binary

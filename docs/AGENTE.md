@@ -38,4 +38,4 @@ O comando direto grava um registro de execução e não pausa para decisão. Par
 
 As entregas documentais anteriores permanecem em `runs/2026-11-06-langgraph-delivery/` e `runs/2026-11-06-review-delivery/`. Elas não mediram geração. Os resultados atuais e as falhas preliminares de RAG estão em [evals/RAG.md](../evals/RAG.md).
 
-Continuam pendentes avaliação independente, revisão fiscal especializada, verificação temporal por dispositivo/data e preparação para acesso público. Nenhuma execução de desenvolvimento é apresentada como aprovação profissional real.
+Continuam pendentes avaliação independente, revisão fiscal especializada e verificação temporal por dispositivo/data. O acesso público foi preparado e validado separadamente: [publicação](RENDER.md), [evidências](../runs/2026-11-08-render-live/verification.json). Nenhuma execução de desenvolvimento é apresentada como aprovação profissional real.

@@ -52,11 +52,11 @@ O conjunto revisado inclui pergunta, modo, plano, coleta, respostas MCP e `rag`:
 
 O registro contém versão/hash do prompt, modelo solicitado/retornado quando informado, uso de tokens informado pelo provedor e rastros de duração. Não se afirma custo zero, pesos imutáveis ou ausência de cobrança da conta. O texto completo de apoio continua sendo uma leitura complementar separada do conjunto original.
 
-O formato de checkpoint passou à versão 2. Revisões anteriores continuam consultáveis, mas mudança de código impede nova decisão sobre um fluxo antigo. Nenhum histórico é apagado ou migrado silenciosamente. Identidade do revisor continua declarada localmente, sem autenticação; decisões sintéticas usam origem `teste_automatizado`.
+O formato de checkpoint passou à versão 2. Revisões anteriores continuam consultáveis, mas mudança de código impede nova decisão sobre um fluxo antigo. Nenhum histórico é apagado ou migrado silenciosamente. Na CLI, a identidade do operador é declarada; na interface web, a decisão exige a conta autenticada e o nome é atribuído pelo servidor. Identidade civil e qualificação não são verificadas. Ver [autenticação](AUTENTICACAO.md). Decisões sintéticas da CLI usam origem `teste_automatizado`.
 
 ## Como usar
 
-Na aplicação local, escolha **Pesquisar um tema → Como executar → Resposta com fontes · RAG**. Pergunte, por exemplo: **“O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?”**. Clique na citação para abrir e destacar o trecho, e revise resposta e evidências antes de decidir. O conteúdo gerado permanece em português, como o fluxo e a documentação das fontes, mesmo quando os controles estão em inglês.
+Na aplicação local ou publicada, escolha **Pesquisar um tema → Como executar → Resposta com fontes · RAG**. Pergunte, por exemplo: **“O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?”**. Clique na citação para abrir e destacar o trecho, e revise resposta e evidências antes de decidir. O conteúdo gerado permanece em português, como o fluxo e a documentação das fontes, mesmo quando os controles estão em inglês.
 
 ```powershell
 .venv/Scripts/python.exe -m taxtrace.revisao iniciar --modo rag --consulta "O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?"
@@ -68,8 +68,9 @@ Reutiliza `GEMINI_API_KEY` e `GEMINI_MODEL` configurados no `.env`. `GEMINI_RAG_
 
 - Avaliação independente e revisão fiscal dos gabaritos e respostas.
 - Validação temporal por dispositivo/data, atualização de fontes e cobertura dos anexos necessários.
-- Autenticação, autorização e proteção de consumo antes de publicação multiusuário.
-- Publicação e vídeo após a conclusão dessas preparações.
+- Gestão de múltiplas contas de revisor e avaliação operacional com usuários.
+
+A aplicação foi publicada com conta de revisor, vínculo de sessão e limites de consumo. O RAG hospedado e uma rejeição técnica autenticada foram conferidos; o [vídeo](DEMONSTRACAO.md) apresenta essa jornada. Isso não encerra as pendências de avaliação fiscal ou validação temporal.
 
 ## Registro da entrega
 

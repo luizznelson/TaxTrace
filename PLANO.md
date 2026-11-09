@@ -122,7 +122,8 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Conta de revisor configurada no serviço. Usuário realizou login; assistente registrou rejeição identificada como teste, exportou o registro e recuperou a decisão após recarregar. Logout, isolamento entre visitantes e interface PT/EN em tela estreita e desktop conferidos. Ver `runs/2026-11-08-reviewer-hosted/README.md`. Isso não é avaliação fiscal independente.
    - [x] Blueprint preparado com publicação automática após checks do GitHub (`checksPass`), preservando os valores privados e a ativação de IA no painel. A aplicação remota dessa configuração depende do push e da sincronização do Blueprint.
    - [x] Ajustes de feedback publicados: JavaScript público equivalente ao código local após normalizar CRLF/LF. Vídeo real de 74 s, edições legendadas PT-BR/EN, capa e evidências adicionados aos READMEs. Ver `runs/2026-11-08-demo-video/verification.json`.
-   - [ ] Confirmar no painel o primeiro deploy automático após os checks do GitHub e enviar o commit dos vídeos. O vídeo não substitui avaliação fiscal independente ou validação temporal.
+   - [x] Apresentação do repositório reorganizada em PT-BR/EN: caso de uso, demonstração, resultados, arquitetura, qualidade e reprodução. Índice de 129 execuções criado preservando os originais e as falhas.
+   - [ ] Confirmar no painel o primeiro deploy automático após os checks do GitHub e enviar o commit da apresentação revisada. O vídeo não substitui avaliação fiscal independente ou validação temporal.
 
 ## Regras do projeto
 - Nunca afirmar vigência sem data e fonte.

@@ -89,10 +89,10 @@ A atualização é aditiva e transacional: mantém a coleta, o texto original e 
 | MRR@5 | 0,495 | 0,652 |
 | Controles sintéticos vazios | 2/2 | 2/2 |
 
-O ganho de dez pontos percentuais resulta de **seis casos recuperados e quatro regressões**. As regressões foram a pergunta sobre fato gerador, as duas consultas sobre créditos e a consulta curta sobre Imposto Seletivo. Por isso, **v1 continua sendo o padrão** e v2 exige seleção explícita; a melhoria agregada ainda não justifica uma troca automática.
+O ganho de dez pontos percentuais resulta de **seis casos recuperados e quatro regressões**. As regressões foram a pergunta sobre fato gerador, as duas consultas sobre créditos e a consulta curta sobre Imposto Seletivo. Naquele experimento, **v1 foi mantida como padrão** e v2 exigiu seleção explícita. A escolha atual é a **v4**, medida em [comparação posterior](COMPARACAO.md); a melhoria agregada da v2 não justificou uma troca automática.
 
 Veja a [comparação por caso](../runs/2026-11-06-search-comparison/comparacao.json), a [execução v1](../runs/recuperacao-6fee1e49-eb43-46ac-91f6-a7409ee8b64b/resultado.json) e a [execução v2](../runs/recuperacao-1616278c-b2f3-4291-b628-8d9495333ea2/resultado.json). As primeiras execuções do experimento também foram mantidas em `runs/`, identificadas pelos hashes do código correspondente.
 
 Nos resultados da busca v2, `correspondencia_parcial` informa se houve termos ausentes. `termos_ausentes` lista os lexemas normalizados que faltaram, não palavras literais nem uma medida de confiança. Preservar a palavra “não” na preparação não significa compreender uma negação jurídica. Uma correspondência parcial não deve ser usada automaticamente como fundamento suficiente para gerar uma resposta.
 
-Próximo passo: tratar as regressões de ranking e medir em perguntas adicionais separadas dos casos usados durante o desenvolvimento. Este experimento ainda não usa embeddings ou LLMs.
+A etapa seguinte tratou as regressões e mediu perguntas adicionais, conforme [comparação atual](COMPARACAO.md). Este experimento histórico não usa embeddings ou LLMs; [semântica](SEMANTICA.md), [híbrida](HIBRIDA.md) e [RAG](RAG.md) têm registros separados.

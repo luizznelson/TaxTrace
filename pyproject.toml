@@ -1,7 +1,7 @@
 [project]
 name = "taxtrace"
 version = "0.0.1"
-description = "Agente com servidor MCP para consultar a Reforma Tributária do consumo (IBS/CBS) com citação de fonte e controle de vigência."
+description = "Consulta documental de IBS/CBS com MCP, RAG citado e revisão rastreável."
 requires-python = ">=3.14"
 
 [tool.ruff]

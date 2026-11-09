@@ -1,6 +1,6 @@
 # Preparação do Neon sem expor credenciais
 
-**Neon preparado e validado em 08/11/2026, conforme o plano autorizado.** Os dois papéis restritos, as tabelas, a captura pública e os checkpoints estão no destino real. Consultas, TLS do cliente, permissões, fontes preservadas e retomada em outro processo foram verificados. **A aplicação ainda não foi publicada.** Veja as [evidências da execução](../runs/2026-11-08-neon-provision/README.md).
+**Neon preparado e validado em 08/11/2026, conforme o plano autorizado.** Os dois papéis restritos, as tabelas, a captura pública e os checkpoints estão no destino real. Consultas, TLS do cliente, permissões, fontes preservadas e retomada em outro processo foram verificados. **A aplicação foi publicada posteriormente no Render.** Veja [operação](RENDER.md) e [validação hospedada](../runs/2026-11-08-reviewer-hosted/README.md). Veja as [evidências da execução](../runs/2026-11-08-neon-provision/README.md).
 
 ## Configuração privada usada na preparação
 
@@ -52,7 +52,7 @@ Esses testes locais não comprovam vigência atual ou adequação fiscal. A vali
 
 ## Próxima etapa
 
-A preparação autorizada foi concluída. A próxima etapa é preparar e revisar a configuração de publicação: variáveis privadas de runtime, conta de revisor, HTTPS, limites de uso e verificação do serviço hospedado. Não enviar a conexão administrativa ao servidor web. O histórico SQLite local não foi migrado. Nenhuma configuração deste documento habilita acesso público automaticamente.
+A preparação autorizada e a publicação foram concluídas. A configuração do servidor, variáveis privadas, conta de revisor e limites estão em [RENDER.md](RENDER.md), com evidência hospedada separada do ensaio local. Não enviar a conexão administrativa ao servidor web. O histórico SQLite local não foi migrado. Nenhuma configuração deste documento habilita acesso público automaticamente.
 
 
 ## Planejamento explícito e ensaio
