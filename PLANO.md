@@ -121,7 +121,8 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Hospedagem pública no Render Free com leitura Neon e uma consulta RAG real verificadas. Revisão recuperada na mesma sessão com dossiê preservado; ver `runs/2026-11-08-render-live/verification.json`.
    - [x] Conta de revisor configurada no serviço. Usuário realizou login; assistente registrou rejeição identificada como teste, exportou o registro e recuperou a decisão após recarregar. Logout, isolamento entre visitantes e interface PT/EN em tela estreita e desktop conferidos. Ver `runs/2026-11-08-reviewer-hosted/README.md`. Isso não é avaliação fiscal independente.
    - [x] Blueprint preparado com publicação automática após checks do GitHub (`checksPass`), preservando os valores privados e a ativação de IA no painel. A aplicação remota dessa configuração depende do push e da sincronização do Blueprint.
-   - [ ] Publicar os pequenos ajustes de feedback de autenticação/estados e a configuração de deploy automático, conferir o primeiro deploy por CI e gravar o vídeo.
+   - [x] Ajustes de feedback publicados: JavaScript público equivalente ao código local após normalizar CRLF/LF. Vídeo real de 74 s, edições legendadas PT-BR/EN, capa e evidências adicionados aos READMEs. Ver `runs/2026-11-08-demo-video/verification.json`.
+   - [ ] Confirmar no painel o primeiro deploy automático após os checks do GitHub e enviar o commit dos vídeos. O vídeo não substitui avaliação fiscal independente ou validação temporal.
 
 ## Regras do projeto
 - Nunca afirmar vigência sem data e fonte.

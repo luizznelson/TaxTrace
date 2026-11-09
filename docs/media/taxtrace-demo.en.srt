@@ -1,0 +1,57 @@
+1
+00:00:00,000 --> 00:00:05,000
+IBS and CBS document research, with traceable sources.
+
+2
+00:00:05,000 --> 00:00:10,000
+Checking IBS and CBS requires finding the rule and verifying its source.
+
+3
+00:00:10,000 --> 00:00:17,000
+Start with a specific question.
+Here, we check what Article 125 says.
+
+4
+00:00:17,000 --> 00:00:19,000
+Actual AI request • waiting time shortened in editing
+
+5
+00:00:19,000 --> 00:00:26,000
+AI generates an explanation with citations.
+The snapshot version and dates remain visible.
+
+6
+00:00:26,000 --> 00:00:32,000
+Open the quoted passage and compare it with the answer.
+
+7
+00:00:32,000 --> 00:00:38,000
+The supporting passage is highlighted in the retrieved document.
+
+8
+00:00:38,000 --> 00:00:44,000
+Read the full article and open the official source.
+
+9
+00:00:44,000 --> 00:00:50,000
+The trace shows the executed steps.
+The snapshot is preserved; current legal validity is not asserted.
+
+10
+00:00:50,000 --> 00:00:55,000
+Return to queries through this tab's history.
+
+11
+00:00:55,000 --> 00:01:01,000
+Inspect the scope: identified legislation and public tables.
+Coverage does not establish current legal validity.
+
+12
+00:01:01,000 --> 00:01:09,000
+Example from an earlier authenticated operational test.
+The reason and decision remain in the exportable record.
+
+13
+00:01:09,000 --> 00:01:14,000
+Try it without signing up: taxtrace.onrender.com
+Document research support. Not tax advice.

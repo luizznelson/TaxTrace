@@ -10,6 +10,15 @@ A tax team needs to check the legal basis of a tax classification. Relevant info
 
 TaxTrace organizes those sources to support that review. Reducing manual lookup is a goal; time savings and use by tax professionals have not yet been measured.
 
+
+## Watch the application in 74 seconds
+
+[![TaxTrace demonstration: question, sources and review](docs/media/taxtrace-demo-poster.jpg)](docs/media/taxtrace-demo.en.mp4)
+
+[Watch or download the English-captioned edition](docs/media/taxtrace-demo.en.mp4) · [Português](docs/media/taxtrace-demo.pt-BR.mp4) · [Try the application](https://taxtrace.onrender.com/)
+
+Recorded from the hosted application: question, cited answer, full article, execution trace and an earlier operational test review. Both editions have captions and no audio; waiting time was shortened and labeled. The captured interface, official sources and recorded answer remain in Portuguese. See [storyboard and limits](docs/DEMONSTRACAO.md) and [verification](runs/2026-11-08-demo-video/verification.json).
+
 ## Implemented
 
 - Official-source collection with URLs, timestamps, file sizes and hashes.
@@ -19,7 +28,7 @@ TaxTrace organizes those sources to support that review. Reducing manual lookup 
 - Portuguese full-text search with literal excerpts, citations and collection metadata.
 - Read-only query login and a separate local integration-test database.
 
-**Document RAG is implemented locally:** retrieved evidence, Gemini synthesis with checked literal citations, conservative refusals and an answer-bound review hash. See [workflow and limits](docs/RAG.md) and [development evaluation](evals/RAG.md). Authenticated multi-user review, device/date-specific legal validity verification and independent expert-reviewed answer evaluation remain **pending**. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval remain explicit alternatives; the RAG workflow uses the stronger textual baseline.
+**Document RAG is implemented and available in the hosted application:** retrieved evidence, Gemini synthesis with checked literal citations, conservative refusals and an answer-bound review hash. See [workflow and limits](docs/RAG.md) and [development evaluation](evals/RAG.md). Authenticated multi-user review, device/date-specific legal validity verification and independent expert-reviewed answer evaluation remain **pending**. The default v4 search remains textual. Experimental local embeddings and pgvector retrieval remain explicit alternatives; the RAG workflow uses the stronger textual baseline.
 
 ## Recorded local verification
 
@@ -143,9 +152,9 @@ Integration tests require explicit opt-in and the dedicated local test database,
 
 ## Operation and evidence
 
-Docker/Linux execution with real PostgreSQL passed **193 tests**, with three skipped without the official raw collection. Tests covered checkpoints, events, browser isolation and runtime-role permissions. [Evidence](runs/2026-11-07-neon-runtime-preparation/verification.json) preserves preliminary failures and the cleanup fix. No deployment or automatic history migration was performed.
+Docker/Linux execution with real PostgreSQL passed **193 tests**, with three skipped without the official raw collection. Tests covered checkpoints, events, browser isolation and runtime-role permissions. [Evidence](runs/2026-11-07-neon-runtime-preparation/verification.json) preserves preliminary failures and the cleanup fix. That earlier run performed no deployment or automatic history migration; the subsequent hosted verification is documented below.
 
-Authorized Neon provisioning was completed on November 8, 2026: **580 articles, 170 classifications, 10,515 NCM records and seven preserved files**. Restricted roles, client TLS, source integrity and review resumption across two Linux processes were verified. The technical review used no model API and recorded an automated rejection, not human approval. [Remote evidence](runs/2026-11-08-neon-provision/README.md). The application is not deployed yet.
+Authorized Neon provisioning was completed on November 8, 2026: **580 articles, 170 classifications, 10,515 NCM records and seven preserved files**. Restricted roles, client TLS, source integrity and review resumption across two Linux processes were verified. The technical review used no model API and recorded an automated rejection, not human approval. [Remote evidence](runs/2026-11-08-neon-provision/README.md). That provisioning run did not publish the application; hosted verification followed separately.
 
 - [Render Free deployment guide](docs/RENDER.md): prepared configuration, HTTPS cookies, usage limits and private environment settings. [Public service](https://taxtrace.onrender.com/) verified with one real RAG request and persisted review; reviewer login and a technical test rejection [verified through the interface](runs/2026-11-08-reviewer-hosted/README.md). [Evidence](runs/2026-11-08-render-live/verification.json).
 - [Neon and preserved-source preparation](docs/NEON.md): private configuration, pinned destination, TLS policy and source snapshots in PostgreSQL.

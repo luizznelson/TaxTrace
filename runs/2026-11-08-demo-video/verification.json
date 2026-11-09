@@ -1,0 +1,245 @@
+{
+  "registrado_em": "2026-11-09T02:04:29.967837+00:00",
+  "status": "video_real_editado_e_verificado",
+  "url_gravada": "https://taxtrace.onrender.com/",
+  "commit_local_de_referencia": "a2786a0cfc11b4701adc71f017d8866637236a37",
+  "javascript_publicado_equivalente_apos_normalizar_CRLF_para_LF": true,
+  "javascript_sha256_com_LF": "70a8c744e2475422858b79b22fc0698e2687be4c948259fd8084b872b59e3341",
+  "metodo": "Capturas sequenciais da interface real durante as interações do navegador, com cortes, cartelas editoriais e legendas. Não é gravação contínua nem medição de tempo de resposta.",
+  "viewport_solicitado": [
+    1600,
+    900
+  ],
+  "resolucao_dos_quadros": "1265x712 ou 1280x720, conforme a captura do navegador; normalizados na edição.",
+  "fps_de_captura_aproximado": "6; saída a 24 fps com repetição de quadros, sem interpolar conteúdo.",
+  "duracao_final_segundos": 74,
+  "tomadas_utilizadas": 11,
+  "consulta_ia_real_nesta_gravacao": 1,
+  "revisao_exibida": "Rejeição de teste autenticado anterior, recuperada pela sessão autorizada e identificada na legenda. Nenhuma nova aprovação foi registrada para o vídeo.",
+  "audio": false,
+  "idiomas": [
+    "pt-BR",
+    "en"
+  ],
+  "nota_idioma": "Cartelas e legendas têm edições PT-BR e EN. Interface, fontes e registros capturados permanecem em português.",
+  "privacidade": "Somente a aplicação e dados públicos foram capturados; sem login, senha, API key, cookies ou conexão de banco visíveis.",
+  "videos": [
+    {
+      "arquivo": "taxtrace-demo.pt-BR.mp4",
+      "bytes": 2875358,
+      "sha256": "de253ac485f2922020e034b339f0cb6d7f75faf3c87e6bd928ffc2c182f590a7",
+      "decodificacao_integral": "aprovada",
+      "resolucao": [
+        1600,
+        900
+      ],
+      "fps": 24,
+      "duracao_segundos": 74,
+      "audio": false
+    },
+    {
+      "arquivo": "taxtrace-demo.en.mp4",
+      "bytes": 2851571,
+      "sha256": "72823e27d843b73562eb3b9d322e41fbda43d933b72a9d17338fff7215349097",
+      "decodificacao_integral": "aprovada",
+      "resolucao": [
+        1600,
+        900
+      ],
+      "fps": 24,
+      "duracao_segundos": 74,
+      "audio": false
+    }
+  ],
+  "cenas": [
+    {
+      "cena": 1,
+      "inicio": 0,
+      "duracao": 5,
+      "titulo": "ABERTURA",
+      "clip": null,
+      "offset_origem": 0
+    },
+    {
+      "cena": 2,
+      "inicio": 5,
+      "duracao": 5,
+      "titulo": "O PROBLEMA",
+      "clip": 1,
+      "offset_origem": 0.5
+    },
+    {
+      "cena": 3,
+      "inicio": 10,
+      "duracao": 7,
+      "titulo": "UMA PERGUNTA CONCRETA",
+      "clip": 2,
+      "offset_origem": 0.5
+    },
+    {
+      "cena": 4,
+      "inicio": 17,
+      "duracao": 2,
+      "titulo": "CONSULTA REAL",
+      "clip": 3,
+      "offset_origem": 0.6
+    },
+    {
+      "cena": 5,
+      "inicio": 19,
+      "duracao": 7,
+      "titulo": "RESPOSTA COM FONTES",
+      "clip": 5,
+      "offset_origem": 0.3
+    },
+    {
+      "cena": 6,
+      "inicio": 26,
+      "duracao": 6,
+      "titulo": "CONFERIR A CITAÇÃO",
+      "clip": 7,
+      "offset_origem": 1.7
+    },
+    {
+      "cena": 7,
+      "inicio": 32,
+      "duracao": 6,
+      "titulo": "EVIDÊNCIA DESTACADA",
+      "clip": 8,
+      "offset_origem": 2
+    },
+    {
+      "cena": 8,
+      "inicio": 38,
+      "duracao": 6,
+      "titulo": "LER O ARTIGO INTEGRAL",
+      "clip": 9,
+      "offset_origem": 2
+    },
+    {
+      "cena": 9,
+      "inicio": 44,
+      "duracao": 6,
+      "titulo": "RASTREAR A CONSULTA",
+      "clip": 10,
+      "offset_origem": 3.5
+    },
+    {
+      "cena": 10,
+      "inicio": 50,
+      "duracao": 5,
+      "titulo": "RETOMAR A PESQUISA",
+      "clip": 11,
+      "offset_origem": 1.5
+    },
+    {
+      "cena": 11,
+      "inicio": 55,
+      "duracao": 6,
+      "titulo": "CONHECER A COBERTURA",
+      "clip": 12,
+      "offset_origem": 2
+    },
+    {
+      "cena": 12,
+      "inicio": 61,
+      "duracao": 8,
+      "titulo": "REVISÃO DOCUMENTAL • TESTE",
+      "clip": 14,
+      "offset_origem": 2.2
+    },
+    {
+      "cena": 13,
+      "inicio": 69,
+      "duracao": 5,
+      "titulo": "EXPERIMENTE",
+      "clip": null,
+      "offset_origem": 0
+    }
+  ],
+  "tomadas": [
+    {
+      "tomada": 1,
+      "fase": "apresentacao",
+      "quadros_capturados": 39,
+      "duracao_captada_segundos": 6.608,
+      "hashes_dos_quadros_sha256": "3cd9d5dd645a725dafbe67ec97923af96ad6fa2a344daa67dde51dd9faa5e1e6"
+    },
+    {
+      "tomada": 2,
+      "fase": "pergunta",
+      "quadros_capturados": 47,
+      "duracao_captada_segundos": 8.15,
+      "hashes_dos_quadros_sha256": "6e354a092648da701cd7d5d777aa233a2142bf2785fbed6545723ff48fe10253"
+    },
+    {
+      "tomada": 3,
+      "fase": "consulta_real",
+      "quadros_capturados": 109,
+      "duracao_captada_segundos": 18.128,
+      "hashes_dos_quadros_sha256": "05095777dc5c6649e1b8d00ae0f0b875435d492fe5ea1733590c4cc579b8d23c"
+    },
+    {
+      "tomada": 5,
+      "fase": "resposta_com_fontes",
+      "quadros_capturados": 45,
+      "duracao_captada_segundos": 7.642,
+      "hashes_dos_quadros_sha256": "7424869f7586c78d83b9eb0ddebe51be4ec4f3ab92c4c775baf21ebe9468feca"
+    },
+    {
+      "tomada": 7,
+      "fase": "trechos_de_apoio",
+      "quadros_capturados": 51,
+      "duracao_captada_segundos": 8.538,
+      "hashes_dos_quadros_sha256": "ff02be08b65d151a1129b195ff9e0bff10a1a55ab756bef35d99d1bbeb0b2644"
+    },
+    {
+      "tomada": 8,
+      "fase": "fonte_integral",
+      "quadros_capturados": 58,
+      "duracao_captada_segundos": 9.592,
+      "hashes_dos_quadros_sha256": "6d3d02de2e98f1f0c313d77f455cafd44aea06c5f4ed380ba2dfb3c1ec5190e7"
+    },
+    {
+      "tomada": 9,
+      "fase": "artigo_integral",
+      "quadros_capturados": 56,
+      "duracao_captada_segundos": 9.132,
+      "hashes_dos_quadros_sha256": "baa4cec0b622fb721127500bdc3a04977497c04687653a0e224ee7c221aea9ff"
+    },
+    {
+      "tomada": 10,
+      "fase": "rastro_da_consulta",
+      "quadros_capturados": 38,
+      "duracao_captada_segundos": 10.205,
+      "hashes_dos_quadros_sha256": "126c7776523d8a5e49cda7ff89493b617e9b6f87c3dc4b95ac19df1901684e8e"
+    },
+    {
+      "tomada": 11,
+      "fase": "historico_da_sessao",
+      "quadros_capturados": 45,
+      "duracao_captada_segundos": 7.521,
+      "hashes_dos_quadros_sha256": "4aa8ffdf08bb1379b233f31fb45c8c1d9d4081cc32d269c28b5bf6990c8c8ab2"
+    },
+    {
+      "tomada": 12,
+      "fase": "base_e_fontes",
+      "quadros_capturados": 52,
+      "duracao_captada_segundos": 8.653,
+      "hashes_dos_quadros_sha256": "d0f9bd98a1524c1d1b9a9034f743b4ad379c30ff33fd790d7e37e3155a3dcd55"
+    },
+    {
+      "tomada": 14,
+      "fase": "revisao_registrada_versao_final",
+      "quadros_capturados": 66,
+      "duracao_captada_segundos": 10.646,
+      "hashes_dos_quadros_sha256": "cc5b966b1a8a7275fc8dc27c0636a67dda8142b187a36bc62882e47816deabe8"
+    }
+  ],
+  "validacoes": [
+    "Decodificação integral sem erros das duas edições.",
+    "1600x900, H.264/yuv420p, 24 fps, MP4 com faststart.",
+    "Quadros extraídos dos vídeos finais e inspecionados em português e inglês.",
+    "Legendas e capas conferidas; sem afirmação de vigência ou parecer fiscal."
+  ]
+}

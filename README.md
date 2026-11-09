@@ -10,6 +10,15 @@ Uma equipe fiscal precisa conferir a base normativa de uma classificação tribu
 
 O TaxTrace organiza essas fontes para apoiar essa conferência. A proposta é reduzir a procura manual e tornar cada consulta verificável. Ainda não medimos economia de tempo nem validamos o uso por uma equipe fiscal.
 
+
+## Veja a aplicação em 74 segundos
+
+[![Demonstração do TaxTrace: pergunta, fontes e revisão](docs/media/taxtrace-demo-poster.jpg)](docs/media/taxtrace-demo.pt-BR.mp4)
+
+[Assistir ou baixar o vídeo em português](docs/media/taxtrace-demo.pt-BR.mp4) · [English captions edition](docs/media/taxtrace-demo.en.mp4) · [Testar a aplicação](https://taxtrace.onrender.com/)
+
+A demonstração usa a aplicação publicada: pergunta, resposta com citações, artigo integral, rastro e um registro anterior de revisão de teste. Edições legendadas, sem áudio; a espera da consulta foi encurtada e sinalizada. Veja [roteiro e limites](docs/DEMONSTRACAO.md) e [registro de verificação](runs/2026-11-08-demo-video/verification.json).
+
 ## O que funciona hoje
 
 - Coleta de fontes oficiais com URL, data, tamanho e hash dos arquivos.
@@ -171,7 +180,7 @@ Os testes de banco exigem a habilitação explícita acima e uma conexão local 
 
 ## Operação e evidências
 
-A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: **193 testes aprovados e três desativados sem a coleta oficial**. Checkpoints, eventos, isolamento entre navegadores e permissões do papel de aplicação foram exercitados. A [evidência completa](runs/2026-11-07-neon-runtime-preparation/verification.json) registra também falhas preliminares e a correção da limpeza de testes. Não houve deploy ou migração automática do histórico.
+A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: **193 testes aprovados e três desativados sem a coleta oficial**. Checkpoints, eventos, isolamento entre navegadores e permissões do papel de aplicação foram exercitados. A [evidência completa](runs/2026-11-07-neon-runtime-preparation/verification.json) registra também falhas preliminares e a correção da limpeza de testes. Naquela etapa não houve deploy ou migração automática do histórico; a publicação posterior está registrada abaixo.
 
 A preparação autorizada no Neon também foi concluída: **580 artigos, 170 classificações, 10.515 NCM e sete arquivos preservados**, com acesso de leitura e estado separados. A revisão técnica foi retomada em outro processo Linux, sem chamadas a modelos e sem aprovação humana. [Evidências no destino real](runs/2026-11-08-neon-provision/README.md).
 

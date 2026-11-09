@@ -1,0 +1,57 @@
+1
+00:00:00,000 --> 00:00:05,000
+Consulta documental de IBS e CBS, com fontes identificadas.
+
+2
+00:00:05,000 --> 00:00:10,000
+Conferir IBS e CBS exige localizar a regra e verificar sua origem.
+
+3
+00:00:10,000 --> 00:00:17,000
+A consulta começa com uma pergunta concreta.
+Aqui, vamos conferir o que diz o artigo 125.
+
+4
+00:00:17,000 --> 00:00:19,000
+Consulta real com IA • espera encurtada na edição
+
+5
+00:00:19,000 --> 00:00:26,000
+A IA produz uma explicação com citações.
+A versão da coleta e suas datas ficam visíveis.
+
+6
+00:00:26,000 --> 00:00:32,000
+Abra o trecho citado e compare com a resposta.
+
+7
+00:00:32,000 --> 00:00:38,000
+A evidência aparece destacada no documento recuperado.
+
+8
+00:00:38,000 --> 00:00:44,000
+Leia também o artigo integral e abra a fonte oficial.
+
+9
+00:00:44,000 --> 00:00:50,000
+O rastro mostra as etapas executadas.
+A coleta é preservada; não se afirma vigência atual.
+
+10
+00:00:50,000 --> 00:00:55,000
+Retome as consultas no histórico desta aba.
+
+11
+00:00:55,000 --> 00:01:01,000
+Conheça o recorte: legislação e tabelas públicas identificadas.
+Cobertura não significa confirmação de vigência.
+
+12
+00:01:01,000 --> 00:01:09,000
+Exemplo de teste autenticado registrado anteriormente.
+A justificativa e a decisão ficam no registro exportável.
+
+13
+00:01:09,000 --> 00:01:14,000
+Experimente sem cadastro: taxtrace.onrender.com
+Apoio documental. Não é parecer tributário.
