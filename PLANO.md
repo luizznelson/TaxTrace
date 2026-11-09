@@ -118,7 +118,8 @@ Antes de recomendar uma próxima etapa ou afirmar que uma habilidade foi atendid
    - [x] Fontes e manifesto originais preservados com gzip e hashes no PostgreSQL; leitura integral com âncoras sem disco local. Suíte Linux: 193 aprovados e três sem coleta; captura oficial também conferida no banco descartável com rollback. Ver `docs/NEON.md`.
    - [x] Preparar schemas/papéis e importar a captura no projeto Neon autorizado; TLS e permissões dos dois acessos restritos confirmados em 08/11/2026. Pausa e retomada em processos Linux separados, controle de sessão e originais sem disco local verificados. Ver `runs/2026-11-08-neon-provision/README.md`. A hospedagem segue pendente.
    - [x] Configuração Render Free preparada com origem HTTPS explícita, cookies seguros atrás do proxy, um worker, limites globais e prazo de consulta. Ensaio local do comando hospedado com Neon real aprovado; IA pública desabilitada por padrão. Ver `docs/RENDER.md`.
-   - [ ] Configurar conta privada de revisor no serviço, validar hospedagem pública, testar IA hospedada e gravar vídeo. Preparação não equivale a deploy.
+   - [x] Hospedagem pública no Render Free com leitura Neon e uma consulta RAG real verificadas. Revisão recuperada na mesma sessão com dossiê preservado; ver `runs/2026-11-08-render-live/verification.json`.
+   - [ ] Configurar conta privada de revisor no serviço, testar login/decisão hospedados, revisar visualmente e gravar vídeo.
 
 ## Regras do projeto
 - Nunca afirmar vigência sem data e fonte.

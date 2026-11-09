@@ -1,0 +1,57 @@
+{
+  "registrado_em": "2026-11-09T00:34:22.226087+00:00",
+  "natureza": "smoke_operacional_publico_sem_revisao_fiscal",
+  "url": "https://taxtrace.onrender.com",
+  "observacoes": {
+    "pagina_http": 200,
+    "health_live": "vivo",
+    "health_ready": "pronto",
+    "base": {
+      "artigos": 580,
+      "classificacoes": 170,
+      "ligacoes": 169,
+      "ncm": 10515,
+      "divergencias": 3
+    },
+    "cookie_secure": true,
+    "hsts": true,
+    "ia_habilitada": true,
+    "revisor_configurado": false
+  },
+  "teste_rag": {
+    "pergunta": "O que o artigo 125 informa sobre as alíquotas do IBS e da CBS?",
+    "http": 200,
+    "status": "aguardando_revisao",
+    "rag_status": "respondida",
+    "modelo": "gemini-3.5-flash-lite",
+    "chamadas_modelo": 1,
+    "tokens": {
+      "entrada": 781,
+      "saida": 239,
+      "total": 1020
+    },
+    "planejamento": "regras_de_entrada",
+    "mcp_real": [
+      "consultar_base",
+      "ler_artigo"
+    ],
+    "citacao_documento": "A125",
+    "citacao_literal_validada": true,
+    "revisao_recuperada_http": 200,
+    "dossie_preservado": true,
+    "aprovacao_humana_realizada": false,
+    "vigencia_verificada": false
+  },
+  "limites": [
+    "Uma consulta de desenvolvimento conhecida; não mede qualidade ampla nem correção jurídica.",
+    "Login e decisão de revisor ainda não testados na hospedagem.",
+    "Verificação HTTP não substitui revisão visual de navegador."
+  ],
+  "segredos_omitidos": [
+    "cookies",
+    "csrf",
+    "chaves",
+    "conexoes",
+    "id_da_revisao"
+  ]
+}

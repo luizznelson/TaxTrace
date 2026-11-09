@@ -2,7 +2,7 @@
 
 O banco Neon foi preparado e validado. Esta etapa prepara o **servidor web**;
 o `render.yaml` não cria outro banco, não importa fontes e não altera papéis.
-A aplicação ainda não foi publicada. O ensaio local do comando de hospedagem
+O serviço foi publicado em [taxtrace.onrender.com](https://taxtrace.onrender.com/) e uma consulta RAG real foi validada, com revisão persistida. A conta de revisor ainda precisa de configuração. Veja [evidências públicas](../runs/2026-11-08-render-live/verification.json). O ensaio local do comando de hospedagem
 com o Neon real está em [evidências](../runs/2026-11-08-render-preparation/README.md).
 
 ## 1. Enviar a versão revisada
