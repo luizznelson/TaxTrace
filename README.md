@@ -175,7 +175,7 @@ A aplicação foi construída e executada no Docker/Linux com PostgreSQL real: *
 
 A preparação autorizada no Neon também foi concluída: **580 artigos, 170 classificações, 10.515 NCM e sete arquivos preservados**, com acesso de leitura e estado separados. A revisão técnica foi retomada em outro processo Linux, sem chamadas a modelos e sem aprovação humana. [Evidências no destino real](runs/2026-11-08-neon-provision/README.md).
 
-- [Publicação no Render Free](docs/RENDER.md): configuração preparada, cookies HTTPS, limites de uso e variáveis privadas. [Serviço publicado](https://taxtrace.onrender.com/) com consulta RAG real e revisão persistida verificadas; conta de revisor pendente. [Evidências](runs/2026-11-08-render-live/verification.json).
+- [Publicação no Render Free](docs/RENDER.md): configuração preparada, cookies HTTPS, limites de uso e variáveis privadas. [Serviço publicado](https://taxtrace.onrender.com/) com consulta RAG real e revisão persistida verificadas; conta de revisor e rejeição de teste [validadas pela interface](runs/2026-11-08-reviewer-hosted/README.md). [Evidências](runs/2026-11-08-render-live/verification.json).
 - [Preparação do Neon e das fontes](docs/NEON.md): configuração privada, política TLS e originais preservados no banco.
 - [Docker](docs/DOCKER.md): execução local com volumes privados e ambiente descartável de integração.
 - [Persistência](docs/PERSISTENCIA.md): SQLite como padrão; checkpoints, eventos e vínculos PostgreSQL opcionais.

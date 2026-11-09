@@ -8,14 +8,15 @@ services:
     dockerContext: .
     dockerCommand: python -m taxtrace.servir
     healthCheckPath: /health/live
-    autoDeployTrigger: "off"
+    autoDeployTrigger: checksPass
     envVars:
       - key: TAXTRACE_DATABASE_MODE
         value: neon
       - key: TAXTRACE_CHECKPOINT_BACKEND
         value: postgres
+      # Mantém o valor privado já definido no painel nas próximas sincronizações.
       - key: TAXTRACE_PUBLIC_AI_ENABLED
-        value: "false"
+        sync: false
       - key: TAXTRACE_NEON_HOST
         sync: false
       - key: TAXTRACE_NEON_DATABASE

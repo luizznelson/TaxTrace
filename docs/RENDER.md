@@ -2,15 +2,24 @@
 
 O banco Neon foi preparado e validado. Esta etapa prepara o **servidor web**;
 o `render.yaml` não cria outro banco, não importa fontes e não altera papéis.
-O serviço foi publicado em [taxtrace.onrender.com](https://taxtrace.onrender.com/) e uma consulta RAG real foi validada, com revisão persistida. A conta de revisor ainda precisa de configuração. Veja [evidências públicas](../runs/2026-11-08-render-live/verification.json). O ensaio local do comando de hospedagem
+O serviço foi publicado em [taxtrace.onrender.com](https://taxtrace.onrender.com/) e uma consulta RAG real foi validada, com revisão persistida. A conta de revisor foi configurada e o fluxo autenticado de rejeição de teste foi validado pela interface. Veja [validação da revisão](../runs/2026-11-08-reviewer-hosted/README.md). Veja [evidências públicas](../runs/2026-11-08-render-live/verification.json). O ensaio local do comando de hospedagem
 com o Neon real está em [evidências](../runs/2026-11-08-render-preparation/README.md).
 
 ## 1. Enviar a versão revisada
 
 Faça o commit e envie ao repositório `luizznelson/TaxTrace`, na branch `main`.
-O Blueprint usa Docker, plano Free e atualização manual. Não cria discos,
-serviços auxiliares ou bancos pagos. Para atualizar depois, publique um novo
-commit e escolha o deploy manual no painel.
+O Blueprint usa Docker, plano Free e publicação automática **após os checks do
+GitHub passarem** (`autoDeployTrigger: checksPass`). Faça o commit e o push na
+`main`: o Render aguarda os jobs do GitHub Actions antes de publicar. Sem checks
+detectados ou com falha, a publicação automática não ocorre. Não cria discos,
+serviços auxiliares ou bancos pagos.
+
+Ao ativar esta configuração em um serviço existente, confira se o Blueprint
+sincronizou o novo `render.yaml`. Se a sincronização automática do Blueprint
+estiver desabilitada, use **Manual sync** uma vez e habilite **Auto Sync** nas
+configurações do Blueprint. Depois, em Settings do serviço, Auto-Deploy deve
+mostrar **After CI Checks Pass**. O deploy manual fica disponível para uso
+excepcional; não é necessário a cada commit.
 
 ## 2. Configurar o serviço
 
@@ -20,7 +29,7 @@ as mudanças propostas antes de aplicar. Se o nome gerar um subdomínio com
 sufixo, a origem é derivada do hostname atribuído pelo Render; não precisa
 adivinhar o endereço no código.
 
-Os quatro valores pedidos pelo Blueprint estão no arquivo privado
+Os valores pedidos pelo Blueprint estão no arquivo privado
 `.env.render`, já preparado neste computador. Copie cada **valor** para a
 variável correspondente no painel, sem adicionar aspas. O arquivo não é
 commitado nem incluído na imagem. Nunca inclua `DATABASE_URL`,
@@ -32,6 +41,12 @@ commitado nem incluído na imagem. Nunca inclua `DATABASE_URL`,
 | `TAXTRACE_NEON_DATABASE` | Banco exclusivo do TaxTrace |
 | `TAXTRACE_READER_DATABASE_URL` | Conta que apenas consulta as fontes |
 | `TAXTRACE_CHECKPOINT_DATABASE_URL` | Conta restrita de checkpoints e autorizações |
+| `TAXTRACE_PUBLIC_AI_ENABLED` | Em uma instalação nova, use `false` até validar o serviço; na existente, mantenha o valor já configurado |
+
+As conexões e a opção de IA usam `sync: false`: o Blueprint não substitui os
+valores definidos no painel durante futuras sincronizações. Isso preserva a IA
+já habilitada neste serviço. As chaves de modelo e a credencial do revisor
+continuam como variáveis privadas do serviço, fora do Git.
 
 Modo Neon e backend PostgreSQL já estão no Blueprint. A porta vem de `PORT`.
 O comando é `python -m taxtrace.servir`, com um único worker, sem confiar em
@@ -68,7 +83,7 @@ uma consulta com IA. A busca direta continua disponível sem chamada ao modelo.
 Verifique as cotas e a configuração de cobrança da conta do provedor: o
 controle da aplicação não constitui garantia financeira ou gratuidade da API.
 
-Não há uma conta de revisor criada nesta preparação. Para habilitar decisões,
+A conta do serviço publicado já foi configurada e testada. O procedimento abaixo documenta como configurar outra instalação. Para habilitar decisões,
 crie uma conta no computador, pelo comando interativo abaixo, com sua própria
 senha. A senha não aparece no comando nem é enviada ao chat:
 
@@ -119,5 +134,7 @@ Neon diretamente a `docker --env-file`.
 ## Referências
 
 - [Web Services e terminação TLS](https://render.com/docs/web-services)
-- [Blueprint: Docker, variáveis privadas e deploy manual](https://render.com/docs/blueprint-spec)
+- [Blueprint: Docker, variáveis privadas e publicação após checks](https://render.com/docs/blueprint-spec)
 - [Limites do plano gratuito](https://render.com/docs/free)
+
+- [Publicação automática e integração com CI](https://render.com/docs/deploys#integrating-with-ci)

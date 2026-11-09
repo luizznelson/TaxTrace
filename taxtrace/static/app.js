@@ -6,19 +6,19 @@ const strings = {
             "Recarregue a página e permita cookies deste site para iniciar uma consulta.",
         reviewerScope:
             "Esta conta de revisor tem acesso administrativo às revisões deste ambiente.",
-        accountAuthenticated: "Conta de revisor autenticada localmente",
+        accountAuthenticated: "Conta de revisor autenticada",
         accessTitle: "Acesso do revisor",
         accessHint:
             "Consultar fontes não exige login. Para aprovar ou rejeitar, entre com a conta de revisor.",
         accessMissing:
-            "A conta de revisor ainda não foi configurada neste computador. As consultas continuam disponíveis; decisões estão bloqueadas.",
+            "A conta de revisor ainda não foi configurada neste ambiente. As consultas continuam disponíveis; decisões estão bloqueadas.",
         accessAccount: "Conta",
         accessPassword: "Senha",
         accessEnter: "Entrar para revisar",
         accessExit: "Encerrar sessão",
         accessActive: "Sessão de revisão",
         accessLimit:
-            "Conta autenticada localmente; identidade civil e qualificação fiscal não verificadas. A sessão expira em uma hora.",
+            "Conta autenticada; identidade civil e qualificação fiscal não verificadas. A sessão expira em uma hora.",
         loginRequired:
             "Entre com a conta de revisor para registrar uma decisão. Confira a área de acesso no início da página.",
         loginError: "Não foi possível entrar. Confira a conta e a senha.",
@@ -26,7 +26,7 @@ const strings = {
             "Muitas tentativas de acesso. Aguarde um minuto e tente novamente.",
         skip: "Ir para a consulta",
         brand: "PESQUISA TRIBUTÁRIA",
-        local: "Ambiente local",
+        local: "Bancada documental",
         new: "Nova consulta",
         session: "Consultas nesta aba",
         resume: "Abrir revisão por identificador",
@@ -65,6 +65,10 @@ const strings = {
         example2sub: "Abra o artigo 125",
         example3: "Conferir um código",
         example3sub: "Consulte o cClassTrib 000001",
+        savingReview: "Registrando a decisão…",
+        savingReviewSub: "A decisão será vinculada à resposta e às evidências já consultadas.",
+        restoringReview: "Recuperando a revisão…",
+        restoringReviewSub: "Buscando o registro salvo, sem gerar uma nova resposta com IA.",
         working: "Consultando a base documental…",
         workingSub:
             "A resposta mostrará os documentos encontrados e a coleta utilizada.",
@@ -83,11 +87,11 @@ const strings = {
         emptyHistory:
             "Nenhuma consulta nesta aba. Inicie pela Consulta documental para pesquisar um tema, artigo ou classificação.",
         baseError:
-            "Não foi possível acessar a base. Confira se o PostgreSQL local está ativo e recarregue a página.",
+            "Não foi possível consultar a base. Tente novamente em instantes; se o problema continuar, contate o responsável pela aplicação.",
         error: "Não foi possível concluir. Tente novamente; se a consulta já tiver um identificador, use “Retomar uma revisão”.",
         inputError: "Confira o texto e os campos obrigatórios.",
         expired:
-            "Esta página perdeu a autorização local. Recarregue antes de continuar.",
+            "A autorização desta página expirou. Recarregue antes de continuar.",
         conflict:
             "A revisão mudou ou já foi encerrada. Abra-a novamente antes de decidir.",
         busy: "Já há consultas em andamento. Aguarde e tente novamente.",
@@ -119,14 +123,14 @@ const strings = {
             "Confira o material e as fontes antes de decidir. A aprovação se refere a este conjunto documental, sem validar enquadramento ou parecer fiscal.",
         reviewer: "Nome do revisor",
         origin: "Origem do registro",
-        person: "Pessoa neste computador",
+        person: "Conta de revisor",
         automatic: "Teste automatizado",
         reason: "O que foi conferido? Quais são as ressalvas?",
         check: "Conferi as evidências registradas nesta consulta. Esta decisão registra somente a revisão documental.",
         approve: "Registrar aprovação",
         reject: "Registrar rejeição",
         recorded: "Decisão registrada",
-        declared: "Registro local, com identidade declarada pelo revisor.",
+        declared: "Registro com identidade declarada pelo revisor.",
         stale: "O código mudou desde esta execução. Inicie uma nova consulta para revisar com o fluxo atual.",
         technical: "Registro técnico e evidências",
         export: "Baixar registro JSON ↓",
@@ -326,19 +330,19 @@ const strings = {
             "Reload the page and allow cookies for this site before starting a query.",
         reviewerScope:
             "This reviewer account has administrative access to reviews in this environment.",
-        accountAuthenticated: "Locally authenticated reviewer account",
+        accountAuthenticated: "Authenticated reviewer account",
         accessTitle: "Reviewer access",
         accessHint:
             "Reading sources does not require a login. Sign in with the reviewer account to approve or reject.",
         accessMissing:
-            "No reviewer account is configured on this computer. Queries remain available; decisions are blocked.",
+            "No reviewer account is configured in this environment. Queries remain available; decisions are blocked.",
         accessAccount: "Account",
         accessPassword: "Password",
         accessEnter: "Sign in to review",
         accessExit: "Sign out",
         accessActive: "Review session",
         accessLimit:
-            "Locally authenticated account; civil identity and tax qualifications are unverified. The session expires in one hour.",
+            "Authenticated account; civil identity and tax qualifications are unverified. The session expires in one hour.",
         loginRequired:
             "Sign in as a reviewer before recording a decision. See reviewer access at the top of the page.",
         loginError: "Unable to sign in. Check the account and password.",
@@ -346,7 +350,7 @@ const strings = {
             "Too many sign-in attempts. Wait one minute before trying again.",
         skip: "Skip to query",
         brand: "TAX RESEARCH",
-        local: "Local workspace",
+        local: "Document workspace",
         new: "New query",
         session: "Queries in this tab",
         resume: "Open a review by identifier",
@@ -385,6 +389,10 @@ const strings = {
         example2sub: "Open article 125",
         example3: "Check a code",
         example3sub: "Look up cClassTrib 000001",
+        savingReview: "Saving the decision…",
+        savingReviewSub: "The decision will be linked to the existing response and evidence.",
+        restoringReview: "Restoring the review…",
+        restoringReviewSub: "Retrieving the saved record without generating another AI response.",
         working: "Querying the document collection…",
         workingSub:
             "The result will identify the retrieved documents and the snapshot used.",
@@ -403,11 +411,11 @@ const strings = {
         emptyHistory:
             "No queries in this tab. Start in Document research to look up a topic, article or classification.",
         baseError:
-            "The collection could not be accessed. Check that local PostgreSQL is running, then reload.",
+            "The collection could not be accessed. Try again shortly; if the problem persists, contact the application operator.",
         error: "The operation could not finish. Try again; if you have a review identifier, use “Resume a review”.",
         inputError: "Check your text and required fields.",
         expired:
-            "This page lost its local authorization. Reload before continuing.",
+            "This page authorization has expired. Reload before continuing.",
         conflict:
             "The review changed or is already closed. Open it again before deciding.",
         busy: "Other queries are running. Please wait and try again.",
@@ -439,7 +447,7 @@ const strings = {
             "Check the material and sources first. Approval concerns this document package; it does not validate a product classification or tax advice.",
         reviewer: "Reviewer name",
         origin: "Record origin",
-        person: "Person on this computer",
+        person: "Reviewer account",
         automatic: "Automated test",
         reason: "What was checked? What caveats remain?",
         check: "I checked the evidence recorded in this query. This decision records document review only.",
@@ -740,7 +748,20 @@ function feedback(key, error = true) {
     box.className = error ? "notice error" : "notice";
     box.hidden = false;
 }
-function setBusy(value) {
+function setBusy(value, activity = "query") {
+    const messages = {
+        query: ["working", "workingSub"],
+        review: ["savingReview", "savingReviewSub"],
+        restore: ["restoringReview", "restoringReviewSub"],
+    };
+    const [title, description] = messages[activity] || messages.query;
+    for (const [selector, key] of [
+        ["#working b", title],
+        ["#working p", description],
+    ]) {
+        $(selector).dataset.i18n = key;
+        $(selector).textContent = t(key);
+    }
     busy = value;
     document
         .querySelectorAll("[data-step-target]")
@@ -1417,6 +1438,7 @@ function renderAccess() {
         exit.type = "button";
         exit.addEventListener("click", async () => {
             exit.disabled = true;
+            $("#feedback").hidden = true;
             try {
                 await api("/api/acesso/sair", { method: "POST", body: "{}" });
                 context = await api("/api/contexto");
@@ -1461,6 +1483,7 @@ function renderAccess() {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         enter.disabled = true;
+        $("#feedback").hidden = true;
         try {
             await api("/api/acesso/entrar", {
                 method: "POST",
@@ -1588,7 +1611,7 @@ function reviewForm(report) {
         if (!form.reportValidity() || busy) return;
         const choice = event.submitter?.value;
         if (!["aprovar", "rejeitar"].includes(choice)) return;
-        setBusy(true);
+        setBusy(true, "review");
         actions.querySelectorAll("button").forEach((n) => (n.disabled = true));
         $("#feedback").hidden = true;
         try {
@@ -1622,7 +1645,7 @@ async function restore(id) {
         feedback("restoreHint");
         return;
     }
-    setBusy(true);
+    setBusy(true, "restore");
     $("#feedback").hidden = true;
     try {
         current = await api(`/api/revisoes/${id}`);

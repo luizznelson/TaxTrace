@@ -1,0 +1,16 @@
+{
+  "registrado_em": "2026-11-09T01:34:07.947965+00:00",
+  "natureza": "smoke_de_autorizacao_no_servico_publico",
+  "url": "https://taxtrace.onrender.com",
+  "revisor_configurado": true,
+  "consulta_sem_login": true,
+  "leitura_exportacao_artigo_da_sessao": true,
+  "outra_sessao_recebe_404_nas_tres_rotas": true,
+  "decisao_sem_login": 401,
+  "csrf_invalido": 403,
+  "revisao_continua_pendente": true,
+  "modelos_chamados": false,
+  "login_real_validado": false,
+  "decisao_autenticada_validada": false,
+  "cookies_e_credenciais_omitidos": true
+}

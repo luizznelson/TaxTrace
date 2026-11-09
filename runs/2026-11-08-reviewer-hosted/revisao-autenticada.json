@@ -1,0 +1,42 @@
+{
+  "registrado_em": "2026-11-09T01:39:38.451915+00:00",
+  "natureza": "teste_operacional_autorizado_com_sessao_autenticada_pelo_usuario",
+  "url": "https://taxtrace.onrender.com",
+  "login_feito_pelo_usuario": true,
+  "senha_acessada_pelo_assistente": false,
+  "decisao_registrada_pelo_assistente": "rejeitar",
+  "justificativa_identifica_teste_operacional": true,
+  "rotulo_servidor_da_origem": "operador_local",
+  "nota_origem": "A rota web atribui operador_local à sessão autenticada; a justificativa identifica o assistente como executor. Não é revisão fiscal humana.",
+  "status": "resposta_documental_rejeitada",
+  "aprovacao_humana_realizada": false,
+  "exportacao_json_pela_interface": true,
+  "historico_preservado_apos_recarregar": true,
+  "decisao_reexibida_apos_recuperar": true,
+  "etapas_no_registro": {
+    "planejar": 1,
+    "consultar_base": 1,
+    "ler_artigo": 1,
+    "aprofundar": 1,
+    "conferir": 1,
+    "avaliar_contexto": 1,
+    "gerar_resposta": 1,
+    "revisar": 1,
+    "finalizar": 1
+  },
+  "modelo": "gemini-3.5-flash-lite",
+  "chamadas_de_sintese": 1,
+  "interface_pt_en_conferida": true,
+  "fontes_e_resposta_preservadas_em_portugues": true,
+  "arquivos_visuais": [
+    "revisao-mobile.jpg",
+    "revisao-desktop-pt.jpg",
+    "revisao-desktop-en.jpg"
+  ],
+  "ajustes_locais_ainda_nao_publicados": [
+    "Limpar erro anterior ao tentar login/logout.",
+    "Distinguir mensagens de consultar, salvar decisão e recuperar revisão.",
+    "Retirar referências a computador/local em rótulos da conta."
+  ],
+  "logout_pela_interface_validado": true
+}
