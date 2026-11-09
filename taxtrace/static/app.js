@@ -57,6 +57,7 @@ const strings = {
             "Consulta a coleta armazenada. Nenhuma pergunta é enviada a um modelo.",
         aiHelp: "Envia a pergunta ao Gemini para escolher uma ação de consulta. A IA não redige pareceres.",
         aiOff: "Assistente IA indisponível neste ambiente.",
+        queryLimit: "O limite de consultas da aplicação foi atingido. Tente novamente mais tarde.",
         send: "Consultar",
         example1: "Encontrar a base legal",
         example1sub: "Explore a cesta básica",
@@ -376,6 +377,7 @@ const strings = {
             "Queries the stored snapshot. No question is sent to a model.",
         aiHelp: "Sends your question to Gemini to choose a lookup action. AI does not write tax advice.",
         aiOff: "AI assistant unavailable in this environment.",
+        queryLimit: "The application has reached its query limit. Please try again later.",
         send: "Look up",
         example1: "Find the legal reference",
         example1sub: "Explore the basic food basket",
@@ -771,26 +773,21 @@ async function api(path, options = {}) {
         throw new Error("error");
     }
     if (!response.ok) {
-        const key =
-            data.detail?.codigo === "sessao_navegador_necessaria"
-                ? "browserSessionRequired"
-                : response.status === 401
-                  ? path === "/api/acesso/entrar"
-                      ? "loginError"
-                      : "loginRequired"
-                  : data.codigo === "acesso_em_espera"
-                    ? "accessWait"
-                    : response.status === 403
-                      ? "expired"
-                      : response.status === 409
-                        ? "conflict"
-                        : response.status === 429
-                          ? "busy"
-                          : response.status === 404
-                            ? "notFound"
-                            : response.status === 422
-                              ? "inputError"
-                              : "error";
+        const codes = {
+            limite_temporario_de_consultas: "queryLimit",
+            ia_publica_desabilitada: "aiOff",
+            sessao_navegador_necessaria: "browserSessionRequired",
+            acesso_em_espera: "accessWait",
+        };
+        const statuses = {
+            401: path === "/api/acesso/entrar" ? "loginError" : "loginRequired",
+            403: "expired",
+            409: "conflict",
+            429: "busy",
+            404: "notFound",
+            422: "inputError",
+        };
+        const key = codes[data.detail?.codigo || data.codigo] || statuses[response.status] || "error";
         throw new Error(key);
     }
     return data;

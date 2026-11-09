@@ -1,0 +1,45 @@
+{
+  "registrado_em": "2026-11-08T23:57:07.267723+00:00",
+  "status": "preparacao_local_render_validada",
+  "deploy_realizado": false,
+  "suite_linux_postgres": {
+    "descobertos": 212,
+    "aprovados": 209,
+    "desativados_sem_coleta": 3
+  },
+  "testes_javascript_aprovados": 6,
+  "ruff_check_e_format": "aprovados",
+  "blueprint": {
+    "parse_yaml_e_restricoes_locais": "aprovados",
+    "plano": "free",
+    "servicos": 1,
+    "deploy_automatico": false,
+    "validacao_remota_render": false
+  },
+  "segredos": {
+    "ocorrencias_em_arquivos_publicaveis": 0,
+    "perfis_privados_ignorados": 4
+  },
+  "limites": {
+    "consultas_por_hora": 60,
+    "subconjunto_ia_por_hora": 20,
+    "simultaneas": 2,
+    "prazo_segundos": 60,
+    "persistem_apos_reinicio": false
+  },
+  "estado_privado": {
+    "arquivo_render_criado": true,
+    "ia_publica_habilitada": false,
+    "conta_de_revisor_configurada": false
+  },
+  "falhas_preliminares": [
+    "Teste de login apontou inicialmente para rota inexistente; corrigido para /api/acesso/entrar.",
+    "Primeira integração usou imagem anterior, pois o builder não carregou o resultado; refeita com --load e aprovada."
+  ],
+  "pendencias": [
+    "Enviar commits pelo usuário.",
+    "Criar/configurar serviço Render Free e verificar HTTPS no endereço público.",
+    "Configurar a conta privada de revisor.",
+    "Ativar e testar IA hospedada antes da demonstração."
+  ]
+}

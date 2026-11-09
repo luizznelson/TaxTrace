@@ -61,7 +61,7 @@ O job `container` do GitHub Actions constrói a imagem sem credenciais e executa
 Para reproduzir quando o Docker estiver ativo:
 
 ```powershell
-docker build --pull -t taxtrace:ci .
+docker build --load --pull -t taxtrace:ci .
 python scripts/smoke_container.py --imagem taxtrace:ci --saida runs/minha-validacao-container/smoke.json
 ```
 
@@ -92,7 +92,7 @@ Depois de ativar o Docker, a suíte passou em um PostgreSQL descartável: 180 te
 Para reproduzir sem utilizar o banco de desenvolvimento, construa a imagem e execute:
 
 ```powershell
-docker build --pull -t taxtrace:ci .
+docker build --load --pull -t taxtrace:ci .
 docker compose -p taxtrace-integration -f docker-compose.integration.yml up --abort-on-container-exit --exit-code-from integration-tests
 ```
 
@@ -103,3 +103,8 @@ docker compose -p taxtrace-integration -f docker-compose.integration.yml down
 ```
 
 Não substitua esse comando pelo projeto de desenvolvimento nem acrescente exclusão de volumes. Essa validação local não comprova que o CI remoto já executou. Veja [o registro completo](../runs/2026-11-07-persistent-access/verification.json).
+
+
+## Preparação posterior para Render Free
+
+A dependência de arquivos locais descrita acima foi removida no modo hospedado: fontes, checkpoints e vínculos usam Neon; o hash do revisor vem de variável privada. O comando hospedado recusa SQLite. A validação ocorreu localmente com o Neon real, sem publicar o serviço. Veja [configuração e limites](RENDER.md). O Compose local permanece independente.

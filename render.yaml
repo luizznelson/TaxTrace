@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: taxtrace
+    runtime: docker
+    plan: free
+    region: virginia
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerCommand: python -m taxtrace.servir
+    healthCheckPath: /health/live
+    autoDeployTrigger: "off"
+    envVars:
+      - key: TAXTRACE_DATABASE_MODE
+        value: neon
+      - key: TAXTRACE_CHECKPOINT_BACKEND
+        value: postgres
+      - key: TAXTRACE_PUBLIC_AI_ENABLED
+        value: "false"
+      - key: TAXTRACE_NEON_HOST
+        sync: false
+      - key: TAXTRACE_NEON_DATABASE
+        sync: false
+      - key: TAXTRACE_READER_DATABASE_URL
+        sync: false
+      - key: TAXTRACE_CHECKPOINT_DATABASE_URL
+        sync: false

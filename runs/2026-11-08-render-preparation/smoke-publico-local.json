@@ -1,0 +1,14 @@
+{
+  "registrado_em": "2026-11-08T23:54:15.125053+00:00",
+  "status": "smoke_local_do_comando_render_aprovado",
+  "neon_real": true,
+  "deploy_realizado": false,
+  "modelos_chamados": false,
+  "verificacoes": [
+    "entrada_hospedada_em_PORT_10000",
+    "leitura_neon_real_sem_chave_administrativa",
+    "cookie_secure_e_origem_https_com_transporte_interno_http",
+    "origem_externa_recusada",
+    "captura_disponivel_pela_api_web"
+  ]
+}

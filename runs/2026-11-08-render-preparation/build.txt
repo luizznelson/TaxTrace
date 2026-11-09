@@ -1,0 +1,50 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 963B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.14-slim
+#2 DONE 0.6s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 302B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916788d80f04802f
+#4 resolve docker.io/library/python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916788d80f04802f 0.0s done
+#4 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 83.07kB 0.2s done
+#5 DONE 0.2s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] COPY requirements.txt ./
+#7 CACHED
+
+#8 [4/6] RUN python -m pip install --no-cache-dir -r requirements.txt     && groupadd --gid 10001 taxtrace     && useradd --uid 10001 --gid 10001 --no-create-home taxtrace     && mkdir -p /app/data/checkpoints /app/data/raw /app/runs     && chown -R 10001:10001 /app/data /app/runs
+#8 CACHED
+
+#9 [5/6] COPY taxtrace/*.py taxtrace/*.sql ./taxtrace/
+#9 CACHED
+
+#10 [6/6] COPY taxtrace/static/ ./taxtrace/static/
+#10 DONE 0.1s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 0.2s done
+#11 exporting manifest sha256:48ffeff867e1eae4d1c467211ad07cd6d48f2d0607b2e642ebe56fdf4457a757 0.1s done
+#11 exporting config sha256:710b00db89dd147ccf1f3b5d681673f50af66ddc437e3080750080e2c7e8ca1b 0.0s done
+#11 exporting attestation manifest sha256:8ac2441f0d81cb5e86a165a46c8e6d4c4e44af7cbe0bcc5f752f132a479cb993
+#11 exporting attestation manifest sha256:8ac2441f0d81cb5e86a165a46c8e6d4c4e44af7cbe0bcc5f752f132a479cb993 0.1s done
+#11 exporting manifest list sha256:1232c0fcf74c49c6b206691f46246509dadb8c36659c86ace8d9a42f52585fcc 0.1s done
+#11 naming to docker.io/library/taxtrace:ci
+#11 naming to docker.io/library/taxtrace:ci 0.0s done
+#11 unpacking to docker.io/library/taxtrace:ci 0.1s done
+#11 DONE 0.6s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/rigdwnuasiwk7c214073k26k9

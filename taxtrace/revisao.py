@@ -36,6 +36,7 @@ def impressao_codigo():
             "autenticacao.py",
             "propriedade.py",
             "web.py",
+            "publicacao.py",
             "planejamento.py",
             "rag.py",
             "revisao.py",

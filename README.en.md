@@ -147,6 +147,7 @@ Docker/Linux execution with real PostgreSQL passed **193 tests**, with three ski
 
 Authorized Neon provisioning was completed on November 8, 2026: **580 articles, 170 classifications, 10,515 NCM records and seven preserved files**. Restricted roles, client TLS, source integrity and review resumption across two Linux processes were verified. The technical review used no model API and recorded an automated rejection, not human approval. [Remote evidence](runs/2026-11-08-neon-provision/README.md). The application is not deployed yet.
 
+- [Render Free deployment guide](docs/RENDER.md): prepared configuration, HTTPS cookies, usage limits and private environment settings. Local hosted-command smoke with real Neon passed; public deployment is still pending.
 - [Neon and preserved-source preparation](docs/NEON.md): private configuration, pinned destination, TLS policy and source snapshots in PostgreSQL.
 - [Docker](docs/DOCKER.md): local runtime and disposable integration environment.
 - [Persistence](docs/PERSISTENCIA.md): SQLite by default; optional PostgreSQL checkpoints, events and access bindings.

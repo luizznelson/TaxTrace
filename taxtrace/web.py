@@ -24,6 +24,7 @@ from taxtrace.conexao import conectar
 from taxtrace.consultas import resumo_base
 from taxtrace.leitura import ler_integral
 from taxtrace.propriedade import COOKIE_VISITANTE, VALIDADE, criar_propriedade, dono
+from taxtrace.publicacao import LimitesConsultas, configuracao
 from taxtrace.revisao import decidir, iniciar, inspecionar
 
 
@@ -72,6 +73,8 @@ def falha_publica(erro):
 def criar_app(raiz=None):
     raiz = Path(raiz) if raiz else Path(__file__).resolve().parent.parent
     assets = Path(__file__).resolve().parent / "static"
+    publicacao = configuracao()
+    limites = LimitesConsultas()
     cache = {}
     ativos = 0
     csrf = secrets.token_urlsafe(32)
@@ -89,10 +92,12 @@ def criar_app(raiz=None):
             await asyncio.gather(*pendentes, return_exceptions=True)
 
     app = FastAPI(
-        title="TaxTrace local", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan
+        title="TaxTrace", docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan
     )
     app.add_middleware(
-        TrustedHostMiddleware, allowed_hosts=["127.0.0.1", "localhost"], www_redirect=False
+        TrustedHostMiddleware,
+        allowed_hosts=["127.0.0.1", "localhost"] + ([publicacao.host] if publicacao.host else []),
+        www_redirect=False,
     )
 
     async def autorizar(revisao_id, request):
@@ -112,7 +117,9 @@ def criar_app(raiz=None):
     async def proteger(request: Request, call_next):
         if request.url.path.startswith("/api/"):
             origem = request.headers.get("origin")
-            esperada = f"{request.url.scheme}://{request.headers.get('host', '')}"
+            esperada = (
+                publicacao.origem or f"{request.url.scheme}://{request.headers.get('host', '')}"
+            )
             if (origem and origem != esperada) or request.headers.get(
                 "sec-fetch-site"
             ) == "cross-site":
@@ -138,6 +145,8 @@ def criar_app(raiz=None):
                 "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
             }
         )
+        if publicacao.origem:
+            response.headers["Strict-Transport-Security"] = "max-age=31536000"
         return response
 
     @app.exception_handler(RequestValidationError)
@@ -178,9 +187,13 @@ def criar_app(raiz=None):
         cfg = dotenv_values(raiz / ".env")
         dados = {
             "csrf": csrf,
-            "gemini_disponivel": bool(os.environ.get("GEMINI_API_KEY", cfg.get("GEMINI_API_KEY"))),
-            "rag_disponivel": bool(os.environ.get("GEMINI_API_KEY", cfg.get("GEMINI_API_KEY"))),
-            "ambiente": "local_com_revisao_restrita",
+            "gemini_disponivel": publicacao.ia_habilitada
+            and bool(os.environ.get("GEMINI_API_KEY", cfg.get("GEMINI_API_KEY"))),
+            "rag_disponivel": publicacao.ia_habilitada
+            and bool(os.environ.get("GEMINI_API_KEY", cfg.get("GEMINI_API_KEY"))),
+            "ambiente": "publico_com_revisao_restrita"
+            if publicacao.origem
+            else "local_com_revisao_restrita",
             "acesso": {
                 "configurado": acesso.credencial is not None,
                 "usuario": acesso.usuario(request.cookies.get(COOKIE)),
@@ -195,7 +208,7 @@ def criar_app(raiz=None):
                 max_age=VALIDADE,
                 httponly=True,
                 samesite="strict",
-                secure=request.url.scheme == "https",
+                secure=bool(publicacao.origem) or request.url.scheme == "https",
                 path="/",
             )
         return response
@@ -222,7 +235,7 @@ def criar_app(raiz=None):
             max_age=DURACAO,
             httponly=True,
             samesite="strict",
-            secure=request.url.scheme == "https",
+            secure=bool(publicacao.origem) or request.url.scheme == "https",
             path="/",
         )
         return response
@@ -271,14 +284,24 @@ def criar_app(raiz=None):
                 if not fechados:
                     raise HTTPException(429, detail={"codigo": "consultas_em_andamento"})
                 del cache[fechados[0]]
+            if publicacao.origem:
+                if dados.modo != "local" and not publicacao.ia_habilitada:
+                    raise HTTPException(503, detail={"codigo": "ia_publica_desabilitada"})
+                if not limites.reservar(dados.modo != "local"):
+                    raise HTTPException(
+                        429,
+                        detail={"codigo": "limite_temporario_de_consultas"},
+                        headers={"Retry-After": "3600"},
+                    )
             ativos += 1
 
             async def trabalho():
                 nonlocal ativos
                 try:
-                    relatorio = await iniciar(
-                        dados.pergunta, modo=dados.modo, coleta_id=dados.coleta_id, raiz=raiz
-                    )
+                    async with asyncio.timeout(60):
+                        relatorio = await iniciar(
+                            dados.pergunta, modo=dados.modo, coleta_id=dados.coleta_id, raiz=raiz
+                        )
                     await asyncio.to_thread(
                         propriedade.vincular, relatorio["revisao_id"], proprietario
                     )
