@@ -10,13 +10,14 @@ TaxTrace supports documentary review of Brazil's consumption tax reform. It comb
 
 ## In one minute
 
-| Question | Answer |
+| | |
 | --- | --- |
-| **What problem does it address?** | Finding a reference is only part of the task: a reviewer must inspect the text, identify its source and preserve what supported the conclusion. |
-| **What was built?** | A PT-BR/EN application with search, source reader, cited RAG, execution traces and persistent document reviews. |
-| **What was measured?** | Textual v4 found the expected reference in the top five in **19/20** and **11/12** positive development cases. This is not legal accuracy. |
-| **What engineering does it demonstrate?** | RAG, MCP, LangGraph, comparative evaluation, persistence, access controls, Docker and Render + Neon operation. |
-| **Where is the evidence?** | [Case study](docs/case-study.md), [decisions](docs/architecture.md), [quality](docs/quality.md) and [indexed runs](runs/README.md). |
+| **Problem** | In tax analysis, finding the passage is only the start: you must show where it came from, what was checked and who decided. |
+| **Constraints** | Answers must be traceable to the source, the model must not decide classification, and the service runs on free hosting (Render + Neon). |
+| **Core decision** | Treat the LLM as the writer of a cited draft, not as a source. An identified capture comes before AI; the planner only reaches domain queries through a read-only MCP server, with no free-form SQL; and every review decision is bound to the hash of the displayed set. |
+| **Measured result** | Textual v4 retrieval placed the reference in the top five in **19/20** and **11/12** development cases. Embeddings and hybrid retrieval (RRF) were implemented, scored lower and remain experiments. This does not measure legal accuracy. |
+| **Next open decision** | Usage limits and authenticated sessions live in one instance's memory; scaling requires moving that state to the database. |
+| **Where to check** | [Architecture decisions](#5-architecture-decisions-and-trade-offs), [full architecture](docs/architecture.md), [quality](docs/quality.md) and [evidence](runs/README.md). |
 
 ## 1. The problem: a retrieved passage does not complete the analysis
 
@@ -81,17 +82,20 @@ flowchart LR
 
 Sources are **LC 214/2025 on Planalto** and tables from the **Receita Federal calculator's public API**. The reference capture is dated **November 5, 2026**, dataset **V0066**, queried for **January 1, 2027**. Capture date, API query date and legal validity are different concepts. [Scope and provenance](docs/case-study.md#fontes-e-recorte).
 
-## 5. Engineering skills and where to inspect them
+## 5. Architecture decisions and trade-offs
 
-| Skill | Concrete decision | Code or evidence |
-| --- | --- | --- |
-| **RAG and structured outputs** | Require identified documents, literal citations and output contracts; block invalid answers | [rag.py](taxtrace/rag.py), [semantic limits](evals/RAG.md) |
-| **Agents and MCP** | Typed plans, four read-only tools and at most three MCP calls per query | [agente.py](taxtrace/agente.py), [MCP server](taxtrace/servidor_mcp.py) |
-| **Retrieval evaluation** | Compare textual search, embeddings and RRF before selecting a default | [Experiments](evals/), [decision](docs/architecture.md) |
-| **Persistent review** | Pause and resume the graph against an evidence hash, without repeating tools or model calls | [revisao.py](taxtrace/revisao.py), [checkpoints](taxtrace/checkpoints.py) |
-| **Auditable data** | Manifests, transactional loading and original-source preservation in PostgreSQL | [integridade.py](taxtrace/integridade.py), [fontes.py](taxtrace/fontes.py) |
-| **API and access controls** | Secure cookies, CSRF, browser-owned reviews and authenticated decisions | [web.py](taxtrace/web.py), [authorization](docs/AUTORIZACAO.md) |
-| **Applied AI operations** | Secret-free image, separate database roles, Neon state and Render Blueprint | [Dockerfile](Dockerfile), [render.yaml](render.yaml), [operations](docs/RENDER.md) |
+Each row is a choice recorded in [docs/architecture.md](docs/architecture.md), with its reason and what it cost.
+
+| Decision | Why | Accepted cost | Evidence |
+| --- | --- | --- | --- |
+| **Identified capture before AI** | An answer must point to checkable bytes and scope | Data reflects a dated capture; it does not confirm current validity | [integridade.py](taxtrace/integridade.py) |
+| **Domain queries through read-only MCP, no free-form SQL** | Limit what the planner can request from the database | Less flexibility than an open SQL question | [consultas.py](taxtrace/consultas.py), [MCP server](taxtrace/servidor_mcp.py) |
+| **Textual v4 as default; embeddings (E5, pgvector) and RRF as experiments** | It scored best on the measured sets (19/20 and 11/12); switching for novelty without a measured gain was not justified | Does not improve ordering when the list is already full; weights are not shipped in the public image | [Comparison](evals/COMPARACAO.md) |
+| **Synthesis with literal citations and structural validation** | Tie each statement to an available passage and block invalid outputs | Literal quotes do not prove a paraphrase is right; semantic entailment still needs human review | [rag.py](taxtrace/rag.py), [limits](evals/RAG.md) |
+| **Pause the LangGraph graph and decide on the set's hash** | Avoid approving an answer or evidence different from what was shown, without re-running model or tools | A code change may require a new review | [revisao.py](taxtrace/revisao.py), [checkpoints](taxtrace/checkpoints.py) |
+| **Two database roles: source reads and state writes** | MCP only gets read access; the web server never gets the admin credential | More credentials to configure and run | [Neon](docs/NEON.md) |
+| **Hosted PostgreSQL instead of local disk** | The free tier's ephemeral disk does not keep reviews | Dependency on an external database | [Persistence](docs/PERSISTENCIA.md) |
+| **One instance, one worker** | Limits and sessions stay in memory, kept simple | Not distributed; a restart resets limits and requires a new login | [Operations](docs/RENDER.md) |
 
 ## 6. Run and explore
 

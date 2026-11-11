@@ -10,13 +10,14 @@ O TaxTrace apoia a conferência documental da Reforma Tributária do consumo. Re
 
 ## Em um minuto
 
-| Pergunta | Resposta |
+| | |
 | --- | --- |
-| **Qual problema resolve?** | Localizar uma referência é apenas parte da tarefa: é preciso conferir o texto, identificar a fonte e registrar o que sustentou uma conclusão. |
-| **O que foi construído?** | Aplicação PT-BR/EN com busca, leitor de fontes, RAG citado, rastro das etapas e revisão documental persistida. |
-| **O que foi medido?** | A busca textual v4 localizou a referência entre os cinco primeiros em **19/20** e **11/12** casos positivos de desenvolvimento. Isso não mede precisão jurídica. |
-| **O que a engenharia demonstra?** | RAG, MCP, LangGraph, avaliação comparativa, persistência, controle de acesso, Docker e operação com Render + Neon. |
-| **Onde conferir?** | [Caso de uso](docs/case-study.md), [decisões técnicas](docs/architecture.md), [qualidade](docs/quality.md) e [evidências indexadas](runs/README.md). |
+| **Problema** | Na análise fiscal, achar o trecho é só o começo: é preciso mostrar de onde ele veio, o que foi conferido e quem decidiu. |
+| **Restrições** | A resposta precisa ser rastreável até a fonte, o modelo não pode decidir enquadramento e o serviço roda em hospedagem gratuita (Render + Neon). |
+| **Decisão central** | Tratar o LLM como redator de um rascunho citado, não como fonte. A captura identificada vem antes da IA; o planejador só acessa consultas de domínio por um servidor MCP somente leitura, sem SQL livre; e cada decisão de revisão fica presa ao hash do conjunto exibido. |
+| **Resultado medido** | A busca textual v4 colocou a referência entre as cinco primeiras em **19/20** e **11/12** casos de desenvolvimento. Embeddings e busca híbrida (RRF) foram implementados, ficaram abaixo e seguem como experimento. Isso não mede precisão jurídica. |
+| **Próxima decisão pendente** | Limites de uso e sessões autenticadas estão na memória de uma instância; escalar exige mover esse estado para o banco. |
+| **Onde conferir** | [Decisões de arquitetura](#5-decisões-de-arquitetura-e-trade-offs), [arquitetura completa](docs/architecture.md), [qualidade](docs/quality.md) e [evidências](runs/README.md). |
 
 ## 1. O problema: encontrar um trecho não encerra a análise
 
@@ -81,17 +82,20 @@ flowchart LR
 
 As fontes são a **LC 214/2025, no Planalto**, e tabelas da **API pública da calculadora da Receita Federal**. A captura de referência é de **05/11/2026**, base **V0066**, com data consultada na API **01/01/2027**. Data da captura, data consultada e vigência têm significados diferentes. [Origem e escopo](docs/case-study.md#fontes-e-recorte).
 
-## 5. Habilidades demonstradas — e onde conferir
+## 5. Decisões de arquitetura e trade-offs
 
-| Habilidade | Decisão concreta | Código ou evidência |
-| --- | --- | --- |
-| **RAG e saídas estruturadas** | Exigir documento identificado, citações literais e contrato de saída; bloquear respostas inválidas | [rag.py](taxtrace/rag.py), [limites semânticos](evals/RAG.md) |
-| **Agentes e MCP** | Plano tipado, quatro ferramentas de leitura e até três chamadas MCP por consulta | [agente.py](taxtrace/agente.py), [servidor MCP](taxtrace/servidor_mcp.py) |
-| **Avaliação de recuperação** | Comparar textual, embeddings e RRF antes de escolher o padrão | [Experimentos](evals/), [decisão](docs/architecture.md) |
-| **Revisão com persistência** | Pausar o grafo e retomar pelo hash do conjunto, sem repetir modelo ou ferramentas | [revisao.py](taxtrace/revisao.py), [checkpoints](taxtrace/checkpoints.py) |
-| **Dados auditáveis** | Captura com manifesto, carga transacional e originais preservados no PostgreSQL | [integridade.py](taxtrace/integridade.py), [fontes.py](taxtrace/fontes.py) |
-| **API e controle de acesso** | Cookies seguros, CSRF, vínculo da consulta à sessão e decisão restrita ao revisor | [web.py](taxtrace/web.py), [autorização](docs/AUTORIZACAO.md) |
-| **Operação de IA aplicada** | Imagem sem segredos, acessos de banco separados, estado no Neon e Blueprint Render | [Dockerfile](Dockerfile), [render.yaml](render.yaml), [operação](docs/RENDER.md) |
+Cada linha é uma escolha registrada em [docs/architecture.md](docs/architecture.md), com o motivo e o que ela custou.
+
+| Decisão | Por quê | Custo aceito | Evidência |
+| --- | --- | --- | --- |
+| **Captura identificada antes da IA** | Uma resposta precisa apontar para bytes e recorte conferíveis | Os dados são de uma coleta datada; não confirmam vigência atual | [integridade.py](taxtrace/integridade.py) |
+| **Consultas de domínio por MCP somente leitura, sem SQL livre** | Limitar o que o planejador pode pedir ao banco | Menos flexibilidade que uma pergunta SQL aberta | [consultas.py](taxtrace/consultas.py), [servidor MCP](taxtrace/servidor_mcp.py) |
+| **Busca textual v4 como padrão; embeddings (E5, pgvector) e RRF como experimentos** | Foi a melhor nos conjuntos medidos (19/20 e 11/12); trocar por novidade sem ganho medido não se justificava | Não melhora a ordem quando a lista já está cheia; os pesos não entram na imagem pública | [Comparação](evals/COMPARACAO.md) |
+| **Síntese com citação literal e validação estrutural** | Ligar cada afirmação a um trecho disponível e bloquear saídas inválidas | Literalidade não prova que a paráfrase está certa; implicação semântica ainda exige revisão humana | [rag.py](taxtrace/rag.py), [limites](evals/RAG.md) |
+| **Pausar o grafo LangGraph e decidir pelo hash do conjunto** | Evitar aprovar uma resposta ou evidência diferente da exibida, sem repetir modelo nem ferramentas | Uma mudança de código pode exigir nova revisão | [revisao.py](taxtrace/revisao.py), [checkpoints](taxtrace/checkpoints.py) |
+| **Dois papéis de banco: leitura das fontes e escrita do estado** | O MCP recebe só leitura; o servidor web não recebe a credencial administrativa | Mais credenciais para configurar e operar | [Neon](docs/NEON.md) |
+| **PostgreSQL hospedado em vez de disco local** | O disco efêmero do plano gratuito não preserva revisões | Dependência de um banco externo | [Persistência](docs/PERSISTENCIA.md) |
+| **Uma instância, um worker** | Limites e sessões ficam em memória, de forma simples | Não é distribuído; reiniciar zera limites e exige novo login | [Operação](docs/RENDER.md) |
 
 ## 6. Executar e investigar o repositório
 
